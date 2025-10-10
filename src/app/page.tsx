@@ -649,7 +649,7 @@ export default function Page() {
                 <select
                   className="mt-1 w-full rounded-xl border border-white/10 bg-black px-3 py-2 focus:border-violet-400"
                   value={gpu}
-                  onChange={(e) => setGpu(e.target.value as any)}
+                  onChange={(e) => setGpu(e.target.value as GPU)}
                 >
                   <option value="all">Todas</option>
                   <option value="4060">RTX 4060</option>
