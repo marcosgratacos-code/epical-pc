@@ -25,7 +25,7 @@ const PRODUCTS: Product[] = [
     name: "EPICAL STARTER",
     price: 999,
     image: "/logo-epical.png", // usa /next.svg si no lo tienes
-    specs: ["Ryzen 5 / i5", "RTX 4060 8GB", "16GB DDR5", "1TB NVMe"],
+    specs: ["Ryzen 5 / i5", "RTX 5060 8GB", "16GB DDR5", "1TB NVMe"],
     tag: "Oferta",
     rating: 4.7,
     inStock: true,
@@ -34,9 +34,9 @@ const PRODUCTS: Product[] = [
   {
     id: "epic2",
     name: "EPICAL ADVANCED",
-    price: 1499,
-    image: "/logo-epical.png",
-    specs: ["Ryzen 7 / i7", "RTX 4070 Ti", "32GB DDR5", "2TB NVMe"],
+    price: 2150,
+    image: "/logo-sin-fondo.png",
+    specs: ["Ryzen 7 7800X3D ", "RTX 5070 Ti", "32GB DDR5", "2TB NVMe"],
     tag: "Nuevo",
     rating: 4.9,
     inStock: true,
@@ -45,12 +45,12 @@ const PRODUCTS: Product[] = [
   {
     id: "epic3",
     name: "EPICAL ULTRA",
-    price: 1999,
+    price: 2800,
     image: "/logo-epical.png",
-    specs: ["Ryzen 9 / i9", "RTX 4080", "64GB DDR5", "2TB NVMe"],
+    specs: ["Ryzen 9 / i9", "RTX 5080", "64GB DDR5", "2TB NVMe samsung evo"],
     tag: "Top Ventas",
     rating: 5,
-    inStock: false,
+    inStock: true,
     desc: "La bestia. 4K alto framerate, VR, proyectos pesados sin sudar.",
   },
 ];
