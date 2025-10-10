@@ -741,7 +741,7 @@ export default function Page() {
           <div className="mt-4 flex flex-wrap justify-center gap-3">
             <a href="https://wa.me/34XXXXXXXXX" target="_blank" rel="noreferrer" className="rounded-xl bg-white px-5 py-2 font-semibold text-black hover:bg-white/90">WhatsApp</a>
             <button onClick={() => setCustomOpen(true)} className="rounded-xl border border-white/20 px-5 py-2 font-semibold hover:border-white/40">PC a medida</button>
-            <a href="mailto:contacto@epical-pc.com?subject=Quiero%20mi%20EPICAL-PC" className="rounded-xl border border-white/20 px-5 py-2 font-semibold hover:border-white/40">Email</a>
+            <a href="mailto:epicalpc@gmail.com?subject=Quiero%20mi%20EPICAL-PC" className="rounded-xl border border-white/20 px-5 py-2 font-semibold hover:border-white/40">Email</a>
           </div>
         </div>
       </section>
