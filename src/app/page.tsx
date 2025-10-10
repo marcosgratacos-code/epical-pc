@@ -6,7 +6,8 @@ import Image from "next/image";
 /* =========================
    Tipos + Datos
    ========================= */
-type Product = {
+type GPU = "all" | "4060" | "4070" | "4080";
+   type Product = {
   id: string;
   name: string;
   price: number;
@@ -454,7 +455,7 @@ export default function Page() {
   const [toast, setToast] = useState<{ show: boolean; msg: string }>({ show: false, msg: "" });
   // filtros + búsqueda
   const [q, setQ] = useState("");
-  const [gpu, setGpu] = useState<"all" | "4060" | "4070" | "4080">("all");
+  const [gpu, setGpu] = useState<GPU>("all");
   const [price, setPrice] = useState<[number, number]>([0, 3000]);
   const searchRef = useRef<HTMLInputElement>(null);
 
