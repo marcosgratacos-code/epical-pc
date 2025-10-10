@@ -538,14 +538,43 @@ export default function Page() {
               -PC
             </span>
           </button>
+  <nav className="hidden md:flex gap-3 text-sm text-white/80" aria-label="Navegación principal">
+  <button
+    onClick={() => scrollTo("productos")}
+    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+  >
+    Montajes
+  </button>
 
-          <nav className="hidden md:flex gap-3 text-sm text-white/80" aria-label="Navegación principal">
-            <button onClick={() => scrollTo("productos")} className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">Montajes</button>
-            <button onClick={() => scrollTo("ventajas")} className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">Ventajas</button>
-            <button onClick={() => setCustomOpen(true)} className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">PC a medida</button>
-            <button onClick={() => scrollTo("faq")} className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">FAQ</button>
-            <button onClick={() => scrollTo("cta")} className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">Contacto</button>
-          </nav>
+  <button
+    onClick={() => scrollTo("ventajas")}
+    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+  >
+    Ventajas
+  </button>
+
+  <button
+    onClick={() => setCustomOpen(true)}
+    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+  >
+    PC a medida
+  </button>
+
+  <button
+    onClick={() => scrollTo("faq")}
+    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+  >
+    FAQ
+  </button>
+
+  <a
+    href="mailto:epicalpc@gmail.com?subject=Consulta%20EPICAL-PC&body=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20PCs%20a%20medida."
+    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+  >
+    Contacto
+  </a>
+</nav>
+
 
           <div className="flex items-center gap-2">
             <button
@@ -564,6 +593,9 @@ export default function Page() {
           </div>
         </div>
       </header>
+
+
+
 
       {/* Hero */}
       <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-6 p-6 md:grid-cols-2">
