@@ -46,7 +46,7 @@ export default function Gallery({ images, title }: { images: Pic[]; title?: stri
               className="object-cover transition group-hover:scale-[1.03]"
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               onError={(e) => {
-                const target = e.currentTarget as any;
+                const target = e.currentTarget as HTMLImageElement;
                 if (!target.src.includes("epical_hero_setup.jpg")) target.src = "/epical_hero_setup.jpg";
               }}
             />

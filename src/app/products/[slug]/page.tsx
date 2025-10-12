@@ -2,6 +2,7 @@
 
 
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { getProductBySlug, PRODUCTS } from "../../lib/products";
 import BackButton from "../../components/BackButton";
@@ -42,7 +43,9 @@ export default function ProductPage({ params }: Props) {
   }
 
   const gallery: string[] =
-    (product as any).images?.length ? (product as any).images : [product.image];
+    Array.isArray((product as { images?: string[] }).images) && (product as { images: string[] }).images.length
+      ? (product as { images: string[] }).images
+      : [product.image];
 
   const eur = (n: number) =>
     new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(n);
@@ -54,9 +57,9 @@ export default function ProductPage({ params }: Props) {
         <div className="mb-4 flex items-center justify-between">
           <BackButton />
           <nav className="text-sm text-white/60">
-            <a href="/" className="hover:text-white">Inicio</a>
+            <Link href="/" className="hover:text-white">Inicio</Link>
             <span className="mx-2">/</span>
-            <a href="/#productos" className="hover:text-white">Montajes</a>
+            <Link href="/#productos" className="hover:text-white">Montajes</Link>
             <span className="mx-2">/</span>
             <span className="text-white">{product.name}</span>
           </nav>
@@ -175,7 +178,7 @@ export default function ProductPage({ params }: Props) {
                   <h3 className="mb-3 text-lg font-semibold">Comparar</h3>
                   <div className="grid gap-4 md:grid-cols-3">
                     {others.map((o) => (
-                      <a
+                      <Link
                         key={o.id}
                         href={`/products/${o.slug}`}
                         className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-white/20"
@@ -197,7 +200,7 @@ export default function ProductPage({ params }: Props) {
                             <li key={s}>• {s}</li>
                           ))}
                         </ul>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
