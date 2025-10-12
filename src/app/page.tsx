@@ -1,58 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+"use client";
+
+import { PRODUCTS, type Product } from "../lib/products";
+import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-/* =========================
-   Tipos + Datos
-   ========================= */
-type GPU = "all" | "4060" | "4070" | "4080";
-   type Product = {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  specs: string[];
-  tag?: string;
-  rating?: number;
-  inStock?: boolean;
-  desc?: string;
-};
 
-const PRODUCTS: Product[] = [
-  {
-    id: "epic1",
-    name: "EPICAL STARTER",
-    price: 999,
-    image: "/logo-epical.png", // usa /next.svg si no lo tienes
-    specs: ["Ryzen 5 / i5", "RTX 5060 8GB", "16GB DDR5", "1TB NVMe"],
-    tag: "Oferta",
-    rating: 4.7,
-    inStock: true,
-    desc: "Equipo equilibrado para 1080p/1440p. Silencioso y eficiente.",
-  },
-  {
-    id: "epic2",
-    name: "EPICAL ADVANCED",
-    price: 2150,
-    image: "/logo-sin-fondo.png",
-    specs: ["Ryzen 7 7800X3D ", "RTX 5070 Ti", "32GB DDR5", "2TB NVMe"],
-    tag: "Nuevo",
-    rating: 4.9,
-    inStock: true,
-    desc: "Rendimiento excelente para streaming y edición. 1440p/4K.",
-  },
-  {
-    id: "epic3",
-    name: "EPICAL ULTRA",
-    price: 2800,
-    image: "/logo-epical.png",
-    specs: ["Ryzen 9 / i9", "RTX 5080", "64GB DDR5", "2TB NVMe samsung evo"],
-    tag: "Top Ventas",
-    rating: 5,
-    inStock: true,
-    desc: "La bestia. 4K alto framerate, VR, proyectos pesados sin sudar.",
-  },
+// Opciones válidas de GPU centralizadas
+type GPU = "all" | "5060" | "5070" | "5080";
+const OPTIONS: { value: GPU; label: string }[] = [
+  { value: "all", label: "Todas" },
+  { value: "5060", label: "RTX 5060" },
+  { value: "5070", label: "RTX 5070" },
+  { value: "5080", label: "RTX 5080" },
 ];
 
 /* =========================
@@ -61,8 +23,11 @@ const PRODUCTS: Product[] = [
 const eur = (n: number) =>
   new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(n);
 
-const hasGPU = (p: Product, gpu: string) =>
-  gpu === "all" || p.specs.join(" ").toLowerCase().includes(gpu);
+// Solo acepta valores válidos de GPU (case-insensitive)
+const hasGPU = (p: Product, gpu: GPU): boolean => {
+  if (gpu === "all") return true;
+  return p.specs.some((spec: string) => spec.toLowerCase().includes(gpu));
+};
 
 /* =========================
    UI: Toast
@@ -226,6 +191,7 @@ function CustomBuildModal({
 /* =========================
    ProductCard
    ========================= */
+import Link from "next/link";
 function ProductCard({
   p,
   onAdd,
@@ -236,59 +202,67 @@ function ProductCard({
   onInfo: (prod: Product) => void;
 }) {
   return (
-    <article
-      className="group relative rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:-translate-y-0.5 hover:border-white/20 focus-within:ring-2 focus-within:ring-violet-400"
-      aria-label={`Producto: ${p.name}`}
+    <Link
+      href={`/products/${p.slug}`}
+      className="block group"
+      tabIndex={-1}
+      aria-label={`Ir a la ficha de ${p.name}`}
+      prefetch={false}
     >
-      {p.tag && (
-        <span className="absolute left-4 top-4 z-10 rounded-full bg-white text-black text-xs font-bold px-2 py-1">
-          {p.tag}
-        </span>
-      )}
+      <article
+        className="group relative rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:-translate-y-0.5 hover:border-white/20 focus-within:ring-2 focus-within:ring-violet-400"
+        aria-label={`Producto: ${p.name}`}
+      >
+        {p.tag && (
+          <span className="absolute left-4 top-4 z-10 rounded-full bg-white text-black text-xs font-bold px-2 py-1">
+            {p.tag}
+          </span>
+        )}
 
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
-        <Image
-          src={p.image}
-          alt={`Imagen de ${p.name}`}
-          fill
-          sizes="(min-width: 768px) 33vw, 100vw"
-          className="object-contain transition duration-300 group-hover:scale-[1.03]"
-        />
-      </div>
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
+          <Image
+            src={p.image}
+            alt={`Imagen de ${p.name}`}
+            fill
+            sizes="(min-width: 768px) 33vw, 100vw"
+            className="object-contain transition duration-300 group-hover:scale-[1.03]"
+          />
+        </div>
 
-      <div className="mt-4 flex items-start justify-between gap-3">
-        <h3 className="text-lg font-semibold">{p.name}</h3>
-        <span className="rounded-lg bg-white/10 px-2 py-1 text-sm">{eur(p.price)}</span>
-      </div>
+        <div className="mt-4 flex items-start justify-between gap-3">
+          <h3 className="text-lg font-semibold">{p.name}</h3>
+          <span className="rounded-lg bg-white/10 px-2 py-1 text-sm">{eur(p.price)}</span>
+        </div>
 
-      <div className="mt-1 text-xs text-white/60" aria-label="Valoración y stock">
-        ⭐ {(p.rating ?? 4.8).toFixed(1)} · {p.inStock ? "En stock" : "Agotado"}
-      </div>
+        <div className="mt-1 text-xs text-white/60" aria-label="Valoración y stock">
+          ⭐ {(p.rating ?? 4.8).toFixed(1)} · {p.inStock ? "En stock" : "Agotado"}
+        </div>
 
-      <ul className="mt-2 space-y-1 text-sm text-white/70">
-        {p.specs.map((s) => (
-          <li key={s}>• {s}</li>
-        ))}
-      </ul>
+        <ul className="mt-2 space-y-1 text-sm text-white/70">
+          {p.specs.map((s: string) => (
+            <li key={s}>• {s}</li>
+          ))}
+        </ul>
 
-      <div className="mt-4 flex gap-2">
-        <button
-          onClick={() => onAdd(p.id)}
-          className="flex-1 rounded-xl bg-white px-4 py-2 text-center font-semibold text-black hover:bg-white/90 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-violet-400"
-          disabled={!p.inStock}
-          aria-label={p.inStock ? `Añadir ${p.name} al carrito` : `${p.name} no disponible`}
-        >
-          {p.inStock ? "Añadir" : "No disponible"}
-        </button>
-        <button
-          onClick={() => onInfo(p)}
-          className="flex-1 rounded-xl border border-white/20 px-4 py-2 text-center font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-          aria-label={`Ver información de ${p.name}`}
-        >
-          Info
-        </button>
-      </div>
-    </article>
+        <div className="mt-4 flex gap-2">
+          <button
+            onClick={e => { e.stopPropagation(); e.preventDefault(); onAdd(p.id); }}
+            className="flex-1 rounded-xl bg-white px-4 py-2 text-center font-semibold text-black hover:bg-white/90 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-violet-400"
+            disabled={!p.inStock}
+            aria-label={p.inStock ? `Añadir ${p.name} al carrito` : `${p.name} no disponible`}
+          >
+            {p.inStock ? "Añadir" : "No disponible"}
+          </button>
+          <button
+            onClick={e => { e.stopPropagation(); e.preventDefault(); onInfo(p); }}
+            className="flex-1 rounded-xl border border-white/20 px-4 py-2 text-center font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
+            aria-label={`Ver información de ${p.name}`}
+          >
+            Info
+          </button>
+        </div>
+      </article>
+    </Link>
   );
 }
 
@@ -310,7 +284,7 @@ function CartDrawer({
     () =>
       Object.entries(cart)
         .map(([id, qty]) => {
-          const p = PRODUCTS.find((x) => x.id === id);
+          const p = PRODUCTS.find((x: Product) => x.id === id);
           return p ? { ...p, qty } : null;
         })
         .filter(Boolean) as (Product & { qty: number })[],
@@ -490,14 +464,14 @@ export default function Page() {
   const totalItems = useMemo(() => Object.values(cart).reduce((a, b) => a + b, 0), [cart]);
   const subtotal = useMemo(() => {
     return Object.entries(cart).reduce((acc, [id, qty]) => {
-      const prod = PRODUCTS.find((x) => x.id === id);
+  const prod = PRODUCTS.find((x: Product) => x.id === id);
       return acc + (prod ? prod.price * qty : 0);
     }, 0);
   }, [cart]);
 
   const add = (id: string) => {
     setCart((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
-    const prod = PRODUCTS.find((p) => p.id === id);
+  const prod = PRODUCTS.find((p: Product) => p.id === id);
     setToast({ show: true, msg: `${prod?.name ?? "Producto"} añadido` });
     setTimeout(() => setToast((t) => ({ ...t, show: false })), 1200);
     setCartOpen(true);
@@ -506,7 +480,7 @@ export default function Page() {
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-  const filtered = PRODUCTS.filter((p) => {
+  const filtered = PRODUCTS.filter((p: Product) => {
     const matchesQ =
       !q ||
       p.name.toLowerCase().includes(q.toLowerCase()) ||
@@ -683,10 +657,9 @@ export default function Page() {
                   value={gpu}
                   onChange={(e) => setGpu(e.target.value as GPU)}
                 >
-                  <option value="all">Todas</option>
-                  <option value="4060">RTX 4060</option>
-                  <option value="4070">RTX 4070</option>
-                  <option value="4080">RTX 4080</option>
+                  {OPTIONS.map(opt => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -724,7 +697,7 @@ export default function Page() {
           <div className="rounded-2xl border border-white/10 p-6 text-white/70">No hay resultados con esos filtros.</div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((p) => (
+            {filtered.map((p: Product) => (
               <ProductCard key={p.id} p={p} onAdd={add} onInfo={(prod) => setInfo(prod)} />
             ))}
           </div>
@@ -789,7 +762,7 @@ export default function Page() {
           <div className="space-y-3">
             <div className="text-white/70">{info.desc}</div>
             <ul className="list-inside list-disc text-white/80">
-              {info.specs.map((s) => (
+              {info.specs.map((s: string) => (
                 <li key={s}>{s}</li>
               ))}
             </ul>
