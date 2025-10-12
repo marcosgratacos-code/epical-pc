@@ -1,9 +1,7 @@
-"use client";
 
 "use client";
 
-import { PRODUCTS, type Product } from "../lib/products";
-import Link from "next/link";
+import { PRODUCTS, type Product } from "./lib/products";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -32,161 +30,7 @@ const hasGPU = (p: Product, gpu: GPU): boolean => {
 /* =========================
    UI: Toast
    ========================= */
-function Toast({ show, msg }: { show: boolean; msg: string }) {
-  return (
-    <div
-      aria-live="polite"
-      className={`fixed right-4 top-4 z-50 transition-all ${
-        show ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0 pointer-events-none"
-      }`}
-    >
-      <div className="rounded-xl border border-white/10 bg-white text-black px-4 py-2 shadow-xl">
-        {msg}
-      </div>
-    </div>
-  );
-}
 
-/* =========================
-   Modal genérico
-   ========================= */
-function Modal({
-  open,
-  title,
-  children,
-  onClose,
-  wide,
-}: {
-  open: boolean;
-  title: string;
-  children: React.ReactNode;
-  onClose: () => void;
-  wide?: boolean;
-}) {
-  if (!open) return null;
-  return (
-    <div
-      className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-label={title}
-      onKeyDown={(e) => e.key === "Escape" && onClose()}
-    >
-      <div className={`w-full ${wide ? "max-w-3xl" : "max-w-xl"} rounded-2xl border border-white/10 bg-black p-4`}>
-        <div className="mb-3 flex items-center justify-between">
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <button
-            onClick={onClose}
-            className="rounded-lg border border-white/20 px-3 py-1 text-sm hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-            aria-label="Cerrar"
-          >
-            Cerrar
-          </button>
-        </div>
-        <div className="text-white/90">{children}</div>
-      </div>
-    </div>
-  );
-}
-
-/* =========================
-   Ventana: PC a medida (NUEVA)
-   ========================= */
-function CustomBuildModal({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  return (
-    <Modal open={open} onClose={onClose} title="PC a medida · Así trabajamos" wide>
-      <div className="space-y-6">
-        {/* Paso a paso */}
-        <ol className="grid gap-3 md:grid-cols-3">
-          {[
-            { t: "1) Brief express", d: "Juegos/soft, presupuesto, estética, ruido esperado y espacio." },
-            { t: "2) Propuesta cerrada", d: "2–3 opciones comparadas (FPS/tiempos de render) con precio final." },
-            { t: "3) Montaje + validación", d: "Stress CPU/GPU, curvas PWM, control acústico y temps registradas." },
-          ].map((x) => (
-            <li key={x.t} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-              <div className="font-semibold">{x.t}</div>
-              <div className="text-sm text-white/70">{x.d}</div>
-            </li>
-          ))}
-        </ol>
-
-        {/* Qué incluye */}
-        <div className="rounded-2xl border border-white/10 p-4">
-          <div className="mb-2 font-semibold">Incluye</div>
-          <ul className="grid gap-2 md:grid-cols-2 text-sm text-white/80">
-            {[
-              "Windows + drivers + BIOS al día",
-              "Perfiles XMP/EXPO y undervolt opcional",
-              "Cableado limpio y flujo de aire optimizado",
-              "Informe de pruebas (temps, ruido, estabilidad)",
-              "3 años de garantía · soporte por WhatsApp",
-              "Entrega 24/48h (según stock)",
-            ].map((i) => (
-              <li key={i}>• {i}</li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Mini formulario demo */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("¡Gracias! Te contactaremos (demo).");
-            onClose();
-          }}
-          className="grid gap-3 md:grid-cols-2"
-        >
-          <div className="md:col-span-2">
-            <label className="block text-xs text-white/60">Correo</label>
-            <input
-              type="email"
-              required
-              placeholder="tu@email.com"
-              className="mt-1 w-full rounded-xl border border-white/10 bg-black px-3 py-2 outline-none focus:border-violet-400"
-            />
-          </div>
-          <div>
-            <label className="block text-xs text-white/60">Presupuesto (€)</label>
-            <input
-              type="number"
-              min={400}
-              placeholder="1200"
-              className="mt-1 w-full rounded-xl border border-white/10 bg-black px-3 py-2 outline-none focus:border-violet-400"
-            />
-          </div>
-          <div>
-            <label className="block text-xs text-white/60">Uso principal</label>
-            <select className="mt-1 w-full rounded-xl border border-white/10 bg-black px-3 py-2 focus:border-violet-400">
-              <option>Gaming</option>
-              <option>Edición/Render</option>
-              <option>Oficina/Estudio</option>
-              <option>Mixto</option>
-            </select>
-          </div>
-          <div className="md:col-span-2">
-            <label className="block text-xs text-white/60">Comentarios</label>
-            <textarea
-              rows={3}
-              placeholder="Juegos/soft, estética, tamaño de caja, ruido deseado…"
-              className="mt-1 w-full rounded-xl border border-white/10 bg-black px-3 py-2 outline-none focus:border-violet-400"
-            />
-          </div>
-          <div className="md:col-span-2">
-            <button className="w-full rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-4 py-2 font-semibold text-black/90 hover:opacity-90">
-              Quiero mi propuesta
-            </button>
-          </div>
-        </form>
-      </div>
-    </Modal>
-  );
-}
 
 /* =========================
    ProductCard
@@ -499,74 +343,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Header */}
-      <header className="sticky top-0 z-10 border-b border-white/10 bg-black/70 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
-          <button
-            onClick={() => scrollTo("hero")}
-            className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1"
-            aria-label="Ir al inicio"
-          >
-            <span className="text-white">EPICAL</span>
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-              -PC
-            </span>
-          </button>
-  <nav className="hidden md:flex gap-3 text-sm text-white/80" aria-label="Navegación principal">
-  <button
-    onClick={() => scrollTo("productos")}
-    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
-  >
-    Montajes
-  </button>
-
-  <button
-    onClick={() => scrollTo("ventajas")}
-    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
-  >
-    Ventajas
-  </button>
-
-  <button
-    onClick={() => setCustomOpen(true)}
-    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
-  >
-    PC a medida
-  </button>
-
-  <button
-    onClick={() => scrollTo("faq")}
-    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
-  >
-    FAQ
-  </button>
-
-  <a
-    href="mailto:epicalpc@gmail.com?subject=Consulta%20EPICAL-PC&body=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20PCs%20a%20medida."
-    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
-  >
-    Contacto
-  </a>
-</nav>
-
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setCustomOpen(true)}
-              className="hidden rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-3 py-1 text-sm font-semibold text-black/90 hover:opacity-90 md:block"
-            >
-              PC a medida
-            </button>
-            <button
-              onClick={() => setCartOpen(true)}
-              className="rounded-xl border border-white/20 px-3 py-1 text-sm hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-              aria-label="Abrir carrito"
-            >
-              🛒 <b aria-live="polite">{totalItems}</b> <span className="text-white/80">· {eur(subtotal)}</span>
-            </button>
-          </div>
-        </div>
-      </header>
 
 
 
@@ -608,7 +384,7 @@ export default function Page() {
         </div>
 
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10">
-          <Image src="/logo-epical.png" alt="Logo EPICAL-PC" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-contain opacity-90" priority />
+          <Image src="/epical_hero_setup.jpg" alt="EPICAL-PC Hero" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover opacity-90" priority />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(56,189,248,0.15),transparent_40%),radial-gradient(circle_at_80%_60%,rgba(139,92,246,0.15),transparent_35%)]" />
         </div>
       </section>
@@ -752,30 +528,10 @@ export default function Page() {
       </section>
 
       {/* Footer */}
+
       <footer className="border-t border-white/10 py-8 text-center text-xs text-white/50">
         © {new Date().getFullYear()} Epical-PC · Aviso legal · Privacidad · Cookies
       </footer>
-
-      {/* Modales y UI flotante */}
-      <Modal open={!!info} title={info?.name ?? ""} onClose={() => setInfo(null)}>
-        {info && (
-          <div className="space-y-3">
-            <div className="text-white/70">{info.desc}</div>
-            <ul className="list-inside list-disc text-white/80">
-              {info.specs.map((s: string) => (
-                <li key={s}>{s}</li>
-              ))}
-            </ul>
-            <div className="pt-2 text-sm text-white/60">
-              Precio: <span className="font-semibold text-white">{eur(info.price)}</span>
-            </div>
-          </div>
-        )}
-      </Modal>
-
-      <CustomBuildModal open={customOpen} onClose={() => setCustomOpen(false)} />
-      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setCart={setCart} />
-      <Toast show={toast.show} msg={toast.msg} />
     </main>
   );
 }
