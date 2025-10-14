@@ -1,36 +1,19 @@
 
-
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { getProductBySlug, PRODUCTS } from "../../lib/products";
 import BackButton from "../../components/BackButton";
 import Accordion from "../../components/Accordion";
+import { useCart } from "../../context/cart-context";
+import { useState } from "react";
 
 type Props = { params: { slug: string } };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const p = getProductBySlug(params.slug);
-  if (!p) {
-    return {
-      title: "Producto no encontrado | EPICAL-PC",
-      description: "El producto solicitado no existe en el catálogo de EPICAL-PC.",
-    };
-  }
-  return {
-    title: `${p.name} | EPICAL-PC`,
-    description: p.desc ?? "PC EPICAL de alto rendimiento.",
-    openGraph: {
-      title: p.name,
-      description: p.desc ?? "",
-      images: p.image ? [{ url: p.image }] : [],
-    },
-  };
-}
-
-
 export default function ProductPage({ params }: Props) {
+  const { add } = useCart();
+  const [toast, setToast] = useState<{ show: boolean; msg: string }>({ show: false, msg: "" });
   const product = getProductBySlug(params.slug);
   if (!product) {
     return (
@@ -49,6 +32,12 @@ export default function ProductPage({ params }: Props) {
 
   const eur = (n: number) =>
     new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(n);
+
+  const handleAdd = () => {
+    add(product.id);
+    setToast({ show: true, msg: `${product.name} añadido al carrito` });
+    setTimeout(() => setToast({ show: false, msg: "" }), 1200);
+  };
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -114,9 +103,10 @@ export default function ProductPage({ params }: Props) {
                 </div>
                 <div className="flex gap-2">
                   <button
+                    onClick={handleAdd}
                     className="rounded-xl bg-white px-5 py-3 font-semibold text-black hover:bg-white/90 disabled:opacity-60"
                     disabled={!product.inStock}
-                    title={product.inStock ? "Añadir (pendiente de carrito global)" : "Sin stock"}
+                    title={product.inStock ? "Añadir al carrito" : "Sin stock"}
                   >
                     Añadir al carrito
                   </button>
@@ -223,6 +213,13 @@ export default function ProductPage({ params }: Props) {
         </div>
       </div>
 
+      {/* Toast de confirmación */}
+      {toast.show && (
+        <div className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 rounded-xl border border-white/20 bg-black/90 px-4 py-2 text-sm backdrop-blur">
+          {toast.msg}
+        </div>
+      )}
+
       {/* CTA móvil pegajosa */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/80 backdrop-blur md:hidden">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 p-3">
@@ -230,7 +227,7 @@ export default function ProductPage({ params }: Props) {
             <div className="text-lg font-extrabold">{eur(product.price)}</div>
             <div className="text-xs text-white/60">{product.inStock ? "En stock" : "Sin stock"}</div>
           </div>
-          <button className="rounded-xl bg-white px-4 py-2 font-semibold text-black" disabled={!product.inStock}>
+          <button onClick={handleAdd} className="rounded-xl bg-white px-4 py-2 font-semibold text-black" disabled={!product.inStock}>
             Añadir
           </button>
         </div>

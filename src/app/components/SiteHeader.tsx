@@ -1,42 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { PRODUCTS } from "../lib/products";
-
-const eur = (n: number) =>
-  new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(n);
+import { useCart } from "../context/cart-context";
+import GoogleSignInButton from "./GoogleSignInButton";
 
 export default function SiteHeader() {
-  const [cart, setCart] = useState<Record<string, number>>({});
-
-  // Carga el carrito desde localStorage para mostrar cantidad y subtotal
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("epical-cart");
-      if (raw) setCart(JSON.parse(raw));
-    } catch {}
-    // escucha cambios del carrito en otras páginas/pestañas
-    const onStorage = () => {
-      try {
-        const raw = localStorage.getItem("epical-cart");
-        if (raw) setCart(JSON.parse(raw));
-      } catch {}
-    };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
-
-  const totalItems = useMemo(() => Object.values(cart).reduce((a, b) => a + b, 0), [cart]);
-  const subtotal = useMemo(() => {
-    return Object.entries(cart).reduce((acc, [id, qty]) => {
-      const prod = PRODUCTS.find((x) => x.id === id);
-      return acc + (prod ? prod.price * qty : 0);
-    }, 0);
-  }, [cart]);
-
+  const { openCart, cart } = useCart();
+  const totalItems = Object.values(cart).reduce((a: number, b: number) => a + b, 0);
   return (
-  <header className="sticky top-0 z-[100] bg-black border-b border-white/10">
+    <header className="sticky top-0 z-[100] bg-black border-b border-white/10">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link
@@ -69,22 +41,16 @@ export default function SiteHeader() {
           </a>
         </nav>
 
-        {/* CTA + Carrito */}
+        {/* Auth + Carrito */}
         <div className="flex items-center gap-2">
-          <Link
-            href="/pc-a-medida"
-            className="rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-3 py-1 text-sm font-semibold text-black/90 hover:opacity-90"
+          <GoogleSignInButton />
+          <button
+            onClick={openCart}
+            className="rounded-xl border border-white/20 px-3 py-1 text-sm hover:border-white/40"
+            aria-label="Abrir carrito"
           >
-            PC a medida
-          </Link>
-
-          <div
-            className="rounded-xl border border-white/20 px-3 py-1 text-sm text-white hover:border-white/40"
-            title="Resumen del carrito"
-            aria-label="Resumen del carrito"
-          >
-            🛒 <b>{totalItems}</b> <span className="text-white/80">· {eur(subtotal)}</span>
-          </div>
+            🛒 <b>{totalItems}</b>
+          </button>
         </div>
       </div>
     </header>

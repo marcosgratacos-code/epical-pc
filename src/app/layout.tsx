@@ -1,22 +1,30 @@
-
-
 import "./globals.css";
 import type { Metadata } from "next";
 import SiteHeader from "./components/SiteHeader";
+import { CartProvider } from "./context/cart-context";
+import CartDrawerGlobal from "./components/CartDrawerGlobal";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import AuthSessionProvider from "./components/AuthSessionProvider";
 
 export const metadata: Metadata = {
   title: "EPICAL-PC",
   description: "PCs personalizados que hacen historia",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession(authOptions);
+  
   return (
     <html lang="es">
       <body className="bg-black text-white">
-        {/* Header global (único) */}
-        <SiteHeader />
-        {/* Contenido: SOLO UNA VEZ */}
-        {children}
+        <AuthSessionProvider session={session}>
+          <CartProvider>
+            <SiteHeader />
+            {children}
+            <CartDrawerGlobal />
+          </CartProvider>
+        </AuthSessionProvider>
       </body>
     </html>
   );

@@ -1,11 +1,5 @@
 
 "use client";
-
-import { PRODUCTS, type Product } from "./lib/products";
-import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
-
-
 // Opciones válidas de GPU centralizadas
 type GPU = "all" | "5060" | "5070" | "5080";
 const OPTIONS: { value: GPU; label: string }[] = [
@@ -15,260 +9,26 @@ const OPTIONS: { value: GPU; label: string }[] = [
   { value: "5080", label: "RTX 5080" },
 ];
 
-/* =========================
-   Utils
-   ========================= */
-const eur = (n: number) =>
-  new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(n);
-
-// Solo acepta valores válidos de GPU (case-insensitive)
-const hasGPU = (p: Product, gpu: GPU): boolean => {
+import { PRODUCTS, type Product } from "./lib/products";
+import ProductCard from "./components/ProductCard";
+// Filtra productos por GPU
+function hasGPU(p: Product, gpu: string) {
   if (gpu === "all") return true;
-  return p.specs.some((spec: string) => spec.toLowerCase().includes(gpu));
-};
-
-/* =========================
-   UI: Toast
-   ========================= */
-
-
-/* =========================
-   ProductCard
-   ========================= */
+  return p.specs.some((s) => s.toLowerCase().includes(gpu));
+}
+import Image from "next/image";
 import Link from "next/link";
-function ProductCard({
-  p,
-  onAdd,
-  onInfo,
-}: {
-  p: Product;
-  onAdd: (id: string) => void;
-  onInfo: (prod: Product) => void;
-}) {
-  return (
-    <Link
-      href={`/products/${p.slug}`}
-      className="block group"
-      tabIndex={-1}
-      aria-label={`Ir a la ficha de ${p.name}`}
-      prefetch={false}
-    >
-      <article
-        className="group relative rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:-translate-y-0.5 hover:border-white/20 focus-within:ring-2 focus-within:ring-violet-400"
-        aria-label={`Producto: ${p.name}`}
-      >
-        {p.tag && (
-          <span className="absolute left-4 top-4 z-10 rounded-full bg-white text-black text-xs font-bold px-2 py-1">
-            {p.tag}
-          </span>
-        )}
-
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
-          <Image
-            src={p.image}
-            alt={`Imagen de ${p.name}`}
-            fill
-            sizes="(min-width: 768px) 33vw, 100vw"
-            className="object-contain transition duration-300 group-hover:scale-[1.03]"
-          />
-        </div>
-
-        <div className="mt-4 flex items-start justify-between gap-3">
-          <h3 className="text-lg font-semibold">{p.name}</h3>
-          <span className="rounded-lg bg-white/10 px-2 py-1 text-sm">{eur(p.price)}</span>
-        </div>
-
-        <div className="mt-1 text-xs text-white/60" aria-label="Valoración y stock">
-          ⭐ {(p.rating ?? 4.8).toFixed(1)} · {p.inStock ? "En stock" : "Agotado"}
-        </div>
-
-        <ul className="mt-2 space-y-1 text-sm text-white/70">
-          {p.specs.map((s: string) => (
-            <li key={s}>• {s}</li>
-          ))}
-        </ul>
-
-        <div className="mt-4 flex gap-2">
-          <button
-            onClick={e => { e.stopPropagation(); e.preventDefault(); onAdd(p.id); }}
-            className="flex-1 rounded-xl bg-white px-4 py-2 text-center font-semibold text-black hover:bg-white/90 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-violet-400"
-            disabled={!p.inStock}
-            aria-label={p.inStock ? `Añadir ${p.name} al carrito` : `${p.name} no disponible`}
-          >
-            {p.inStock ? "Añadir" : "No disponible"}
-          </button>
-          <button
-            onClick={e => { e.stopPropagation(); e.preventDefault(); onInfo(p); }}
-            className="flex-1 rounded-xl border border-white/20 px-4 py-2 text-center font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-            aria-label={`Ver información de ${p.name}`}
-          >
-            Info
-          </button>
-        </div>
-      </article>
-    </Link>
-  );
-}
-
+import { useRef, useState } from "react";
+import { useCart } from "./context/cart-context";
+//
 /* =========================
-   Carrito (Drawer)
+   Carrito (Drawer mejorado)
    ========================= */
-function CartDrawer({
-  open,
-  onClose,
-  cart,
-  setCart,
-}: {
-  open: boolean;
-  onClose: () => void;
-  cart: Record<string, number>;
-  setCart: React.Dispatch<React.SetStateAction<Record<string, number>>>;
-}) {
-  const items = useMemo(
-    () =>
-      Object.entries(cart)
-        .map(([id, qty]) => {
-          const p = PRODUCTS.find((x: Product) => x.id === id);
-          return p ? { ...p, qty } : null;
-        })
-        .filter(Boolean) as (Product & { qty: number })[],
-    [cart]
-  );
-
-  const subtotal = useMemo(() => items.reduce((a, it) => a + it.price * it.qty, 0), [items]);
-
-  const inc = (id: string) => setCart((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
-  const dec = (id: string) =>
-    setCart((prev) => {
-      const next = { ...prev };
-      if (!next[id]) return prev;
-      next[id] = Math.max(0, next[id] - 1);
-      if (next[id] === 0) delete next[id];
-      return next;
-    });
-  const remove = (id: string) =>
-    setCart((prev) => {
-      const next = { ...prev };
-      delete next[id];
-      return next;
-    });
-  const clear = () => setCart({});
-
-  if (!open) return null;
-
-  return (
-    <aside
-      className="fixed inset-0 z-50 flex"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Carrito de compra"
-      onKeyDown={(e) => e.key === "Escape" && onClose()}
-    >
-      <div className="w-full bg-black/60" onClick={onClose} aria-hidden />
-      <div className="ml-auto h-full w-full max-w-md bg-black border-l border-white/10 p-4 overflow-y-auto">
-        <div className="mb-3 flex items-center justify-between">
-          <h3 className="text-lg font-semibold">Tu carrito</h3>
-          <button
-            onClick={onClose}
-            className="rounded-lg border border-white/20 px-3 py-1 text-sm hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-            aria-label="Cerrar carrito"
-          >
-            Cerrar
-          </button>
-        </div>
-
-        {items.length === 0 ? (
-          <p className="text-white/70">Tu carrito está vacío.</p>
-        ) : (
-          <ul className="space-y-3">
-            {items.map((it) => (
-              <li key={it.id} className="flex gap-3 rounded-xl border border-white/10 p-3">
-                <div className="relative h-16 w-16 overflow-hidden rounded-lg border border-white/10">
-                  <Image src={it.image} alt={`Miniatura de ${it.name}`} fill sizes="64px" className="object-contain" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <p className="truncate font-semibold">{it.name}</p>
-                      <p className="text-xs text-white/60">{eur(it.price)}</p>
-                    </div>
-                    <button
-                      onClick={() => remove(it.id)}
-                      className="rounded-md border border-white/20 px-2 py-1 text-xs hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-                      aria-label={`Quitar ${it.name} del carrito`}
-                    >
-                      Quitar
-                    </button>
-                  </div>
-
-                  <div className="mt-2 flex items-center gap-2">
-                    <button
-                      onClick={() => dec(it.id)}
-                      className="rounded-md border border-white/20 px-2 py-1 hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-                      aria-label={`Disminuir cantidad de ${it.name}`}
-                    >
-                      −
-                    </button>
-                    <span aria-live="polite" className="w-6 text-center">
-                      {it.qty}
-                    </span>
-                    <button
-                      onClick={() => inc(it.id)}
-                      className="rounded-md border border-white/20 px-2 py-1 hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-                      aria-label={`Aumentar cantidad de ${it.name}`}
-                    >
-                      +
-                    </button>
-
-                    <span className="ml-auto text-sm text-white/80">{eur(it.price * it.qty)}</span>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className="mt-4 border-t border-white/10 pt-4">
-          <div className="flex items-center justify-between">
-            <span className="text-white/70">Subtotal</span>
-            <span className="font-semibold">{eur(subtotal)}</span>
-          </div>
-          <div className="mt-3 flex gap-2">
-            <button
-              onClick={clear}
-              className="flex-1 rounded-xl border border-white/20 px-4 py-2 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
-              aria-label="Vaciar carrito"
-            >
-              Vaciar
-            </button>
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                alert("Demo: aquí iría tu checkout.");
-              }}
-              className="flex-1 rounded-xl bg-white px-4 py-2 text-center font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400"
-              aria-label="Proceder al pago"
-            >
-              Pagar
-            </a>
-          </div>
-        </div>
-      </div>
-    </aside>
-  );
-}
-
 /* =========================
    Página
    ========================= */
 export default function Page() {
-  // carrito
-  const [cart, setCart] = useState<Record<string, number>>({});
-  // modales
-  const [info, setInfo] = useState<Product | null>(null);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [customOpen, setCustomOpen] = useState(false); // NUEVO
+  const { add } = useCart();
   // toast
   const [toast, setToast] = useState<{ show: boolean; msg: string }>({ show: false, msg: "" });
   // filtros + búsqueda
@@ -277,49 +37,9 @@ export default function Page() {
   const [price, setPrice] = useState<[number, number]>([0, 3000]);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // Persistencia carrito
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("epical-cart");
-      if (raw) setCart(JSON.parse(raw));
-    } catch {}
-  }, []);
-  useEffect(() => {
-    try {
-      localStorage.setItem("epical-cart", JSON.stringify(cart));
-    } catch {}
-  }, [cart]);
-
   // Atajos
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "/") {
-        e.preventDefault();
-        searchRef.current?.focus();
-      }
-      if (e.key.toLowerCase() === "c") setCartOpen(true);
-      if (e.key.toLowerCase() === "m") setCustomOpen(true); // abrir modal a medida
-      if (e.key === "Escape") setCartOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  const totalItems = useMemo(() => Object.values(cart).reduce((a, b) => a + b, 0), [cart]);
-  const subtotal = useMemo(() => {
-    return Object.entries(cart).reduce((acc, [id, qty]) => {
-  const prod = PRODUCTS.find((x: Product) => x.id === id);
-      return acc + (prod ? prod.price * qty : 0);
-    }, 0);
-  }, [cart]);
-
-  const add = (id: string) => {
-    setCart((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
-  const prod = PRODUCTS.find((p: Product) => p.id === id);
-    setToast({ show: true, msg: `${prod?.name ?? "Producto"} añadido` });
-    setTimeout(() => setToast((t) => ({ ...t, show: false })), 1200);
-    setCartOpen(true);
-  };
+  // (mantener solo los atajos relevantes, sin lógica de carrito local)
+  // ...
 
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -333,6 +53,14 @@ export default function Page() {
     const matchesPrice = p.price >= price[0] && p.price <= price[1];
     return matchesQ && matchesGpu && matchesPrice;
   });
+
+  // Nueva función para añadir al carrito usando el contexto global
+  const handleAdd = (id: string) => {
+    add(id);
+    const prod = PRODUCTS.find((p: Product) => p.id === id);
+    setToast({ show: true, msg: `${prod?.name ?? "Producto"} añadido` });
+    setTimeout(() => setToast({ show: false, msg: "" }), 1200);
+  };
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -368,12 +96,12 @@ export default function Page() {
             >
               Ver montajes
             </button>
-            <button
-              onClick={() => setCustomOpen(true)}
+            <Link
+              href="/pc-a-medida"
               className="rounded-xl border border-white/20 px-4 py-2 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
             >
-              PC a medida (M)
-            </button>
+              PC a medida
+            </Link>
           </div>
 
           <ul className="mt-6 grid grid-cols-2 gap-3 text-sm text-white/70 md:grid-cols-3">
@@ -474,7 +202,7 @@ export default function Page() {
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((p: Product) => (
-              <ProductCard key={p.id} p={p} onAdd={add} onInfo={(prod) => setInfo(prod)} />
+              <ProductCard key={p.id} p={p} onAdd={handleAdd} />
             ))}
           </div>
         )}
@@ -521,14 +249,20 @@ export default function Page() {
           <p className="mt-2 text-white/70">Escríbenos por WhatsApp o pide tu PC a medida ahora.</p>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
             <a href="https://wa.me/34XXXXXXXXX" target="_blank" rel="noreferrer" className="rounded-xl bg-white px-5 py-2 font-semibold text-black hover:bg-white/90">WhatsApp</a>
-            <button onClick={() => setCustomOpen(true)} className="rounded-xl border border-white/20 px-5 py-2 font-semibold hover:border-white/40">PC a medida</button>
+            <Link href="/pc-a-medida" className="rounded-xl border border-white/20 px-5 py-2 font-semibold hover:border-white/40">PC a medida</Link>
             <a href="mailto:epicalpc@gmail.com?subject=Quiero%20mi%20EPICAL-PC" className="rounded-xl border border-white/20 px-5 py-2 font-semibold hover:border-white/40">Email</a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Toast de confirmación */}
+      {toast.show && (
+        <div className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 rounded-xl border border-white/20 bg-black/90 px-4 py-2 text-sm backdrop-blur">
+          {toast.msg}
+        </div>
+      )}
 
+      {/* Footer */}
       <footer className="border-t border-white/10 py-8 text-center text-xs text-white/50">
         © {new Date().getFullYear()} Epical-PC · Aviso legal · Privacidad · Cookies
       </footer>

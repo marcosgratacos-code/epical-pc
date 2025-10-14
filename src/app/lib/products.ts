@@ -27,7 +27,7 @@ export const PRODUCTS: Product[] = [
     name: "EPICAL STARTER",
     price: 900, // ← ajustado
   image: "/epical_hero_setup.jpg",
-  images: ["/epical_hero_setu.jpg", "/cableado_limpio_01.jpg"],
+  images: ["/epical_hero_setup.jpg", "/cableado-limpio-01.jpg"],
     tag: "Oferta",
     rating: 4.7,
     inStock: true,
@@ -67,8 +67,8 @@ export const PRODUCTS: Product[] = [
     slug: "epical-advanced",
     name: "EPICAL ADVANCED",
     price: 2300, // ← ajustado
-  image: "/logo-sin-fondo.png",
-  images: ["/advanced_angle_01.jpg", "/advanced_internals_01.jpg"],
+  image: "/advanced-angle-01.jpg",
+  images: ["/advanced-angle-01.jpg", "/advanced-internals-01.jpg"],
     tag: "Nuevo",
     rating: 4.9,
     inStock: true,
@@ -109,8 +109,8 @@ export const PRODUCTS: Product[] = [
     slug: "epical-ultra",
     name: "EPICAL ULTRA",
     price: 2800, // ← ajustado
-  image: "/ultra_angle_01.jpg",
-  images: ["/ultra_angle_01.jpg", "/before_after_cable_management.jpg"],
+  image: "/ultra-angle-01.jpg",
+  images: ["/ultra-angle-01.jpg", "/cableado-limpio-01.jpg"],
     tag: "Top Ventas",
     rating: 5,
     inStock: true,
