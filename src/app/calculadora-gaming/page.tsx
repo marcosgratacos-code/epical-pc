@@ -4,17 +4,23 @@ import { useState, useEffect } from "react";
 import { PRODUCTS } from "../lib/products";
 import Image from "next/image";
 
-// Base de datos de juegos con benchmarks reales
+// Base de datos de juegos con benchmarks reales y DLSS 4
 const GAMES_DATABASE = [
   {
     id: "cyberpunk",
     name: "Cyberpunk 2077",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
     categories: ["AAA", "Ray Tracing", "Open World"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 78, "1440p": 52, "4K": 28 },
-      "RTX 5070": { "1080p": 115, "1440p": 82, "4K": 45 },
-      "RTX 5080": { "1080p": 155, "1440p": 118, "4K": 72 }
+      "RTX 5060": { "1080p": 65, "1440p": 42, "4K": 22 },
+      "RTX 5070": { "1080p": 95, "1440p": 68, "4K": 38 },
+      "RTX 5080": { "1080p": 125, "1440p": 95, "4K": 58 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5070": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 },
+      "RTX 5080": { "1080p": 1.6, "1440p": 1.8, "4K": 2.0 }
     }
   },
   {
@@ -22,10 +28,16 @@ const GAMES_DATABASE = [
     name: "Elden Ring",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
     categories: ["AAA", "Souls-like", "Open World"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 95, "1440p": 68, "4K": 32 },
-      "RTX 5070": { "1080p": 135, "1440p": 98, "4K": 52 },
-      "RTX 5080": { "1080p": 175, "1440p": 135, "4K": 82 }
+      "RTX 5060": { "1080p": 78, "1440p": 55, "4K": 28 },
+      "RTX 5070": { "1080p": 112, "1440p": 82, "4K": 45 },
+      "RTX 5080": { "1080p": 145, "1440p": 108, "4K": 68 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.3, "1440p": 1.5, "4K": 1.7 },
+      "RTX 5070": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5080": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 }
     }
   },
   {
@@ -33,10 +45,11 @@ const GAMES_DATABASE = [
     name: "Valorant",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/1270790/header.jpg",
     categories: ["Competitive", "FPS", "Esports"],
+    supportsDLSS4: false,
     benchmarks: {
-      "RTX 5060": { "1080p": 320, "1440p": 280, "4K": 140 },
-      "RTX 5070": { "1080p": 450, "1440p": 380, "4K": 220 },
-      "RTX 5080": { "1080p": 580, "1440p": 480, "4K": 320 }
+      "RTX 5060": { "1080p": 280, "1440p": 240, "4K": 120 },
+      "RTX 5070": { "1080p": 380, "1440p": 320, "4K": 180 },
+      "RTX 5080": { "1080p": 480, "1440p": 420, "4K": 260 }
     }
   },
   {
@@ -44,21 +57,33 @@ const GAMES_DATABASE = [
     name: "Fortnite",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg",
     categories: ["Battle Royale", "Competitive", "Building"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 125, "1440p": 88, "4K": 42 },
-      "RTX 5070": { "1080p": 185, "1440p": 135, "4K": 68 },
-      "RTX 5080": { "1080p": 245, "1440p": 185, "4K": 98 }
+      "RTX 5060": { "1080p": 95, "1440p": 68, "4K": 32 },
+      "RTX 5070": { "1080p": 135, "1440p": 98, "4K": 52 },
+      "RTX 5080": { "1080p": 175, "1440p": 135, "4K": 78 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.3, "1440p": 1.5, "4K": 1.7 },
+      "RTX 5070": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5080": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 }
     }
   },
   {
     id: "minecraft",
-    name: "Minecraft RTX",
+    name: "Minecraft",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg",
     categories: ["Sandbox", "Ray Tracing", "Creative"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 55, "1440p": 38, "4K": 18 },
-      "RTX 5070": { "1080p": 85, "1440p": 62, "4K": 32 },
-      "RTX 5080": { "1080p": 115, "1440p": 88, "4K": 48 }
+      "RTX 5060": { "1080p": 45, "1440p": 32, "4K": 15 },
+      "RTX 5070": { "1080p": 68, "1440p": 48, "4K": 25 },
+      "RTX 5080": { "1080p": 92, "1440p": 68, "4K": 38 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5070": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 },
+      "RTX 5080": { "1080p": 1.6, "1440p": 1.8, "4K": 2.0 }
     }
   },
   {
@@ -66,10 +91,16 @@ const GAMES_DATABASE = [
     name: "Apex Legends",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg",
     categories: ["Battle Royale", "FPS", "Competitive"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 105, "1440p": 75, "4K": 38 },
-      "RTX 5070": { "1080p": 155, "1440p": 115, "4K": 62 },
-      "RTX 5080": { "1080p": 210, "1440p": 165, "4K": 92 }
+      "RTX 5060": { "1080p": 85, "1440p": 62, "4K": 32 },
+      "RTX 5070": { "1080p": 125, "1440p": 92, "4K": 52 },
+      "RTX 5080": { "1080p": 165, "1440p": 125, "4K": 78 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.3, "1440p": 1.5, "4K": 1.7 },
+      "RTX 5070": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5080": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 }
     }
   },
   {
@@ -77,10 +108,16 @@ const GAMES_DATABASE = [
     name: "Call of Duty: Modern Warfare III",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/2519060/header.jpg",
     categories: ["AAA", "FPS", "Multiplayer"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 88, "1440p": 62, "4K": 32 },
-      "RTX 5070": { "1080p": 128, "1440p": 92, "4K": 52 },
-      "RTX 5080": { "1080p": 168, "1440p": 128, "4K": 78 }
+      "RTX 5060": { "1080p": 72, "1440p": 52, "4K": 28 },
+      "RTX 5070": { "1080p": 105, "1440p": 78, "4K": 42 },
+      "RTX 5080": { "1080p": 138, "1440p": 105, "4K": 62 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5070": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 },
+      "RTX 5080": { "1080p": 1.6, "1440p": 1.8, "4K": 2.0 }
     }
   },
   {
@@ -88,10 +125,16 @@ const GAMES_DATABASE = [
     name: "Marvel's Spider-Man Remastered",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg",
     categories: ["AAA", "Action", "Open World"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 82, "1440p": 58, "4K": 28 },
-      "RTX 5070": { "1080p": 118, "1440p": 85, "4K": 45 },
-      "RTX 5080": { "1080p": 158, "1440p": 118, "4K": 68 }
+      "RTX 5060": { "1080p": 68, "1440p": 48, "4K": 22 },
+      "RTX 5070": { "1080p": 98, "1440p": 72, "4K": 38 },
+      "RTX 5080": { "1080p": 128, "1440p": 98, "4K": 58 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5070": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 },
+      "RTX 5080": { "1080p": 1.6, "1440p": 1.8, "4K": 2.0 }
     }
   },
   {
@@ -99,10 +142,16 @@ const GAMES_DATABASE = [
     name: "Hogwarts Legacy",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/990080/header.jpg",
     categories: ["AAA", "RPG", "Open World"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 75, "1440p": 52, "4K": 25 },
-      "RTX 5070": { "1080p": 108, "1440p": 78, "4K": 42 },
-      "RTX 5080": { "1080p": 145, "1440p": 108, "4K": 62 }
+      "RTX 5060": { "1080p": 58, "1440p": 42, "4K": 20 },
+      "RTX 5070": { "1080p": 85, "1440p": 62, "4K": 32 },
+      "RTX 5080": { "1080p": 112, "1440p": 85, "4K": 48 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5070": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 },
+      "RTX 5080": { "1080p": 1.6, "1440p": 1.8, "4K": 2.0 }
     }
   },
   {
@@ -110,10 +159,16 @@ const GAMES_DATABASE = [
     name: "Diablo IV",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/2344520/header.jpg",
     categories: ["AAA", "RPG", "Action"],
+    supportsDLSS4: true,
     benchmarks: {
-      "RTX 5060": { "1080p": 95, "1440p": 68, "4K": 35 },
-      "RTX 5070": { "1080p": 135, "1440p": 98, "4K": 52 },
-      "RTX 5080": { "1080p": 175, "1440p": 135, "4K": 78 }
+      "RTX 5060": { "1080p": 78, "1440p": 55, "4K": 28 },
+      "RTX 5070": { "1080p": 112, "1440p": 82, "4K": 45 },
+      "RTX 5080": { "1080p": 145, "1440p": 108, "4K": 68 }
+    },
+    dlss4Boost: {
+      "RTX 5060": { "1080p": 1.3, "1440p": 1.5, "4K": 1.7 },
+      "RTX 5070": { "1080p": 1.4, "1440p": 1.6, "4K": 1.8 },
+      "RTX 5080": { "1080p": 1.5, "1440p": 1.7, "4K": 1.9 }
     }
   }
 ];
@@ -139,13 +194,20 @@ export default function GamingCalculator() {
   const [selectedResolution, setSelectedResolution] = useState(RESOLUTIONS[0]);
   const [selectedQuality, setSelectedQuality] = useState(QUALITY_PRESETS[2]);
   const [selectedGPU, setSelectedGPU] = useState("RTX 5070");
+  const [enableDLSS4, setEnableDLSS4] = useState(false);
   const [results, setResults] = useState<any>(null);
   const [showComparison, setShowComparison] = useState(false);
 
-  // Calcular FPS estimados
+  // Calcular FPS estimados con DLSS 4
   const calculateFPS = () => {
-    const baseFPS = selectedGame.benchmarks[selectedGPU]?.[selectedResolution.id] || 0;
-    const adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
+    let baseFPS = selectedGame.benchmarks[selectedGPU]?.[selectedResolution.id] || 0;
+    let adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
+    
+    // Aplicar DLSS 4 si está habilitado y el juego lo soporta
+    if (enableDLSS4 && selectedGame.supportsDLSS4 && selectedGame.dlss4Boost) {
+      const dlssMultiplier = selectedGame.dlss4Boost[selectedGPU]?.[selectedResolution.id] || 1;
+      adjustedFPS = Math.round(adjustedFPS * dlssMultiplier);
+    }
     
     // Calcular experiencia de juego
     let experience = "";
@@ -170,7 +232,8 @@ export default function GamingCalculator() {
       experience,
       experienceColor,
       baseFPS,
-      qualityImpact: Math.round((1 - selectedQuality.multiplier) * 100)
+      qualityImpact: Math.round((1 - selectedQuality.multiplier) * 100),
+      dlssEnabled: enableDLSS4 && selectedGame.supportsDLSS4
     };
   };
 
@@ -199,6 +262,13 @@ export default function GamingCalculator() {
       });
     }
 
+    if (selectedGame.supportsDLSS4 && !enableDLSS4) {
+      recommendations.push({
+        type: "info",
+        message: "DLSS 4 puede mejorar significativamente el rendimiento en este juego"
+      });
+    }
+
     return recommendations;
   };
 
@@ -208,8 +278,15 @@ export default function GamingCalculator() {
     
     Object.keys(selectedGame.benchmarks).forEach(gpu => {
       if (gpu !== selectedGPU) {
-        const baseFPS = selectedGame.benchmarks[gpu][selectedResolution.id] || 0;
-        const adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
+        let baseFPS = selectedGame.benchmarks[gpu][selectedResolution.id] || 0;
+        let adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
+        
+        // Aplicar DLSS 4 si está habilitado
+        if (enableDLSS4 && selectedGame.supportsDLSS4 && selectedGame.dlss4Boost) {
+          const dlssMultiplier = selectedGame.dlss4Boost[gpu]?.[selectedResolution.id] || 1;
+          adjustedFPS = Math.round(adjustedFPS * dlssMultiplier);
+        }
+        
         comparisons.push({
           gpu,
           fps: adjustedFPS,
@@ -224,7 +301,7 @@ export default function GamingCalculator() {
   useEffect(() => {
     const result = calculateFPS();
     setResults(result);
-  }, [selectedGame, selectedResolution, selectedQuality, selectedGPU]);
+  }, [selectedGame, selectedResolution, selectedQuality, selectedGPU, enableDLSS4]);
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -282,6 +359,9 @@ export default function GamingCalculator() {
                           <div className="text-xs text-white/60">
                             {game.categories.join(" • ")}
                           </div>
+                          {game.supportsDLSS4 && (
+                            <div className="text-xs text-cyan-400">✓ DLSS 4</div>
+                          )}
                         </div>
                       </div>
                     </button>
@@ -349,6 +429,24 @@ export default function GamingCalculator() {
                   ))}
                 </div>
               </div>
+
+              {/* DLSS 4 */}
+              {selectedGame.supportsDLSS4 && (
+                <div className="mb-6">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={enableDLSS4}
+                      onChange={(e) => setEnableDLSS4(e.target.checked)}
+                      className="w-4 h-4 text-cyan-400 bg-black border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+                    />
+                    <div>
+                      <div className="font-medium text-white/80">DLSS 4</div>
+                      <div className="text-xs text-cyan-400">Mejora de rendimiento con IA</div>
+                    </div>
+                  </label>
+                </div>
+              )}
             </div>
           </div>
 
@@ -368,6 +466,11 @@ export default function GamingCalculator() {
                     <div className={`text-lg font-medium ${results.experienceColor}`}>
                       {results.experience}
                     </div>
+                    {results.dlssEnabled && (
+                      <div className="mt-2 text-sm text-cyan-400 font-medium">
+                        ✨ Con DLSS 4 activado
+                      </div>
+                    )}
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-3 text-center">
