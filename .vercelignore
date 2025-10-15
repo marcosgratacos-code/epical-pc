@@ -1,0 +1,4 @@
+# Limpiar caché de Vercel
+.next
+node_modules
+.env.local
