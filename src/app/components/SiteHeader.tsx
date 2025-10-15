@@ -30,6 +30,9 @@ export default function SiteHeader() {
           <Link href="/calculadora-gaming" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">
             Calculadora Gaming
           </Link>
+          <Link href="/comparador" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">
+            Comparador
+          </Link>
           <Link href="/#productos" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">
             Montajes
           </Link>
