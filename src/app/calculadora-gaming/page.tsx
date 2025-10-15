@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -128,24 +128,23 @@ export default function GamingCalculator() {
   const [selectedGPU, setSelectedGPU] = useState("RTX 5070");
   const [enableDLSS4, setEnableDLSS4] = useState(false);
   const [results, setResults] = useState<{
+    fps: number;
+    experience: string;
+    experienceColor: string;
     baseFPS: number;
-    dlss4FPS: number;
-    improvement: number;
-    game: string;
-    gpu: string;
-    resolution: string;
-    quality: string;
+    qualityImpact: number;
+    dlssEnabled: boolean;
   } | null>(null);
   const [showComparison, setShowComparison] = useState(false);
 
   // Calcular FPS estimados con DLSS 4
-  const calculateFPS = () => {
-    const baseFPS = selectedGame.benchmarks[selectedGPU]?.[selectedResolution.id] || 0;
+  const calculateFPS = useCallback(() => {
+    const baseFPS = selectedGame.benchmarks[selectedGPU as keyof typeof selectedGame.benchmarks]?.[selectedResolution.id as keyof typeof selectedGame.benchmarks[keyof typeof selectedGame.benchmarks]] || 0;
     let adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
     
     // Aplicar DLSS 4 si está habilitado y el juego lo soporta
     if (enableDLSS4 && selectedGame.supportsDLSS4 && selectedGame.dlss4Boost) {
-      const dlssMultiplier = selectedGame.dlss4Boost[selectedGPU]?.[selectedResolution.id] || 1;
+      const dlssMultiplier = selectedGame.dlss4Boost[selectedGPU as keyof typeof selectedGame.dlss4Boost]?.[selectedResolution.id as keyof typeof selectedGame.dlss4Boost[keyof typeof selectedGame.dlss4Boost]] || 1;
       adjustedFPS = Math.round(adjustedFPS * dlssMultiplier);
     }
     
@@ -175,7 +174,7 @@ export default function GamingCalculator() {
       qualityImpact: Math.round((1 - selectedQuality.multiplier) * 100),
       dlssEnabled: enableDLSS4 && selectedGame.supportsDLSS4
     };
-  };
+  }, [selectedGame, selectedGPU, selectedResolution, selectedQuality, enableDLSS4]);
 
   // Obtener recomendaciones
   const getRecommendations = (fps: number) => {
@@ -214,22 +213,28 @@ export default function GamingCalculator() {
 
   // Comparar con otros productos
   const getComparison = () => {
-    const comparisons = [];
+    const comparisons: Array<{
+      gpu: string;
+      fps: number;
+      experience: string;
+      difference: number;
+    }> = [];
     
     Object.keys(selectedGame.benchmarks).forEach(gpu => {
       if (gpu !== selectedGPU) {
-        const baseFPS = selectedGame.benchmarks[gpu][selectedResolution.id] || 0;
+        const baseFPS = selectedGame.benchmarks[gpu as keyof typeof selectedGame.benchmarks][selectedResolution.id as keyof typeof selectedGame.benchmarks[keyof typeof selectedGame.benchmarks]] || 0;
         let adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
         
         // Aplicar DLSS 4 si está habilitado
         if (enableDLSS4 && selectedGame.supportsDLSS4 && selectedGame.dlss4Boost) {
-          const dlssMultiplier = selectedGame.dlss4Boost[gpu]?.[selectedResolution.id] || 1;
+          const dlssMultiplier = selectedGame.dlss4Boost[gpu as keyof typeof selectedGame.dlss4Boost]?.[selectedResolution.id as keyof typeof selectedGame.dlss4Boost[keyof typeof selectedGame.dlss4Boost]] || 1;
           adjustedFPS = Math.round(adjustedFPS * dlssMultiplier);
         }
         
         comparisons.push({
           gpu,
           fps: adjustedFPS,
+          experience: adjustedFPS >= 60 ? "Fluido" : adjustedFPS >= 30 ? "Jugable" : "Lento",
           difference: adjustedFPS - calculateFPS().fps
         });
       }
