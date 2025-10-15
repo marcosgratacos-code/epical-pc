@@ -36,7 +36,7 @@ export default function SiteHeader() {
         >
                  <span className="text-white">EPICAL</span>
                  <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
-                   -PC V2
+                   -PC
                  </span>
         </Link>
 

@@ -1,24 +1,35 @@
-# EPICAL-PC V2 🚀
+# EPICAL-PC
 
-**FORZAR REBUILD MASIVO EN VERCEL**
+Una aplicación Next.js para configurar PCs gaming personalizados.
 
-## Cambios Masivos V2:
-- ✅ Logo Corsair implementado
-- ✅ Animaciones avanzadas añadidas  
-- ✅ Todos los errores TypeScript corregidos
-- ✅ Build local funcionando perfectamente
-- ✅ Cache de Vercel limpiado
+## Características
 
-## Estado:
-- **Build Local**: ✅ Funcionando (0 errores)
-- **Vercel**: 🔄 Forzando rebuild masivo
-- **Commit**: `c0701e6` → `NUEVO`
+- Configurador de PCs interactivo
+- Autenticación con Google
+- Carrito de compras
+- Comparador de productos
+- Calculadora de rendimiento gaming
 
-## URLs:
-- **Local**: http://localhost:3000
-- **Vercel**: https://epical-pc-khmf.vercel.app
+## Tecnologías
 
----
-**Fecha**: 2025-01-15  
-**Versión**: 2.0.0  
-**Cache Buster**: 1737062400
+- Next.js 15
+- TypeScript
+- Tailwind CSS
+- NextAuth.js
+- React Context API
+
+## Instalación
+
+```bash
+npm install
+npm run dev
+```
+
+## Variables de entorno
+
+```env
+GOOGLE_CLIENT_ID=tu_client_id
+GOOGLE_CLIENT_SECRET=tu_client_secret
+NEXTAUTH_SECRET=tu_secret
+NEXTAUTH_URL=http://localhost:3000
+```

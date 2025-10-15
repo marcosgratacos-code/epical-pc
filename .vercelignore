@@ -1,4 +1,21 @@
-# Limpiar caché de Vercel
-.next
-node_modules
+# Vercel Ignore - Forzar rebuild completo
+.next/
+node_modules/
+.git/
 .env.local
+.env
+*.log
+.DS_Store
+Thumbs.db
+.cache/
+.temp/
+.tmp/
+dist/
+build/
+coverage/
+.nyc_output/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

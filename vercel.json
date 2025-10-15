@@ -1,9 +1,13 @@
 {
   "version": 2,
+  "name": "epical-pc-v2",
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/next"
+      "use": "@vercel/next",
+      "config": {
+        "zeroConfig": false
+      }
     }
   ],
   "routes": [
@@ -15,6 +19,12 @@
   "env": {
     "FORCE_REBUILD": "true",
     "BUILD_VERSION": "2.0.0",
-    "CACHE_BUSTER": "1737062400"
+    "CACHE_BUSTER": "1737063000",
+    "VERCEL_FORCE_REBUILD": "true"
+  },
+  "functions": {
+    "app/api/**/*.ts": {
+      "runtime": "nodejs18.x"
+    }
   }
 }
