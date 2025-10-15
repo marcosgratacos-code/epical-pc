@@ -1,0 +1,11 @@
+# VERCEL BUILD FORCE - ULTIMA OPORTUNIDAD
+# Si Vercel sigue usando commit dc7a496, este archivo lo forzará
+# Commit actual: b7c4f7b
+# Fecha: 2025-01-15 23:15:00
+
+VERCEL_FORCE_REBUILD=true
+BUILD_TIMESTAMP=1737062400
+PROJECT_VERSION=2.0.0
+CACHE_INVALIDATION=true
+
+# Este archivo debe forzar a Vercel a usar el commit correcto
