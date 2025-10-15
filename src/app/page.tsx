@@ -45,43 +45,55 @@ export default function Page() {
 
       {/* Hero */}
       <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-6 p-6 md:grid-cols-2">
-        <div>
-          <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80">Nuevo · Serie EPICAL 2025</p>
-          <h1 className="mt-3 text-4xl font-extrabold leading-tight md:text-5xl">
+        <div className="animate-fade-in-up">
+          <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie EPICAL 2025</p>
+          <h1 className="mt-3 text-4xl font-extrabold leading-tight md:text-5xl animate-fade-in-up-delay-2">
             Potencia extrema, <span className="text-white/70">diseño impecable</span>
             <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
               PCs personalizados que hacen historia
             </span>
           </h1>
-          <p className="mt-4 text-white/70">
+          <p className="mt-4 text-white/70 animate-fade-in-up-delay-3">
             Montajes de alto rendimiento con validación térmica, control acústico y perfiles XMP/EXPO probados.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <button
               onClick={() => scrollTo("productos")}
-              className="rounded-xl bg-white px-4 py-2 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400"
+              className="rounded-xl bg-white px-4 py-2 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow"
             >
               Ver montajes
             </button>
             <Link
               href="/pc-a-medida"
-              className="rounded-xl border border-white/20 px-4 py-2 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
+              className="rounded-xl border border-white/20 px-4 py-2 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow"
             >
               PC a medida
             </Link>
           </div>
 
           <ul className="mt-6 grid grid-cols-2 gap-3 text-sm text-white/70 md:grid-cols-3">
-            {["3 años de garantía","Envío 24/48h","Montaje y test incluidos","Soporte WhatsApp","Devolución 30 días","Pago a plazos"].map((t) => (
-              <li key={t} className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2">{t}</li>
+            {["3 años de garantía","Envío 24/48h","Montaje y test incluidos","Soporte WhatsApp","Devolución 30 días","Pago a plazos"].map((t, index) => (
+              <li key={t} className={`rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 animate-fade-in-scale stagger-${index + 1}`}>{t}</li>
             ))}
           </ul>
         </div>
 
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10">
-          <Image src="/epical_hero_setup.jpg" alt="EPICAL-PC Hero" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover opacity-90" priority />
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 animate-fade-in-right group">
+          <Image 
+            src="/corsair-logo.webp" 
+            alt="Corsair Partner EPICAL-PC" 
+            fill 
+            sizes="(min-width: 768px) 50vw, 100vw" 
+            className="object-contain opacity-90 transform group-hover:scale-110 transition-transform duration-700 ease-out" 
+            priority 
+          />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(56,189,248,0.15),transparent_40%),radial-gradient(circle_at_80%_60%,rgba(139,92,246,0.15),transparent_35%)]" />
+          
+          {/* Partículas decorativas */}
+          <div className="particle absolute top-1/4 left-1/4 animate-soft-pulse"></div>
+          <div className="particle absolute top-3/4 right-1/4 animate-soft-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="particle absolute top-1/2 right-1/3 animate-soft-pulse" style={{animationDelay: '2s'}}></div>
         </div>
       </section>
 
@@ -93,11 +105,11 @@ export default function Page() {
             { t: "Packs Gaming", d: "PC + periféricos" },
             { t: "PC Edición", d: "Premiere, Blender" },
             { t: "PC Oficina", d: "Silenciosos y fiables" },
-          ].map((c) => (
+          ].map((c, index) => (
             <button
               key={c.t}
               onClick={() => scrollTo("productos")}
-              className="rounded-2xl border border-white/10 bg-gradient-to-tr from-white/[0.04] to-white/[0.02] p-4 text-left hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-400"
+              className={`rounded-2xl border border-white/10 bg-gradient-to-tr from-white/[0.04] to-white/[0.02] p-4 text-left hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow animate-fade-in-scale stagger-${index + 1}`}
             >
               <div className="text-sm text-white/60">{c.d}</div>
               <div className="mt-1 text-lg font-semibold">{c.t}</div>
@@ -238,7 +250,7 @@ export default function Page() {
 
       {/* Toast de confirmación */}
       {toast.show && (
-        <div className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 rounded-xl border border-white/20 bg-black/90 px-4 py-2 text-sm backdrop-blur">
+        <div className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 rounded-xl border border-white/20 bg-black/90 px-4 py-2 text-sm backdrop-blur animate-fade-in-scale hover-glow">
           {toast.msg}
         </div>
       )}

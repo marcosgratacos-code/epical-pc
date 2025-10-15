@@ -17,19 +17,25 @@ const SPEC_CATEGORIES = [
     id: "gpu",
     name: "GPU",
     icon: "🎮",
-    specs: ["gpu_model", "gpu_memory", "gpu_performance"]
+    specs: ["gpu_brand", "gpu_model", "gpu_memory", "gpu_performance"]
   },
   {
     id: "cpu",
     name: "CPU",
     icon: "⚡",
-    specs: ["cpu_model", "cpu_cores", "cpu_performance"]
+    specs: ["cpu_brand", "cpu_model", "cpu_cores", "cpu_performance"]
   },
   {
     id: "memory",
     name: "Memoria",
     icon: "💾",
-    specs: ["ram_capacity", "ram_speed", "storage_capacity", "storage_type"]
+    specs: ["ram_brand", "ram_model", "ram_capacity", "ram_speed", "storage_brand", "storage_capacity", "storage_type"]
+  },
+  {
+    id: "motherboard",
+    name: "Placa Base",
+    icon: "🔧",
+    specs: ["motherboard_model", "socket_type", "wifi_support"]
   },
   {
     id: "cooling",
@@ -42,55 +48,188 @@ const SPEC_CATEGORIES = [
     name: "Alimentación",
     icon: "🔌",
     specs: ["psu_wattage", "psu_efficiency", "power_consumption"]
+  },
+  {
+    id: "features",
+    name: "Características",
+    icon: "✨",
+    specs: ["dlss_support", "ray_tracing", "warranty", "delivery"]
   }
 ];
 
 // Función para extraer especificaciones específicas de los specs
 const extractSpecValue = (product: Product, specKey: string): string => {
-  const spec = product.specs.find(s => s.toLowerCase().includes(specKey.toLowerCase()));
-  if (!spec) return "N/A";
+  const specs = product.specs;
   
-  // Extraer valores específicos
+  // Extraer valores específicos basados en las especificaciones reales
   switch (specKey) {
     case "gpu_model":
-      return spec.split(" ").slice(0, 3).join(" ");
+      const gpuSpec = specs.find(s => s.includes("GPU") || s.includes("GeForce"));
+      if (!gpuSpec) return "N/A";
+      const gpuParts = gpuSpec.split("GPU ")[1]?.split(" ");
+      return gpuParts ? `${gpuParts[0]} ${gpuParts[1]} ${gpuParts[2]}` : "N/A";
+      
+    case "gpu_brand":
+      const gpuBrandSpec = specs.find(s => s.includes("GPU") || s.includes("GeForce"));
+      if (!gpuBrandSpec) return "N/A";
+      const gpuBrand = gpuBrandSpec.split("GPU ")[1]?.split(" ")[0];
+      return gpuBrand || "N/A";
+      
     case "gpu_memory":
-      const gpuMem = spec.match(/(\d+)GB/);
-      return gpuMem ? `${gpuMem[1]}GB` : "N/A";
-    case "cpu_model":
-      return spec.split(" ").slice(0, 3).join(" ");
-    case "cpu_cores":
-      const cores = spec.match(/(\d+)-core|(\d+) cores/i);
-      return cores ? (cores[1] || cores[2]) : "N/A";
-    case "ram_capacity":
-      const ram = spec.match(/(\d+)GB/);
-      return ram ? `${ram[1]}GB` : "N/A";
-    case "ram_speed":
-      const speed = spec.match(/(\d+)\s*MT|(\d+)\s*MHz/i);
-      return speed ? `${speed[1] || speed[2]} MT/s` : "N/A";
-    case "storage_capacity":
-      const storage = spec.match(/(\d+)TB|(\d+)GB/);
-      return storage ? `${storage[1] || storage[2]}${storage[1] ? 'TB' : 'GB'}` : "N/A";
-    case "storage_type":
-      if (spec.includes("NVMe")) return "NVMe SSD";
-      if (spec.includes("SSD")) return "SSD";
-      if (spec.includes("HDD")) return "HDD";
-      return "SSD";
-    case "cooler_type":
-      if (spec.includes("360")) return "Líquida 360mm";
-      if (spec.includes("240")) return "Líquida 240mm";
-      if (spec.includes("líquida") || spec.includes("RL")) return "Líquida";
-      return "Aire";
-    case "psu_wattage":
-      const wattage = spec.match(/(\d+)W/);
-      return wattage ? `${wattage[1]}W` : "N/A";
-    case "psu_efficiency":
-      if (spec.includes("80+ Gold")) return "80+ Gold";
-      if (spec.includes("80+ Bronze")) return "80+ Bronze";
-      if (spec.includes("80+")) return "80+";
+      const gpuMemSpec = specs.find(s => s.includes("GPU") || s.includes("GeForce"));
+      if (!gpuMemSpec) return "N/A";
+      const gpuMem = gpuMemSpec.match(/(\d+)GB/);
+      return gpuMem ? `${gpuMem[1]}GB GDDR7` : "N/A";
+      
+    case "gpu_performance":
+      if (product.id === "epic1") return "1080p/1440p Gaming";
+      if (product.id === "epic2") return "1440p/4K Gaming + Streaming";
+      if (product.id === "epic3") return "4K Ultra + VR + Edición";
       return "N/A";
+      
+    case "cpu_model":
+      const cpuSpec = specs.find(s => s.includes("CPU") || s.includes("Intel") || s.includes("AMD"));
+      if (!cpuSpec) return "N/A";
+      const cpuParts = cpuSpec.split("CPU ")[1]?.split(" ");
+      return cpuParts ? `${cpuParts[0]} ${cpuParts[1]} ${cpuParts[2]}` : "N/A";
+      
+    case "cpu_brand":
+      const cpuBrandSpec = specs.find(s => s.includes("CPU") || s.includes("Intel") || s.includes("AMD"));
+      if (!cpuBrandSpec) return "N/A";
+      const cpuBrand = cpuBrandSpec.split("CPU ")[1]?.split(" ")[0];
+      return cpuBrand || "N/A";
+      
+    case "cpu_cores":
+      if (product.id === "epic1") return "6 cores / 12 threads";
+      if (product.id === "epic2") return "8 cores / 16 threads";
+      if (product.id === "epic3") return "8 cores / 16 threads";
+      return "N/A";
+      
+    case "cpu_performance":
+      if (product.id === "epic1") return "Gaming + Uso General";
+      if (product.id === "epic2") return "Gaming + Streaming + Edición";
+      if (product.id === "epic3") return "Gaming + Edición Avanzada";
+      return "N/A";
+      
+    case "ram_capacity":
+      const ramSpec = specs.find(s => s.includes("RAM"));
+      if (!ramSpec) return "N/A";
+      const ram = ramSpec.match(/(\d+)GB/);
+      return ram ? `${ram[1]}GB` : "N/A";
+      
+    case "ram_speed":
+      const ramSpeedSpec = specs.find(s => s.includes("RAM"));
+      if (!ramSpeedSpec) return "N/A";
+      const speed = ramSpeedSpec.match(/(\d+)\s*MHz/i);
+      return speed ? `${speed[1]}MHz` : "N/A";
+      
+    case "ram_brand":
+      const ramBrandSpec = specs.find(s => s.includes("RAM"));
+      if (!ramBrandSpec) return "N/A";
+      // Extraer marca después de "RAM "
+      const ramBrandMatch = ramBrandSpec.match(/RAM\s+([A-Za-z]+)\s+([A-Za-z]+)/);
+      return ramBrandMatch ? `${ramBrandMatch[1]} ${ramBrandMatch[2]}` : "N/A";
+      
+    case "ram_model":
+      const ramModelSpec = specs.find(s => s.includes("RAM"));
+      if (!ramModelSpec) return "N/A";
+      // Extraer modelo completo después de "RAM "
+      const ramModelMatch = ramModelSpec.match(/RAM\s+(.+?)\s+\d+MHz/);
+      return ramModelMatch ? ramModelMatch[1] : "N/A";
+      
+    case "storage_capacity":
+      const storageSpec = specs.find(s => s.includes("SSD") || s.includes("NVMe"));
+      if (!storageSpec) return "N/A";
+      const storage = storageSpec.match(/(\d+)TB|(\d+)GB/);
+      return storage ? `${storage[1] || storage[2]}${storage[1] ? 'TB' : 'GB'}` : "N/A";
+      
+    case "storage_type":
+      const storageTypeSpec = specs.find(s => s.includes("SSD") || s.includes("NVMe"));
+      if (!storageTypeSpec) return "N/A";
+      if (storageTypeSpec.includes("PCIe 5.0")) return "NVMe PCIe 5.0";
+      if (storageTypeSpec.includes("PCIe 4.0")) return "NVMe PCIe 4.0";
+      if (storageTypeSpec.includes("NVMe")) return "NVMe SSD";
+      if (storageTypeSpec.includes("SSD")) return "SSD";
+      return "SSD";
+      
+    case "storage_brand":
+      const storageBrandSpec = specs.find(s => s.includes("SSD"));
+      if (!storageBrandSpec) return "N/A";
+      // Extraer marca después de "SSD "
+      const storageBrandMatch = storageBrandSpec.match(/SSD\s+([A-Za-z]+)\s+([A-Za-z]+)/);
+      return storageBrandMatch ? `${storageBrandMatch[1]} ${storageBrandMatch[2]}` : "N/A";
+      
+    case "cooler_type":
+      const coolerSpec = specs.find(s => s.includes("RL") || s.includes("Disipador") || s.includes("líquida"));
+      if (!coolerSpec) return "Aire";
+      if (coolerSpec.includes("360")) return "Líquida 360mm ARGB";
+      if (coolerSpec.includes("240")) return "Líquida 240mm";
+      if (coolerSpec.includes("RL") || coolerSpec.includes("líquida")) return "Líquida";
+      return "Aire";
+      
+    case "case_type":
+      const caseSpec = specs.find(s => s.includes("Caja"));
+      if (!caseSpec) return "N/A";
+      const caseParts = caseSpec.split("Caja ")[1]?.split(" ");
+      return caseParts ? `${caseParts[0]} ${caseParts[1]} ${caseParts[2]}` : "N/A";
+      
+    case "airflow":
+      if (product.id === "epic1") return "Básico";
+      if (product.id === "epic2") return "Optimizado";
+      if (product.id === "epic3") return "Premium";
+      return "N/A";
+      
+    case "psu_wattage":
+      const psuSpec = specs.find(s => s.includes("Fuente"));
+      if (!psuSpec) return "N/A";
+      const wattage = psuSpec.match(/(\d+)W/);
+      return wattage ? `${wattage[1]}W` : "N/A";
+      
+    case "psu_efficiency":
+      const psuEffSpec = specs.find(s => s.includes("Fuente"));
+      if (!psuEffSpec) return "N/A";
+      if (psuEffSpec.includes("80+ Gold")) return "80+ Gold";
+      if (psuEffSpec.includes("80+ Bronze")) return "80+ Bronze";
+      if (psuEffSpec.includes("80+")) return "80+";
+      return "N/A";
+      
+    case "power_consumption":
+      if (product.id === "epic1") return "~400W";
+      if (product.id === "epic2") return "~650W";
+      if (product.id === "epic3") return "~750W";
+      return "N/A";
+      
+    case "motherboard_model":
+      const mbSpec = specs.find(s => s.includes("Placa"));
+      if (!mbSpec) return "N/A";
+      const mbParts = mbSpec.split("Placa ")[1]?.split(" ");
+      return mbParts ? `${mbParts[0]} ${mbParts[1]} ${mbParts[2]}` : "N/A";
+      
+    case "socket_type":
+      if (product.id === "epic1") return "LGA1700 (Intel)";
+      if (product.id === "epic2") return "AM5 (AMD)";
+      if (product.id === "epic3") return "AM5 (AMD)";
+      return "N/A";
+      
+    case "wifi_support":
+      const wifiSpec = specs.find(s => s.includes("Placa"));
+      if (!wifiSpec) return "N/A";
+      return wifiSpec.includes("WIFI") ? "WiFi 6E" : "No";
+      
+    case "dlss_support":
+      return "DLSS 4";
+      
+    case "ray_tracing":
+      return "Ray Tracing Hardware";
+      
+    case "warranty":
+      return "3 años";
+      
+    case "delivery":
+      return "24/48h";
+      
     default:
-      return spec;
+      return "N/A";
   }
 };
 
@@ -107,8 +246,8 @@ const calculateValueScore = (product: Product): number => {
 };
 
 // Función para obtener recomendación
-const getRecommendation = (products: Product[]): { winner: Product; reason: string } => {
-  if (products.length === 0) return { winner: PRODUCTS[0], reason: "" };
+const getRecommendation = (products: Product[]): { winner: Product; reason: string; details: string[] } => {
+  if (products.length === 0) return { winner: PRODUCTS[0], reason: "", details: [] };
   
   const scores = products.map(p => ({
     product: p,
@@ -121,15 +260,35 @@ const getRecommendation = (products: Product[]): { winner: Product; reason: stri
   const winner = scores[0].product;
   
   let reason = "";
-  if (winner.price < 1500) {
-    reason = "Mejor relación calidad-precio";
-  } else if (winner.rating && winner.rating >= 4.8) {
-    reason = "Máxima calidad y rendimiento";
-  } else {
-    reason = "Equilibrio perfecto entre precio y características";
+  let details: string[] = [];
+  
+  if (winner.id === "epic1") {
+    reason = "Mejor relación calidad-precio para gaming 1080p/1440p";
+    details = [
+      "RTX 5060 ideal para eSports y juegos modernos",
+      "Intel i5-12400F con excelente rendimiento",
+      "16GB DDR5 para multitarea fluida",
+      "Perfecto para estudiantes y gamers casuales"
+    ];
+  } else if (winner.id === "epic2") {
+    reason = "Equilibrio perfecto entre rendimiento y valor";
+    details = [
+      "RTX 5070 Ti para gaming 1440p/4K",
+      "Ryzen 7 9800X3D con cache 3D para FPS máximos",
+      "32GB DDR5 para streaming y edición",
+      "Ideal para creadores de contenido y gamers serios"
+    ];
+  } else if (winner.id === "epic3") {
+    reason = "Máximo rendimiento para usuarios exigentes";
+    details = [
+      "RTX 5080 para 4K ultra y VR",
+      "64GB DDR5 para proyectos pesados",
+      "SSD PCIe 5.0 de última generación",
+      "Perfecto para profesionales y entusiastas"
+    ];
   }
   
-  return { winner, reason };
+  return { winner, reason, details };
 };
 
 export default function ProductComparator() {
@@ -156,22 +315,51 @@ export default function ProductComparator() {
     setShowRecommendation(false);
   };
 
-  // Función para exportar comparación
-  const exportComparison = () => {
-    const data = {
-      products: selectedProducts.map(p => ({
-        name: p.name,
-        price: p.price,
-        specs: p.specs
-      })),
-      timestamp: new Date().toISOString()
-    };
+  // Función para exportar comparación en PDF (texto plano)
+  const exportComparisonPDF = () => {
+    const content = `
+COMPARACIÓN DE PCs EPICAL
+========================
+Fecha: ${new Date().toLocaleDateString('es-ES')}
+Hora: ${new Date().toLocaleTimeString('es-ES')}
+
+PRODUCTOS COMPARADOS:
+${selectedProducts.map((p, i) => `
+${i + 1}. ${p.name}
+   Precio: ${p.price}€
+   Etiqueta: ${p.tag}
+   Valoración: ${p.rating}/5
+   Descripción: ${p.desc}
+   
+   ESPECIFICACIONES:
+${p.specs.map(spec => `   • ${spec}`).join('\n')}
+`).join('\n')}
+
+RECOMENDACIÓN:
+${recommendation.winner ? `
+🏆 PRODUCTO RECOMENDADO: ${recommendation.winner.name}
+💰 Precio: ${recommendation.winner.price}€
+📝 Razón: ${recommendation.reason}
+
+DETALLES ADICIONALES:
+${recommendation.details.map(detail => `• ${detail}`).join('\n')}
+` : 'No hay productos seleccionados para comparar'}
+
+RESUMEN:
+• Total de productos: ${selectedProducts.length}
+• Rango de precios: ${Math.min(...selectedProducts.map(p => p.price))}€ - ${Math.max(...selectedProducts.map(p => p.price))}€
+• Precio promedio: ${Math.round(selectedProducts.reduce((sum, p) => sum + p.price, 0) / selectedProducts.length)}€
+
+---
+Generado por EPICAL-PC Comparador
+https://epical-pc.vercel.app/comparador
+    `.trim();
     
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const blob = new Blob([content], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `comparacion-epical-${Date.now()}.json`;
+    a.download = `comparacion-epical-${Date.now()}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -214,10 +402,10 @@ export default function ProductComparator() {
                   Limpiar selección
                 </button>
                 <button
-                  onClick={exportComparison}
+                  onClick={exportComparisonPDF}
                   className="text-sm text-blue-400 hover:text-blue-300"
                 >
-                  Exportar comparación
+                  📋 Exportar comparación
                 </button>
               </>
             )}
@@ -244,23 +432,39 @@ export default function ProductComparator() {
               <span className="text-2xl">🏆</span>
               <h3 className="text-xl font-semibold">Nuestra Recomendación</h3>
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
                 <h4 className="text-lg font-semibold text-violet-400 mb-2">
                   {recommendation.winner.name}
                 </h4>
-                <p className="text-white/70 mb-2">{recommendation.reason}</p>
-                <div className="text-2xl font-bold">
+                <p className="text-white/70 mb-4">{recommendation.reason}</p>
+                <div className="text-2xl font-bold mb-4">
                   {recommendation.winner.price.toLocaleString()}€
                 </div>
+                <div className="space-y-2">
+                  {recommendation.details.map((detail, index) => (
+                    <div key={index} className="flex items-start gap-2 text-sm text-white/80">
+                      <span className="text-violet-400 mt-0.5">•</span>
+                      <span>{detail}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="flex justify-end">
-                <button
-                  onClick={() => toggleProduct(recommendation.winner)}
+              <div className="flex flex-col justify-center items-center gap-4">
+                <div className="relative aspect-[4/3] w-full max-w-[200px] overflow-hidden rounded-xl border border-white/10">
+                  <Image 
+                    src={recommendation.winner.image} 
+                    alt={recommendation.winner.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <Link
+                  href={`/products/${recommendation.winner.slug}`}
                   className="rounded-xl bg-violet-400 px-6 py-3 font-semibold text-black hover:bg-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
                 >
-                  Ver detalles
-                </button>
+                  Ver detalles completos
+                </Link>
               </div>
             </div>
           </div>
