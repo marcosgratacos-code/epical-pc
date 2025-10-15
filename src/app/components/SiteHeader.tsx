@@ -24,6 +24,9 @@ export default function SiteHeader() {
 
         {/* Nav */}
         <nav className="hidden md:flex gap-4 text-sm text-white/80" aria-label="Navegación principal">
+          <Link href="/productos" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">
+            Productos
+          </Link>
           <Link href="/#productos" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">
             Montajes
           </Link>
