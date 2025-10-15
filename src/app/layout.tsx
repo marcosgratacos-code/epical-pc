@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   let session = null;
   try {
     session = await getServerSession(authOptions);
-  } catch (error) {
+  } catch {
     console.warn("Auth not configured, continuing without authentication");
   }
   

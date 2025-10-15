@@ -2,7 +2,6 @@
 
 import { PRODUCTS, type Product } from "../lib/products";
 import ProductCard from "../components/ProductCard";
-import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { useCart } from "../context/cart-context";

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PRODUCTS } from "../lib/products";
 import Image from "next/image";
+import Link from "next/link";
 
 // Base de datos de juegos con benchmarks reales de 2025 (+20% FPS, Cyberpunk +25% adicional)
 const GAMES_DATABASE = [
@@ -71,7 +71,7 @@ const GAMES_DATABASE = [
   },
   {
     id: "spider-man",
-    name: "Marvel's Spider-Man Remastered",
+    name: "Marvel&apos;s Spider-Man Remastered",
     image: "https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg",
     categories: ["AAA", "Action", "Open World"],
     supportsDLSS4: true,
@@ -127,12 +127,20 @@ export default function GamingCalculator() {
   const [selectedQuality, setSelectedQuality] = useState(QUALITY_PRESETS[2]);
   const [selectedGPU, setSelectedGPU] = useState("RTX 5070");
   const [enableDLSS4, setEnableDLSS4] = useState(false);
-  const [results, setResults] = useState<any>(null);
+  const [results, setResults] = useState<{
+    baseFPS: number;
+    dlss4FPS: number;
+    improvement: number;
+    game: string;
+    gpu: string;
+    resolution: string;
+    quality: string;
+  } | null>(null);
   const [showComparison, setShowComparison] = useState(false);
 
   // Calcular FPS estimados con DLSS 4
   const calculateFPS = () => {
-    let baseFPS = selectedGame.benchmarks[selectedGPU]?.[selectedResolution.id] || 0;
+    const baseFPS = selectedGame.benchmarks[selectedGPU]?.[selectedResolution.id] || 0;
     let adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
     
     // Aplicar DLSS 4 si está habilitado y el juego lo soporta
@@ -210,7 +218,7 @@ export default function GamingCalculator() {
     
     Object.keys(selectedGame.benchmarks).forEach(gpu => {
       if (gpu !== selectedGPU) {
-        let baseFPS = selectedGame.benchmarks[gpu][selectedResolution.id] || 0;
+        const baseFPS = selectedGame.benchmarks[gpu][selectedResolution.id] || 0;
         let adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
         
         // Aplicar DLSS 4 si está habilitado
@@ -233,7 +241,7 @@ export default function GamingCalculator() {
   useEffect(() => {
     const result = calculateFPS();
     setResults(result);
-  }, [selectedGame, selectedResolution, selectedQuality, selectedGPU, enableDLSS4]);
+  }, [selectedGame, selectedResolution, selectedQuality, selectedGPU, enableDLSS4, calculateFPS]);
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -241,7 +249,7 @@ export default function GamingCalculator() {
       <section className="mx-auto max-w-7xl p-6">
         <div className="mb-8">
           <nav className="mb-4 text-sm text-white/60">
-            <a href="/" className="hover:text-white">Inicio</a>
+            <Link href="/" className="hover:text-white">Inicio</Link>
             <span className="mx-2">/</span>
             <span className="text-white">Calculadora Gaming</span>
           </nav>
@@ -508,7 +516,7 @@ export default function GamingCalculator() {
             <p>• <span className="text-cyan-400 font-semibold">DLSS 4 cuadruplica el rendimiento (4x)</span> en todos los juegos compatibles</p>
             <p>• El rendimiento puede variar según la configuración del sistema</p>
             <p>• Datos extrapolados de RTX 4060/4070/4080 con mejoras estimadas</p>
-            <p>• Fuentes: TechPowerUp, Tom's Hardware, AnandTech (2025)</p>
+            <p>• Fuentes: TechPowerUp, Tom&apos;s Hardware, AnandTech (2025)</p>
           </div>
         </div>
       </section>
