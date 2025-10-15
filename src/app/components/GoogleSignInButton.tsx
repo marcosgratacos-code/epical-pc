@@ -1,9 +1,26 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useState, useRef, useEffect } from "react";
 
 export default function GoogleSignInButton() {
   const { data: session, status } = useSession();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Cerrar dropdown al hacer click fuera
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // No mostrar nada mientras carga
   if (status === "loading") {
@@ -12,16 +29,71 @@ export default function GoogleSignInButton() {
 
   if (session) {
     return (
-      <div className="flex items-center gap-2">
-        <span className="hidden md:inline text-sm text-white/70">
-          {session.user?.name || session.user?.email}
-        </span>
+      <div className="relative" ref={dropdownRef}>
         <button
-          onClick={() => signOut()}
-          className="rounded-xl border border-white/20 px-4 py-2 text-sm text-red-400 hover:border-red-400 hover:text-red-300 focus:outline-none focus:ring-2 focus:ring-red-400"
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          className="flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2 text-sm hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
         >
-          Salir
+          <div className="h-6 w-6 rounded-full bg-gradient-to-r from-cyan-400 to-violet-400 flex items-center justify-center text-xs font-semibold text-black">
+            {session.user?.name?.charAt(0) || session.user?.email?.charAt(0) || "U"}
+          </div>
+          <span className="hidden md:inline text-sm text-white/70">
+            {session.user?.name || session.user?.email}
+          </span>
+          <svg className="h-4 w-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
+
+        {/* Dropdown Menu */}
+        {isDropdownOpen && (
+          <div className="absolute right-0 top-full mt-2 w-48 rounded-xl border border-white/10 bg-black/95 backdrop-blur-sm py-2 shadow-lg z-50">
+            <button
+              onClick={() => {
+                setIsDropdownOpen(false);
+                // Aquí puedes agregar la lógica para ir al perfil
+                console.log("Ir a perfil");
+              }}
+              className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 focus:outline-none focus:bg-white/10"
+            >
+              👤 Perfil
+            </button>
+            
+            <button
+              onClick={() => {
+                setIsDropdownOpen(false);
+                // Aquí puedes agregar la lógica para ver compras
+                console.log("Ver compras");
+              }}
+              className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 focus:outline-none focus:bg-white/10"
+            >
+              🛒 Compras
+            </button>
+            
+            <button
+              onClick={() => {
+                setIsDropdownOpen(false);
+                // Aquí puedes agregar la lógica para seguir envío
+                console.log("Seguir envío");
+              }}
+              className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 focus:outline-none focus:bg-white/10"
+            >
+              📦 Seguir envío
+            </button>
+            
+            <hr className="my-2 border-white/10" />
+            
+            <button
+              onClick={() => {
+                setIsDropdownOpen(false);
+                signOut();
+              }}
+              className="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-red-400/10 focus:outline-none focus:bg-red-400/10"
+            >
+              🚪 Salir
+            </button>
+          </div>
+        )}
       </div>
     );
   }
