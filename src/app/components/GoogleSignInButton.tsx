@@ -18,7 +18,7 @@ export default function GoogleSignInButton() {
         </span>
         <button
           onClick={() => signOut()}
-          className="rounded-xl border border-white/20 px-4 py-2 text-sm hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
+          className="rounded-xl border border-white/20 px-4 py-2 text-sm text-red-400 hover:border-red-400 hover:text-red-300 focus:outline-none focus:ring-2 focus:ring-red-400"
         >
           Salir
         </button>
