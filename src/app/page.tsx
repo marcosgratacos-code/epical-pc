@@ -35,7 +35,7 @@ export default function Page() {
       {/* Promo con TRES colores */}
       <div className="w-full bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-violet-500/20 border-b border-white/10">
         <div className="mx-auto max-w-7xl p-2 text-center text-sm">
-          <b>-5% Epical Weeks</b> con cupón <b>EQW</b> · Envío 24/48h · 3 años de garantía
+          <b>-5% Epical Weeks V2</b> con cupón <b>EQW</b> · Envío 24/48h · 3 años de garantía
         </div>
       </div>
 
@@ -46,12 +46,12 @@ export default function Page() {
       {/* Hero */}
       <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-6 p-6 md:grid-cols-2">
         <div className="animate-fade-in-up">
-          <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie EPICAL 2025</p>
+          <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo V2 · Serie EPICAL 2025</p>
           <h1 className="mt-3 text-4xl font-extrabold leading-tight md:text-5xl animate-fade-in-up-delay-2">
-            Potencia extrema, <span className="text-white/70">diseño impecable</span>
+            Potencia extrema V2, <span className="text-white/70">diseño impecable</span>
             <br />
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
-              PCs personalizados que hacen historia
+              PCs personalizados que hacen historia V2
             </span>
           </h1>
           <p className="mt-4 text-white/70 animate-fade-in-up-delay-3">

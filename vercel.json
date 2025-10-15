@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "FORCE_REBUILD": "true",
+    "BUILD_VERSION": "2.0.0",
+    "CACHE_BUSTER": "1737062400"
+  }
+}
