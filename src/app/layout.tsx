@@ -13,7 +13,13 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions);
+  // Intentar obtener la sesión, pero no fallar si no está configurado
+  let session = null;
+  try {
+    session = await getServerSession(authOptions);
+  } catch (error) {
+    console.warn("Auth not configured, continuing without authentication");
+  }
   
   return (
     <html lang="es">

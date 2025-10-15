@@ -5,15 +5,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 export default function GoogleSignInButton() {
   const { data: session, status } = useSession();
 
+  // No mostrar nada mientras carga
   if (status === "loading") {
-    return (
-      <button
-        disabled
-        className="rounded-xl border border-white/20 px-4 py-2 text-sm opacity-50"
-      >
-        Cargando...
-      </button>
-    );
+    return null;
   }
 
   if (session) {
@@ -32,6 +26,8 @@ export default function GoogleSignInButton() {
     );
   }
 
+  // No mostrar el botón de login si no está configurado (opcional)
+  // Por ahora lo dejamos visible para que sepas cuándo está configurado
   return (
     <button
       onClick={() => signIn("google")}
