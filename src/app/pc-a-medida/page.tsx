@@ -128,7 +128,7 @@ export default function PCMedidaPage() {
             { src: "/validacion-termica-graph.png", alt: "Validación térmica (gráfico)" },
             { src: "/curvas-pwm-silencio.png", alt: "Curvas PWM silenciosas" },
             { src: "/workbench-assembly.jpg", alt: "Mesa de montaje EPICAL" },
-            { src: "/epical-hero-setup.jpg", alt: "Setup EPICAL" },
+            { src: "/epical_hero_setup.jpg", alt: "Setup EPICAL" },
           ]}
         />
       </section>

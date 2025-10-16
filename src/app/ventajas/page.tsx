@@ -216,7 +216,7 @@ export default function VentajasPage() {
             { src: "/validacion-termica-graph.png", alt: "Validación térmica" },
             { src: "/curvas-pwm-silencio.png", alt: "Curvas PWM silenciosas" },
             { src: "/workbench-assembly.jpg", alt: "Mesa de montaje EPICAL" },
-            { src: "/epical-hero-setup.jpg", alt: "Setup EPICAL" },
+            { src: "/epical_hero_setup.jpg", alt: "Setup EPICAL" },
           ]}
         />
         <p className="mt-2 text-xs text-white/50">

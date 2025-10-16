@@ -4,12 +4,18 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useCart } from "../context/cart-context";
 import { PRODUCTS, type Product } from "../lib/products";
+import { getStripe } from "../lib/get-stripe";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const eur = (n: number) => new Intl.NumberFormat("es-ES",{style:"currency",currency:"EUR"}).format(n);
 
 export default function CartDrawerGlobal() {
   const { cart, setCart, open, closeCart, hydrated } = useCart();
   const panelRef = useRef<HTMLDivElement>(null);
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (open) {
@@ -65,6 +71,80 @@ export default function CartDrawerGlobal() {
     if (code === "EQW") setCouponApplied({ code, discount: 0.05 });
     else if (code === "EPICAL10") setCouponApplied({ code, discount: 0.1 });
     else { setCouponApplied(null); alert("Cupón no válido."); }
+  };
+
+  const handleCheckout = async () => {
+    // 🔐 VERIFICAR SI HAY SESIÓN ANTES DE PROCEDER AL PAGO
+    if (!session) {
+      // Mostrar alerta y redirigir a login
+      const shouldLogin = confirm(
+        "🔐 Inicia sesión para comprar\n\n" +
+        "Necesitas una cuenta para realizar compras y gestionar tus pedidos.\n\n" +
+        "¿Quieres iniciar sesión ahora?"
+      );
+      
+      if (shouldLogin) {
+        // Guardar el carrito antes de ir a login
+        localStorage.setItem("cart", JSON.stringify(cart));
+        // Redirigir a login y volver al carrito después
+        router.push("/auth/signin?callbackUrl=" + encodeURIComponent(window.location.pathname));
+        closeCart();
+      }
+      return;
+    }
+
+    // ✅ Usuario autenticado, proceder con el pago
+    setIsProcessingPayment(true);
+    
+    try {
+      // Llamar a la API para crear sesión de Stripe
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cartItems: cart,
+        }),
+      });
+
+      const data = await response.json();
+
+      // Si el sistema de pagos no está configurado (error 503)
+      if (response.status === 503) {
+        alert(
+          "⚠️ Sistema de pagos en configuración\n\n" +
+          "El sistema de pagos con Stripe aún no está configurado.\n\n" +
+          "Si eres el administrador, consulta el archivo CONFIGURAR_STRIPE.md para activar los pagos.\n\n" +
+          "Por ahora puedes:\n" +
+          "✓ Explorar productos\n" +
+          "✓ Añadir al carrito\n" +
+          "✓ Ver precios y especificaciones\n\n" +
+          "Para consultas: epicalpc@gmail.com"
+        );
+        setIsProcessingPayment(false);
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al procesar el pago");
+      }
+
+      const { url } = data;
+      
+      // Redirigir a Stripe Checkout
+      if (url) {
+        window.location.href = url;
+      }
+    } catch (error) {
+      console.error("Error al procesar el pago:", error);
+      alert(
+        error instanceof Error 
+          ? error.message 
+          : "Error al procesar el pago. Por favor, inténtalo de nuevo."
+      );
+      setIsProcessingPayment(false);
+    }
   };
 
   if (!open || !hydrated) return null;
@@ -150,8 +230,30 @@ export default function CartDrawerGlobal() {
               <div className="mt-3 flex items-center justify-between text-base"><span className="font-semibold">Total (IVA incl.)</span><span className="font-bold">{eur(total)}</span></div>
               <div className="mt-2 text-xs text-white/60">{envio===0 ? "🎉 Envío gratis a partir de 1000€" : `Sube tu pedido a ${eur(1000)} para envío gratis. Te faltan ${eur(Math.max(0, 1000 - subtotal))}.`}</div>
               <div className="mt-4 flex gap-2">
-                <button onClick={clear} className="flex-1 rounded-xl border border-white/20 px-4 py-2 font-semibold hover:border-white/40">Vaciar</button>
-                <a href="#" onClick={(e)=>{e.preventDefault(); alert('Demo: checkout');}} className="flex-1 rounded-xl bg-white px-4 py-2 text-center font-semibold text-black hover:bg-white/90">Pagar</a>
+                <button 
+                  onClick={clear} 
+                  className="flex-1 rounded-xl border border-white/20 px-4 py-2 font-semibold hover:border-white/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isProcessingPayment}
+                >
+                  Vaciar
+                </button>
+                <button 
+                  onClick={handleCheckout} 
+                  disabled={isProcessingPayment}
+                  className="flex-1 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-4 py-2 text-center font-semibold text-white hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isProcessingPayment ? (
+                    <>
+                      <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Procesando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>💳</span>
+                      <span>Proceder al Pago</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           </>
