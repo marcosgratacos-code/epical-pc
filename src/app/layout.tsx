@@ -15,6 +15,7 @@ import Onboarding from "./components/Onboarding";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthSessionProvider from "./components/AuthSessionProvider";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "EPICAL-PC | PCs Gaming Personalizados con Validación Térmica",
@@ -111,7 +112,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <CartProvider>
               <WishlistProvider>
                 <CompareProvider>
-                  <ProgressBar />
+                  <Suspense fallback={null}>
+                    <ProgressBar />
+                  </Suspense>
                   <SiteHeader />
                   {children}
                   <CartDrawerGlobal />
