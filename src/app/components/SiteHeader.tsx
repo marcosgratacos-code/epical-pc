@@ -35,11 +35,11 @@ export default function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2 md:px-4 md:py-3 gap-2 md:gap-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-6 lg:max-w-8xl xl:max-w-none xl:px-8">
           {/* Logo */}
           <Link
             href="/"
-            className="text-lg md:text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
+            className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
             aria-label="Ir al inicio"
           >
                    <span className="text-white">EPICAL</span>
@@ -48,12 +48,12 @@ export default function SiteHeader() {
                    </span>
           </Link>
 
-               {/* Nav - Solo Desktop */}
-               <nav className="hidden lg:flex gap-4 text-sm text-white/80" aria-label="Navegación principal">
-                 <Link href="/productos" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift">
+               {/* Nav - Desktop Optimizado */}
+               <nav className="hidden lg:flex gap-6 text-sm text-white/80" aria-label="Navegación principal">
+                 <Link href="/productos" className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200">
                    Productos
                  </Link>
-                 <Link href="/configurador" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-500/30">
+                 <Link href="/configurador" className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 hover:from-cyan-500/30 hover:to-violet-500/30 transition-all duration-200">
                    🛠️ Configurador
                  </Link>
                  
@@ -105,51 +105,51 @@ export default function SiteHeader() {
                    )}
                  </div>
                  
-                 <Link href="/pc-a-medida" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">
+                 <Link href="/pc-a-medida" className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200">
                    PC a medida
                  </Link>
               <Link
                 href="/contacto"
-                className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+                className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200"
               >
                 Contacto
               </Link>
                  <a
                    href="/faq"
-                   className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+                   className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200"
                  >
                    FAQ
                  </a>
                </nav>
 
-          {/* Búsqueda - Solo Desktop */}
+          {/* Búsqueda - Desktop Optimizada */}
           <button
             id="global-search-trigger"
             onClick={() => setIsSearchOpen(true)}
-            className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 group flex-1 max-w-xs"
+            className="hidden lg:flex items-center gap-3 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 group flex-1 max-w-md"
             aria-label="Buscar productos"
           >
             <svg className="h-4 w-4 text-white/40 group-hover:text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-            <span className="text-sm text-white/40 group-hover:text-white/60">Buscar...</span>
-            <kbd className="ml-auto px-2 py-0.5 text-xs rounded bg-white/10 text-white/40 border border-white/20">⌘K</kbd>
+            <span className="text-sm text-white/40 group-hover:text-white/60">Buscar productos...</span>
+            <kbd className="ml-auto px-2 py-0.5 text-xs rounded bg-white/10 text-white/40 border border-white/20 group-hover:bg-white/20 group-hover:text-white/60">⌘K</kbd>
           </button>
 
-          {/* Acciones - Desktop */}
-          <div className="hidden md:flex items-center gap-2">
+          {/* Acciones - Desktop Optimizadas */}
+          <div className="hidden lg:flex items-center gap-3">
             <GoogleSignInButton />
             <NotificationBell />
             <Link
               href="/favoritos"
-              className="rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 relative touch-target"
+              className="rounded-xl border border-white/20 px-4 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 relative touch-target hover:bg-white/5"
               aria-label="Ver favoritos"
             >
               ❤️ <b>{wishlistCount}</b>
             </Link>
             <button
               onClick={openCart}
-              className="rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200"
+              className="rounded-xl border border-white/20 px-4 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 hover:bg-white/5"
               aria-label="Abrir carrito"
             >
               🛒 <b>{totalItems}</b>

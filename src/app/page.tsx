@@ -48,29 +48,29 @@ export default function Page() {
 
 
       {/* Hero */}
-      <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-4 p-4 md:gap-6 md:p-6 md:grid-cols-2 lg:max-w-8xl xl:max-w-none xl:px-8">
+      <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-8 p-6 md:gap-12 md:p-8 md:grid-cols-2 lg:max-w-8xl xl:max-w-none xl:px-8 xl:gap-16">
         <div className="animate-fade-in-up">
           <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie EPICAL 2025</p>
-          <h1 className="mt-3 text-3xl font-extrabold leading-tight md:text-5xl animate-fade-in-up-delay-2">
+          <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl lg:text-7xl animate-fade-in-up-delay-2">
             Potencia extrema, <span className="text-white/70">diseño impecable</span>
             <br />
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
               PCs personalizados que hacen historia
             </span>
           </h1>
-          <p className="mt-4 text-sm text-white/70 md:text-base animate-fade-in-up-delay-3">
+          <p className="mt-6 text-lg text-white/70 md:text-xl lg:text-2xl animate-fade-in-up-delay-3">
             Montajes de alto rendimiento con validación térmica, control acústico y perfiles XMP/EXPO probados.
           </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:gap-3">
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:gap-4 lg:gap-6">
             <button
               onClick={() => scrollTo("productos")}
-              className="rounded-xl bg-white px-6 py-3 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow touch-target"
+              className="rounded-xl bg-white px-8 py-4 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow touch-target text-lg"
             >
               Ver montajes
             </button>
             <Link
               href="/pc-a-medida"
-              className="rounded-xl border border-white/20 px-6 py-3 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow touch-target text-center"
+              className="rounded-xl border border-white/20 px-8 py-4 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow touch-target text-center text-lg"
             >
               PC a medida
             </Link>
@@ -139,8 +139,8 @@ export default function Page() {
 
 
       {/* Productos */}
-      <section id="productos" className="mx-auto max-w-7xl p-4 md:p-6 lg:max-w-8xl xl:max-w-none xl:px-8">
-        <h2 className="mb-6 text-lg font-semibold text-white/90 md:text-xl md:mb-8">Montajes destacados</h2>
+      <section id="productos" className="mx-auto max-w-7xl p-6 md:p-8 lg:max-w-8xl xl:max-w-none xl:px-8">
+        <h2 className="mb-8 text-2xl font-semibold text-white/90 md:text-3xl lg:text-4xl md:mb-12">Montajes destacados</h2>
         
         {/* EPICAL ADVANCED destacado */}
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 lg:items-center">
