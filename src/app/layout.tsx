@@ -115,7 +115,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   <Suspense fallback={null}>
                     <ProgressBar />
                   </Suspense>
-                  <SiteHeader />
+                  <Suspense fallback={
+                    <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
+                      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
+                        <div className="text-2xl font-bold text-white">EPICAL-PC</div>
+                        <div className="flex items-center gap-2">
+                          <div className="h-8 w-8 bg-white/10 rounded animate-pulse"></div>
+                          <div className="h-8 w-8 bg-white/10 rounded animate-pulse"></div>
+                        </div>
+                      </div>
+                    </header>
+                  }>
+                    <SiteHeader />
+                  </Suspense>
                   {children}
                   <CartDrawerGlobal />
                   <ChatWidget />

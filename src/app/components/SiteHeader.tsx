@@ -35,7 +35,7 @@ export default function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4 lg:max-w-8xl xl:max-w-none xl:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
           {/* Logo */}
           <Link
             href="/"
