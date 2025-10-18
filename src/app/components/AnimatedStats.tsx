@@ -44,9 +44,9 @@ export default function AnimatedStats() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto max-w-7xl p-6 my-12"
+      className="mx-auto max-w-7xl p-4 md:p-6 my-8 md:my-12"
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
         {stats.map((stat, index) => (
           <StatCard
             key={stat.label}
@@ -95,7 +95,7 @@ function StatCard({
 
   return (
     <div
-      className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 text-center backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:scale-105 hover-glow"
+      className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-3 md:p-6 text-center backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:scale-105 hover-glow"
       style={{
         animationDelay: `${delay}s`,
         opacity: isVisible ? 1 : 0,
@@ -103,12 +103,12 @@ function StatCard({
         transition: "all 0.6s ease-out",
       }}
     >
-      <div className="text-4xl mb-3">{stat.icon}</div>
-      <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent mb-2">
+      <div className="text-2xl md:text-4xl mb-2 md:mb-3">{stat.icon}</div>
+      <div className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent mb-1 md:mb-2">
         {count}
         {stat.suffix}
       </div>
-      <div className="text-sm text-white/70">{stat.label}</div>
+      <div className="text-xs md:text-sm text-white/70">{stat.label}</div>
     </div>
   );
 }

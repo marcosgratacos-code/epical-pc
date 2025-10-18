@@ -29,23 +29,23 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="mx-auto max-w-7xl p-6 my-16">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <section className="mx-auto max-w-7xl p-4 md:p-6 my-8 md:my-16">
+      <div className="text-center mb-8 md:mb-12">
+        <h2 className="text-2xl md:text-4xl font-bold mb-4">
           <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
             ¿Cómo funciona?
           </span>
         </h2>
-        <p className="text-white/70 max-w-2xl mx-auto">
+        <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto">
           De la elección de componentes a tu setup gaming en 4 sencillos pasos
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {steps.map((step, index) => (
           <div
             key={step.number}
-            className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:scale-105 group"
+            className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-4 md:p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:scale-105 group"
           >
             {/* Línea conectora (solo en desktop) */}
             {index < steps.length - 1 && (
@@ -53,18 +53,18 @@ export default function HowItWorks() {
             )}
 
             {/* Número */}
-            <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-br from-violet-500/20 to-cyan-500/20 border border-white/10 mb-4 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-400 group-hover:scale-110 transition-transform duration-300">
+            <div className="inline-flex items-center justify-center h-12 w-12 md:h-16 md:w-16 rounded-full bg-gradient-to-br from-violet-500/20 to-cyan-500/20 border border-white/10 mb-3 md:mb-4 text-lg md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-400 group-hover:scale-110 transition-transform duration-300">
               {step.number}
             </div>
 
             {/* Icono */}
-            <div className="text-4xl mb-4">{step.icon}</div>
+            <div className="text-3xl md:text-4xl mb-3 md:mb-4">{step.icon}</div>
 
             {/* Contenido */}
-            <h3 className="text-xl font-semibold mb-3 text-white">
+            <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3 text-white">
               {step.title}
             </h3>
-            <p className="text-sm text-white/70 leading-relaxed">
+            <p className="text-xs md:text-sm text-white/70 leading-relaxed">
               {step.description}
             </p>
 

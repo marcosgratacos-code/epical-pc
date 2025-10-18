@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import BackButton from "@/app/components/BackButton";
+import Confetti from "@/app/components/Confetti";
 import { findOrderBySessionId, formatDateOnly } from "@/app/lib/orders";
 import { Order } from "@/types/order";
 import { useCart } from "@/app/context/cart-context";
@@ -13,6 +14,7 @@ function ExitoContent() {
   const sessionId = searchParams.get("session_id");
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
   const { clearCart } = useCart();
 
   useEffect(() => {
@@ -24,6 +26,8 @@ function ExitoContent() {
         setOrder(foundOrder);
         // Limpiar el carrito después del pago exitoso
         clearCart();
+        // Activar confetti
+        setShowConfetti(true);
       } else {
         // Si no se encuentra el pedido, esperar un poco más
         // (el webhook podría tardar unos segundos)
@@ -32,6 +36,7 @@ function ExitoContent() {
           if (retryOrder) {
             setOrder(retryOrder);
             clearCart();
+            setShowConfetti(true);
           }
         }, 2000);
       }
@@ -52,9 +57,11 @@ function ExitoContent() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full">
-        <BackButton />
+    <>
+      <Confetti active={showConfetti} duration={5000} />
+      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full">
+          <BackButton />
         
         {/* Animación de éxito */}
         <div className="text-center mb-8 animate-fade-in-scale">
@@ -203,7 +210,8 @@ function ExitoContent() {
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
 

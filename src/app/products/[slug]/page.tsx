@@ -9,15 +9,70 @@ import Accordion from "../../components/Accordion";
 import ReviewSection from "../../components/ReviewSection";
 import ImageGalleryZoom from "../../components/ImageGalleryZoom";
 import { useCart } from "../../context/cart-context";
-import { useState, use } from "react";
+import { useRecentlyViewed } from "../../hooks/useRecentlyViewed";
+import { useState, use, useEffect } from "react";
+import StructuredData from "../../components/StructuredData";
 
 type Props = { params: Promise<{ slug: string }> };
 
+// Generar metadata dinámica
+export async function generateMetadata({ params }: Props) {
+  const resolvedParams = await params;
+  const product = getProductBySlug(resolvedParams.slug);
+  
+  if (!product) {
+    return {
+      title: "Producto no encontrado | EPICAL-PC",
+      description: "El producto que buscas no existe",
+    };
+  }
+
+  const title = `${product.name} | EPICAL-PC - PC Gaming Personalizado`;
+  const description = `${product.desc || product.name} - ${product.price.toLocaleString("es-ES", { style: "currency", currency: "EUR" })}. ${product.specs.slice(0, 3).join(", ")}. Garantía 3 años, envío 24-48h.`;
+  const url = `https://epical-pc.com/products/${product.slug}`;
+
+  return {
+    title,
+    description,
+    keywords: `${product.name}, PC gaming, ${product.specs.join(", ")}, EPICAL-PC`,
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "EPICAL-PC",
+      images: [
+        {
+          url: product.image,
+          width: 1200,
+          height: 630,
+          alt: product.name,
+        },
+      ],
+      type: "product" as const,
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description,
+      images: [product.image],
+    },
+  };
+}
+
 export default function ProductPage({ params }: Props) {
   const { add } = useCart();
+  const { addToRecentlyViewed } = useRecentlyViewed();
   const [toast, setToast] = useState<{ show: boolean; msg: string }>({ show: false, msg: "" });
   const resolvedParams = use(params);
   const product = getProductBySlug(resolvedParams.slug);
+  
+  // Agregar a vistos recientemente
+  useEffect(() => {
+    if (product) {
+      addToRecentlyViewed(product);
+    }
+  }, [product, addToRecentlyViewed]);
+  
   if (!product) {
     return (
       <main className="min-h-screen bg-black text-white mx-auto max-w-6xl p-6">
@@ -42,8 +97,71 @@ export default function ProductPage({ params }: Props) {
     setTimeout(() => setToast({ show: false, msg: "" }), 1200);
   };
 
+  // Structured data para SEO
+  const structuredData = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    name: product.name,
+    image: product.image,
+    description: product.desc || product.name,
+    brand: {
+      "@type": "Brand",
+      name: "EPICAL-PC",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `https://epical-pc.com/products/${product.slug}`,
+      priceCurrency: "EUR",
+      price: product.price,
+      availability: product.inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      seller: {
+        "@type": "Organization",
+        name: "EPICAL-PC",
+      },
+    },
+    aggregateRating: product.rating
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: product.rating,
+          bestRating: "5",
+          worstRating: "1",
+        }
+      : undefined,
+  };
+
+  const breadcrumbData = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: "https://epical-pc.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Productos",
+        item: "https://epical-pc.com/productos",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: `https://epical-pc.com/products/${product.slug}`,
+      },
+    ],
+  };
+
   return (
-    <main className="min-h-screen bg-black text-white">
+    <>
+      <StructuredData data={structuredData} />
+      <StructuredData data={breadcrumbData} />
+      
+      <main className="min-h-screen bg-black text-white">
       <div className="mx-auto max-w-7xl p-6">
         {/* barra superior: volver + migas */}
         <div className="mb-4 flex items-center justify-between">
@@ -217,6 +335,7 @@ export default function ProductPage({ params }: Props) {
           </button>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

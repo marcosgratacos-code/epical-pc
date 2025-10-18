@@ -5,6 +5,8 @@ import { useCart } from "../context/cart-context";
 import { useWishlist } from "../context/wishlist-context";
 import GoogleSignInButton from "./GoogleSignInButton";
 import NotificationBell from "./NotificationBell";
+import MobileMenu from "./MobileMenu";
+import GlobalSearch from "./GlobalSearch";
 import { useState, useRef } from "react";
 
 export default function SiteHeader() {
@@ -12,6 +14,8 @@ export default function SiteHeader() {
   const { wishlistCount } = useWishlist();
   const totalItems = Object.values(cart).reduce((a: number, b: number) => a + b, 0);
   const [isVentajasDropdownOpen, setIsVentajasDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -29,24 +33,28 @@ export default function SiteHeader() {
     }, 150); // 150ms de delay
   };
   return (
-    <header className="sticky top-0 z-[100] bg-black border-b border-white/10">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
-          aria-label="Ir al inicio"
-        >
-                 <span className="text-white">EPICAL</span>
-                 <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
-                   -PC
-                 </span>
-        </Link>
+    <>
+      <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2 md:px-4 md:py-3 gap-2 md:gap-4">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-xl md:text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
+            aria-label="Ir al inicio"
+          >
+                   <span className="text-white">EPICAL</span>
+                   <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
+                     -PC
+                   </span>
+          </Link>
 
                {/* Nav */}
                <nav className="hidden md:flex gap-4 text-sm text-white/80" aria-label="Navegación principal">
                  <Link href="/productos" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift">
                    Productos
+                 </Link>
+                 <Link href="/configurador" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-500/30">
+                   🛠️ Configurador
                  </Link>
                  
                  {/* Ventajas con dropdown */}
@@ -114,26 +122,70 @@ export default function SiteHeader() {
                  </a>
                </nav>
 
-        {/* Auth + Notificaciones + Wishlist + Carrito */}
-        <div className="flex items-center gap-2">
-          <GoogleSignInButton />
-          <NotificationBell />
-          <Link
-            href="/favoritos"
-            className="rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 relative touch-target"
-            aria-label="Ver favoritos"
-          >
-            ❤️ <b>{wishlistCount}</b>
-          </Link>
+          {/* Búsqueda - Desktop */}
           <button
-            onClick={openCart}
-            className="rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 touch-target"
-            aria-label="Abrir carrito"
+            id="global-search-trigger"
+            onClick={() => setIsSearchOpen(true)}
+            className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 group flex-1 max-w-xs"
+            aria-label="Buscar productos"
           >
-            🛒 <b>{totalItems}</b>
+            <svg className="h-4 w-4 text-white/40 group-hover:text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <span className="text-sm text-white/40 group-hover:text-white/60">Buscar...</span>
+            <kbd className="ml-auto px-2 py-0.5 text-xs rounded bg-white/10 text-white/40 border border-white/20">⌘K</kbd>
           </button>
+
+          {/* Auth + Notificaciones + Wishlist + Carrito */}
+          <div className="flex items-center gap-1 md:gap-2">
+            {/* Búsqueda móvil */}
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="md:hidden rounded-xl border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200 touch-target"
+              aria-label="Buscar"
+            >
+              🔍
+            </button>
+            
+            <div className="hidden md:flex items-center gap-2">
+              <GoogleSignInButton />
+              <NotificationBell />
+            </div>
+            
+            <Link
+              href="/favoritos"
+              className="hidden md:flex rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 relative touch-target"
+              aria-label="Ver favoritos"
+            >
+              ❤️ <b>{wishlistCount}</b>
+            </Link>
+            <button
+              onClick={openCart}
+              className="rounded-xl border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 touch-target"
+              aria-label="Abrir carrito"
+            >
+              🛒 <b>{totalItems}</b>
+            </button>
+            
+            {/* Hamburger Menu - Mobile */}
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden rounded-xl border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200 touch-target"
+              aria-label="Abrir menú"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile Menu */}
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+
+      {/* Global Search */}
+      <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+    </>
   );
 }

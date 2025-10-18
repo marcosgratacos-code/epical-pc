@@ -4,8 +4,14 @@ import SiteHeader from "./components/SiteHeader";
 import { CartProvider } from "./context/cart-context";
 import { WishlistProvider } from "./context/wishlist-context";
 import { NotificationsProvider } from "./context/notifications-context";
+import { CompareProvider } from "./context/compare-context";
 import CartDrawerGlobal from "./components/CartDrawerGlobal";
 import ChatWidget from "./components/ChatWidget";
+import ProgressBar from "./components/ProgressBar";
+import ScrollToTop from "./components/ScrollToTop";
+import CompareFloatingButton from "./components/CompareFloatingButton";
+import StructuredData from "./components/StructuredData";
+import Onboarding from "./components/Onboarding";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthSessionProvider from "./components/AuthSessionProvider";
@@ -46,7 +52,20 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#8b5cf6"
+  themeColor: "#8b5cf6",
+  maximumScale: 5,
+  userScalable: true,
+};
+
+// Precargar recursos críticos
+const preloadResources = () => {
+  return (
+    <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://cdn.akamai.steamstatic.com" />
+    </>
+  );
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -58,17 +77,49 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     console.warn("Auth not configured, continuing without authentication");
   }
   
+  // Structured data para la organización
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "EPICAL-PC",
+    url: "https://epical-pc.com",
+    logo: "https://epical-pc.com/logo-epical.png",
+    description: "PCs gaming personalizados con montaje profesional, validación térmica real y 3 años de garantía",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "ES",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      availableLanguage: "Spanish",
+    },
+    sameAs: [
+      // Añadir redes sociales cuando estén disponibles
+    ],
+  };
+
   return (
     <html lang="es">
+      <head>
+        {preloadResources()}
+      </head>
       <body className="bg-black text-white">
+        <StructuredData data={organizationData} />
         <AuthSessionProvider session={session}>
           <NotificationsProvider>
             <CartProvider>
               <WishlistProvider>
-                <SiteHeader />
-                {children}
-                <CartDrawerGlobal />
-                <ChatWidget />
+                <CompareProvider>
+                  <ProgressBar />
+                  <SiteHeader />
+                  {children}
+                  <CartDrawerGlobal />
+                  <ChatWidget />
+                  <ScrollToTop />
+                  <CompareFloatingButton />
+                  <Onboarding />
+                </CompareProvider>
               </WishlistProvider>
             </CartProvider>
           </NotificationsProvider>

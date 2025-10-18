@@ -31,6 +31,37 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Tamaños de fuente optimizados para móvil */
+  @media (max-width: 768px) {
+    .text-mobile-xs { font-size: 0.75rem; }
+    .text-mobile-sm { font-size: 0.875rem; }
+    .text-mobile-base { font-size: 1rem; }
+    .text-mobile-lg { font-size: 1.125rem; }
+    .text-mobile-xl { font-size: 1.25rem; }
+    .text-mobile-2xl { font-size: 1.5rem; }
+    .text-mobile-3xl { font-size: 1.875rem; }
+  }
+  
+  /* Áreas táctiles mínimas */
+  @media (max-width: 768px) {
+    .touch-target {
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  
+  /* Eliminar hover effects en táctil */
+  @media (hover: none) {
+    .hover-lift:hover,
+    .hover-glow:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
 }
 
 /* =========================

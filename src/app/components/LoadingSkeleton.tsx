@@ -43,14 +43,24 @@ export default function LoadingSkeleton({
 
 export function ProductCardSkeleton() {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 space-y-3">
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 space-y-3 animate-pulse">
       <LoadingSkeleton variant="rectangular" height="200px" />
       <LoadingSkeleton variant="text" width="80%" />
       <LoadingSkeleton variant="text" width="60%" />
       <div className="flex gap-2">
-        <LoadingSkeleton variant="rectangular" height="40px" />
-        <LoadingSkeleton variant="rectangular" height="40px" />
+        <LoadingSkeleton variant="rectangular" height="40px" width="50%" />
+        <LoadingSkeleton variant="rectangular" height="40px" width="50%" />
       </div>
+    </div>
+  );
+}
+
+export function ProductGridSkeleton({ count = 6 }: { count?: number }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {Array.from({ length: count }).map((_, i) => (
+        <ProductCardSkeleton key={i} />
+      ))}
     </div>
   );
 }

@@ -48,42 +48,42 @@ export default function Page() {
 
 
       {/* Hero */}
-      <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-6 p-6 md:grid-cols-2">
+      <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-4 p-4 md:gap-6 md:p-6 md:grid-cols-2">
         <div className="animate-fade-in-up">
           <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie EPICAL 2025</p>
-          <h1 className="mt-3 text-4xl font-extrabold leading-tight md:text-5xl animate-fade-in-up-delay-2">
+          <h1 className="mt-3 text-3xl font-extrabold leading-tight md:text-5xl animate-fade-in-up-delay-2">
             Potencia extrema, <span className="text-white/70">diseño impecable</span>
             <br />
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
               PCs personalizados que hacen historia
             </span>
           </h1>
-          <p className="mt-4 text-white/70 animate-fade-in-up-delay-3">
+          <p className="mt-4 text-sm text-white/70 md:text-base animate-fade-in-up-delay-3">
             Montajes de alto rendimiento con validación térmica, control acústico y perfiles XMP/EXPO probados.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:gap-3">
             <button
               onClick={() => scrollTo("productos")}
-              className="rounded-xl bg-white px-4 py-2 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow"
+              className="rounded-xl bg-white px-6 py-3 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow touch-target"
             >
               Ver montajes
             </button>
             <Link
               href="/pc-a-medida"
-              className="rounded-xl border border-white/20 px-4 py-2 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow"
+              className="rounded-xl border border-white/20 px-6 py-3 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow touch-target text-center"
             >
               PC a medida
             </Link>
           </div>
 
-          <ul className="mt-6 grid grid-cols-2 gap-3 text-sm text-white/70 md:grid-cols-3">
+          <ul className="mt-6 grid grid-cols-1 gap-2 text-sm text-white/70 sm:grid-cols-2 md:grid-cols-3">
             {["3 años de garantía","Envío 24/48h","Montaje y test incluidos","Soporte WhatsApp","Devolución 30 días","Pago a plazos"].map((t, index) => (
               <li key={t} className={`rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 animate-fade-in-scale stagger-${index + 1}`}>{t}</li>
             ))}
           </ul>
         </div>
 
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 animate-fade-in-right group">
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 animate-fade-in-right group md:aspect-[4/3]">
           <Image 
             src="/corsair-logo.webp" 
             alt="Corsair Partner EPICAL-PC" 
@@ -139,11 +139,11 @@ export default function Page() {
 
 
       {/* Productos */}
-      <section id="productos" className="mx-auto max-w-7xl p-6">
-        <h2 className="mb-8 text-xl font-semibold text-white/90">Montajes destacados</h2>
+      <section id="productos" className="mx-auto max-w-7xl p-4 md:p-6">
+        <h2 className="mb-6 text-lg font-semibold text-white/90 md:text-xl md:mb-8">Montajes destacados</h2>
         
         {/* EPICAL ADVANCED destacado */}
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div className="grid gap-4 md:gap-8 lg:grid-cols-2 lg:items-center">
           {/* Producto a la izquierda */}
           <div className="order-2 lg:order-1">
             {(() => {
@@ -158,7 +158,7 @@ export default function Page() {
           
           {/* Descripción a la derecha */}
           <div className="order-1 lg:order-2">
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-violet-500/10 p-8">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-violet-500/10 p-4 md:p-8">
               <div className="mb-4">
                 <span className="inline-block rounded-full bg-gradient-to-r from-cyan-400 to-violet-400 px-4 py-2 text-sm font-semibold text-black">
                   Selección Especial

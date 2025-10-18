@@ -152,3 +152,4 @@ console.log('7. Ver imágenes ampliadas');
 console.log('8. Intentar dejar reseña (solo si has comprado)');
 
 
+
