@@ -35,11 +35,11 @@ export default function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2 md:px-4 md:py-3 gap-2 md:gap-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl md:text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
+            className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
             aria-label="Ir al inicio"
           >
                    <span className="text-white">EPICAL</span>
@@ -137,11 +137,11 @@ export default function SiteHeader() {
           </button>
 
           {/* Auth + Notificaciones + Wishlist + Carrito */}
-          <div className="flex items-center gap-1 md:gap-2">
+          <div className="flex items-center gap-2">
             {/* Búsqueda móvil */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="md:hidden rounded-xl border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200 touch-target"
+              className="md:hidden rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200"
               aria-label="Buscar"
             >
               🔍
@@ -161,7 +161,7 @@ export default function SiteHeader() {
             </Link>
             <button
               onClick={openCart}
-              className="rounded-xl border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 touch-target"
+              className="rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200"
               aria-label="Abrir carrito"
             >
               🛒 <b>{totalItems}</b>
@@ -170,7 +170,7 @@ export default function SiteHeader() {
             {/* Hamburger Menu - Mobile */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden rounded-xl border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200 touch-target"
+              className="md:hidden rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200"
               aria-label="Abrir menú"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
