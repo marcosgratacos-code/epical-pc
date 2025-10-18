@@ -7,7 +7,7 @@ const isStripeConfigured = !!STRIPE_SECRET_KEY;
 // Solo crear instancia de Stripe si está configurado
 export const stripe = isStripeConfigured
   ? new Stripe(STRIPE_SECRET_KEY as string, {
-      apiVersion: "2024-12-18.acacia",
+      apiVersion: "2025-09-30.clover",
       typescript: true,
     })
   : null;
