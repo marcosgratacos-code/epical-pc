@@ -35,11 +35,11 @@ export default function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2 md:px-4 md:py-3 gap-2 md:gap-4">
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
+            className="text-lg md:text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
             aria-label="Ir al inicio"
           >
                    <span className="text-white">EPICAL</span>
@@ -48,8 +48,8 @@ export default function SiteHeader() {
                    </span>
           </Link>
 
-               {/* Nav */}
-               <nav className="hidden md:flex gap-4 text-sm text-white/80" aria-label="Navegación principal">
+               {/* Nav - Solo Desktop */}
+               <nav className="hidden lg:flex gap-4 text-sm text-white/80" aria-label="Navegación principal">
                  <Link href="/productos" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift">
                    Productos
                  </Link>
@@ -122,11 +122,11 @@ export default function SiteHeader() {
                  </a>
                </nav>
 
-          {/* Búsqueda - Desktop */}
+          {/* Búsqueda - Solo Desktop */}
           <button
             id="global-search-trigger"
             onClick={() => setIsSearchOpen(true)}
-            className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 group flex-1 max-w-xs"
+            className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 group flex-1 max-w-xs"
             aria-label="Buscar productos"
           >
             <svg className="h-4 w-4 text-white/40 group-hover:text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,25 +136,13 @@ export default function SiteHeader() {
             <kbd className="ml-auto px-2 py-0.5 text-xs rounded bg-white/10 text-white/40 border border-white/20">⌘K</kbd>
           </button>
 
-          {/* Auth + Notificaciones + Wishlist + Carrito */}
-          <div className="flex items-center gap-2">
-            {/* Búsqueda móvil */}
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="md:hidden rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200"
-              aria-label="Buscar"
-            >
-              🔍
-            </button>
-            
-            <div className="hidden md:flex items-center gap-2">
-              <GoogleSignInButton />
-              <NotificationBell />
-            </div>
-            
+          {/* Acciones - Desktop */}
+          <div className="hidden md:flex items-center gap-2">
+            <GoogleSignInButton />
+            <NotificationBell />
             <Link
               href="/favoritos"
-              className="hidden md:flex rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 relative touch-target"
+              className="rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 relative touch-target"
               aria-label="Ver favoritos"
             >
               ❤️ <b>{wishlistCount}</b>
@@ -166,14 +154,35 @@ export default function SiteHeader() {
             >
               🛒 <b>{totalItems}</b>
             </button>
+          </div>
+
+          {/* Acciones - Mobile */}
+          <div className="flex md:hidden items-center gap-1">
+            {/* Búsqueda móvil */}
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="rounded-lg border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200"
+              aria-label="Buscar"
+            >
+              🔍
+            </button>
+            
+            {/* Carrito móvil */}
+            <button
+              onClick={openCart}
+              className="rounded-lg border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200"
+              aria-label="Abrir carrito"
+            >
+              🛒 <b>{totalItems}</b>
+            </button>
             
             {/* Hamburger Menu - Mobile */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200"
+              className="rounded-lg border border-white/20 px-2 py-2 text-sm hover:border-white/40 hover-lift hover-glow transition-all duration-200"
               aria-label="Abrir menú"
             >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
