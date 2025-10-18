@@ -6,8 +6,9 @@ import PartPicker from '@/app/components/configurator/PartPicker';
 import SummarySticky from '@/app/components/configurator/SummarySticky';
 import { CPU } from '@/types/parts';
 import Link from 'next/link';
+import ConfiguratorProvider from '@/app/components/configurator/ConfiguratorProvider';
 
-export default function ProcesadorPage() {
+function ProcesadorContent() {
   const { build, setPart, setStep } = useConfigStore();
   const router = useRouter();
 
@@ -97,6 +98,14 @@ export default function ProcesadorPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProcesadorPage() {
+  return (
+    <ConfiguratorProvider>
+      <ProcesadorContent />
+    </ConfiguratorProvider>
   );
 }
 

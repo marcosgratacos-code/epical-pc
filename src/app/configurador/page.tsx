@@ -5,8 +5,9 @@ import { UserProfile } from '@/types/parts';
 import { getProfileCriteria } from '@/lib/recommend';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import ConfiguratorProvider from '@/app/components/configurator/ConfiguratorProvider';
 
-export default function ConfiguradorPage() {
+function ConfiguradorContent() {
   const { setProfile, setStep, reset } = useConfigStore();
   const router = useRouter();
 
@@ -191,6 +192,14 @@ export default function ConfiguradorPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ConfiguradorPage() {
+  return (
+    <ConfiguratorProvider>
+      <ConfiguradorContent />
+    </ConfiguratorProvider>
   );
 }
 
