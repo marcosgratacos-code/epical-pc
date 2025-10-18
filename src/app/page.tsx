@@ -48,7 +48,7 @@ export default function Page() {
 
 
       {/* Hero */}
-      <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-4 p-4 md:gap-6 md:p-6 md:grid-cols-2">
+      <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-4 p-4 md:gap-6 md:p-6 md:grid-cols-2 lg:max-w-8xl xl:max-w-none xl:px-8">
         <div className="animate-fade-in-up">
           <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie EPICAL 2025</p>
           <h1 className="mt-3 text-3xl font-extrabold leading-tight md:text-5xl animate-fade-in-up-delay-2">
@@ -111,8 +111,8 @@ export default function Page() {
       <HowItWorks />
 
       {/* Categorías rápidas */}
-      <section className="mx-auto max-w-7xl p-6">
-        <h2 className="text-2xl font-bold mb-6 text-center">
+      <section className="mx-auto max-w-7xl p-6 lg:max-w-8xl xl:max-w-none xl:px-8">
+        <h2 className="text-2xl font-bold mb-6 text-center lg:text-3xl">
           <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
             Encuentra tu PC perfecto
           </span>
@@ -139,7 +139,7 @@ export default function Page() {
 
 
       {/* Productos */}
-      <section id="productos" className="mx-auto max-w-7xl p-4 md:p-6">
+      <section id="productos" className="mx-auto max-w-7xl p-4 md:p-6 lg:max-w-8xl xl:max-w-none xl:px-8">
         <h2 className="mb-6 text-lg font-semibold text-white/90 md:text-xl md:mb-8">Montajes destacados</h2>
         
         {/* EPICAL ADVANCED destacado */}

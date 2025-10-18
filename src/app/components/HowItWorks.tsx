@@ -29,7 +29,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="mx-auto max-w-7xl p-4 md:p-6 my-8 md:my-16">
+    <section className="mx-auto max-w-7xl p-4 md:p-6 my-8 md:my-16 lg:max-w-8xl xl:max-w-none xl:px-8">
       <div className="text-center mb-8 md:mb-12">
         <h2 className="text-2xl md:text-4xl font-bold mb-4">
           <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">

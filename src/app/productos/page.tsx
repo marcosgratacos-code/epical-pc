@@ -24,7 +24,7 @@ export default function ProductosPage() {
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
       <div className="border-b border-white/10 bg-gradient-to-br from-violet-500/10 to-cyan-500/10">
-        <div className="max-w-6xl mx-auto px-4 py-4 md:py-8">
+        <div className="max-w-6xl mx-auto px-4 py-4 md:py-8 lg:max-w-8xl xl:max-w-none xl:px-8">
           <BackButton />
           <div className="mt-4 md:mt-6">
             <h1 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-violet-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
@@ -61,7 +61,7 @@ export default function ProductosPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} p={product} onAdd={handleAdd} />
             ))}

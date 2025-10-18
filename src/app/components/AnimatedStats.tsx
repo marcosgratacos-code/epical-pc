@@ -44,7 +44,7 @@ export default function AnimatedStats() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto max-w-7xl p-4 md:p-6 my-8 md:my-12"
+      className="mx-auto max-w-7xl p-4 md:p-6 my-8 md:my-12 lg:max-w-8xl xl:max-w-none xl:px-8"
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
         {stats.map((stat, index) => (
