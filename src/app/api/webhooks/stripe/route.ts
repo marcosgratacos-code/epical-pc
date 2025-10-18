@@ -53,13 +53,13 @@ export async function POST(req: NextRequest) {
         const cartItems = metadata?.cartItems ? JSON.parse(metadata.cartItems) : {};
         
         // Obtener información de envío
-        const shippingDetails = session.shipping_details;
+        const shippingDetails = (session as any).shipping_details;
         const shippingAddress: ShippingInfo = {
-          nombre: shippingDetails?.name || '',
+          nombre: shippingDetails?.name || session.customer_details?.name || '',
           direccion: shippingDetails?.address?.line1 || '',
           ciudad: shippingDetails?.address?.city || '',
           codigoPostal: shippingDetails?.address?.postal_code || '',
-          pais: shippingDetails?.address?.country || '',
+          pais: shippingDetails?.address?.country || 'ES',
           telefono: session.customer_details?.phone || ''
         };
         
