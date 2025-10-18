@@ -21,10 +21,5 @@
     "BUILD_VERSION": "2.0.0",
     "CACHE_BUSTER": "1737063000",
     "VERCEL_FORCE_REBUILD": "true"
-  },
-  "functions": {
-    "app/api/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
   }
 }
