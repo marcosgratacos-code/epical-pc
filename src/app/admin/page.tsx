@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { PRODUCTS } from "../lib/products";
-import { getAllOrders } from "../lib/orders";
+import { getOrdersFromStorage } from "../lib/orders";
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -16,7 +16,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     // Calcular estadísticas
-    const orders = getAllOrders();
+    const orders = getOrdersFromStorage();
     const totalVentas = orders.reduce((acc, order) => acc + order.total, 0);
     const pedidosPendientes = orders.filter(o => o.estado !== "entregado" && o.estado !== "cancelado").length;
     const productosStock = PRODUCTS.filter(p => p.inStock).length;
