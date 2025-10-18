@@ -147,11 +147,17 @@ export default function CartDrawerGlobal() {
     }
   };
 
+  // Productos relacionados/sugeridos que NO están en el carrito
+  const suggestedProducts = useMemo(() => {
+    const cartIds = Object.keys(cart);
+    return PRODUCTS.filter(p => !cartIds.includes(p.id) && p.inStock).slice(0, 3);
+  }, [cart]);
+
   if (!open || !hydrated) return null;
 
   return (
     <aside
-      className="fixed inset-0 z-50 flex"
+      className="fixed inset-0 z-50 flex animate-fade-in"
       role="dialog"
       aria-modal="true"
       aria-label="Carrito de compra"
@@ -170,48 +176,152 @@ export default function CartDrawerGlobal() {
         }
       }}
     >
-      <div className="w-full bg-black/60" onClick={closeCart} aria-hidden />
-      <div ref={panelRef} tabIndex={-1} className="ml-auto h-full w-full max-w-md bg-black border-l border-white/10 p-4 overflow-y-auto outline-none">
-        <div className="mb-3 flex items-center justify-between">
-          <h3 className="text-lg font-semibold">Tu carrito</h3>
-          <button onClick={closeCart} className="rounded-lg border border-white/20 px-3 py-1 text-sm hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400">Cerrar</button>
+      <div className="w-full bg-black/60 backdrop-blur-sm" onClick={closeCart} aria-hidden />
+      <div ref={panelRef} tabIndex={-1} className="ml-auto h-full w-full max-w-md bg-black border-l border-white/10 p-6 overflow-y-auto outline-none animate-slide-in-right">
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h3 className="text-2xl font-bold">Tu carrito</h3>
+            {items.length > 0 && (
+              <p className="text-sm text-white/60 mt-1">{items.length} {items.length === 1 ? 'producto' : 'productos'}</p>
+            )}
+          </div>
+          <button onClick={closeCart} className="rounded-lg border border-white/20 px-4 py-2 text-sm hover:border-white/40 hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400">Cerrar</button>
         </div>
 
         {items.length === 0 ? (
-          <div className="rounded-xl border border-white/10 p-4 text-white/80">
-            <p className="font-semibold">Tu carrito está vacío.</p>
-            <p className="mt-1 text-sm">¿Seguimos viendo opciones?</p>
-            <div className="mt-3 flex gap-2">
-              <Link href="/#productos" onClick={closeCart} className="rounded-xl bg-white px-4 py-2 font-semibold text-black hover:bg-white/90">Ver montajes</Link>
-              <Link href="/pc-a-medida" onClick={closeCart} className="rounded-xl border border-white/20 px-4 py-2 font-semibold hover:border-white/40">PC a medida</Link>
+          <div className="flex flex-col items-center justify-center py-12">
+            <div className="h-24 w-24 rounded-full bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center mb-6">
+              <svg className="h-12 w-12 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
             </div>
+            <p className="font-semibold text-lg mb-2">Tu carrito está vacío</p>
+            <p className="text-sm text-white/60 text-center mb-6 max-w-xs">
+              Descubre nuestros PCs gaming personalizados con montaje profesional
+            </p>
+            <div className="flex flex-col gap-3 w-full">
+              <Link href="/#productos" onClick={closeCart} className="w-full rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-6 py-3 font-semibold text-white text-center hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300">Ver montajes</Link>
+              <Link href="/pc-a-medida" onClick={closeCart} className="w-full rounded-xl border border-white/20 px-6 py-3 font-semibold text-center hover:border-white/40 transition-all duration-200">PC a medida</Link>
+            </div>
+
+            {/* Sugerencias cuando el carrito está vacío */}
+            {suggestedProducts.length > 0 && (
+              <div className="mt-8 w-full">
+                <h4 className="text-sm font-semibold mb-3 text-white/90">Explora nuestros montajes</h4>
+                <div className="space-y-3">
+                  {suggestedProducts.map(p => (
+                    <Link 
+                      key={p.id} 
+                      href={`/products/${p.slug}`}
+                      onClick={closeCart}
+                      className="block rounded-xl border border-white/10 p-3 hover:border-white/20 hover:bg-white/5 transition-all duration-200 group"
+                    >
+                      <div className="flex gap-3">
+                        <div className="relative h-16 w-16 flex-shrink-0 rounded-lg overflow-hidden border border-white/10">
+                          <Image src={p.image} alt={p.name} fill sizes="64px" className="object-contain group-hover:scale-110 transition-transform duration-300" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-sm truncate">{p.name}</p>
+                          <p className="text-xs text-white/60 mt-0.5">{eur(p.price)}</p>
+                          <p className="text-xs text-green-400 mt-1">En stock</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <>
-            <ul className="space-y-3">
-              {items.map((it) => (
-                <li key={it.id} className="flex gap-3 rounded-xl border border-white/10 p-3">
-                  <div className="relative h-16 w-16 overflow-hidden rounded-lg border border-white/10">
-                    <Image src={it.image} alt={it.name} fill sizes="64px" className="object-contain" />
-                  </div>
+            <ul className="space-y-3 mb-6">
+              {items.map((it, index) => (
+                <li 
+                  key={it.id} 
+                  className="flex gap-3 rounded-xl border border-white/10 p-3 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-sm hover:border-white/20 transition-all duration-200 group"
+                  style={{
+                    animation: "fadeInUp 0.3s ease-out forwards",
+                    animationDelay: `${index * 0.05}s`,
+                  }}
+                >
+                  <Link href={`/products/${it.slug}`} onClick={closeCart} className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border border-white/10 group-hover:border-violet-400/50 transition-colors duration-200">
+                    <Image src={it.image} alt={it.name} fill sizes="80px" className="object-contain group-hover:scale-110 transition-transform duration-300" />
+                  </Link>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start justify-between gap-2 mb-2">
                       <div className="min-w-0">
-                        <p className="truncate font-semibold">{it.name}</p>
-                        <p className="text-xs text-white/60">{eur(it.price)}</p>
+                        <Link href={`/products/${it.slug}`} onClick={closeCart} className="block hover:text-violet-400 transition-colors">
+                          <p className="truncate font-semibold">{it.name}</p>
+                        </Link>
+                        <p className="text-xs text-white/60 mt-0.5">{eur(it.price)} c/u</p>
                       </div>
-                      <button onClick={() => remove(it.id)} className="rounded-md border border-white/20 px-2 py-1 text-xs hover:border-white/40">Quitar</button>
+                      <button 
+                        onClick={() => remove(it.id)} 
+                        className="p-1 rounded-md hover:bg-red-500/20 text-red-400 transition-all duration-200"
+                        aria-label={`Eliminar ${it.name}`}
+                      >
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
                     </div>
-                    <div className="mt-2 flex items-center gap-2">
-                      <button onClick={() => dec(it.id)} className="rounded-md border border-white/20 px-2 py-1 hover:border-white/40">−</button>
-                      <span className="w-6 text-center" aria-live="polite">{it.qty}</span>
-                      <button onClick={() => inc(it.id)} className="rounded-md border border-white/20 px-2 py-1 hover:border-white/40">+</button>
-                      <span className="ml-auto text-sm text-white/80">{eur(it.price * it.qty)}</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => dec(it.id)} className="h-8 w-8 rounded-md border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-200 flex items-center justify-center">−</button>
+                        <span className="w-8 text-center font-semibold" aria-live="polite">{it.qty}</span>
+                        <button onClick={() => inc(it.id)} className="h-8 w-8 rounded-md border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-200 flex items-center justify-center">+</button>
+                      </div>
+                      <span className="font-bold">{eur(it.price * it.qty)}</span>
                     </div>
                   </div>
                 </li>
               ))}
             </ul>
+
+            {/* Beneficios del pedido */}
+            <div className="grid grid-cols-3 gap-3 mb-6">
+              {[
+                { icon: "🛡️", text: "3 años garantía" },
+                { icon: "🚚", text: envio === 0 ? "Envío gratis" : "Envío 24-48h" },
+                { icon: "✅", text: "Montaje Pro" },
+              ].map((benefit, i) => (
+                <div key={i} className="text-center p-3 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/10">
+                  <div className="text-2xl mb-1">{benefit.icon}</div>
+                  <div className="text-xs text-white/70">{benefit.text}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Productos sugeridos (cross-sell) */}
+            {suggestedProducts.length > 0 && (
+              <div className="mb-6 p-4 rounded-xl border border-white/10 bg-gradient-to-br from-violet-500/10 to-cyan-500/10">
+                <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                  <span>💡</span>
+                  <span>También te podría interesar</span>
+                </h4>
+                <div className="space-y-2">
+                  {suggestedProducts.slice(0, 2).map(p => (
+                    <Link
+                      key={p.id}
+                      href={`/products/${p.slug}`}
+                      onClick={closeCart}
+                      className="flex gap-2 p-2 rounded-lg hover:bg-white/5 transition-all duration-200 group"
+                    >
+                      <div className="relative h-12 w-12 flex-shrink-0 rounded overflow-hidden border border-white/10">
+                        <Image src={p.image} alt={p.name} fill sizes="48px" className="object-contain group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-semibold truncate">{p.name}</p>
+                        <p className="text-xs text-white/60">{eur(p.price)}</p>
+                      </div>
+                      <svg className="h-4 w-4 text-white/40 group-hover:text-white/80 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <form onSubmit={applyCoupon} className="mt-4 rounded-xl border border-white/10 p-3">
               <label className="block text-xs text-white/60">Cupón de descuento</label>

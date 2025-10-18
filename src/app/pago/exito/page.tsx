@@ -4,37 +4,52 @@ import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import BackButton from "@/app/components/BackButton";
+import { findOrderBySessionId, formatDateOnly } from "@/app/lib/orders";
+import { Order } from "@/types/order";
+import { useCart } from "@/app/context/cart-context";
 
 function ExitoContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
-  const [orderNumber, setOrderNumber] = useState<string>("");
+  const [order, setOrder] = useState<Order | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { clearCart } = useCart();
 
   useEffect(() => {
-    // Generar número de pedido único
     if (sessionId) {
-      const orderNum = `EP-${new Date().getFullYear()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
-      setOrderNumber(orderNum);
-
-      // Aquí podrías verificar el pago con Stripe
-      // y guardar el pedido en tu base de datos
+      // Buscar el pedido creado por el webhook
+      const foundOrder = findOrderBySessionId(sessionId);
       
-      // Limpiar el carrito
-      localStorage.removeItem("cart");
+      if (foundOrder) {
+        setOrder(foundOrder);
+        // Limpiar el carrito después del pago exitoso
+        clearCart();
+      } else {
+        // Si no se encuentra el pedido, esperar un poco más
+        // (el webhook podría tardar unos segundos)
+        setTimeout(() => {
+          const retryOrder = findOrderBySessionId(sessionId);
+          if (retryOrder) {
+            setOrder(retryOrder);
+            clearCart();
+          }
+        }, 2000);
+      }
       
-      // Opcional: Guardar el pedido en el historial del usuario
-      const order = {
-        id: orderNum,
-        sessionId: sessionId,
-        fecha: new Date().toISOString(),
-        estado: "confirmado",
-      };
-      
-      const existingOrders = JSON.parse(localStorage.getItem("userOrders") || "[]");
-      existingOrders.unshift(order);
-      localStorage.setItem("userOrders", JSON.stringify(existingOrders));
+      setLoading(false);
     }
-  }, [sessionId]);
+  }, [sessionId, clearCart]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+          <div className="h-20 w-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-500"></div>
+          <p className="text-white/60">Cargando información del pedido...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
@@ -70,10 +85,21 @@ function ExitoContent() {
             Tu pedido ha sido confirmado con éxito
           </p>
           
-          {orderNumber && (
-            <p className="text-sm text-white/50 animate-fade-in-up-delay-2">
-              Número de pedido: <span className="font-mono font-bold text-cyan-400">{orderNumber}</span>
-            </p>
+          {order && (
+            <div className="space-y-2 animate-fade-in-up-delay-2">
+              <p className="text-sm text-white/50">
+                Número de pedido: <span className="font-mono font-bold text-cyan-400">{order.id}</span>
+              </p>
+              <p className="text-sm text-white/50">
+                Número de seguimiento: <span className="font-mono font-bold text-violet-400">{order.numeroSeguimiento}</span>
+              </p>
+              <p className="text-sm text-white/50">
+                Fecha: <span className="font-semibold text-white">{formatDateOnly(order.fecha)}</span>
+              </p>
+              <p className="text-sm text-white/50">
+                Total: <span className="font-bold text-green-400">{order.total}€</span>
+              </p>
+            </div>
           )}
         </div>
 
@@ -142,16 +168,18 @@ function ExitoContent() {
             className="px-6 py-4 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold text-center hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 flex items-center justify-center gap-2"
           >
             <span>📋</span>
-            Ver Pedido
+            Ver Pedidos
           </Link>
           
-          <Link
-            href="/seguimiento"
-            className="px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
-          >
-            <span>📦</span>
-            Seguimiento
-          </Link>
+          {order && (
+            <Link
+              href={`/seguimiento?pedido=${order.id}`}
+              className="px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <span>📦</span>
+              Rastrear Pedido
+            </Link>
+          )}
           
           <Link
             href="/"

@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
 import Link from "next/link";
+import PasswordInfoModal from "../components/modals/PasswordInfoModal";
 
 export default function PerfilPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [userData, setUserData] = useState({
     nombre: "",
     telefono: "",
@@ -362,13 +364,22 @@ export default function PerfilPage() {
                 <span>🔒</span>
                 Seguridad
               </h3>
-              <button className="w-full px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-all text-sm">
+              <button 
+                onClick={() => setIsPasswordModalOpen(true)}
+                className="w-full px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-all text-sm"
+              >
                 Cambiar contraseña
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Modal de información de contraseña */}
+      <PasswordInfoModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
+      />
     </div>
   );
 }

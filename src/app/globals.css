@@ -150,6 +150,102 @@ body {
   animation: slideDown 0.2s ease-out forwards;
 }
 
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+/* Optimizaciones móviles */
+@media (max-width: 768px) {
+  /* Botones más grandes para touch */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mejorar espaciado en móvil */
+  .mobile-spacing {
+    padding: 1rem;
+  }
+  
+  /* Texto más legible en móvil */
+  .mobile-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Cards más grandes en móvil */
+  .mobile-card {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Mejorar navegación táctil */
+  .touch-nav {
+    padding: 0.75rem 1rem;
+    margin: 0.25rem;
+  }
+  
+  /* Swipe gestures */
+  .swipe-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .swipe-item {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+/* Mejoras de accesibilidad táctil */
+@media (hover: none) and (pointer: coarse) {
+  /* Dispositivos táctiles */
+  .hover\:scale-105:hover {
+    transform: none;
+  }
+  
+  .hover\:shadow-lg:hover {
+    box-shadow: none;
+  }
+  
+  /* Botones más grandes en touch */
+  button, .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Links más grandes */
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* Animaciones optimizadas para móvil */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mejoras de rendimiento móvil */
+@media (max-width: 768px) {
+  /* Reducir efectos complejos en móvil */
+  .backdrop-blur-sm {
+    backdrop-filter: none;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Optimizar imágenes */
+  img {
+    loading: lazy;
+  }
+}
+
 /* Clases de animación */
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
@@ -284,4 +380,50 @@ button, a, input, select, textarea {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Animación de fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Animación de slide-in-right (para carrito y sidebars) */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Animación de slide-in-left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

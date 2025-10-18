@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
 import Link from "next/link";
+import { getOrdersFromStorage, calculateOrderStats, getOrderStatusColor, getOrderStatusIcon, formatDateOnly } from "@/app/lib/orders";
+import { Order } from "@/types/order";
+import OrderDetailsModal from "../components/modals/OrderDetailsModal";
+import { generateInvoiceFromOrder } from "@/app/lib/invoice";
+import ReviewForm from "../components/ReviewForm";
+import { canUserReviewProduct } from "@/app/lib/reviews";
 
 interface Pedido {
   id: string;
@@ -23,52 +29,17 @@ interface Pedido {
 export default function PedidosPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [pedidos, setPedidos] = useState<Pedido[]>([]);
+  const [pedidos, setPedidos] = useState<Order[]>([]);
   const [filtroEstado, setFiltroEstado] = useState<string>("todos");
-
-  // Ya no redirigimos automáticamente
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [selectedProductForReview, setSelectedProductForReview] = useState<{id: string, name: string} | null>(null);
 
   useEffect(() => {
-    // Cargar pedidos del localStorage o API
-    const pedidosGuardados = localStorage.getItem("userOrders");
-    if (pedidosGuardados) {
-      setPedidos(JSON.parse(pedidosGuardados));
-    } else {
-      // Pedidos de ejemplo
-      const pedidosEjemplo: Pedido[] = [
-        {
-          id: "EP-2025-001",
-          fecha: "2025-01-15",
-          total: 2300,
-          estado: "entregado",
-          numeroSeguimiento: "ES123456789",
-          productos: [
-            {
-              nombre: "EPICAL ADVANCED",
-              cantidad: 1,
-              precio: 2300,
-              imagen: "/logo-sin-fondo.png",
-            },
-          ],
-        },
-        {
-          id: "EP-2025-002",
-          fecha: "2025-02-10",
-          total: 900,
-          estado: "enviado",
-          numeroSeguimiento: "ES987654321",
-          productos: [
-            {
-              nombre: "EPICAL STARTER",
-              cantidad: 1,
-              precio: 900,
-              imagen: "/epical_hero_setup.jpg",
-            },
-          ],
-        },
-      ];
-      setPedidos(pedidosEjemplo);
-    }
+    // Cargar pedidos reales del localStorage
+    const pedidosReales = getOrdersFromStorage();
+    setPedidos(pedidosReales);
   }, []);
 
   if (status === "loading") {
@@ -122,6 +93,22 @@ export default function PedidosPage() {
     );
   }
 
+  const stats = calculateOrderStats(pedidos);
+
+  const handleViewDetails = (pedido: Order) => {
+    setSelectedOrder(pedido);
+    setIsDetailsModalOpen(true);
+  };
+
+  const handleDownloadInvoice = (pedido: Order) => {
+    generateInvoiceFromOrder(pedido);
+  };
+
+  const closeDetailsModal = () => {
+    setIsDetailsModalOpen(false);
+    setSelectedOrder(null);
+  };
+
   const getEstadoColor = (estado: string) => {
     switch (estado) {
       case "entregado":
@@ -159,6 +146,10 @@ export default function PedidosPage() {
   const pedidosFiltrados =
     filtroEstado === "todos"
       ? pedidos
+      : filtroEstado === "enviado"
+      ? pedidos.filter((p) => ["enviado", "en_reparto"].includes(p.estado))
+      : filtroEstado === "procesando"
+      ? pedidos.filter((p) => ["confirmado", "preparando"].includes(p.estado))
       : pedidos.filter((p) => p.estado === filtroEstado);
 
   return (
@@ -179,24 +170,31 @@ export default function PedidosPage() {
 
             {/* Resumen rápido */}
             <div className="hidden md:flex gap-4">
-              <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                  {pedidos.length}
-                </p>
-                <p className="text-xs text-white/50">Total Pedidos</p>
-              </div>
-              <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
-                  {pedidos.filter((p) => p.estado === "entregado").length}
-                </p>
-                <p className="text-xs text-white/50">Entregados</p>
-              </div>
-              <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                  {pedidos.filter((p) => p.estado === "enviado").length}
-                </p>
-                <p className="text-xs text-white/50">En Camino</p>
-              </div>
+              {(() => {
+                const stats = calculateOrderStats(pedidos);
+                return (
+                  <>
+                    <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
+                      <p className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                        {stats.totalPedidos}
+                      </p>
+                      <p className="text-xs text-white/50">Total Pedidos</p>
+                    </div>
+                    <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
+                      <p className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+                        {stats.entregados}
+                      </p>
+                      <p className="text-xs text-white/50">Entregados</p>
+                    </div>
+                    <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
+                      <p className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                        {stats.enCamino}
+                      </p>
+                      <p className="text-xs text-white/50">En Camino</p>
+                    </div>
+                  </>
+                );
+              })()}
             </div>
           </div>
 
@@ -212,36 +210,43 @@ export default function PedidosPage() {
             >
               Todos ({pedidos.length})
             </button>
-            <button
-              onClick={() => setFiltroEstado("entregado")}
-              className={`px-4 py-2 rounded-xl font-medium transition-all ${
-                filtroEstado === "entregado"
-                  ? "bg-green-500/30 text-green-400 border border-green-500/50"
-                  : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              Entregados ({pedidos.filter((p) => p.estado === "entregado").length})
-            </button>
-            <button
-              onClick={() => setFiltroEstado("enviado")}
-              className={`px-4 py-2 rounded-xl font-medium transition-all ${
-                filtroEstado === "enviado"
-                  ? "bg-blue-500/30 text-blue-400 border border-blue-500/50"
-                  : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              En camino ({pedidos.filter((p) => p.estado === "enviado").length})
-            </button>
-            <button
-              onClick={() => setFiltroEstado("procesando")}
-              className={`px-4 py-2 rounded-xl font-medium transition-all ${
-                filtroEstado === "procesando"
-                  ? "bg-yellow-500/30 text-yellow-400 border border-yellow-500/50"
-                  : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              Procesando ({pedidos.filter((p) => p.estado === "procesando").length})
-            </button>
+            {(() => {
+              const stats = calculateOrderStats(pedidos);
+              return (
+                <>
+                  <button
+                    onClick={() => setFiltroEstado("entregado")}
+                    className={`px-4 py-2 rounded-xl font-medium transition-all ${
+                      filtroEstado === "entregado"
+                        ? "bg-green-500/30 text-green-400 border border-green-500/50"
+                        : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    Entregados ({stats.entregados})
+                  </button>
+                  <button
+                    onClick={() => setFiltroEstado("enviado")}
+                    className={`px-4 py-2 rounded-xl font-medium transition-all ${
+                      filtroEstado === "enviado"
+                        ? "bg-blue-500/30 text-blue-400 border border-blue-500/50"
+                        : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    En camino ({stats.enCamino})
+                  </button>
+                  <button
+                    onClick={() => setFiltroEstado("procesando")}
+                    className={`px-4 py-2 rounded-xl font-medium transition-all ${
+                      filtroEstado === "procesando"
+                        ? "bg-yellow-500/30 text-yellow-400 border border-yellow-500/50"
+                        : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    Procesando ({stats.procesando})
+                  </button>
+                </>
+              );
+            })()}
           </div>
         </div>
       </div>
@@ -280,11 +285,7 @@ export default function PedidosPage() {
                       Pedido #{pedido.id}
                     </h3>
                     <p className="text-sm text-white/50">
-                      {new Date(pedido.fecha).toLocaleDateString("es-ES", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
+                      {formatDateOnly(pedido.fecha)}
                     </p>
                   </div>
 
@@ -341,10 +342,16 @@ export default function PedidosPage() {
                       📦 Rastrear Pedido
                     </Link>
                   )}
-                  <button className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-all font-medium">
+                  <button 
+                    onClick={() => handleViewDetails(pedido)}
+                    className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-all font-medium"
+                  >
                     Ver Detalles
                   </button>
-                  <button className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-all font-medium">
+                  <button 
+                    onClick={() => handleDownloadInvoice(pedido)}
+                    className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-all font-medium"
+                  >
                     Descargar Factura
                   </button>
                 </div>
@@ -353,6 +360,15 @@ export default function PedidosPage() {
           </div>
         )}
       </div>
+
+      {/* Modal de detalles */}
+      {selectedOrder && (
+        <OrderDetailsModal
+          isOpen={isDetailsModalOpen}
+          onClose={closeDetailsModal}
+          order={selectedOrder}
+        />
+      )}
     </div>
   );
 }

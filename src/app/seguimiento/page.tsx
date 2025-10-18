@@ -5,22 +5,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 import BackButton from "../components/BackButton";
 import Link from "next/link";
-
-interface Seguimiento {
-  pedidoId: string;
-  numeroSeguimiento: string;
-  producto: string;
-  estado: "confirmado" | "preparando" | "enviado" | "en_reparto" | "entregado";
-  fechaPedido: string;
-  fechaEntregadaEstimada: string;
-  transportista: string;
-  eventos: {
-    fecha: string;
-    descripcion: string;
-    ubicacion: string;
-    completado: boolean;
-  }[];
-}
+import { findOrderById, findOrderByTrackingNumber, formatDateForDisplay, getOrderProgressPercentage, getOrderStatusColor, getOrderStatusIcon } from "@/app/lib/orders";
+import { Order } from "@/types/order";
+import TransportContactModal from "../components/modals/TransportContactModal";
+import ContactModal from "../components/modals/ContactModal";
+import AddressChangeModal from "../components/modals/AddressChangeModal";
+import FAQModal from "../components/modals/FAQModal";
 
 function SeguimientoContent() {
   const { data: session, status } = useSession();
@@ -28,124 +18,46 @@ function SeguimientoContent() {
   const searchParams = useSearchParams();
   const pedidoId = searchParams.get("pedido");
 
-  const [seguimiento, setSeguimiento] = useState<Seguimiento | null>(null);
+  const [order, setOrder] = useState<Order | null>(null);
   const [numeroRastreo, setNumeroRastreo] = useState("");
-
-  // Ya no redirigimos automáticamente
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Estados para modales
+  const [isTransportModalOpen, setIsTransportModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [isFAQModalOpen, setIsFAQModalOpen] = useState(false);
 
   useEffect(() => {
     // Si viene un pedido ID, cargar su seguimiento
     if (pedidoId) {
-      // Simular datos de seguimiento
-      const seguimientoEjemplo: Seguimiento = {
-        pedidoId: pedidoId,
-        numeroSeguimiento: "ES987654321",
-        producto: "EPICAL STARTER",
-        estado: "en_reparto",
-        fechaPedido: "2025-02-10",
-        fechaEntregadaEstimada: "2025-02-16",
-        transportista: "SEUR",
-        eventos: [
-          {
-            fecha: "2025-02-10 10:30",
-            descripcion: "Pedido confirmado",
-            ubicacion: "Madrid, España",
-            completado: true,
-          },
-          {
-            fecha: "2025-02-11 14:20",
-            descripcion: "En preparación",
-            ubicacion: "Centro logístico EPICAL",
-            completado: true,
-          },
-          {
-            fecha: "2025-02-12 09:15",
-            descripcion: "Enviado",
-            ubicacion: "Madrid, España",
-            completado: true,
-          },
-          {
-            fecha: "2025-02-15 08:45",
-            descripcion: "En reparto",
-            ubicacion: "Centro de distribución local",
-            completado: true,
-          },
-          {
-            fecha: "Estimado: 2025-02-16",
-            descripcion: "Entregado",
-            ubicacion: "Tu dirección",
-            completado: false,
-          },
-        ],
-      };
-      setSeguimiento(seguimientoEjemplo);
-      setNumeroRastreo(seguimientoEjemplo.numeroSeguimiento);
+      const foundOrder = findOrderById(pedidoId);
+      if (foundOrder) {
+        setOrder(foundOrder);
+        setNumeroRastreo(foundOrder.numeroSeguimiento);
+      } else {
+        setError("Pedido no encontrado");
+      }
     }
   }, [pedidoId]);
 
   const buscarPedido = () => {
-    if (!numeroRastreo) return;
-
-    // Simular búsqueda
-    const seguimientoEjemplo: Seguimiento = {
-      pedidoId: "EP-2025-002",
-      numeroSeguimiento: numeroRastreo,
-      producto: "EPICAL ADVANCED",
-      estado: "enviado",
-      fechaPedido: "2025-02-08",
-      fechaEntregadaEstimada: "2025-02-14",
-      transportista: "MRW",
-      eventos: [
-        {
-          fecha: "2025-02-08 11:00",
-          descripcion: "Pedido confirmado",
-          ubicacion: "Madrid, España",
-          completado: true,
-        },
-        {
-          fecha: "2025-02-09 16:30",
-          descripcion: "En preparación",
-          ubicacion: "Centro logístico EPICAL",
-          completado: true,
-        },
-        {
-          fecha: "2025-02-10 10:00",
-          descripcion: "Enviado",
-          ubicacion: "Madrid, España",
-          completado: true,
-        },
-        {
-          fecha: "Estimado: 2025-02-13",
-          descripcion: "En reparto",
-          ubicacion: "Centro de distribución local",
-          completado: false,
-        },
-        {
-          fecha: "Estimado: 2025-02-14",
-          descripcion: "Entregado",
-          ubicacion: "Tu dirección",
-          completado: false,
-        },
-      ],
-    };
-    setSeguimiento(seguimientoEjemplo);
-  };
-
-  const getEstadoPorcentaje = (estado: string) => {
-    switch (estado) {
-      case "confirmado":
-        return 20;
-      case "preparando":
-        return 40;
-      case "enviado":
-        return 60;
-      case "en_reparto":
-        return 80;
-      case "entregado":
-        return 100;
-      default:
-        return 0;
+    if (!numeroRastreo.trim()) return;
+    
+    setLoading(true);
+    setError(null);
+    
+    // Buscar por número de seguimiento
+    const foundOrder = findOrderByTrackingNumber(numeroRastreo.trim());
+    
+    if (foundOrder) {
+      setOrder(foundOrder);
+    } else {
+      setError("No se encontró ningún pedido con ese número de seguimiento");
     }
+    
+    setLoading(false);
   };
 
   if (status === "loading") {
@@ -233,31 +145,54 @@ function SeguimientoContent() {
             />
             <button
               onClick={buscarPedido}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300"
+              disabled={loading}
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
-              Buscar
+              {loading ? (
+                <>
+                  <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  Buscando...
+                </>
+              ) : (
+                'Buscar'
+              )}
             </button>
           </div>
         </div>
 
+        {/* Mensaje de error */}
+        {error && (
+          <div className="rounded-2xl border border-red-500/20 bg-gradient-to-br from-red-500/10 to-transparent p-6 backdrop-blur-sm mb-8">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                <span className="text-xl">❌</span>
+              </div>
+              <div>
+                <h3 className="font-semibold text-red-400">Error</h3>
+                <p className="text-sm text-white/60">{error}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Información del pedido */}
-        {seguimiento && (
+        {order && (
           <div className="space-y-6 animate-fade-in-up">
             {/* Resumen */}
             <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">
-                    {seguimiento.producto}
+                    {order.productos.map(p => p.nombre).join(', ')}
                   </h3>
                   <p className="text-white/50 mt-1">
-                    Pedido #{seguimiento.pedidoId}
+                    Pedido #{order.id}
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-white/50">Número de seguimiento</p>
                   <p className="text-lg font-mono font-bold bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
-                    {seguimiento.numeroSeguimiento}
+                    {order.numeroSeguimiento}
                   </p>
                 </div>
               </div>
@@ -268,14 +203,14 @@ function SeguimientoContent() {
                   <div
                     className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 transition-all duration-1000 ease-out relative"
                     style={{
-                      width: `${getEstadoPorcentaje(seguimiento.estado)}%`,
+                      width: `${getOrderProgressPercentage(order.estado)}%`,
                     }}
                   >
                     <div className="absolute inset-0 bg-white/30 animate-shimmer"></div>
                   </div>
                 </div>
                 <p className="text-sm text-white/60 mt-2 text-center">
-                  {getEstadoPorcentaje(seguimiento.estado)}% completado
+                  {getOrderProgressPercentage(order.estado)}% completado
                 </p>
               </div>
 
@@ -284,23 +219,19 @@ function SeguimientoContent() {
                 <div className="text-center p-4 rounded-xl bg-white/5">
                   <p className="text-white/50 text-sm mb-1">Fecha de pedido</p>
                   <p className="font-semibold text-white">
-                    {new Date(seguimiento.fechaPedido).toLocaleDateString(
-                      "es-ES"
-                    )}
+                    {formatDateForDisplay(order.fecha)}
                   </p>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/5">
                   <p className="text-white/50 text-sm mb-1">Entrega estimada</p>
                   <p className="font-semibold text-white">
-                    {new Date(
-                      seguimiento.fechaEntregadaEstimada
-                    ).toLocaleDateString("es-ES")}
+                    {order.fechaEntregadaEstimada ? formatDateForDisplay(order.fechaEntregadaEstimada) : 'Por confirmar'}
                   </p>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/5">
                   <p className="text-white/50 text-sm mb-1">Transportista</p>
                   <p className="font-semibold text-white">
-                    {seguimiento.transportista}
+                    {order.transportista || 'Por asignar'}
                   </p>
                 </div>
               </div>
@@ -314,8 +245,8 @@ function SeguimientoContent() {
               </h3>
 
               <div className="space-y-6">
-                {seguimiento.eventos.map((evento, idx) => (
-                  <div key={idx} className="flex gap-4 group">
+                {order.eventos.map((evento, idx) => (
+                  <div key={evento.id} className="flex gap-4 group">
                     {/* Timeline line */}
                     <div className="flex flex-col items-center">
                       <div
@@ -343,7 +274,7 @@ function SeguimientoContent() {
                           <div className="h-3 w-3 rounded-full bg-white/50"></div>
                         )}
                       </div>
-                      {idx < seguimiento.eventos.length - 1 && (
+                      {idx < order.eventos.length - 1 && (
                         <div
                           className={`h-full w-0.5 my-1 ${
                             evento.completado
@@ -376,9 +307,14 @@ function SeguimientoContent() {
                             <p className="text-sm text-white/60 mt-1">
                               📍 {evento.ubicacion}
                             </p>
+                            {evento.detalles && (
+                              <p className="text-xs text-white/50 mt-1">
+                                {evento.detalles}
+                              </p>
+                            )}
                           </div>
                           <p className="text-sm text-white/50 whitespace-nowrap">
-                            {evento.fecha}
+                            {formatDateForDisplay(evento.fecha)}
                           </p>
                         </div>
                       </div>
@@ -392,16 +328,28 @@ function SeguimientoContent() {
             <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 backdrop-blur-sm">
               <h3 className="text-lg font-bold mb-4">¿Necesitas ayuda?</h3>
               <div className="grid md:grid-cols-2 gap-4">
-                <button className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left">
+                <button 
+                  onClick={() => setIsTransportModalOpen(true)}
+                  className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left"
+                >
                   📞 Contactar con el transportista
                 </button>
-                <button className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left">
+                <button 
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left"
+                >
                   💬 Hablar con soporte EPICAL
                 </button>
-                <button className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left">
+                <button 
+                  onClick={() => setIsAddressModalOpen(true)}
+                  className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left"
+                >
                   📋 Modificar dirección de entrega
                 </button>
-                <button className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left">
+                <button 
+                  onClick={() => setIsFAQModalOpen(true)}
+                  className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left"
+                >
                   ❓ Preguntas frecuentes
                 </button>
               </div>
@@ -409,6 +357,32 @@ function SeguimientoContent() {
           </div>
         )}
       </div>
+
+      {/* Modales */}
+      {order && (
+        <>
+          <TransportContactModal
+            isOpen={isTransportModalOpen}
+            onClose={() => setIsTransportModalOpen(false)}
+            order={order}
+          />
+          <ContactModal
+            isOpen={isContactModalOpen}
+            onClose={() => setIsContactModalOpen(false)}
+            order={order}
+          />
+          <AddressChangeModal
+            isOpen={isAddressModalOpen}
+            onClose={() => setIsAddressModalOpen(false)}
+            order={order}
+          />
+        </>
+      )}
+      
+      <FAQModal
+        isOpen={isFAQModalOpen}
+        onClose={() => setIsFAQModalOpen(false)}
+      />
     </div>
   );
 }

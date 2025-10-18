@@ -2,11 +2,14 @@
 
 import Link from "next/link";
 import { useCart } from "../context/cart-context";
+import { useWishlist } from "../context/wishlist-context";
 import GoogleSignInButton from "./GoogleSignInButton";
+import NotificationBell from "./NotificationBell";
 import { useState, useRef } from "react";
 
 export default function SiteHeader() {
   const { openCart, cart } = useCart();
+  const { wishlistCount } = useWishlist();
   const totalItems = Object.values(cart).reduce((a: number, b: number) => a + b, 0);
   const [isVentajasDropdownOpen, setIsVentajasDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -97,20 +100,34 @@ export default function SiteHeader() {
                  <Link href="/pc-a-medida" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400">
                    PC a medida
                  </Link>
+              <Link
+                href="/contacto"
+                className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+              >
+                Contacto
+              </Link>
                  <a
-                   href="mailto:epicalpc@gmail.com?subject=Consulta%20EPICAL-PC"
+                   href="/faq"
                    className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
                  >
-                   Contacto
+                   FAQ
                  </a>
                </nav>
 
-        {/* Auth + Carrito */}
+        {/* Auth + Notificaciones + Wishlist + Carrito */}
         <div className="flex items-center gap-2">
           <GoogleSignInButton />
+          <NotificationBell />
+          <Link
+            href="/favoritos"
+            className="rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 relative touch-target"
+            aria-label="Ver favoritos"
+          >
+            ❤️ <b>{wishlistCount}</b>
+          </Link>
           <button
             onClick={openCart}
-            className="rounded-xl border border-white/20 px-3 py-1 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200"
+            className="rounded-xl border border-white/20 px-3 py-2 text-sm hover:border-white/40 hover-lift hover-glow transform hover:scale-105 transition-all duration-200 touch-target"
             aria-label="Abrir carrito"
           >
             🛒 <b>{totalItems}</b>

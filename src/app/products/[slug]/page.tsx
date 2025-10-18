@@ -6,15 +6,18 @@ import Link from "next/link";
 import { getProductBySlug, PRODUCTS } from "../../lib/products";
 import BackButton from "../../components/BackButton";
 import Accordion from "../../components/Accordion";
+import ReviewSection from "../../components/ReviewSection";
+import ImageGalleryZoom from "../../components/ImageGalleryZoom";
 import { useCart } from "../../context/cart-context";
-import { useState } from "react";
+import { useState, use } from "react";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export default function ProductPage({ params }: Props) {
   const { add } = useCart();
   const [toast, setToast] = useState<{ show: boolean; msg: string }>({ show: false, msg: "" });
-  const product = getProductBySlug(params.slug);
+  const resolvedParams = use(params);
+  const product = getProductBySlug(resolvedParams.slug);
   if (!product) {
     return (
       <main className="min-h-screen bg-black text-white mx-auto max-w-6xl p-6">
@@ -55,31 +58,8 @@ export default function ProductPage({ params }: Props) {
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Galería */}
-          <section className="rounded-2xl border border-white/10 p-4">
-            <div className="grid gap-4 md:grid-cols-[96px_1fr]">
-              <ul className="order-2 flex gap-3 md:order-1 md:flex-col">
-                {gallery.map((img, i) => (
-                  <li key={img + i} className="relative h-16 w-16 overflow-hidden rounded-lg border border-white/10">
-                    <Image src={img} alt={`${product.name} mini ${i + 1}`} fill className="object-contain" />
-                  </li>
-                ))}
-              </ul>
-
-              <div className="order-1 relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 md:order-2">
-                <Image
-                  src={gallery[0]}
-                  alt={product.name}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width:1024px) 100vw, 50vw"
-                  priority
-                />
-                {/* tu halo EPICAL */}
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(56,189,248,0.08),transparent_40%),radial-gradient(circle_at_80%_60%,rgba(139,92,246,0.08),transparent_35%)]" />
-              </div>
-            </div>
-          </section>
+          {/* Galería con Zoom */}
+          <ImageGalleryZoom images={gallery} productName={product.name} />
 
           {/* Info + CTA */}
           <section>
@@ -174,7 +154,7 @@ export default function ProductPage({ params }: Props) {
                         className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-white/20"
                       >
                         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10">
-                          <Image src={o.image} alt={o.name} fill className="object-contain" />
+                          <Image src={o.image} alt={o.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-contain" />
                         </div>
                         <div className="mt-3 flex items-center justify-between gap-2">
                           <div className="min-w-0">
@@ -210,6 +190,11 @@ export default function ProductPage({ params }: Props) {
               ))}
             </div>
           </section>
+        </div>
+
+        {/* Sección de Reseñas */}
+        <div className="mt-12">
+          <ReviewSection productId={product.id} productName={product.name} />
         </div>
       </div>
 

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/app/lib/stripe";
 import Stripe from "stripe";
+import { createOrderFromStripeSession, saveOrderToStorage } from "@/app/lib/orders";
+import { OrderItem, ShippingInfo } from "@/types/order";
+import { PRODUCTS } from "@/app/lib/products";
 
 export async function POST(req: NextRequest) {
   // Verificar si Stripe está configurado
@@ -43,22 +46,71 @@ export async function POST(req: NextRequest) {
       const session = event.data.object as Stripe.Checkout.Session;
       console.log("✅ Pago completado:", session.id);
       
-      // Aquí puedes:
-      // - Guardar el pedido en base de datos
-      // - Enviar email de confirmación
-      // - Actualizar inventario
-      // - etc.
-      
-      const metadata = session.metadata;
-      console.log("Metadata del pedido:", metadata);
-      
-      // Ejemplo de lo que podrías hacer:
-      // await saveOrderToDatabase({
-      //   sessionId: session.id,
-      //   customerEmail: session.customer_details?.email,
-      //   amount: session.amount_total,
-      //   items: JSON.parse(metadata?.cartItems || '{}'),
-      // });
+      try {
+        // Extraer información del pedido
+        const customerEmail = session.customer_details?.email || session.customer_email || '';
+        const metadata = session.metadata;
+        const cartItems = metadata?.cartItems ? JSON.parse(metadata.cartItems) : {};
+        
+        // Obtener información de envío
+        const shippingDetails = session.shipping_details;
+        const shippingAddress: ShippingInfo = {
+          nombre: shippingDetails?.name || '',
+          direccion: shippingDetails?.address?.line1 || '',
+          ciudad: shippingDetails?.address?.city || '',
+          codigoPostal: shippingDetails?.address?.postal_code || '',
+          pais: shippingDetails?.address?.country || '',
+          telefono: session.customer_details?.phone || ''
+        };
+        
+        // Convertir items del carrito a OrderItems
+        const productos: OrderItem[] = Object.entries(cartItems).map(([productId, quantity]) => {
+          const product = PRODUCTS.find(p => p.id === productId);
+          if (!product) {
+            throw new Error(`Producto no encontrado: ${productId}`);
+          }
+          
+          return {
+            id: product.id,
+            nombre: product.name,
+            cantidad: quantity as number,
+            precio: product.price,
+            imagen: product.image,
+            descripcion: product.desc
+          };
+        });
+        
+        // Calcular total
+        const total = productos.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        
+        // Crear el pedido
+        const order = createOrderFromStripeSession(
+          session.id,
+          customerEmail,
+          shippingAddress,
+          productos,
+          total
+        );
+        
+        // Guardar el pedido
+        saveOrderToStorage(order);
+        
+        console.log("📦 Pedido creado:", order.id);
+        console.log("📧 Email del cliente:", customerEmail);
+        console.log("💰 Total:", total);
+        console.log("📦 Productos:", productos.length);
+        
+        // Aquí podrías también:
+        // - Enviar email de confirmación
+        // - Actualizar inventario
+        // - Notificar al equipo de logística
+        // - etc.
+        
+      } catch (error) {
+        console.error("❌ Error al procesar pedido:", error);
+        // En producción, deberías manejar este error apropiadamente
+        // Por ejemplo, enviar una notificación al equipo técnico
+      }
       
       break;
     }
