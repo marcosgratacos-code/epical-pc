@@ -48,12 +48,12 @@ export default function SiteHeader() {
                    </span>
           </Link>
 
-               {/* Nav - Desktop Optimizado */}
+               {/* Nav - Desktop Simplificado */}
                <nav className="hidden md:flex gap-4 text-sm text-white/80" aria-label="Navegación principal">
-                 <Link href="/productos" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200">
+                 <Link href="/productos" className="px-2 py-1 hover:text-white">
                    Productos
                  </Link>
-                 <Link href="/configurador" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 hover:from-cyan-500/30 hover:to-violet-500/30 transition-all duration-200">
+                 <Link href="/configurador" className="px-2 py-1 hover:text-white bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-500/30">
                    🛠️ Configurador
                  </Link>
                  
@@ -64,9 +64,7 @@ export default function SiteHeader() {
                    onMouseEnter={handleMouseEnter}
                    onMouseLeave={handleMouseLeave}
                  >
-                   <button
-                     className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 flex items-center gap-1"
-                   >
+                   <button className="px-2 py-1 hover:text-white flex items-center gap-1">
                      Ventajas
                      <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -76,28 +74,28 @@ export default function SiteHeader() {
                    {/* Dropdown Menu */}
                    {isVentajasDropdownOpen && (
                      <div 
-                       className="absolute top-full left-0 mt-1 w-48 rounded-xl border border-white/10 bg-black/95 backdrop-blur-sm py-2 shadow-lg z-50"
+                       className="absolute top-full left-0 mt-1 w-48 border border-white/10 bg-black/95 py-2 z-50"
                        onMouseEnter={handleMouseEnter}
                        onMouseLeave={handleMouseLeave}
                      >
                        <Link
                          href="/ventajas"
                          onClick={() => setIsVentajasDropdownOpen(false)}
-                         className="block w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 focus:outline-none focus:bg-white/10"
+                         className="block w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10"
                        >
                          ✨ Ventajas EPICAL
                        </Link>
                        <Link
                          href="/calculadora-gaming"
                          onClick={() => setIsVentajasDropdownOpen(false)}
-                         className="block w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 focus:outline-none focus:bg-white/10"
+                         className="block w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10"
                        >
                          🎮 Calculadora Gaming
                        </Link>
                        <Link
                          href="/comparador"
                          onClick={() => setIsVentajasDropdownOpen(false)}
-                         className="block w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 focus:outline-none focus:bg-white/10"
+                         className="block w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10"
                        >
                          ⚖️ Comparador
                        </Link>
@@ -105,19 +103,13 @@ export default function SiteHeader() {
                    )}
                  </div>
                  
-                 <Link href="/pc-a-medida" className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200">
+                 <Link href="/pc-a-medida" className="px-2 py-1 hover:text-white">
                    PC a medida
                  </Link>
-              <Link
-                href="/contacto"
-                className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200"
-              >
-                Contacto
-              </Link>
-                 <a
-                   href="/faq"
-                   className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200"
-                 >
+                 <Link href="/contacto" className="px-2 py-1 hover:text-white">
+                   Contacto
+                 </Link>
+                 <a href="/faq" className="px-2 py-1 hover:text-white">
                    FAQ
                  </a>
                </nav>

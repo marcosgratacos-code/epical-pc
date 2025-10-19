@@ -48,7 +48,7 @@ export default function Page() {
 
 
       {/* Hero */}
-      <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-8 p-6 md:gap-12 md:p-8 md:grid-cols-2 lg:max-w-8xl xl:max-w-none xl:px-8 xl:gap-16">
+      <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-8 p-6 md:gap-12 md:p-8 md:grid-cols-2">
         <div className="animate-fade-in-up">
           <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie EPICAL 2025</p>
           <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl lg:text-7xl animate-fade-in-up-delay-2">
@@ -139,7 +139,7 @@ export default function Page() {
 
 
       {/* Productos */}
-      <section id="productos" className="mx-auto max-w-7xl p-6 md:p-8 lg:max-w-8xl xl:max-w-none xl:px-8">
+      <section id="productos" className="mx-auto max-w-7xl p-6 md:p-8">
         <h2 className="mb-8 text-2xl font-semibold text-white/90 md:text-3xl lg:text-4xl md:mb-12">Montajes destacados</h2>
         
         {/* EPICAL ADVANCED destacado */}
