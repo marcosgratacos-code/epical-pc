@@ -35,7 +35,7 @@ export default function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-6 lg:max-w-8xl xl:max-w-none xl:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
           {/* Logo */}
           <Link
             href="/"
@@ -49,11 +49,11 @@ export default function SiteHeader() {
           </Link>
 
                {/* Nav - Desktop Optimizado */}
-               <nav className="hidden lg:flex gap-6 text-sm text-white/80" aria-label="Navegación principal">
-                 <Link href="/productos" className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200">
+               <nav className="hidden md:flex gap-4 text-sm text-white/80" aria-label="Navegación principal">
+                 <Link href="/productos" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover:bg-white/5 transition-all duration-200">
                    Productos
                  </Link>
-                 <Link href="/configurador" className="rounded-md px-3 py-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 hover:from-cyan-500/30 hover:to-violet-500/30 transition-all duration-200">
+                 <Link href="/configurador" className="rounded-md px-2 py-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 hover:from-cyan-500/30 hover:to-violet-500/30 transition-all duration-200">
                    🛠️ Configurador
                  </Link>
                  
