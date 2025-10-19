@@ -7,7 +7,7 @@ import GoogleSignInButton from "./GoogleSignInButton";
 import NotificationBell from "./NotificationBell";
 import MobileMenu from "./MobileMenu";
 import GlobalSearch from "./GlobalSearch";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function SiteHeader() {
   const { openCart, cart } = useCart();
@@ -16,8 +16,13 @@ export default function SiteHeader() {
   const [isVentajasDropdownOpen, setIsVentajasDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
@@ -32,6 +37,20 @@ export default function SiteHeader() {
       setIsVentajasDropdownOpen(false);
     }, 150); // 150ms de delay
   };
+  if (!isClient) {
+    return (
+      <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
+          <div className="text-2xl font-bold text-white">EPICAL-PC</div>
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 bg-white/10 rounded animate-pulse"></div>
+            <div className="h-8 w-8 bg-white/10 rounded animate-pulse"></div>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <>
       <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">

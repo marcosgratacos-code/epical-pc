@@ -9,7 +9,7 @@ import HowItWorks from "./components/HowItWorks";
 import TrustBadges from "./components/TrustBadges";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "./context/cart-context";
 //
 /* =========================
@@ -22,6 +22,11 @@ export default function Page() {
   const { add } = useCart();
   // toast
   const [toast, setToast] = useState<{ show: boolean; msg: string }>({ show: false, msg: "" });
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -33,6 +38,17 @@ export default function Page() {
     setToast({ show: true, msg: `${prod?.name ?? "Producto"} añadido` });
     setTimeout(() => setToast({ show: false, msg: "" }), 1200);
   };
+
+  if (!isClient) {
+    return (
+      <main className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+          <div className="h-20 w-20 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500"></div>
+          <p className="text-white/60">Cargando...</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-black text-white">
