@@ -124,7 +124,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
         <div className="grid gap-8 lg:grid-cols-2">
           {/* galería */}
           <div>
-            <ImageGalleryZoom images={gallery} alt={product.name} />
+            <ImageGalleryZoom images={gallery} productName={product.name} />
           </div>
 
           {/* info del producto */}

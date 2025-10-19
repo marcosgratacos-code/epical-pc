@@ -201,7 +201,7 @@ export default function SummarySticky({ onNext, canProceed = true, isLastStep = 
               {parts.filter(p => p.value).map((part) => (
                 <div key={part.key} className="text-sm">
                   <span className="text-white/40">{part.label}: </span>
-                  <span className="text-white">{Array.isArray(part.value) ? `${part.value.length} items` : part.value.name}</span>
+                  <span className="text-white">{Array.isArray(part.value) ? `${part.value.length} items` : part.value?.name || 'N/A'}</span>
                 </div>
               ))}
             </div>

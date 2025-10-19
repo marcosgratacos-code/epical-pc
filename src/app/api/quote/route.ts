@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     
     if (!validationResult.success) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: validationResult.error.errors },
+        { error: 'Invalid request data', details: validationResult.error.issues },
         { status: 400 }
       );
     }
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     const { build, priceTotal, compat, userNotes, contactEmail, contactPhone } = validationResult.data;
 
     // Verificar compatibilidad
-    const compatCheck = checkCompatibility(build);
+    const compatCheck = checkCompatibility(build as any);
     
     if (!compatCheck.ok) {
       return NextResponse.json(

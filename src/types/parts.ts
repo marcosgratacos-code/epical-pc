@@ -1,4 +1,4 @@
-export type Socket = 'AM5' | 'LGA1700' | 'LGA1851';
+export type Socket = 'AM4' | 'AM5' | 'LGA1700' | 'LGA1851';
 export type PciGen = 3 | 4 | 5;
 export type RamGen = 'DDR4' | 'DDR5';
 export type WifiStd = 'WiFi 6' | 'WiFi 6E' | 'WiFi 7';
