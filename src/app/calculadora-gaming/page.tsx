@@ -261,7 +261,7 @@ export default function GamingCalculator() {
           
           <h1 className="text-4xl font-bold mb-2">
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-              Calculadora Gaming EPICAL
+              Calculadora Gaming TITAN
             </span>
           </h1>
           <p className="text-white/70 text-lg">

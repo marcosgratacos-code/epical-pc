@@ -130,7 +130,7 @@ export default function VentajasPage() {
         </p>
       </section>
 
-      {/* QUÉ INCLUYE CADA EPICAL */}
+      {/* QUÉ INCLUYE CADA TITAN */}
       <section className="mx-auto max-w-7xl px-6 py-6">
         <h2 className="mb-4 text-xl font-semibold">Qué incluye cada TITAN-PC</h2>
         <div className="grid gap-4 md:grid-cols-2">
@@ -215,8 +215,8 @@ export default function VentajasPage() {
             { src: "/before-after-cable-management.jpg", alt: "Antes / Después cableado" },
             { src: "/validacion-termica-graph.png", alt: "Validación térmica" },
             { src: "/curvas-pwm-silencio.png", alt: "Curvas PWM silenciosas" },
-            { src: "/workbench-assembly.jpg", alt: "Mesa de montaje EPICAL" },
-            { src: "/epical_hero_setup.jpg", alt: "Setup EPICAL" },
+            { src: "/workbench-assembly.jpg", alt: "Mesa de montaje TITAN" },
+            { src: "/epical_hero_setup.jpg", alt: "Setup TITAN" },
           ]}
         />
         <p className="mt-2 text-xs text-white/50">

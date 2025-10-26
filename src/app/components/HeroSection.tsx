@@ -168,7 +168,7 @@ export default function HeroSection() {
                   animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                Nuevo · Serie EPICAL 2025
+                Nuevo · Serie TITAN 2025
               </span>
             </motion.div>
 

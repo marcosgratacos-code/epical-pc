@@ -43,7 +43,7 @@ const faqData: FAQItem[] = [
   {
     emoji: "📋",
     pregunta: "Mi seguimiento no se actualiza, ¿qué debo hacer?",
-    respuesta: "Es normal que pase algún tiempo entre actualizaciones, especialmente durante el transporte. Si han pasado más de 48 horas sin cambios, contáctanos a través del botón 'Hablar con soporte EPICAL' y revisaremos tu caso."
+    respuesta: "Es normal que pase algún tiempo entre actualizaciones, especialmente durante el transporte. Si han pasado más de 48 horas sin cambios, contáctanos a través del botón 'Hablar con soporte TITAN' y revisaremos tu caso."
   },
   {
     emoji: "💰",

@@ -49,7 +49,7 @@ export function createInitialTrackingEvents(): TrackingEvent[] {
       id: `event-${Date.now()}-2`,
       fecha: new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString(), // +1 día
       descripcion: 'En preparación',
-      ubicacion: 'Centro logístico EPICAL',
+      ubicacion: 'Centro logístico TITAN',
       completado: false,
       detalles: 'Estamos preparando tu pedido para el envío'
     },

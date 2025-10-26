@@ -23,7 +23,7 @@ function SignInContent() {
         <div className="text-center mb-8 animate-fade-in-up">
           <div className="inline-block">
             <h1 className="text-5xl font-bold mb-3">
-              <span className="text-white">EPICAL</span>
+              <span className="text-white">TITAN</span>
               <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
                 -PC
               </span>

@@ -38,7 +38,7 @@ export default function SiteHeader() {
             className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
             aria-label="Ir al inicio"
           >
-            <span className="text-white">EPICAL</span>
+            <span className="text-white">TITAN</span>
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
               -PC
             </span>

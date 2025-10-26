@@ -321,7 +321,7 @@ ${formData.nombre}
             <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-6">
               <div className="text-center">
                 <div className="text-4xl mb-3">🛡️</div>
-                <h3 className="text-lg font-bold text-green-400 mb-2">Garantía EPICAL</h3>
+                <h3 className="text-lg font-bold text-green-400 mb-2">Garantía TITAN</h3>
                 <p className="text-green-400/80 text-sm">
                   3 años de garantía completa en todos nuestros montajes con validación térmica real.
                 </p>

@@ -54,7 +54,7 @@ export default function Page() {
       {/* Hero */}
       <section id="hero" className="relative mx-auto grid max-w-7xl items-center gap-8 p-6 md:gap-12 md:p-8 md:grid-cols-2">
         <div className="animate-fade-in-up">
-          <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie EPICAL 2025</p>
+          <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie TITAN 2025</p>
           <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl lg:text-7xl animate-fade-in-up-delay-2">
             Potencia extrema, <span className="text-white/70">diseño impecable</span>
             <br />
@@ -305,7 +305,7 @@ export default function Page() {
             {/* Logo y descripción */}
             <div className="md:col-span-1">
               <Link href="/" className="text-2xl font-bold block mb-4">
-                <span className="text-white">EPICAL</span>
+                <span className="text-white">TITAN</span>
                 <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">-PC</span>
               </Link>
               <p className="text-sm text-white/60 leading-relaxed">

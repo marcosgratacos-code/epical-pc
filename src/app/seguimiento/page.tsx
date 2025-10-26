@@ -338,7 +338,7 @@ function SeguimientoContent() {
                   onClick={() => setIsContactModalOpen(true)}
                   className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all font-medium text-left"
                 >
-                  💬 Hablar con soporte EPICAL
+                  💬 Hablar con soporte TITAN
                 </button>
                 <button 
                   onClick={() => setIsAddressModalOpen(true)}

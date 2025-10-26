@@ -37,7 +37,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   ];
 
   const ventajasItems = [
-    { href: "/ventajas", label: "Ventajas EPICAL", icon: "✨" },
+    { href: "/ventajas", label: "Ventajas TITAN", icon: "✨" },
     { href: "/comparador", label: "Comparador", icon: "⚖️" },
   ];
 
@@ -55,7 +55,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         {/* Header */}
         <div className="sticky top-0 bg-black/95 backdrop-blur border-b border-white/10 p-4 flex items-center justify-between">
           <div className="text-xl font-bold">
-            <span className="text-white">EPICAL</span>
+            <span className="text-white">TITAN</span>
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
               -PC
             </span>

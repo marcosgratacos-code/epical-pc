@@ -1,4 +1,4 @@
-// Modal para contactar con soporte EPICAL
+// Modal para contactar con soporte TITAN
 
 import { useState } from 'react';
 import { Order } from '@/types/order';
@@ -79,7 +79,7 @@ export default function ContactModal({ isOpen, onClose, order }: ContactModalPro
   };
 
   const sendEmail = () => {
-    const subject = `Soporte EPICAL - ${formData.subject || 'Consulta'}`;
+    const subject = `Soporte TITAN - ${formData.subject || 'Consulta'}`;
     const body = `Pedido: ${order?.id || 'N/A'}
 Asunto: ${formData.subject || 'Consulta'}
 Mensaje: ${formData.message || ''}
