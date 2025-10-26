@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "epical-pc-v2",
+  "name": "titan-pc-v2",
   "builds": [
     {
       "src": "package.json",

@@ -14,8 +14,8 @@ const faqs: FAQ[] = [
   // General
   {
     id: '1',
-    question: '¿Qué hace diferente a EPICAL-PC?',
-    answer: 'EPICAL-PC se especializa en montaje profesional con validación térmica real. Realizamos stress testing completo, optimización de curvas PWM para silencio máximo, y cableado profesional. Cada PC se entrega listo para usar con Windows activado, drivers instalados y perfiles XMP/EXPO aplicados.',
+    question: '¿Qué hace diferente a TITAN-PC?',
+    answer: 'TITAN-PC se especializa en montaje profesional con validación térmica real. Realizamos stress testing completo, optimización de curvas PWM para silencio máximo, y cableado profesional. Cada PC se entrega listo para usar con Windows activado, drivers instalados y perfiles XMP/EXPO aplicados.',
     category: 'general'
   },
   {

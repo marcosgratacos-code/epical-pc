@@ -154,7 +154,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </div>
 
           <div className="mt-4 text-center text-xs text-white/40">
-            © 2025 EPICAL-PC
+            © 2025 TITAN-PC
           </div>
         </div>
       </div>

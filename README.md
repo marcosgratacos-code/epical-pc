@@ -1,4 +1,4 @@
-# EPICAL-PC
+# TITAN-PC
 
 Una aplicación Next.js para configurar PCs gaming personalizados.
 

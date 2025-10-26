@@ -384,7 +384,7 @@ export default function HeroSection() {
                 {/* Imagen del PC */}
                 <Image 
                   src="/epical_hero_setup.jpg" 
-                  alt="EPICAL-PC Setup Gaming Premium" 
+                  alt="TITAN-PC Setup Gaming Premium" 
                   fill 
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-105" 

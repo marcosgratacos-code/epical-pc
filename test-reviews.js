@@ -10,7 +10,7 @@ const exampleReviews = [
     customerName: "Alex G.",
     rating: 5,
     title: "¡Mi PC gaming perfecto!",
-    comment: "Llevo 2 meses con mi EPICAL-PC y es una bestia total. El montaje es impecable, las temperaturas están perfectas y el silencio es increíble. La validación térmica se nota mucho, nunca pasa de 70°C en gaming intenso. Recomendado 100%.",
+    comment: "Llevo 2 meses con mi TITAN-PC y es una bestia total. El montaje es impecable, las temperaturas están perfectas y el silencio es increíble. La validación térmica se nota mucho, nunca pasa de 70°C en gaming intenso. Recomendado 100%.",
     images: ["https://via.placeholder.com/400x300?text=Setup+Gaming"],
     verified: true,
     helpful: 12,

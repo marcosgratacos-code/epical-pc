@@ -56,6 +56,17 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Redirecciones SEO para rebranding a TITAN-PC
+  async redirects() {
+    return [
+      // Productos específicos (redirects exactos)
+      { source: '/productos/titan-starter', destination: '/productos/titan-starter', permanent: true },
+      { source: '/productos/titan-advanced', destination: '/productos/titan-advanced', permanent: true },
+      { source: '/productos/titan-ultra', destination: '/productos/titan-ultra', permanent: true },
+      // Patrón general para productos epical-* (mantener compatibilidad)
+      { source: '/productos/epical-:rest*', destination: '/productos/titan-:rest*', permanent: true },
+    ];
+  },
   env: {
     FORCE_REBUILD: 'true',
     BUILD_VERSION: '2.0.1',

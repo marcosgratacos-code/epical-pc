@@ -18,13 +18,13 @@ export type Product = {
 
 export const PRODUCTS: Product[] = [
   /* =========================
-     CONFIG 2: INTEL + RTX 5060  → EPICAL STARTER
+     CONFIG 2: INTEL + RTX 5060  → TITAN STARTER
      PVP: 900 €
   ========================= */
   {
-    id: "epic1",
-    slug: "epical-starter",
-    name: "EPICAL STARTER",
+    id: "titan1",
+    slug: "titan-starter",
+    name: "TITAN STARTER",
     price: 900,
     image: "/epical_hero_setup.jpg",
     images: ["/epical_hero_setup.jpg", "/cableado-limpio-01.jpg"],
@@ -59,13 +59,13 @@ export const PRODUCTS: Product[] = [
   },
 
   /* =========================
-     CONFIG 1: AMD + RTX 5070 Ti  → EPICAL ADVANCED
+     CONFIG 1: AMD + RTX 5070 Ti  → TITAN ADVANCED
      PVP: 2300 €
   ========================= */
   {
-    id: "epic2",
-    slug: "epical-advanced",
-    name: "EPICAL ADVANCED",
+    id: "titan2",
+    slug: "titan-advanced",
+    name: "TITAN ADVANCED",
     price: 2300,
     image: "/logo-sin-fondo.png",
     images: ["/logo-sin-fondo.png", "/advanced-internals-01.jpg"],
@@ -101,13 +101,13 @@ export const PRODUCTS: Product[] = [
   },
 
   /* =========================
-     CONFIG 3: AMD + RTX 5080  → EPICAL ULTRA
+     CONFIG 3: AMD + RTX 5080  → TITAN ULTRA
      PVP: 2800 €
   ========================= */
   {
-    id: "epic3",
-    slug: "epical-ultra",
-    name: "EPICAL ULTRA",
+    id: "titan3",
+    slug: "titan-ultra",
+    name: "TITAN ULTRA",
     price: 2800,
     image: "/ultra-angle-01.jpg",
     images: ["/ultra-angle-01.jpg", "/cableado-limpio-01.jpg"],

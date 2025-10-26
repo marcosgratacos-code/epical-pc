@@ -89,7 +89,7 @@ export default function ChatWidget() {
   const initializeChat = () => {
     setMessages([{
       id: '1',
-      text: '¡Hola! 👋 Soy el asistente de EPICAL-PC. ¿En qué puedo ayudarte?',
+      text: '¡Hola! 👋 Soy el asistente de TITAN-PC. ¿En qué puedo ayudarte?',
       isUser: false,
       timestamp: new Date()
     }]);
@@ -194,7 +194,7 @@ export default function ChatWidget() {
                 <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-black"></span>
               </div>
               <div>
-                <h3 className="text-white font-semibold text-sm">EPICAL-PC</h3>
+                <h3 className="text-white font-semibold text-sm">TITAN-PC</h3>
                 <p className="text-green-400 text-xs flex items-center gap-1">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-400"></span>
                   En línea

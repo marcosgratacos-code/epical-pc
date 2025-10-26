@@ -84,11 +84,11 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
     description: product.desc || product.name,
     brand: {
       "@type": "Brand",
-      name: "EPICAL-PC",
+      name: "TITAN-PC",
     },
     offers: {
       "@type": "Offer",
-      url: `https://epical-pc.com/products/${product.slug}`,
+      url: `https://titan-pc.com/products/${product.slug}`,
       priceCurrency: "EUR",
       price: product.price,
       availability: product.inStock
@@ -96,7 +96,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
         : "https://schema.org/OutOfStock",
       seller: {
         "@type": "Organization",
-        name: "EPICAL-PC",
+        name: "TITAN-PC",
       },
     },
     aggregateRating: product.rating
@@ -117,19 +117,19 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
         "@type": "ListItem",
         position: 1,
         name: "Inicio",
-        item: "https://epical-pc.com",
+        item: "https://titan-pc.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Productos",
-        item: "https://epical-pc.com/productos",
+        item: "https://titan-pc.com/productos",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: product.name,
-        item: `https://epical-pc.com/products/${product.slug}`,
+        item: `https://titan-pc.com/products/${product.slug}`,
       },
     ],
   };
@@ -233,7 +233,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 backdrop-blur-sm">
-                  <h3 className="mb-4 font-semibold text-lg">Ventajas EPICAL-PC</h3>
+                  <h3 className="mb-4 font-semibold text-lg">Ventajas TITAN-PC</h3>
                   <ul className="space-y-3 text-sm text-white/80">
                     {[
                       "✓ 3 años de garantía completa",

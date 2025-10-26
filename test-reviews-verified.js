@@ -34,9 +34,9 @@ function addExampleReviews() {
   console.log("🧹 Reseñas anteriores eliminadas");
 
   const exampleReviews = [
-    // Reviews para epical-advanced (epic1) - SOLO USUARIOS VERIFICADOS
+    // Reviews para titan-advanced (titan1) - SOLO USUARIOS VERIFICADOS
     {
-      productId: "epic1",
+      productId: "titan1",
       orderId: "order_12345",
       customerEmail: "cliente.verificado@email.com",
       customerName: "Cliente Verificado",
@@ -47,7 +47,7 @@ function addExampleReviews() {
       verified: true, // Esta sí está verificada
     },
     {
-      productId: "epic1",
+      productId: "titan1",
       orderId: "order_12346",
       customerEmail: "maria.garcia@email.com",
       customerName: "María García",
@@ -58,19 +58,19 @@ function addExampleReviews() {
       verified: true,
     },
     {
-      productId: "epic1",
+      productId: "titan1",
       orderId: "order_12347",
       customerEmail: "carlos.ruiz@email.com",
       customerName: "Carlos Ruiz",
       rating: 5,
       title: "Silencioso y potente",
-      comment: "Lo que más me ha sorprendido es lo silencioso que es, incluso bajo carga. La potencia es brutal, puedo hacer streaming y jugar a la vez sin ningún lag. ¡EPICAL-PC es top!",
+      comment: "Lo que más me ha sorprendido es lo silencioso que es, incluso bajo carga. La potencia es brutal, puedo hacer streaming y jugar a la vez sin ningún lag. ¡TITAN-PC es top!",
       images: [],
       verified: true,
     },
     // Reviews para otros productos
     {
-      productId: "epic2",
+      productId: "titan2",
       orderId: "order_12348",
       customerEmail: "laura.fernandez@email.com",
       customerName: "Laura Fernández",
@@ -81,7 +81,7 @@ function addExampleReviews() {
       verified: true,
     },
     {
-      productId: "epic3",
+      productId: "titan3",
       orderId: "order_12349",
       customerEmail: "ana.lopez@email.com",
       customerName: "Ana López",
@@ -92,7 +92,7 @@ function addExampleReviews() {
       verified: true,
     },
     {
-      productId: "epic2",
+      productId: "titan2",
       orderId: "order_12350",
       customerEmail: "juan.perez@email.com",
       customerName: "Juan Pérez",
@@ -114,24 +114,24 @@ function addExampleReviews() {
   console.log("💾 Reseñas guardadas en localStorage:", savedReviews.length);
   
   // Mostrar estadísticas por producto
-  const epic1Reviews = savedReviews.filter(r => r.productId === "epic1");
-  const epic2Reviews = savedReviews.filter(r => r.productId === "epic2");
-  const epic3Reviews = savedReviews.filter(r => r.productId === "epic3");
+  const titan1Reviews = savedReviews.filter(r => r.productId === "titan1");
+  const titan2Reviews = savedReviews.filter(r => r.productId === "titan2");
+  const titan3Reviews = savedReviews.filter(r => r.productId === "titan3");
   
   console.log("📊 Estadísticas por producto:");
-  console.log("- EPICAL Advanced (epic1):", epic1Reviews.length, "reseñas");
-  console.log("- EPICAL Pro (epic2):", epic2Reviews.length, "reseñas");
-  console.log("- EPICAL Ultimate (epic3):", epic3Reviews.length, "reseñas");
+  console.log("- EPICAL Advanced (titan1):", titan1Reviews.length, "reseñas");
+  console.log("- EPICAL Pro (titan2):", titan2Reviews.length, "reseñas");
+  console.log("- EPICAL Ultimate (titan3):", titan3Reviews.length, "reseñas");
   
   // Calcular promedios
-  const epic1Avg = epic1Reviews.reduce((sum, r) => sum + r.rating, 0) / epic1Reviews.length;
-  const epic2Avg = epic2Reviews.reduce((sum, r) => sum + r.rating, 0) / epic2Reviews.length;
-  const epic3Avg = epic3Reviews.reduce((sum, r) => sum + r.rating, 0) / epic3Reviews.length;
+  const titan1Avg = titan1Reviews.reduce((sum, r) => sum + r.rating, 0) / titan1Reviews.length;
+  const titan2Avg = titan2Reviews.reduce((sum, r) => sum + r.rating, 0) / titan2Reviews.length;
+  const titan3Avg = titan3Reviews.reduce((sum, r) => sum + r.rating, 0) / titan3Reviews.length;
   
   console.log("⭐ Promedios de valoración:");
-  console.log("- EPICAL Advanced:", epic1Avg.toFixed(1), "estrellas");
-  console.log("- EPICAL Pro:", epic2Avg.toFixed(1), "estrellas");
-  console.log("- EPICAL Ultimate:", epic3Avg.toFixed(1), "estrellas");
+  console.log("- EPICAL Advanced:", titan1Avg.toFixed(1), "estrellas");
+  console.log("- EPICAL Pro:", titan2Avg.toFixed(1), "estrellas");
+  console.log("- EPICAL Ultimate:", titan3Avg.toFixed(1), "estrellas");
 }
 
 function clearAllReviews() {

@@ -90,7 +90,7 @@ export default function Page() {
         <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 animate-fade-in-right group md:aspect-[4/3]">
           <Image 
             src="/corsair-logo.webp" 
-            alt="Corsair Partner EPICAL-PC" 
+            alt="Corsair Partner TITAN-PC" 
             fill 
             sizes="(min-width: 768px) 50vw, 100vw" 
             className="object-contain opacity-90 transform group-hover:scale-110 transition-transform duration-700 ease-out" 
@@ -146,12 +146,12 @@ export default function Page() {
       <section id="productos" className="mx-auto max-w-7xl p-6 md:p-8">
         <h2 className="mb-8 text-2xl font-semibold text-white/90 md:text-3xl lg:text-4xl md:mb-12">Montajes destacados</h2>
         
-        {/* EPICAL ADVANCED destacado */}
+        {/* TITAN ADVANCED destacado */}
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 lg:items-center">
           {/* Producto a la izquierda */}
           <div className="order-2 lg:order-1">
             {(() => {
-              const advancedProduct = PRODUCTS.find(p => p.id === "epic2");
+              const advancedProduct = PRODUCTS.find(p => p.id === "titan2");
               if (!advancedProduct) return null;
               
               return (
@@ -171,7 +171,7 @@ export default function Page() {
               
               <h3 className="mb-4 text-2xl font-bold">
                 <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-                  EPICAL ADVANCED
+                  TITAN ADVANCED
                 </span>
               </h3>
               
@@ -207,7 +207,7 @@ export default function Page() {
               
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
-                  href="/products/epical-advanced"
+                  href="/products/titan-advanced"
                   className="rounded-xl bg-white px-6 py-3 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400"
                 >
                   Ver producto
@@ -228,7 +228,7 @@ export default function Page() {
       <section id="ventajas" className="mx-auto max-w-7xl p-6 my-16">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-            Por qué EPICAL-PC
+            Por qué TITAN-PC
           </span>
         </h2>
         <p className="text-center text-white/70 mb-12 max-w-2xl mx-auto">
@@ -288,7 +288,7 @@ export default function Page() {
       {/* CTA */}
       <section id="cta" className="mx-auto max-w-7xl p-6 pb-16">
         <div className="rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-violet-500/10 p-6 text-center">
-          <h3 className="text-2xl font-bold">¿Listo para tu EPICAL-PC?</h3>
+          <h3 className="text-2xl font-bold">¿Listo para tu TITAN-PC?</h3>
           <p className="mt-2 text-white/70">Escríbenos por WhatsApp o pide tu PC a medida ahora.</p>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
             <a href="https://wa.me/34XXXXXXXXX" target="_blank" rel="noreferrer" className="rounded-xl bg-white px-5 py-2 font-semibold text-black hover:bg-white/90">WhatsApp</a>
@@ -360,7 +360,7 @@ export default function Page() {
 
           {/* Copyright */}
           <div className="border-t border-white/10 pt-8 text-center text-xs text-white/50">
-            <p>© {new Date().getFullYear()} EPICAL-PC. Todos los derechos reservados.</p>
+            <p>© {new Date().getFullYear()} TITAN-PC. Todos los derechos reservados.</p>
             <p className="mt-2">Montaje profesional · Validación térmica · 3 años de garantía</p>
           </div>
         </div>

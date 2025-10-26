@@ -71,7 +71,7 @@ export default function AdminDashboard() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-        <p className="text-white/60">Resumen general de EPICAL-PC</p>
+        <p className="text-white/60">Resumen general de TITAN-PC</p>
       </div>
 
       {/* Tarjetas de estadísticas */}

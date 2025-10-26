@@ -13,7 +13,7 @@ interface OnboardingStep {
 
 const STEPS: OnboardingStep[] = [
   {
-    title: "¡Bienvenido a EPICAL-PC!",
+    title: "¡Bienvenido a TITAN-PC!",
     description: "Tu destino para PCs gaming de alto rendimiento. Te mostraremos las funcionalidades principales.",
     icon: "🎮",
   },

@@ -11,24 +11,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   if (!product) {
     return {
-      title: "Producto no encontrado | EPICAL-PC",
+      title: "Producto no encontrado | TITAN-PC",
       description: "El producto que buscas no existe",
     };
   }
 
-  const title = `${product.name} | EPICAL-PC - PC Gaming Personalizado`;
+  const title = `${product.name} | TITAN-PC - PC Gaming Personalizado`;
   const description = `${product.desc || product.name} - ${product.price.toLocaleString("es-ES", { style: "currency", currency: "EUR" })}. ${product.specs.slice(0, 3).join(", ")}. Garantía 3 años, envío 24-48h.`;
-  const url = `https://epical-pc.com/products/${product.slug}`;
+  const url = `https://titan-pc.com/products/${product.slug}`;
 
   return {
     title,
     description,
-    keywords: `${product.name}, PC gaming, ${product.specs.join(", ")}, EPICAL-PC`,
+    keywords: `${product.name}, PC gaming, ${product.specs.join(", ")}, TITAN-PC`,
     openGraph: {
       title,
       description,
       url,
-      siteName: "EPICAL-PC",
+      siteName: "TITAN-PC",
       images: [
         {
           url: product.image,

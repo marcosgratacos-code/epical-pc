@@ -32,9 +32,9 @@ function addExampleReviews() {
   clearAllReviews(); // Limpiar antes de añadir nuevas
 
   const exampleReviews = [
-    // Reviews para epical-advanced (epic1)
+    // Reviews para titan-advanced (titan1)
     {
-      productId: "epic1",
+      productId: "titan1",
       orderId: "guest-review",
       customerEmail: "juan.perez@email.com",
       customerName: "Juan Pérez",
@@ -45,7 +45,7 @@ function addExampleReviews() {
       verified: false, // No verificada porque no ha comprado
     },
     {
-      productId: "epic1",
+      productId: "titan1",
       orderId: "guest-review",
       customerEmail: "maria.garcia@email.com",
       customerName: "María García",
@@ -56,19 +56,19 @@ function addExampleReviews() {
       verified: false,
     },
     {
-      productId: "epic1",
+      productId: "titan1",
       orderId: "guest-review",
       customerEmail: "carlos.ruiz@email.com",
       customerName: "Carlos Ruiz",
       rating: 5,
       title: "Silencioso y potente",
-      comment: "Lo que más me ha sorprendido es lo silencioso que es, incluso bajo carga. La potencia es brutal, puedo hacer streaming y jugar a la vez sin ningún lag. ¡EPICAL-PC es top!",
+      comment: "Lo que más me ha sorprendido es lo silencioso que es, incluso bajo carga. La potencia es brutal, puedo hacer streaming y jugar a la vez sin ningún lag. ¡TITAN-PC es top!",
       images: [],
       verified: false,
     },
-    // Reviews para epical-pro (epic2)
+    // Reviews para epical-pro (titan2)
     {
-      productId: "epic2",
+      productId: "titan2",
       orderId: "guest-review",
       customerEmail: "laura.fernandez@email.com",
       customerName: "Laura Fernández",
@@ -79,7 +79,7 @@ function addExampleReviews() {
       verified: false,
     },
     {
-      productId: "epic2",
+      productId: "titan2",
       orderId: "guest-review",
       customerEmail: "pedro.sanchez@email.com",
       customerName: "Pedro Sánchez",
@@ -89,9 +89,9 @@ function addExampleReviews() {
       images: [],
       verified: false,
     },
-    // Reviews para epical-ultimate (epic3)
+    // Reviews para epical-ultimate (titan3)
     {
-      productId: "epic3",
+      productId: "titan3",
       orderId: "guest-review",
       customerEmail: "ana.lopez@email.com",
       customerName: "Ana López",
@@ -103,7 +103,7 @@ function addExampleReviews() {
     },
     // Algunas reseñas verificadas (simulando compras reales)
     {
-      productId: "epic1",
+      productId: "titan1",
       orderId: "order_12345",
       customerEmail: "cliente.verificado@email.com",
       customerName: "Cliente Verificado",
@@ -139,14 +139,14 @@ function testReviewSystem() {
   console.log("📋 Reseñas en localStorage:", reviews.length);
   
   // Mostrar estadísticas
-  const epic1Reviews = reviews.filter(r => r.productId === "epic1");
-  const epic2Reviews = reviews.filter(r => r.productId === "epic2");
-  const epic3Reviews = reviews.filter(r => r.productId === "epic3");
+  const titan1Reviews = reviews.filter(r => r.productId === "titan1");
+  const titan2Reviews = reviews.filter(r => r.productId === "titan2");
+  const titan3Reviews = reviews.filter(r => r.productId === "titan3");
   
   console.log("📊 Estadísticas por producto:");
-  console.log("- EPICAL Advanced:", epic1Reviews.length, "reseñas");
-  console.log("- EPICAL Pro:", epic2Reviews.length, "reseñas");
-  console.log("- EPICAL Ultimate:", epic3Reviews.length, "reseñas");
+  console.log("- EPICAL Advanced:", titan1Reviews.length, "reseñas");
+  console.log("- EPICAL Pro:", titan2Reviews.length, "reseñas");
+  console.log("- EPICAL Ultimate:", titan3Reviews.length, "reseñas");
   
   console.log("🎉 ¡Sistema listo para probar!");
   console.log("💡 Ahora puedes ir a cualquier producto y ver las reseñas");

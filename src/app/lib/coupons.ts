@@ -65,11 +65,11 @@ export const AVAILABLE_COUPONS: Coupon[] = [
     code: 'ULTRA100',
     type: 'fixed',
     value: 100,
-    description: '100€ de descuento en EPICAL ULTRA',
+    description: '100€ de descuento en TITAN ULTRA',
     minAmount: 1500,
     validFrom: '2025-01-01',
     validUntil: '2025-12-31',
-    applicableProducts: ['epical-ultra'],
+    applicableProducts: ['titan-ultra'],
     active: true,
     usedCount: 0
   }

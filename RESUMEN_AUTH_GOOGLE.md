@@ -1,6 +1,6 @@
 # ✅ Autenticación con Google - COMPLETADA
 
-## 🎉 Se ha implementado exitosamente la autenticación con Google en EPICAL-PC
+## 🎉 Se ha implementado exitosamente la autenticación con Google en TITAN-PC
 
 ---
 
@@ -67,7 +67,7 @@ npm run dev
 
 ### 2. Página de Signin personalizada
 - Ruta: `/auth/signin`
-- Diseño acorde a EPICAL-PC (negro con gradientes cyan/blue/violet)
+- Diseño acorde a TITAN-PC (negro con gradientes cyan/blue/violet)
 - Botón grande de "Continuar con Google"
 - Badges de características (Guarda carrito, Historial, Configs)
 - Responsive y moderno
@@ -182,7 +182,7 @@ npm run dev
 
 ## 🎊 ¡Todo listo!
 
-Tu aplicación EPICAL-PC ahora tiene:
+Tu aplicación TITAN-PC ahora tiene:
 - ✅ Autenticación con Google OAuth
 - ✅ UI moderna y responsive
 - ✅ Manejo de sesiones

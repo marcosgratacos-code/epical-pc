@@ -22,14 +22,14 @@
 4. Click en **"Crear credenciales" > "ID de cliente de OAuth 2.0"**
 5. Si es la primera vez, configura la pantalla de consentimiento:
    - Tipo: **Externo**
-   - Nombre de la app: **EPICAL-PC**
+   - Nombre de la app: **TITAN-PC**
    - Correo del usuario: tu email
    - Dominios autorizados: (déjalo vacío por ahora)
    - Agrega tu email en "Correos de prueba" si es necesario
 
 6. Vuelve a "Credenciales" y crea el OAuth client ID:
    - Tipo de aplicación: **Aplicación web**
-   - Nombre: **EPICAL-PC Web**
+   - Nombre: **TITAN-PC Web**
    - **Orígenes JavaScript autorizados**: 
      ```
      http://localhost:3000
@@ -117,7 +117,7 @@ npm run dev
 
 - ✅ Login con Google OAuth
 - ✅ Botón de login/logout en el header
-- ✅ Página de signin personalizada con diseño EPICAL-PC
+- ✅ Página de signin personalizada con diseño TITAN-PC
 - ✅ Manejo de sesiones con NextAuth
 - ✅ Responsive design (móvil y desktop)
 - ✅ Estados de carga
@@ -164,5 +164,5 @@ Si tienes problemas, verifica:
 
 ---
 
-¡Listo! Tu aplicación EPICAL-PC ahora tiene autenticación con Google 🎉
+¡Listo! Tu aplicación TITAN-PC ahora tiene autenticación con Google 🎉
 

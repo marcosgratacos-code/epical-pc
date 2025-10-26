@@ -51,7 +51,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span className="text-xl font-bold">E</span>
           </div>
           <div>
-            <h1 className="font-bold">EPICAL-PC</h1>
+            <h1 className="font-bold">TITAN-PC</h1>
             <p className="text-xs text-white/60">Admin Panel</p>
           </div>
         </Link>

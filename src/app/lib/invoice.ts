@@ -18,14 +18,14 @@ interface InvoiceData {
 }
 
 const COMPANY_INFO = {
-  name: 'EPICAL-PC',
+  name: 'TITAN-PC',
   address: 'Calle Tecnología, 123',
   city: 'Madrid',
   postalCode: '28001',
   country: 'España',
   cif: 'B12345678',
   phone: '+34 900 123 456',
-  email: 'facturacion@epical-pc.com'
+  email: 'facturacion@titan-pc.com'
 };
 
 export function generateInvoicePDF(order: Order): void {
@@ -172,9 +172,9 @@ export function generateInvoicePDF(order: Order): void {
   const pageHeight = doc.internal.pageSize.height;
   doc.setFontSize(8);
   doc.setTextColor(100, 100, 100);
-  doc.text('Gracias por confiar en EPICAL-PC', 20, pageHeight - 20);
-  doc.text('Para consultas: soporte@epical-pc.com', 20, pageHeight - 15);
-  doc.text('www.epical-pc.com', 20, pageHeight - 10);
+  doc.text('Gracias por confiar en TITAN-PC', 20, pageHeight - 20);
+  doc.text('Para consultas: soporte@titan-pc.com', 20, pageHeight - 15);
+  doc.text('www.titan-pc.com', 20, pageHeight - 10);
   
   // Guardar PDF
   doc.save(`factura-${order.id}.pdf`);

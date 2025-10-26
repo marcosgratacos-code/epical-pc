@@ -4,9 +4,9 @@ import Link from "next/link";
 import Gallery from "../components/Gallery";
 
 export const metadata = {
-  title: "Ventajas | EPICAL-PC",
+  title: "Ventajas | TITAN-PC",
   description:
-    "Por qué elegir EPICAL-PC frente a tiendas genéricas: montaje a medida, validación térmica real, informe de pruebas, soporte cercano y precio cerrado.",
+    "Por qué elegir TITAN-PC frente a tiendas genéricas: montaje a medida, validación térmica real, informe de pruebas, soporte cercano y precio cerrado.",
 };
 
 export default function VentajasPage() {
@@ -20,14 +20,14 @@ export default function VentajasPage() {
       {/* HERO PERSUASIVO */}
       <section className="border-b border-white/10 bg-[radial-gradient(80%_120%_at_0%_0%,rgba(56,189,248,.12),transparent),radial-gradient(80%_120%_at_100%_0%,rgba(139,92,246,.12),transparent)]">
         <div className="mx-auto max-w-7xl px-6 py-12">
-          <p className="text-xs text-white/60 tracking-widest">EPICAL-PC</p>
+          <p className="text-xs text-white/60 tracking-widest">TITAN-PC</p>
           <h1 className="mt-2 text-4xl font-extrabold leading-tight">
             Más que “montar un PC”: {" "}
             <span className="text-white/70">lo ajustamos para ti</span>
           </h1>
           <p className="mt-3 max-w-2xl text-white/80">
             Si compras en una tienda genérica, recibes una lista de piezas.
-            Con EPICAL-PC te entregamos un equipo{" "}
+            Con TITAN-PC te entregamos un equipo{" "}
             <b>probado, silencioso y listo</b>: validación térmica real, informe
             de pruebas, BIOS/Drivers al día y soporte humano que responde.
           </p>
@@ -60,14 +60,14 @@ export default function VentajasPage() {
 
       {/* COMPARATIVA DIRECTA */}
       <section className="mx-auto max-w-7xl px-6 py-10">
-        <h2 className="mb-4 text-xl font-semibold">EPICAL-PC vs “gran tienda”</h2>
+        <h2 className="mb-4 text-xl font-semibold">TITAN-PC vs “gran tienda”</h2>
 
         <div className="overflow-x-auto rounded-2xl border border-white/10">
           <table className="min-w-[720px] w-full border-separate border-spacing-0 bg-black text-sm">
             <thead className="bg-white/[0.03] text-left">
               <tr>
                 <th className="p-3">Qué miras al comprar</th>
-                <th className="p-3">EPICAL-PC</th>
+                <th className="p-3">TITAN-PC</th>
                 <th className="p-3">Tienda genérica</th>
               </tr>
             </thead>
@@ -132,7 +132,7 @@ export default function VentajasPage() {
 
       {/* QUÉ INCLUYE CADA EPICAL */}
       <section className="mx-auto max-w-7xl px-6 py-6">
-        <h2 className="mb-4 text-xl font-semibold">Qué incluye cada EPICAL-PC</h2>
+        <h2 className="mb-4 text-xl font-semibold">Qué incluye cada TITAN-PC</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
             "Windows opcional, drivers, utilidades y BIOS/firmware al día.",
@@ -259,7 +259,7 @@ export default function VentajasPage() {
             <p>
               Son buenos vendiendo piezas, pero <b>no</b> ajustan tu equipo a tu
               perfil ni incluyen informe de pruebas ni curvas acústicas. Con
-              EPICAL-PC ahorras tiempo y evitas dolores de cabeza: te llega{" "}
+              TITAN-PC ahorras tiempo y evitas dolores de cabeza: te llega{" "}
               <b>listo, estable y silencioso</b>.
             </p>
           </div>

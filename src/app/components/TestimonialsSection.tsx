@@ -20,8 +20,8 @@ const testimonials: Testimonial[] = [
     id: '1',
     name: 'Carlos M.',
     rating: 5,
-    comment: 'Increíble PC gaming. El montaje es impecable y las temperaturas son excelentes. EPICAL-PC superó todas mis expectativas.',
-    product: 'EPICAL ULTRA',
+    comment: 'Increíble PC gaming. El montaje es impecable y las temperaturas son excelentes. TITAN-PC superó todas mis expectativas.',
+    product: 'TITAN ULTRA',
     date: '2024-01-15',
     verified: true
   },
@@ -30,7 +30,7 @@ const testimonials: Testimonial[] = [
     name: 'Ana R.',
     rating: 5,
     comment: 'Servicio excepcional desde el primer contacto. Mi PC llegó perfectamente configurado y funcionando al 100%.',
-    product: 'EPICAL ADVANCED',
+    product: 'TITAN ADVANCED',
     date: '2024-01-10',
     verified: true
   },
@@ -38,8 +38,8 @@ const testimonials: Testimonial[] = [
     id: '3',
     name: 'Miguel L.',
     rating: 5,
-    comment: 'La calidad del montaje es profesional. Se nota que saben lo que hacen. Recomiendo totalmente EPICAL-PC.',
-    product: 'EPICAL STARTER',
+    comment: 'La calidad del montaje es profesional. Se nota que saben lo que hacen. Recomiendo totalmente TITAN-PC.',
+    product: 'TITAN STARTER',
     date: '2024-01-08',
     verified: true
   },
@@ -48,7 +48,7 @@ const testimonials: Testimonial[] = [
     name: 'Sofia G.',
     rating: 5,
     comment: 'PC gaming perfecto para mi setup. Las especificaciones son exactas y el rendimiento es espectacular.',
-    product: 'EPICAL ULTRA',
+    product: 'TITAN ULTRA',
     date: '2024-01-05',
     verified: true
   },
@@ -57,7 +57,7 @@ const testimonials: Testimonial[] = [
     name: 'David P.',
     rating: 5,
     comment: 'Excelente relación calidad-precio. El soporte técnico es muy profesional y resolvieron todas mis dudas.',
-    product: 'EPICAL ADVANCED',
+    product: 'TITAN ADVANCED',
     date: '2024-01-03',
     verified: true
   },
@@ -65,8 +65,8 @@ const testimonials: Testimonial[] = [
     id: '6',
     name: 'Laura M.',
     rating: 5,
-    comment: 'Mi PC gaming soñado hecho realidad. EPICAL-PC me ayudó a elegir la configuración perfecta para mis necesidades.',
-    product: 'EPICAL STARTER',
+    comment: 'Mi PC gaming soñado hecho realidad. TITAN-PC me ayudó a elegir la configuración perfecta para mis necesidades.',
+    product: 'TITAN STARTER',
     date: '2024-01-01',
     verified: true
   }
@@ -132,7 +132,7 @@ export default function TestimonialsSection() {
             Lo que dicen nuestros clientes
           </h2>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Miles de gamers confían en EPICAL-PC para sus setups perfectos
+            Miles de gamers confían en TITAN-PC para sus setups perfectos
           </p>
         </div>
 

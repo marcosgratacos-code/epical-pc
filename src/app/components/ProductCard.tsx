@@ -46,7 +46,7 @@ export default function ProductCard({ p }: {
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           <Image
             src={p.image}
-            alt={`${p.name} - PC gaming personalizado por EPICAL-PC`}
+            alt={`${p.name} - PC gaming personalizado por TITAN-PC`}
             fill
             sizes="(max-width:1024px) 100vw, 33vw"
             className="object-contain transition-transform duration-500 group-hover:scale-110"

@@ -34,7 +34,7 @@ export default function ContactoPage() {
       // Crear el email con los datos del formulario
       const emailSubject = `[${formData.tipoConsulta.toUpperCase()}] ${formData.asunto}`;
       const emailBody = `
-Hola EPICAL-PC,
+Hola TITAN-PC,
 
 Me pongo en contacto con ustedes por el siguiente motivo:
 
@@ -73,7 +73,7 @@ ${formData.nombre}
       icon: '📞',
       title: 'WhatsApp',
       description: 'Respuesta inmediata',
-      action: () => window.open('https://wa.me/34612345678?text=Hola%20EPICAL-PC,%20me%20interesa%20configurar%20un%20PC%20a%20medida', '_blank'),
+      action: () => window.open('https://wa.me/34612345678?text=Hola%20TITAN-PC,%20me%20interesa%20configurar%20un%20PC%20a%20medida', '_blank'),
       color: 'from-green-500 to-green-600'
     },
     {
@@ -126,7 +126,7 @@ ${formData.nombre}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-violet-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
-              Contacta con EPICAL-PC
+              Contacta con TITAN-PC
             </span>
           </h1>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">

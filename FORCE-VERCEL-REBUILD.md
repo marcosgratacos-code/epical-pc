@@ -1,4 +1,4 @@
-# EPICAL-PC V2 - FORZAR CAMBIO MASIVO
+# TITAN-PC V2 - FORZAR CAMBIO MASIVO
 # Este archivo fuerza a Vercel a detectar cambios masivos
 # Fecha: 2025-01-15
 # Commit: c0701e6

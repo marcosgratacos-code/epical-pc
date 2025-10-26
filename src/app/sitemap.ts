@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { PRODUCTS } from './lib/products'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://epical-pc.com'
+  const baseUrl = 'https://titan-pc.com'
   
   // Páginas estáticas
   const staticPages = [

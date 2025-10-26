@@ -37,7 +37,7 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
     {
       icon: '💎',
       title: 'Nuestro compromiso contigo',
-      content: 'En EPICAL-PC trabajamos para ofrecerte siempre el mejor precio posible:',
+      content: 'En TITAN-PC trabajamos para ofrecerte siempre el mejor precio posible:',
       details: [
         'Propuesta personalizada sin compromiso',
         'Transparencia total en precios finales',

@@ -22,33 +22,33 @@ import { Toaster } from "react-hot-toast";
 // import { ourFileRouter } from "./api/uploadthing/core";
 
 export const metadata: Metadata = {
-  title: "EPICAL-PC | PCs Gaming Personalizados con Validación Térmica",
+  title: "TITAN-PC | PCs Gaming Personalizados con Validación Térmica",
   description: "PCs gaming personalizados con montaje profesional, validación térmica real y 3 años de garantía. Configura tu PC perfecto con componentes de última generación. Envío 24-48h.",
   keywords: "PC gaming, ordenador gaming, PC personalizado, montaje PC, validación térmica, gaming, componentes PC, AMD, Intel, NVIDIA",
-  authors: [{ name: "EPICAL-PC" }],
-  creator: "EPICAL-PC",
-  publisher: "EPICAL-PC",
+  authors: [{ name: "TITAN-PC" }],
+  creator: "TITAN-PC",
+  publisher: "TITAN-PC",
   robots: "index, follow",
-  metadataBase: new URL("https://epical-pc.com"),
+  metadataBase: new URL("https://titan-pc.com"),
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://epical-pc.com",
-    title: "EPICAL-PC | PCs Gaming Personalizados",
+    url: "https://titan-pc.com",
+    title: "TITAN-PC | PCs Gaming Personalizados",
     description: "PCs gaming personalizados con montaje profesional y validación térmica real",
-    siteName: "EPICAL-PC",
+    siteName: "TITAN-PC",
     images: [
       {
         url: "/logo-epical.png",
         width: 1200,
         height: 630,
-        alt: "EPICAL-PC Logo"
+        alt: "TITAN-PC Logo"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "EPICAL-PC | PCs Gaming Personalizados",
+    title: "TITAN-PC | PCs Gaming Personalizados",
     description: "PCs gaming personalizados con montaje profesional y validación térmica real",
     images: ["/logo-epical.png"]
   }
@@ -86,9 +86,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "EPICAL-PC",
-    url: "https://epical-pc.com",
-    logo: "https://epical-pc.com/logo-epical.png",
+    name: "TITAN-PC",
+    url: "https://titan-pc.com",
+    logo: "https://titan-pc.com/logo-epical.png",
     description: "PCs gaming personalizados con montaje profesional, validación térmica real y 3 años de garantía",
     address: {
       "@type": "PostalAddress",
@@ -122,7 +122,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   <Suspense fallback={
                     <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
                       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
-                        <div className="text-2xl font-bold text-white">EPICAL-PC</div>
+                        <div className="text-2xl font-bold text-white">TITAN-PC</div>
                         <div className="flex items-center gap-2">
                           <div className="h-8 w-8 bg-white/10 rounded animate-pulse"></div>
                           <div className="h-8 w-8 bg-white/10 rounded animate-pulse"></div>
