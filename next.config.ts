@@ -59,12 +59,9 @@ const nextConfig: NextConfig = {
   // Redirecciones SEO para rebranding a TITAN-PC
   async redirects() {
     return [
-      // Productos específicos (redirects exactos)
-      { source: '/productos/titan-starter', destination: '/productos/titan-starter', permanent: true },
-      { source: '/productos/titan-advanced', destination: '/productos/titan-advanced', permanent: true },
-      { source: '/productos/titan-ultra', destination: '/productos/titan-ultra', permanent: true },
-      // Patrón general para productos epical-* (mantener compatibilidad)
-      { source: '/productos/epical-:rest*', destination: '/productos/titan-:rest*', permanent: true },
+      // Redireccionar URLs antiguas epical-* a titan-*
+      { source: '/productos/epical-:slug', destination: '/productos/titan-:slug', permanent: true },
+      { source: '/products/epical-:slug', destination: '/products/titan-:slug', permanent: true },
     ];
   },
   env: {
