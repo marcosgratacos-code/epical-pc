@@ -190,7 +190,7 @@ export default function ChatWidget() {
           <div className="flex items-center justify-between p-4 border-b border-white/10 bg-gradient-to-r from-violet-500/10 to-cyan-500/10 rounded-t-2xl flex-shrink-0">
             <div className="flex items-center gap-3">
               <div className="h-8 w-8 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 flex items-center justify-center relative">
-                <span className="text-white text-sm font-bold">E</span>
+                <span className="text-white text-sm font-bold">T</span>
                 <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-black"></span>
               </div>
               <div>

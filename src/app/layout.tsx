@@ -22,35 +22,57 @@ import { Toaster } from "react-hot-toast";
 // import { ourFileRouter } from "./api/uploadthing/core";
 
 export const metadata: Metadata = {
-  title: "TITAN-PC | PCs Gaming Personalizados con Validación Térmica",
-  description: "PCs gaming personalizados con montaje profesional, validación térmica real y 3 años de garantía. Configura tu PC perfecto con componentes de última generación. Envío 24-48h.",
-  keywords: "PC gaming, ordenador gaming, PC personalizado, montaje PC, validación térmica, gaming, componentes PC, AMD, Intel, NVIDIA",
+  title: "TITAN-PC | Potencia extrema, diseño impecable",
+  description: "TITAN-PC crea PCs personalizados de alto rendimiento con diseño premium. Montajes validados térmicamente, con componentes certificados y garantía profesional.",
+  keywords: [
+    "PC gaming",
+    "ordenadores personalizados",
+    "TITAN-PC",
+    "custom PC",
+    "montaje de PCs",
+    "Corsair",
+    "iCUE",
+    "alto rendimiento",
+    "PC profesional",
+    "validación térmica",
+    "gaming",
+    "componentes PC",
+    "AMD",
+    "Intel",
+    "NVIDIA"
+  ],
   authors: [{ name: "TITAN-PC" }],
   creator: "TITAN-PC",
   publisher: "TITAN-PC",
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+  },
   metadataBase: new URL("https://titan-pc.com"),
+  alternates: {
+    canonical: "https://titan-pc.com/",
+  },
   openGraph: {
-    type: "website",
-    locale: "es_ES",
-    url: "https://titan-pc.com",
-    title: "TITAN-PC | PCs Gaming Personalizados",
-    description: "PCs gaming personalizados con montaje profesional y validación térmica real",
+    title: "TITAN-PC | Potencia extrema, diseño impecable",
+    description: "Montajes de alto rendimiento con validación térmica, control acústico y perfiles XMP/EXPO probados.",
+    url: "https://titan-pc.com/",
     siteName: "TITAN-PC",
     images: [
       {
-        url: "/logo-epical.png",
+        url: "https://titan-pc.com/logo-epical.png",
         width: 1200,
         height: 630,
-        alt: "TITAN-PC Logo"
+        alt: "TITAN-PC logo",
       }
-    ]
+    ],
+    locale: "es_ES",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "TITAN-PC | PCs Gaming Personalizados",
-    description: "PCs gaming personalizados con montaje profesional y validación térmica real",
-    images: ["/logo-epical.png"]
+    title: "TITAN-PC | Potencia extrema, diseño impecable",
+    description: "Montajes de alto rendimiento con validación térmica, control acústico y perfiles XMP/EXPO probados.",
+    images: ["https://titan-pc.com/logo-epical.png"]
   }
 };
 

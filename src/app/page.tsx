@@ -298,6 +298,17 @@ export default function Page() {
         </div>
       </section>
 
+      {/* SEO Text */}
+      <section className="mx-auto max-w-7xl p-6 pb-16">
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center">
+          <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
+            En <strong className="text-white">TITAN-PC</strong> montamos ordenadores personalizados con componentes de alta gama,
+            rendimiento extremo y diseño profesional. Diseñados para gamers, creadores y entornos exigentes.
+            Nuestros PCs incluyen validación térmica certificada, montaje meticuloso y tres años de garantía completa.
+          </p>
+        </div>
+      </section>
+
       {/* Footer Mejorado */}
       <footer className="border-t border-white/10 bg-gradient-to-b from-transparent to-white/5 mt-20">
         <div className="mx-auto max-w-7xl p-6 py-12">
