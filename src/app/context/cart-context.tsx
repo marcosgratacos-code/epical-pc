@@ -9,7 +9,9 @@ type CartContextValue = {
   cart: CartState;
   setCart: React.Dispatch<React.SetStateAction<CartState>>;
   add: (id: string, qty?: number) => void;
+  inc: (id: string) => void;
   dec: (id: string) => void;
+  setQty: (id: string, qty: number) => void;
   remove: (id: string) => void;
   clear: () => void;
   clearCart: () => void; // Alias para mayor claridad
@@ -72,12 +74,25 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const add = (id: string, qty = 1) =>
     setCart((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + qty }));
+  const inc = (id: string) =>
+    setCart((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
   const dec = (id: string) =>
     setCart((prev) => {
       const next = { ...prev };
       if (!next[id]) return prev;
       next[id] = Math.max(0, next[id] - 1);
       if (next[id] === 0) delete next[id];
+      return next;
+    });
+  const setQty = (id: string, qty: number) =>
+    setCart((prev) => {
+      const next = { ...prev };
+      const newQty = Math.max(1, Math.floor(qty || 1));
+      if (newQty === 0) {
+        delete next[id];
+      } else {
+        next[id] = newQty;
+      }
       return next;
     });
   const remove = (id: string) =>
@@ -136,7 +151,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       cart,
       setCart,
       add,
+      inc,
       dec,
+      setQty,
       remove,
       clear,
       clearCart: clear, // Alias para mayor claridad

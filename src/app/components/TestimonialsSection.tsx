@@ -2,7 +2,7 @@
 
 // Componente de testimonios de clientes
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Testimonial {
   id: string;
@@ -75,6 +75,12 @@ const testimonials: Testimonial[] = [
 export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Marcar como montado
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -90,15 +96,15 @@ export default function TestimonialsSection() {
   };
 
   // Auto-play
-  useState(() => {
-    if (!isAutoPlaying) return;
+  useEffect(() => {
+    if (!isMounted || !isAutoPlaying) return;
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  });
+  }, [isAutoPlaying, isMounted]);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (

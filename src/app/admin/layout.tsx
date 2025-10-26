@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Link from "next/link";
 
-// Lista de emails admin (en producción esto estaría en base de datos o variable de entorno)
-const ADMIN_EMAILS = ["admin@epical-pc.com", "epicalpc@gmail.com"];
-
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -20,8 +17,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       return;
     }
 
-    // Verificar si el usuario es admin
-    if (!ADMIN_EMAILS.includes(session.user?.email || "")) {
+    // Verificar si el usuario tiene rol de admin
+    const userRole = (session.user as any)?.role;
+    if (userRole !== "admin") {
       alert("⚠️ Acceso denegado\n\nNo tienes permisos de administrador.");
       router.push("/");
     }
@@ -38,7 +36,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  if (!session || !ADMIN_EMAILS.includes(session.user?.email || "")) {
+  // Verificar si el usuario tiene rol de admin
+  const userRole = (session?.user as any)?.role;
+  if (!session || userRole !== "admin") {
     return null;
   }
 

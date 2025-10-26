@@ -9,6 +9,14 @@ export default function GoogleSignInButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Manejo silencioso de errores de autenticación
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      // Usuario no autenticado, esto es normal
+      return;
+    }
+  }, [status]);
+
   // Cerrar dropdown al hacer click fuera
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -49,6 +57,7 @@ export default function GoogleSignInButton() {
                 src={userImage} 
                 alt={userName}
                 className="h-full w-full object-cover"
+                referrerPolicy="no-referrer"
               />
             ) : (
               <div className="h-full w-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 flex items-center justify-center text-xs font-bold text-white">
@@ -75,7 +84,7 @@ export default function GoogleSignInButton() {
 
         {/* Dropdown Menu Premium */}
         {isDropdownOpen && (
-          <div className="absolute right-0 top-full mt-2 w-72 rounded-2xl border border-white/10 bg-gradient-to-b from-black/98 to-black/95 backdrop-blur-xl py-2 shadow-2xl shadow-violet-500/10 z-50 overflow-hidden animate-fade-in-up">
+          <div className="absolute right-0 top-full mt-2 w-72 rounded-2xl border border-white/10 bg-black backdrop-blur-xl py-2 shadow-2xl shadow-violet-500/10 z-50 overflow-hidden animate-fade-in-up">
             {/* Header del usuario */}
             <div className="px-4 py-4 border-b border-white/10 bg-gradient-to-br from-violet-500/15 to-cyan-500/15 backdrop-blur-sm">
               <div className="flex items-center gap-3">
@@ -84,6 +93,7 @@ export default function GoogleSignInButton() {
                     src={userImage} 
                     alt={userName}
                     className="h-12 w-12 rounded-full ring-2 ring-violet-400/50 shadow-lg shadow-violet-500/30"
+                    referrerPolicy="no-referrer"
                   />
                 ) : (
                   <div className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 flex items-center justify-center text-lg font-bold text-white ring-2 ring-violet-400/50 shadow-lg shadow-violet-500/30">
@@ -160,6 +170,30 @@ export default function GoogleSignInButton() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
+
+              {/* Botón Admin - Solo para marcosgratacos@gmail.com */}
+              {userEmail === "marcosgratacos@gmail.com" && (
+                <Link
+                  href="/admin"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="group flex items-center gap-3 w-full px-4 py-3 text-left text-sm text-white hover:bg-gradient-to-r hover:from-amber-500/25 hover:to-orange-500/25 focus:outline-none transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/10 relative overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500/0 to-orange-500/0 group-hover:from-amber-500/5 group-hover:to-orange-500/5 transition-all duration-300"></div>
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-amber-500/25 to-amber-500/15 flex items-center justify-center group-hover:from-amber-500/35 group-hover:to-amber-500/25 transition-all duration-300 group-hover:scale-105 shadow-lg shadow-amber-500/20">
+                    <svg className="h-5 w-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1 relative z-10">
+                    <p className="font-semibold group-hover:text-amber-300 transition-colors">Panel Admin</p>
+                    <p className="text-xs text-white/60 group-hover:text-white/70 transition-colors">Gestión del sitio</p>
+                  </div>
+                  <svg className="h-4 w-4 text-white/40 group-hover:text-amber-400 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              )}
             </div>
             
             <hr className="my-2 border-white/10" />

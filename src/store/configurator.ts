@@ -10,12 +10,29 @@ interface ConfigState {
   recommendedPrice: number;
   warnings: string[];
   errors: string[];
+  profile: UserProfile | null;
+  processor: string | null;
+  motherboard: string | null;
+  memory: string | null;
+  graphics: string | null;
+  storage: string | null;
+  cooling: string | null;
+  powerSupply: string | null;
+  case: string | null;
   setStep: (s: Step) => void;
   setPart: <K extends keyof Build>(k: K, v: Build[K]) => void;
   addStorage: (d: Storage) => void;
   removeStorage: (id: string) => void;
   recalc: () => void;
   setProfile: (p: UserProfile) => void;
+  setProcessor: (p: string) => void;
+  setMotherboard: (m: string) => void;
+  setMemory: (m: string) => void;
+  setGraphics: (g: string) => void;
+  setStorage: (s: string) => void;
+  setCooling: (c: string) => void;
+  setPowerSupply: (p: string) => void;
+  setCase: (c: string) => void;
   reset: () => void;
 }
 
@@ -26,6 +43,15 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
   recommendedPrice: 0,
   warnings: [],
   errors: [],
+  profile: null,
+  processor: null,
+  motherboard: null,
+  memory: null,
+  graphics: null,
+  storage: null,
+  cooling: null,
+  powerSupply: null,
+  case: null,
   
   setStep: (s) => set({ step: s }),
   
@@ -44,9 +70,15 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
     setTimeout(() => get().recalc(), 0);
   },
   
-  setProfile: (p) => {
-    set({ build: { ...get().build, profile: p } });
-  },
+  setProfile: (p) => set({ profile: p }),
+  setProcessor: (p) => set({ processor: p }),
+  setMotherboard: (m) => set({ motherboard: m }),
+  setMemory: (m) => set({ memory: m }),
+  setGraphics: (g) => set({ graphics: g }),
+  setStorage: (s) => set({ storage: s }),
+  setCooling: (c) => set({ cooling: c }),
+  setPowerSupply: (p) => set({ powerSupply: p }),
+  setCase: (c) => set({ case: c }),
   
   recalc: () => {
     const b = get().build;
@@ -76,7 +108,16 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
     priceTotal: 0, 
     recommendedPrice: 0,
     warnings: [], 
-    errors: [] 
+    errors: [],
+    profile: null,
+    processor: null,
+    motherboard: null,
+    memory: null,
+    graphics: null,
+    storage: null,
+    cooling: null,
+    powerSupply: null,
+    case: null
   })
 }));
 

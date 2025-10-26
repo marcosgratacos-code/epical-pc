@@ -12,6 +12,7 @@ interface WishlistContextValue {
   isInWishlist: (productId: string) => boolean;
   clearWishlist: () => void;
   wishlistCount: number;
+  hydrated: boolean; // para evitar parpadeos SSR/CSR
 }
 
 const WishlistContext = createContext<WishlistContextValue | undefined>(undefined);
@@ -85,8 +86,9 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
       isInWishlist,
       clearWishlist,
       wishlistCount,
+      hydrated,
     }),
-    [wishlist]
+    [wishlist, hydrated]
   );
 
   return (

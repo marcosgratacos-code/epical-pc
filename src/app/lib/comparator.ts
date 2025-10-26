@@ -227,3 +227,17 @@ export function calculateProductScore(product: Product): number {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

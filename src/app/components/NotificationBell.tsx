@@ -97,8 +97,11 @@ export default function NotificationBell() {
       </button>
 
       {/* Dropdown de notificaciones */}
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 md:w-96 bg-black border border-white/10 rounded-2xl shadow-2xl z-50 animate-fade-in-scale origin-top-right max-h-[80vh] flex flex-col">
+      <div className={`absolute right-0 mt-2 w-80 md:w-96 bg-black border border-white/10 rounded-2xl shadow-2xl z-50 origin-top-right max-h-[80vh] flex flex-col transition-all duration-200 ${
+        isOpen 
+          ? 'opacity-100 visible translate-y-0' 
+          : 'opacity-0 invisible -translate-y-2 pointer-events-none'
+      }`}>
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-white/10">
             <h3 className="text-lg font-semibold text-white">Notificaciones</h3>
@@ -262,8 +265,7 @@ export default function NotificationBell() {
             </div>
           )}
         </div>
-      )}
-    </div>
+      </div>
   );
 }
 

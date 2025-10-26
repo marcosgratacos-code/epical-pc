@@ -153,3 +153,17 @@ console.log('8. Intentar dejar reseña (solo si has comprado)');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,58 +1,105 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { type Product } from "../lib/products";
+import { useEffect, useRef, useState, useCallback } from "react";
 
-const MAX_RECENT_ITEMS = 5;
-const STORAGE_KEY = "epical-recently-viewed";
+export type Product = {
+  id: string;
+  slug: string;
+  name: string;
+  price?: number;
+  image?: string;
+};
 
-export function useRecentlyViewed() {
+const STORAGE_KEY = "epical_recently_viewed_v5";
+
+export function useRecentlyViewed(userId?: string) {
   const [recentlyViewed, setRecentlyViewed] = useState<Product[]>([]);
+  const loaded = useRef(false);
 
-  // Cargar desde localStorage
+  // 🔹 Carga inicial: localStorage + merge con servidor si hay usuario
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        setRecentlyViewed(JSON.parse(stored));
-      }
-    } catch (error) {
-      console.error("Error loading recently viewed:", error);
-    }
-  }, []);
+    if (loaded.current) return;
+    loaded.current = true;
 
-  const addToRecentlyViewed = (product: Product) => {
-    setRecentlyViewed((prev) => {
-      // Filtrar el producto actual si ya existe
-      const filtered = prev.filter((p) => p.id !== product.id);
-      
-      // Agregar al inicio
-      const updated = [product, ...filtered].slice(0, MAX_RECENT_ITEMS);
-      
-      // Guardar en localStorage
+    const loadAndSync = async () => {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-      } catch (error) {
-        console.error("Error saving recently viewed:", error);
-      }
-      
-      return updated;
-    });
-  };
+        const localRaw = localStorage.getItem(STORAGE_KEY);
+        const localData: Product[] = localRaw ? JSON.parse(localRaw) : [];
 
-  const clearRecentlyViewed = () => {
+        if (userId) {
+          // 🔸 Carga del servidor
+          const res = await fetch(`/api/recently-viewed?userId=${userId}`);
+          const serverData: Product[] = await res.json();
+
+          // 🔸 Fusionar sin duplicar
+          const merged: Product[] = [
+            ...localData,
+            ...serverData.filter(
+              (sv) => !localData.some((lc) => lc.slug === sv.slug)
+            ),
+          ].slice(0, 20);
+
+          setRecentlyViewed(merged);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+
+          // 🔸 Subir los productos locales que no estaban en el servidor
+          for (const prod of localData) {
+            if (!serverData.some((s) => s.slug === prod.slug)) {
+              await fetch("/api/recently-viewed", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId, product: prod }),
+              });
+            }
+          }
+        } else {
+          // 🔸 Usuario no logueado → solo local
+          setRecentlyViewed(localData);
+        }
+      } catch (err) {
+        console.error("Error al cargar vistos:", err);
+      }
+    };
+
+    loadAndSync();
+  }, [userId]);
+
+  // 🔹 Añadir producto
+  const addToRecentlyViewed = useCallback(
+    async (product: Product) => {
+      if (!product?.slug) return;
+
+      setRecentlyViewed((prev) => {
+        const exists = prev.some((p) => p.slug === product.slug);
+        if (exists) return prev;
+        const updated = [product, ...prev].slice(0, 20);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+        return updated;
+      });
+
+      // 🔸 Si hay usuario, guardar en el servidor
+      if (userId) {
+        try {
+          await fetch("/api/recently-viewed", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId, product }),
+          });
+        } catch (err) {
+          console.error("Error sincronizando con DB:", err);
+        }
+      }
+    },
+    [userId]
+  );
+
+  const clearRecentlyViewed = useCallback(() => {
     setRecentlyViewed([]);
     try {
       localStorage.removeItem(STORAGE_KEY);
-    } catch (error) {
-      console.error("Error clearing recently viewed:", error);
-    }
-  };
+    } catch {}
+  }, []);
 
-  return {
-    recentlyViewed,
-    addToRecentlyViewed,
-    clearRecentlyViewed,
-  };
+  return { recentlyViewed, addToRecentlyViewed, clearRecentlyViewed };
 }
 

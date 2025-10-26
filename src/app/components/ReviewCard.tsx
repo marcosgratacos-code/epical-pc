@@ -153,3 +153,17 @@ export default function ReviewCard({ review, onImageClick }: ReviewCardProps) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

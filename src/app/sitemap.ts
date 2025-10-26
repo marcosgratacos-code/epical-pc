@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/productos',
     '/pc-a-medida',
     '/comparador',
-    '/calculadora-gaming',
     '/ventajas',
     '/contacto',
     '/faq',

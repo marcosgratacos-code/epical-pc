@@ -1,7 +1,7 @@
 
 "use client";
 
-import { PRODUCTS, type Product } from "./lib/products";
+import { PRODUCTS } from "./lib/products";
 import ProductCard from "./components/ProductCard";
 import TestimonialsSection from "./components/TestimonialsSection";
 import AnimatedStats from "./components/AnimatedStats";
@@ -10,7 +10,6 @@ import TrustBadges from "./components/TrustBadges";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useCart } from "./context/cart-context";
 //
 /* =========================
    Carrito (Drawer mejorado)
@@ -19,9 +18,6 @@ import { useCart } from "./context/cart-context";
    Página
    ========================= */
 export default function Page() {
-  const { add } = useCart();
-  // toast
-  const [toast, setToast] = useState<{ show: boolean; msg: string }>({ show: false, msg: "" });
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -30,14 +26,6 @@ export default function Page() {
 
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-
-  // Función para añadir al carrito usando el contexto global
-  const handleAdd = (id: string) => {
-    add(id);
-    const prod = PRODUCTS.find((p: Product) => p.id === id);
-    setToast({ show: true, msg: `${prod?.name ?? "Producto"} añadido` });
-    setTimeout(() => setToast({ show: false, msg: "" }), 1200);
-  };
 
   if (!isClient) {
     return (
@@ -167,7 +155,7 @@ export default function Page() {
               if (!advancedProduct) return null;
               
               return (
-                <ProductCard key={advancedProduct.id} p={advancedProduct} onAdd={handleAdd} />
+                <ProductCard key={advancedProduct.id} p={advancedProduct} />
               );
             })()}
           </div>
@@ -218,12 +206,12 @@ export default function Page() {
               </div>
               
               <div className="mt-8 flex flex-wrap gap-3">
-                <button
-                  onClick={() => handleAdd("epic2")}
+                <Link
+                  href="/products/epical-advanced"
                   className="rounded-xl bg-white px-6 py-3 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400"
                 >
-                  Añadir al carrito
-                </button>
+                  Ver producto
+                </Link>
                 <Link
                   href="/productos"
                   className="rounded-xl border border-white/20 px-6 py-3 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
@@ -309,13 +297,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
-      {/* Toast de confirmación */}
-      {toast.show && (
-        <div className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 rounded-xl border border-white/20 bg-black/90 px-4 py-2 text-sm backdrop-blur animate-fade-in-scale hover-glow">
-          {toast.msg}
-        </div>
-      )}
 
       {/* Footer Mejorado */}
       <footer className="border-t border-white/10 bg-gradient-to-b from-transparent to-white/5 mt-20">

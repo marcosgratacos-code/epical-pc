@@ -103,12 +103,6 @@ function SignInContent() {
             >
               🛍️ Explorar productos
             </Link>
-            <Link
-              href="/calculadora-gaming"
-              className="block w-full px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-center font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-            >
-              🎮 Usar calculadora gaming
-            </Link>
           </div>
 
           <div className="mt-8 text-center">

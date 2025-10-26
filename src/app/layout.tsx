@@ -16,6 +16,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthSessionProvider from "./components/AuthSessionProvider";
 import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
 
 export const metadata: Metadata = {
   title: "EPICAL-PC | PCs Gaming Personalizados con Validación Térmica",
@@ -139,6 +143,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </CartProvider>
           </NotificationsProvider>
         </AuthSessionProvider>
+        <Toaster position="top-right" />
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
       </body>
     </html>
   );

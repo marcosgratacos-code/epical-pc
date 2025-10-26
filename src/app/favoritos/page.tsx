@@ -3,24 +3,16 @@
 import { useWishlist } from "../context/wishlist-context";
 import { PRODUCTS } from "../lib/products";
 import ProductCard from "../components/ProductCard";
-import { useCart } from "../context/cart-context";
 import BackButton from "../components/BackButton";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function WishlistPage() {
   const { wishlist, clearWishlist } = useWishlist();
-  const { add } = useCart();
   const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   // Filtrar productos que están en la wishlist
   const wishlistProducts = PRODUCTS.filter(product => wishlist.includes(product.id));
-
-  const handleAdd = (id: string) => {
-    add(id);
-    const product = PRODUCTS.find(p => p.id === id);
-    // Aquí podrías añadir un toast de confirmación
-  };
 
   const handleClearWishlist = () => {
     clearWishlist();
@@ -102,7 +94,6 @@ export default function WishlistPage() {
                 <ProductCard
                   key={product.id}
                   p={product}
-                  onAdd={handleAdd}
                 />
               ))}
             </div>
@@ -161,6 +152,20 @@ export default function WishlistPage() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

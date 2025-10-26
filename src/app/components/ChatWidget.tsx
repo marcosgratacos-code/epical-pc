@@ -165,26 +165,27 @@ export default function ChatWidget() {
   return (
     <>
       {/* Botón flotante */}
-      {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 touch-target relative"
-          aria-label="Abrir chat de soporte"
-        >
-          <svg className="h-6 w-6 text-white mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
-          
-          {/* Badge de nuevo mensaje */}
-          {hasNewMessage && (
-            <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 animate-ping"></span>
-          )}
-        </button>
-      )}
+      <button
+        onClick={() => setIsOpen(true)}
+        className={`fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 touch-target relative ${
+          isOpen ? 'opacity-0 invisible pointer-events-none' : 'opacity-100 visible'
+        }`}
+        aria-label="Abrir chat de soporte"
+      >
+        <svg className="h-6 w-6 text-white mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        
+        {/* Badge de nuevo mensaje */}
+        {hasNewMessage && (
+          <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 animate-ping"></span>
+        )}
+      </button>
 
       {/* Widget de chat */}
-      {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-80 md:w-96 h-[500px] bg-black border border-white/10 rounded-2xl shadow-2xl backdrop-blur-sm animate-fade-in-scale flex flex-col">
+      <div className={`fixed bottom-6 right-6 z-50 w-80 md:w-96 h-[500px] bg-black border border-white/10 rounded-2xl shadow-2xl backdrop-blur-sm flex flex-col transition-all duration-300 ${
+        isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4 pointer-events-none'
+      }`}>
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-white/10 bg-gradient-to-r from-violet-500/10 to-cyan-500/10 rounded-t-2xl flex-shrink-0">
             <div className="flex items-center gap-3">
@@ -330,7 +331,6 @@ export default function ChatWidget() {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 }

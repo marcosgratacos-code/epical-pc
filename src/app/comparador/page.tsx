@@ -92,6 +92,7 @@ export default function ComparadorPage() {
             <p className="text-white/60 mt-2">
               Compara hasta 3 PCs gaming y encuentra el perfecto para ti
             </p>
+
           </div>
         </div>
       </div>

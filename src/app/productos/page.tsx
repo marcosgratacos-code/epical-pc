@@ -5,20 +5,10 @@ import ProductCard from "../components/ProductCard";
 import AdvancedSearch from "../components/AdvancedSearch";
 import Link from "next/link";
 import { useState } from "react";
-import { useCart } from "../context/cart-context";
 import BackButton from "../components/BackButton";
 
 export default function ProductosPage() {
-  const { add } = useCart();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(PRODUCTS);
-  const [toast, setToast] = useState<{ show: boolean; msg: string }>({ show: false, msg: "" });
-
-  const handleAdd = (id: string) => {
-    add(id);
-    const product = PRODUCTS.find((p: Product) => p.id === id);
-    setToast({ show: true, msg: `${product?.name ?? "Producto"} añadido` });
-    setTimeout(() => setToast({ show: false, msg: "" }), 1200);
-  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -63,7 +53,7 @@ export default function ProductosPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {filteredProducts.map((product) => (
-              <ProductCard key={product.id} p={product} onAdd={handleAdd} />
+              <ProductCard key={product.id} p={product} />
             ))}
           </div>
         )}
@@ -90,13 +80,6 @@ export default function ProductosPage() {
           </div>
         </div>
       </div>
-
-      {/* Toast de confirmación */}
-      {toast.show && (
-        <div className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 rounded-xl border border-white/20 bg-black/90 px-4 py-2 text-sm backdrop-blur">
-          {toast.msg}
-        </div>
-      )}
     </div>
   );
 }
