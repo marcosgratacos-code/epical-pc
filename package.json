@@ -9,7 +9,9 @@
     "lint": "next lint",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "ts-node prisma/seed.ts"
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "rebrand:preview": "ts-node scripts/rebrand-to-titan.ts",
+    "rebrand:apply": "cross-env DRY_RUN=false ts-node scripts/rebrand-to-titan.ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -41,6 +43,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cross-env": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "15.5.4",
     "jspdf": "^3.0.3",
