@@ -15,14 +15,102 @@ model Product {
   shortName  String?
   price      Int      // en céntimos: 900€ => 90000
   inStock    Boolean  @default(true)
+  stockQty   Int      @default(10)
   tag        Tag?
   imageUrl   String?
+  images     String?  @default("[]") // JSON array
+  description String? // por si se necesita
+  
+  // Campos adicionales para specs
+  cpu        String?  // ej: "AMD Ryzen 7 9800X3D"
+  gpu        String?  // ej: "RTX 5070 Ti"
+  ram        String?  // ej: "32GB DDR5"
+  storage    String?  // ej: "1TB NVMe"
+  psu        String?  // ej: "850W Gold"
+  case       String?  // ej: "Corsair 3500X"
+  
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  
+  // Relación con órdenes
+  orderItems OrderItem[]
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  sessionId       String?     // Stripe session ID
+  customerEmail   String
+  customerName    String?
+  status          OrderStatus @default(CREATED)
+  total           Int         // en céntimos
+  currency        String      @default("eur")
+  
+  // Información de envío
+  shippingName    String?
+  shippingAddress String?     // JSON
+  shippingCity    String?
+  shippingPostal  String?
+  shippingCountry String?
+  shippingPhone   String?
+  
+  // Tracking
+  trackingNumber  String?
+  transportista   String?
+  
+  // Metadatos
+  metadata        String?     // JSON
+  
+  // Items
+  items           OrderItem[]
+  
+  // Eventos de seguimiento
+  events          OrderEvent[]
+  
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model OrderItem {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String?
+  product       Product? @relation(fields: [productId], references: [id])
+  
+  // Snapshot del producto (por si cambia)
+  name          String
+  price         Int      // en céntimos
+  quantity      Int
+  image         String?
+  
+  createdAt     DateTime @default(now())
+}
+
+model OrderEvent {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  description   String
+  location      String?
+  completed     Boolean  @default(false)
+  
+  createdAt     DateTime @default(now())
 }
 
 enum Tag {
   OFERTA
   NUEVO
   TOP_VENTAS
+}
+
+enum OrderStatus {
+  CREATED
+  CONFIRMED
+  PREPARING
+  SHIPPED
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+  FAILED
 }

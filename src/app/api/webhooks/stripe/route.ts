@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/app/lib/stripe";
 import Stripe from "stripe";
-import { createOrderFromStripeSession, saveOrderToStorage } from "@/app/lib/orders";
-import { OrderItem, ShippingInfo } from "@/types/order";
-import { PRODUCTS } from "@/app/lib/products";
 
 export async function POST(req: NextRequest) {
   // Verificar si Stripe está configurado
@@ -49,13 +46,13 @@ export async function POST(req: NextRequest) {
       try {
         // Extraer información del pedido
         const customerEmail = session.customer_details?.email || session.customer_email || '';
-        const metadata = session.metadata;
-        const cartItems = metadata?.cartItems ? JSON.parse(metadata.cartItems) : {};
+        const customerName = session.customer_details?.name || '';
+        const metadata = session.metadata || {};
         
         // Obtener información de envío
-        const shippingDetails = (session as any).shipping_details;
-        const shippingAddress: ShippingInfo = {
-          nombre: shippingDetails?.name || session.customer_details?.name || '',
+        const shippingDetails = session.shipping_details;
+        const shippingInfo = {
+          nombre: shippingDetails?.name || customerName,
           direccion: shippingDetails?.address?.line1 || '',
           ciudad: shippingDetails?.address?.city || '',
           codigoPostal: shippingDetails?.address?.postal_code || '',
@@ -63,53 +60,58 @@ export async function POST(req: NextRequest) {
           telefono: session.customer_details?.phone || ''
         };
         
-        // Convertir items del carrito a OrderItems
-        const productos: OrderItem[] = Object.entries(cartItems).map(([productId, quantity]) => {
-          const product = PRODUCTS.find(p => p.id === productId);
-          if (!product) {
-            throw new Error(`Producto no encontrado: ${productId}`);
-          }
+        // Obtener line items del checkout para saber qué se compró
+        const sessionWithItems = await stripe.checkout.sessions.retrieve(session.id, {
+          expand: ['line_items']
+        });
+        
+        const items = (sessionWithItems.line_items?.data || []).map(item => {
+          const price = item.price;
+          const product = price?.product;
           
           return {
-            id: product.id,
-            nombre: product.name,
-            cantidad: quantity as number,
-            precio: product.price,
-            imagen: product.image,
-            descripcion: product.desc
+            id: product?.metadata?.productId || (typeof product === 'string' ? product : 'unknown'),
+            nombre: (typeof product === 'object' ? product?.name : '') || '',
+            nombreCompleto: item.description || '',
+            cantidad: item.quantity || 0,
+            precio: item.amount_total ? (item.amount_total / 100) : 0,
+            image: price?.product && typeof price.product === 'object' ? (price.product.images?.[0] || '') : '',
           };
         });
         
-        // Calcular total
-        const total = productos.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        const total = sessionWithItems.amount_total ? (sessionWithItems.amount_total / 100) : 0;
         
-        // Crear el pedido
-        const order = createOrderFromStripeSession(
-          session.id,
-          customerEmail,
-          shippingAddress,
-          productos,
-          total
-        );
+        // Llamar a nuestra API de órdenes para crear el pedido en BD
+        const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+        const orderResponse = await fetch(`${baseUrl}/api/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sessionId: session.id,
+            customerEmail,
+            customerName,
+            shippingInfo,
+            items,
+            total,
+          }),
+        });
+
+        if (!orderResponse.ok) {
+          throw new Error('Error creando orden en BD');
+        }
+
+        const order = await orderResponse.json();
         
-        // Guardar el pedido
-        saveOrderToStorage(order);
-        
-        console.log("📦 Pedido creado:", order.id);
+        console.log("📦 Pedido creado en BD:", order.id);
         console.log("📧 Email del cliente:", customerEmail);
         console.log("💰 Total:", total);
-        console.log("📦 Productos:", productos.length);
-        
-        // Aquí podrías también:
-        // - Enviar email de confirmación
-        // - Actualizar inventario
-        // - Notificar al equipo de logística
-        // - etc.
+        console.log("📦 Productos:", items.length);
         
       } catch (error) {
         console.error("❌ Error al procesar pedido:", error);
-        // En producción, deberías manejar este error apropiadamente
-        // Por ejemplo, enviar una notificación al equipo técnico
+        // En producción, deberías enviar una notificación al equipo técnico
       }
       
       break;
@@ -133,4 +135,3 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ received: true });
 }
-
