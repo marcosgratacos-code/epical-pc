@@ -1,9 +1,7 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" fill="#000000"/>
-  
-  <!-- Glow layer for the T -->
+  <!-- T Letter with glow effect on transparent background -->
   <g filter="url(#glow)">
-    <!-- Vertical stem -->
+    <!-- Vertical stem with angled bottom -->
     <path d="M 13 6 L 13 22 L 19 22 L 19 26 L 10 26 L 10 28 L 19 28 L 19 26 L 13 26 L 13 22 Z" 
           fill="#06b6d4"/>
     

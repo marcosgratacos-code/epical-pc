@@ -1,7 +1,5 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="180" fill="#000000"/>
-  
-  <!-- Glow layer -->
+  <!-- T Letter with glow on transparent background -->
   <g filter="url(#glow)">
     <!-- Vertical stem with angled bottom -->
     <path d="M 75 40 L 75 140 L 105 140 L 105 160 L 70 160 L 70 175 L 110 175 L 110 160 L 80 160 L 80 140 L 105 140 L 105 120 L 75 120 Z" 
