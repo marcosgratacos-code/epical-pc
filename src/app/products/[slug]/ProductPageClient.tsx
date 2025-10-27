@@ -16,9 +16,10 @@ import { useState, useEffect, useRef } from "react";
 import StructuredData from "../../components/StructuredData";
 import { motion, AnimatePresence } from "framer-motion";
 import RecentlyViewed from "../../components/RecentlyViewed";
-import ProductRecommendations from "./Recommendations.server";
-import Complements from "./Complements.server";
-import Upgrades from "./Upgrades.server";
+// Temporalmente comentado - componentes async no se pueden usar en client components
+// import ProductRecommendations from "./Recommendations.server";
+// import Complements from "./Complements.server";
+// import Upgrades from "./Upgrades.server";
 
 interface ProductPageClientProps {
   product: Product;
@@ -304,17 +305,11 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               <ReviewSection productId={product.id} productName={product.name} />
             </div>
 
-            {/* Recomendaciones basadas en "vistos juntos" */}
-            {/* @ts-expect-error Server Component */}
-            <ProductRecommendations slug={product.slug} />
-
-            {/* Complementos recomendados */}
-            {/* @ts-expect-error Server Component */}
-            <Complements slug={product.slug} />
-
-            {/* Upgrades compatibles */}
-            {/* @ts-expect-error Server Component */}
-            <Upgrades slug={product.slug} />
+            {/* Componentes de recomendaciones temporalmente deshabilitados
+                - ProductRecommendations
+                - Complements  
+                - Upgrades
+                Estos son server components y no funcionan dentro de client components */}
 
             {/* Vistos recientemente */}
             <RecentlyViewed />
