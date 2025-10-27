@@ -1,0 +1,17 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="180" fill="black"/>
+  
+  <!-- T Letter with modern angular design -->
+  <g>
+    <!-- Vertical bar -->
+    <path d="M 80 45 L 80 135 L 100 135 L 100 155 L 80 155 L 80 135 L 100 135 L 100 115 L 80 115 Z" 
+          fill="#06b6d4"
+          opacity="0.95"/>
+    
+    <!-- Horizontal bar with angled ends -->
+    <path d="M 40 80 L 140 80 L 135 65 L 45 65 L 40 80 Z" 
+          fill="#06b6d4"
+          opacity="0.95"/>
+  </g>
+</svg>
+

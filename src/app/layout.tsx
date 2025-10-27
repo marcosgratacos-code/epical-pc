@@ -130,6 +130,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="es">
       <head>
         {preloadResources()}
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-icon.svg" />
       </head>
       <body className="bg-black text-white">
         <StructuredData data={organizationData} />
