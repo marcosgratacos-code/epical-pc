@@ -1,17 +1,37 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="180" fill="black"/>
+  <rect width="180" height="180" fill="#000000"/>
   
-  <!-- T Letter with modern angular design -->
+  <!-- Glow layer -->
+  <g filter="url(#glow)">
+    <!-- Vertical stem with angled bottom -->
+    <path d="M 75 40 L 75 140 L 105 140 L 105 160 L 70 160 L 70 175 L 110 175 L 110 160 L 80 160 L 80 140 L 105 140 L 105 120 L 75 120 Z" 
+          fill="#06b6d4"/>
+    
+    <!-- Horizontal bar with angled cuts -->
+    <path d="M 35 90 L 145 90 L 140 70 L 50 70 L 35 90 Z" 
+          fill="#06b6d4"/>
+  </g>
+  
+  <!-- Main T layer -->
   <g>
-    <!-- Vertical bar -->
-    <path d="M 80 45 L 80 135 L 100 135 L 100 155 L 80 155 L 80 135 L 100 135 L 100 115 L 80 115 Z" 
-          fill="#06b6d4"
+    <!-- Vertical stem -->
+    <path d="M 80 50 L 80 130 L 100 130 L 100 150 L 75 150 L 75 165 L 105 165 L 105 150 L 85 150 L 85 130 L 100 130 L 100 115 L 80 115 Z" 
+          fill="#3b82f6"
           opacity="0.95"/>
     
-    <!-- Horizontal bar with angled ends -->
-    <path d="M 40 80 L 140 80 L 135 65 L 45 65 L 40 80 Z" 
-          fill="#06b6d4"
+    <!-- Horizontal bar -->
+    <path d="M 45 95 L 135 95 L 130 80 L 60 80 L 45 95 Z" 
+          fill="#3b82f6"
           opacity="0.95"/>
   </g>
+  
+  <!-- Glow filter -->
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+      </feMerge>
+    </filter>
+  </defs>
 </svg>
-

@@ -1,30 +1,37 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" fill="black"/>
+  <rect width="32" height="32" fill="#000000"/>
   
-  <!-- T Letter with glow effect and angled cuts -->
+  <!-- Glow layer for the T -->
   <g filter="url(#glow)">
-    <!-- Vertical bar -->
-    <path d="M 14 8 L 14 23 L 18 23 L 18 26 L 10 26 L 10 23 L 14 23 Z" 
-          fill="#06b6d4" 
-          stroke="#3b82f6" 
-          stroke-width="0.5"/>
+    <!-- Vertical stem -->
+    <path d="M 13 6 L 13 22 L 19 22 L 19 26 L 10 26 L 10 28 L 19 28 L 19 26 L 13 26 L 13 22 Z" 
+          fill="#06b6d4"/>
     
     <!-- Horizontal bar with angled cuts -->
-    <path d="M 7 10 L 25 10 L 24 8 L 8 8 L 7 10 Z" 
-          fill="#06b6d4" 
-          stroke="#3b82f6" 
-          stroke-width="0.5"/>
+    <path d="M 6 10 L 26 10 L 25 8 L 11 8 L 6 10 Z" 
+          fill="#06b6d4"/>
+  </g>
+  
+  <!-- Main T layer (sharper) -->
+  <g>
+    <!-- Vertical stem -->
+    <path d="M 14 7 L 14 21 L 18 21 L 18 25 L 9 25 L 9 27 L 18 27 L 18 25 L 14 25 L 14 21 Z" 
+          fill="#3b82f6"
+          opacity="0.9"/>
+    
+    <!-- Horizontal bar with angled cuts -->
+    <path d="M 7 11 L 25 11 L 24 9 L 12 9 L 7 11 Z" 
+          fill="#3b82f6"
+          opacity="0.9"/>
   </g>
   
   <!-- Glow filter -->
   <defs>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
   </defs>
 </svg>
-
