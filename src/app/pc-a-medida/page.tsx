@@ -1,177 +1,116 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function ConfigurarPC() {
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Hero */}
-      <section className="flex flex-col items-center text-center py-20 px-6">
-        <div className="inline-block mb-6">
-          <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 rounded-full mx-auto mb-4 animate-gradient-shift"></div>
+      <section className="relative flex flex-col items-center text-center py-24 px-6 overflow-hidden">
+        {/* Efectos de fondo */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
         </div>
-        
-        <h1 className="text-5xl md:text-6xl font-bold mb-4">
-          <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
-            PCs a Medida
-          </span>
-          {" "}
-          <span className="text-white">TITAN-PC</span>
-        </h1>
-        
-        <p className="text-gray-300 text-lg max-w-3xl leading-relaxed">
-          Diseñamos y montamos ordenadores <span className="text-cyan-400 font-semibold">100% personalizados</span> para 
-          todos los presupuestos y tipos de usuario. Desde gamers exigentes hasta profesionales creativos o estudiantes, 
-          cada equipo TITAN-PC se adapta a <span className="text-blue-400 font-semibold">tus necesidades</span>, rendimiento y estilo.
-        </p>
 
-        <div className="mt-8 flex flex-wrap gap-4 justify-center">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
-            <span className="text-2xl">✓</span>
-            <span className="text-sm text-white/80">Componentes de primeras marcas</span>
+        <div className="relative z-10 max-w-5xl">
+          <div className="inline-block mb-6">
+            <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 rounded-full mx-auto mb-4 animate-gradient-shift"></div>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
-            <span className="text-2xl">✓</span>
-            <span className="text-sm text-white/80">Garantía 3 años</span>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-white">Tu PC Ideal,</span>
+            <br />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
+              Diseñado a Medida
+            </span>
+          </h1>
+          
+          <p className="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed mb-10">
+            En TITAN-PC no vendemos ordenadores estándar. Creamos <span className="text-cyan-400 font-semibold">experiencias personalizadas</span> que 
+            se adaptan perfectamente a lo que necesitas: gaming de alto nivel, edición profesional, programación, 
+            o simplemente el mejor equipo para tu día a día.
+          </p>
+
+          <div className="flex flex-wrap gap-4 justify-center mb-12">
+            <div className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+              <span className="text-2xl">✓</span>
+              <span className="text-white/80">Componentes premium</span>
+            </div>
+            <div className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+              <span className="text-2xl">✓</span>
+              <span className="text-white/80">Garantía 3 años</span>
+            </div>
+            <div className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+              <span className="text-2xl">✓</span>
+              <span className="text-white/80">Montaje profesional</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
-            <span className="text-2xl">✓</span>
-            <span className="text-sm text-white/80">Montaje profesional</span>
-          </div>
+
+          <Link
+            href="/contacto"
+            className="inline-block px-10 py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 text-white text-lg font-semibold rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105"
+          >
+            Solicita tu Presupuesto Personalizado
+          </Link>
         </div>
       </section>
 
-      {/* Sección de tipos de PC con imágenes */}
-      <section className="grid md:grid-cols-3 gap-8 px-6 md:px-20 pb-20">
-        {/* PC Gaming */}
-        <div className="group bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-xl p-6 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-cyan-500/20">
-          <div className="relative h-64 mb-6 rounded-xl overflow-hidden">
-            <Image
-              src="/epical_hero_setup.jpg"
-              alt="PC Gaming TITAN"
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div className="absolute bottom-4 left-4 right-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-cyan-400/20 border border-cyan-400/40 text-cyan-300 text-xs font-semibold">
-                ALTO RENDIMIENTO
-              </span>
-            </div>
-          </div>
-          
-          <h3 className="text-2xl font-bold mb-3 text-cyan-400 group-hover:text-cyan-300 transition-colors">
-            🎮 PC Gaming
-          </h3>
-          <p className="text-gray-400 text-sm leading-relaxed mb-4">
-            Rendimiento extremo para los últimos títulos AAA. Refrigeración avanzada, iluminación RGB personalizable 
-            y componentes certificados. <span className="text-cyan-400 font-semibold">Cada FPS cuenta</span>.
+      {/* Qué hacemos diferente */}
+      <section className="py-20 px-6 bg-gradient-to-b from-black to-neutral-950">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            <span className="text-white">¿Qué hace</span>{" "}
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
+              TITAN-PC
+            </span>{" "}
+            <span className="text-white">diferente?</span>
+          </h2>
+          <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto text-lg">
+            No vendemos cajas con componentes. Creamos soluciones personalizadas.
           </p>
-          
-          <div className="space-y-2 mb-6">
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>RTX 5060 / 5070 / 5080</span>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Asesoramiento */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl p-8 rounded-2xl border border-white/10">
+              <div className="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-cyan-400">Asesoramiento Real</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Hablamos contigo para entender qué necesitas realmente. Sin tecnicismos innecesarios, 
+                sin componentes que no vas a aprovechar. Solo lo que te hace falta.
+              </p>
             </div>
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>Intel i5/i7 o AMD Ryzen 7/9</span>
+
+            {/* Montaje Profesional */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl p-8 rounded-2xl border border-white/10">
+              <div className="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-blue-400 to-violet-500 flex items-center justify-center">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-blue-400">Montaje de Calidad</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Cableado limpio, gestión térmica optimizada, BIOS configurada. Cada PC sale probado, 
+                estable y listo para rendir desde el primer día.
+              </p>
             </div>
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>16GB - 64GB DDR5</span>
+
+            {/* Soporte Post-Venta */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl p-8 rounded-2xl border border-white/10">
+              <div className="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-500 flex items-center justify-center">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-violet-400">Soporte Continuo</h3>
+              <p className="text-gray-400 leading-relaxed">
+                No desaparecemos después de la venta. 3 años de garantía, actualizaciones, 
+                y estamos aquí para cualquier duda o upgrade que necesites.
+              </p>
             </div>
           </div>
-
-          <div className="text-sm text-gray-500 mb-2">Desde</div>
-          <div className="text-3xl font-bold text-white mb-4">900€</div>
-        </div>
-
-        {/* PC Profesional */}
-        <div className="group bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-xl p-6 rounded-2xl border border-white/10 hover:border-blue-400/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/20">
-          <div className="relative h-64 mb-6 rounded-xl overflow-hidden">
-            <Image
-              src="/cableado-limpio-01.jpg"
-              alt="PC Profesional TITAN"
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div className="absolute bottom-4 left-4 right-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-blue-400/20 border border-blue-400/40 text-blue-300 text-xs font-semibold">
-                WORKSTATION
-              </span>
-            </div>
-          </div>
-          
-          <h3 className="text-2xl font-bold mb-3 text-blue-400 group-hover:text-blue-300 transition-colors">
-            💼 PC Profesional
-          </h3>
-          <p className="text-gray-400 text-sm leading-relaxed mb-4">
-            Equipos silenciosos y optimizados para <span className="text-blue-400 font-semibold">edición, diseño, IA o programación</span> intensiva. 
-            Estabilidad 24/7 y máxima eficiencia energética.
-          </p>
-          
-          <div className="space-y-2 mb-6">
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>GPUs profesionales o RTX</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>Procesadores multi-core</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>32GB - 128GB RAM</span>
-            </div>
-          </div>
-
-          <div className="text-sm text-gray-500 mb-2">Desde</div>
-          <div className="text-3xl font-bold text-white mb-4">1,200€</div>
-        </div>
-
-        {/* PC para Todos */}
-        <div className="group bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-xl p-6 rounded-2xl border border-white/10 hover:border-violet-400/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-500/20">
-          <div className="relative h-64 mb-6 rounded-xl overflow-hidden">
-            <Image
-              src="/logo-sin-fondo.png"
-              alt="PC para Todos TITAN"
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div className="absolute bottom-4 left-4 right-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-violet-400/20 border border-violet-400/40 text-violet-300 text-xs font-semibold">
-                ACCESIBLE
-              </span>
-            </div>
-          </div>
-          
-          <h3 className="text-2xl font-bold mb-3 text-violet-400 group-hover:text-violet-300 transition-colors">
-            🏠 PC para Todos
-          </h3>
-          <p className="text-gray-400 text-sm leading-relaxed mb-4">
-            Ordenadores <span className="text-violet-400 font-semibold">accesibles, fiables y duraderos</span>. 
-            Perfectos para estudiar, trabajar en oficina, navegar y disfrutar del contenido multimedia.
-          </p>
-          
-          <div className="space-y-2 mb-6">
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>Procesadores eficientes</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>Gráficos integrados o dedicados</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <span className="text-green-400">●</span>
-              <span>8GB - 16GB RAM</span>
-            </div>
-          </div>
-
-          <div className="text-sm text-gray-500 mb-2">Desde</div>
-          <div className="text-3xl font-bold text-white mb-4">600€</div>
         </div>
       </section>
 
