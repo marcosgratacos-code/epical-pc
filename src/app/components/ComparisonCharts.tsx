@@ -1,6 +1,12 @@
 "use client";
 
 import { Product } from "../lib/products";
+import { 
+  getBenchmark, 
+  calculatePerformanceScore, 
+  calculateValueScore, 
+  calculateFeaturesScore 
+} from "../lib/benchmarks";
 
 interface ComparisonChartsProps {
   products: Product[];
@@ -9,15 +15,20 @@ interface ComparisonChartsProps {
 export default function ComparisonCharts({ products }: ComparisonChartsProps) {
   if (products.length === 0) return null;
 
-  // Calcular puntuaciones relativas
+  // Calcular puntuaciones usando benchmarks reales
   const maxPrice = Math.max(...products.map(p => p.price));
-  const scores = products.map(p => ({
-    name: p.name,
-    price: ((maxPrice - p.price) / maxPrice) * 100, // Invertido: menor precio = mejor
-    performance: calculatePerformanceScore(p),
-    features: calculateFeaturesScore(p),
-    value: calculateValueScore(p),
-  }));
+  const scores = products.map(p => {
+    const benchmark = getBenchmark(p.id);
+    
+    return {
+      name: p.name,
+      price: ((maxPrice - p.price) / maxPrice) * 100, // Invertido: menor precio = mejor
+      performance: benchmark ? calculatePerformanceScore(benchmark) : 50,
+      features: benchmark ? calculateFeaturesScore(benchmark) : 50,
+      value: benchmark ? calculateValueScore(benchmark, p.price) : 50,
+      benchmark: benchmark
+    };
+  });
 
   const categories = ['Precio', 'Rendimiento', 'Características', 'Relación calidad-precio'];
   
@@ -153,6 +164,83 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
         </div>
       </div>
 
+      {/* Rendimiento detallado (FPS) */}
+      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 p-6 backdrop-blur-sm">
+        <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+          <span>🎯</span>
+          <span>Rendimiento en Juegos (FPS Promedio)</span>
+        </h3>
+        
+        <div className="grid md:grid-cols-3 gap-4">
+          {products.map((product, index) => {
+            const benchmark = scores[index].benchmark;
+            if (!benchmark) return null;
+            
+            return (
+              <div key={product.id} className="p-4 rounded-xl bg-black/30 border border-white/10">
+                <div className="mb-4">
+                  <h4 className="font-semibold text-white">{product.name}</h4>
+                  <p className="text-xs text-white/60">Benchmarks reales</p>
+                </div>
+                
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs text-white/70">1080p Ultra</span>
+                      <span className="text-sm font-bold text-green-400">{benchmark.gaming.fps1080p} FPS</span>
+                    </div>
+                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-green-500 to-emerald-400"
+                        style={{ width: `${(benchmark.gaming.fps1080p / 240) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs text-white/70">1440p Ultra</span>
+                      <span className="text-sm font-bold text-blue-400">{benchmark.gaming.fps1440p} FPS</span>
+                    </div>
+                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-400"
+                        style={{ width: `${(benchmark.gaming.fps1440p / 200) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs text-white/70">4K Ultra</span>
+                      <span className="text-sm font-bold text-violet-400">{benchmark.gaming.fps4k} FPS</span>
+                    </div>
+                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-violet-500 to-purple-400"
+                        style={{ width: `${(benchmark.gaming.fps4k / 140) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="pt-2 border-t border-white/10">
+                    <div className="text-xs text-white/60">
+                      €/FPS (1440p): <span className="text-cyan-400 font-semibold">{benchmark.efficiency.pricePerFps1440p.toFixed(2)}€</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        
+        <div className="mt-4 p-3 rounded-lg bg-black/20 border border-white/10">
+          <p className="text-xs text-white/60">
+            💡 <strong>Nota:</strong> FPS promedios basados en {products[0] && scores[0].benchmark ? scores[0].benchmark.gaming.gamesTest.length : 5}+ juegos AAA actuales en calidad Ultra/Máxima
+          </p>
+        </div>
+      </div>
+
       {/* Recomendaciones por uso */}
       <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/10 to-cyan-500/10 p-6 backdrop-blur-sm">
         <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
@@ -223,73 +311,51 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
   );
 }
 
-// Funciones helper para calcular puntuaciones
-function calculatePerformanceScore(product: Product): number {
-  // Basado en el precio y specs (simplificado)
-  let score = 50; // Base score
-  
-  // Bonus por CPU de alta gama
-  const specs = product.specs.join(' ').toLowerCase();
-  if (specs.includes('9800x3d') || specs.includes('14900k')) score += 25;
-  else if (specs.includes('9700x') || specs.includes('14700')) score += 20;
-  else if (specs.includes('12400') || specs.includes('7600')) score += 10;
-  
-  // Bonus por GPU
-  if (specs.includes('5070 ti') || specs.includes('4080')) score += 25;
-  else if (specs.includes('5060') || specs.includes('4060 ti')) score += 15;
-  else if (specs.includes('4060')) score += 10;
-  
-  return Math.min(100, score);
-}
-
-function calculateFeaturesScore(product: Product): number {
-  const specs = product.specs.join(' ').toLowerCase();
-  let score = 40;
-  
-  // Bonus por características premium
-  if (specs.includes('rgb')) score += 10;
-  if (specs.includes('32gb')) score += 15;
-  else if (specs.includes('16gb')) score += 10;
-  if (specs.includes('1tb') || specs.includes('2tb')) score += 10;
-  if (specs.includes('nvme')) score += 10;
-  if (specs.includes('modular')) score += 10;
-  if (specs.includes('wifi')) score += 5;
-  
-  return Math.min(100, score);
-}
-
-function calculateValueScore(product: Product): number {
-  const performance = calculatePerformanceScore(product);
-  const features = calculateFeaturesScore(product);
-  const priceScore = (1 - (product.price / 3000)) * 100; // Normalizado a 3000€ max
-  
-  return (performance * 0.4 + features * 0.3 + priceScore * 0.3);
-}
-
+// Funciones helper basadas en benchmarks reales
 function getBestForGaming(products: Product[]): Product | null {
   if (products.length === 0) return null;
-  return products.reduce((best, current) => 
-    calculatePerformanceScore(current) > calculatePerformanceScore(best) ? current : best
-  );
+  
+  return products.reduce((best, current) => {
+    const currentBench = getBenchmark(current.id);
+    const bestBench = getBenchmark(best.id);
+    
+    if (!currentBench) return best;
+    if (!bestBench) return current;
+    
+    // Comparar por FPS en 1440p (resolución más común)
+    return currentBench.gaming.fps1440p > bestBench.gaming.fps1440p ? current : best;
+  });
 }
 
 function getBestForCreation(products: Product[]): Product | null {
   if (products.length === 0) return null;
+  
   return products.reduce((best, current) => {
-    const currentSpecs = current.specs.join(' ').toLowerCase();
-    const bestSpecs = best.specs.join(' ').toLowerCase();
+    const currentBench = getBenchmark(current.id);
+    const bestBench = getBenchmark(best.id);
     
-    const currentRAM = currentSpecs.includes('32gb') ? 32 : 16;
-    const bestRAM = bestSpecs.includes('32gb') ? 32 : 16;
+    if (!currentBench) return best;
+    if (!bestBench) return current;
     
-    return currentRAM > bestRAM ? current : best;
+    // Mejor para creación: mayor puntuación en useCases.creativeWork
+    return currentBench.useCases.creativeWork > bestBench.useCases.creativeWork ? current : best;
   });
 }
 
 function getBestValue(products: Product[]): Product | null {
   if (products.length === 0) return null;
-  return products.reduce((best, current) => 
-    calculateValueScore(current) > calculateValueScore(best) ? current : best
-  );
+  
+  return products.reduce((best, current) => {
+    const currentBench = getBenchmark(current.id);
+    const bestBench = getBenchmark(best.id);
+    
+    if (!currentBench) return best;
+    if (!bestBench) return current;
+    
+    const currentValue = calculateValueScore(currentBench, current.price);
+    const bestValue = calculateValueScore(bestBench, best.price);
+    
+    return currentValue > bestValue ? current : best;
+  });
 }
 

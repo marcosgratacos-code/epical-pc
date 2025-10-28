@@ -206,23 +206,24 @@ export function determineBestInCategory(products: Product[], category: 'price' |
   }
 }
 
-// Calcular puntuación de producto
+// Calcular puntuación de producto usando benchmarks reales
 export function calculateProductScore(product: Product): number {
-  let score = 0;
-  
-  // Precio (invertido - menor es mejor)
-  score += Math.max(0, 100 - (product.price / 30));
-  
-  // Rating
-  score += (product.rating || 0) * 20;
-  
-  // Disponibilidad
-  if (product.inStock) score += 10;
-  
-  // Número de especificaciones (más es mejor)
-  score += Math.min(20, product.specs.length * 2);
-  
-  return Math.round(score);
+  // Importar dinámicamente para evitar errores de SSR
+  try {
+    const benchmarks = require('./benchmarks');
+    const benchmark = benchmarks.getBenchmark(product.id);
+    
+    if (!benchmark) {
+      // Fallback a cálculo simple si no hay benchmark
+      return Math.round((product.rating || 70) * 20);
+    }
+    
+    // Usar el cálculo global de benchmarks
+    return benchmarks.calculateGlobalScore(benchmark, product.price);
+  } catch {
+    // Fallback
+    return Math.round((product.rating || 70) * 20);
+  }
 }
 
 
