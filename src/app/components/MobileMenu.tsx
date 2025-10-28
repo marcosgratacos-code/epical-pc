@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import TitanLogo from "./TitanLogo";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -54,12 +55,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <div className="fixed inset-y-0 right-0 z-[1000] w-[85vw] max-w-sm bg-black border-l border-white/10 overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-black/95 backdrop-blur border-b border-white/10 p-4 flex items-center justify-between">
-          <div className="text-xl font-bold">
-            <span className="text-white">TITAN</span>
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-              -PC
-            </span>
-          </div>
+          <TitanLogo className="h-8 w-auto" />
           <button
             onClick={onClose}
             className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
