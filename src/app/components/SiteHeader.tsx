@@ -8,6 +8,7 @@ import NotificationBell from "./NotificationBell";
 import MobileMenu from "./MobileMenu";
 import GlobalSearch from "./GlobalSearch";
 import SafeCount from "./SafeCount";
+import TitanLogo from "./TitanLogo";
 import { useState } from "react";
 
 export default function SiteHeader() {
@@ -35,13 +36,10 @@ export default function SiteHeader() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
+            className="focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md hover-lift transition-transform duration-200"
             aria-label="Ir al inicio"
           >
-            <span className="text-white">TITAN</span>
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
-              -PC
-            </span>
+            <TitanLogo className="h-8 w-auto md:h-10" />
           </Link>
 
           {/* Nav - Desktop */}
