@@ -121,3 +121,5 @@ Si no quieres esperar el deployment, puedes:
 - [ ] Login con Google funciona
 - [ ] Todo listo ✨
 
+
+

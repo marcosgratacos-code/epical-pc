@@ -220,3 +220,5 @@ Cambios pusheados a GitHub → Vercel deployment automático en ~2-3 minutos.
 
 ¡Comparador profesional 100% funcional con datos reales! 🎉
 
+
+
