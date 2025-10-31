@@ -1,31 +1,20 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- T Letter with glow effect for iOS/Apple, transparent background -->
+  <!-- TITAN-PC Logo para iOS/Apple -->
+  <!-- Background -->
+  <rect width="180" height="180" fill="#000000"/>
   
-  <!-- Glow layer -->
-  <g filter="url(#glow)">
-    <!-- Vertical stem with pointed bottom -->
-    <path d="M 65 35 L 65 105 L 95 105 L 95 120 L 55 120 L 55 160 L 105 160 L 105 120 L 75 120 L 75 105 Z" 
-          fill="#00d4ff"/>
+  <!-- Texto "TITAN-" blanco -->
+  <text x="20" y="70" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">TITAN-</text>
+  
+  <!-- Texto "PC" azul con glow -->
+  <g filter="url(#pcGlow)">
+    <text x="20" y="120" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#00d4ff">PC</text>
   </g>
   
-  <!-- Horizontal bar with inward angled ends -->
-  <g filter="url(#glow)">
-    <path d="M 30 55 L 45 40 L 60 55 L 120 55 L 105 40 L 90 55 Z" 
-          fill="#00d4ff"/>
-  </g>
-  
-  <!-- Main T layer -->
-  <!-- Vertical stem with pointed bottom (inverted V) -->
-  <path d="M 70 40 L 70 110 L 90 110 L 90 125 L 50 125 L 50 165 L 110 165 L 110 125 L 70 125 L 70 110 Z" 
-        fill="#06b6d4"/>
-  
-  <!-- Horizontal bar with inward angled ends -->
-  <path d="M 35 60 L 50 45 L 65 60 L 115 60 L 100 45 L 85 60 Z" 
-        fill="#06b6d4"/>
-  
-  <!-- Glow filter -->
+  <!-- Filtros -->
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <!-- Efecto glow azul para PC -->
+    <filter id="pcGlow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>

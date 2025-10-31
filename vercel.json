@@ -18,8 +18,8 @@
   ],
   "env": {
     "FORCE_REBUILD": "true",
-    "BUILD_VERSION": "2.0.1",
-    "CACHE_BUSTER": "1737064500",
+    "BUILD_VERSION": "2.0.2",
+    "CACHE_BUSTER": "1737065000",
     "VERCEL_FORCE_REBUILD": "true"
   }
 }
