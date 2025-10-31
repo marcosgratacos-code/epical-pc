@@ -48,6 +48,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-icon.svg",
+  },
   metadataBase: new URL("https://titan-pc.com"),
   alternates: {
     canonical: "https://titan-pc.com/",
@@ -132,6 +136,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {preloadResources()}
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-icon.svg" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="bg-black text-white">
         <StructuredData data={organizationData} />
