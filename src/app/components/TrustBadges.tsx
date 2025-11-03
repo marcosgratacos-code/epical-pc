@@ -2,32 +2,32 @@
 
 const badges = [
   {
-    icon: "🛡️",
+    icon: "",
     title: "3 Años Garantía",
     description: "Componentes y montaje",
   },
   {
-    icon: "🚚",
+    icon: "",
     title: "Envío Gratis",
     description: "Península en 24-48h",
   },
   {
-    icon: "💳",
+    icon: "",
     title: "Pago Seguro",
     description: "Stripe verificado",
   },
   {
-    icon: "🔄",
+    icon: "",
     title: "Devolución 30 días",
     description: "Sin preguntas",
   },
   {
-    icon: "🎯",
+    icon: "",
     title: "Montaje Pro",
     description: "Validación térmica",
   },
   {
-    icon: "⚡",
+    icon: "",
     title: "Soporte Rápido",
     description: "WhatsApp directo",
   },
@@ -48,9 +48,6 @@ export default function TrustBadges() {
                 opacity: 0,
               }}
             >
-              <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                {badge.icon}
-              </div>
               <div className="text-sm font-semibold text-white mb-1">
                 {badge.title}
               </div>

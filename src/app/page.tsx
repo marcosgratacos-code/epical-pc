@@ -56,27 +56,27 @@ export default function Page() {
         <div className="animate-fade-in-up">
           <p className="inline rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 animate-fade-in-up-delay-1">Nuevo · Serie TITAN 2025</p>
           <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl lg:text-7xl animate-fade-in-up-delay-2">
-            Potencia extrema, <span className="text-white/70">diseño impecable</span>
+            PCs gaming <span className="text-white/70">hechos a mano</span>
             <br />
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
-              PCs personalizados que hacen historia
+              para jugadores de verdad
             </span>
           </h1>
           <p className="mt-6 text-lg text-white/70 md:text-xl lg:text-2xl animate-fade-in-up-delay-3">
-            Montajes de alto rendimiento con validación térmica, control acústico y perfiles XMP/EXPO probados.
+            No vendemos cajas con componentes. Cada PC sale de nuestro taller probado, optimizado y listo para darlo todo en partidas competitivas.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:gap-4 lg:gap-6">
             <button
               onClick={() => scrollTo("productos")}
               className="rounded-xl bg-white px-8 py-4 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow touch-target text-lg"
             >
-              Ver montajes
+              Ver PCs disponibles
             </button>
             <Link
               href="/pc-a-medida"
               className="rounded-xl border border-white/20 px-8 py-4 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow touch-target text-center text-lg"
             >
-              PC a medida
+              Diseña el tuyo
             </Link>
           </div>
 
@@ -118,23 +118,22 @@ export default function Page() {
       <section className="mx-auto max-w-7xl p-6 lg:max-w-8xl xl:max-w-none xl:px-8">
         <h2 className="text-2xl font-bold mb-6 text-center lg:text-3xl">
           <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-            Encuentra tu PC perfecto
+            Qué tipo de PC necesitas
           </span>
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { t: "PC Gaming", d: "240 FPS en eSports", icon: "🎮" },
-            { t: "Packs Gaming", d: "PC + periféricos", icon: "🖱️" },
-            { t: "PC Edición", d: "Premiere, Blender", icon: "🎬" },
-            { t: "PC Oficina", d: "Silenciosos y fiables", icon: "💼" },
+            { t: "PC Gaming", d: "Rendimiento extremo para jugadores" },
+            { t: "Packs Gaming", d: "PC completo con periféricos" },
+            { t: "PC Edición", d: "Potencia para creadores" },
+            { t: "PC Oficina", d: "Confiables y silenciosos" },
           ].map((c, index) => (
             <button
               key={c.t}
               onClick={() => scrollTo("productos")}
               className={`rounded-2xl border border-white/10 bg-gradient-to-tr from-white/[0.04] to-white/[0.02] p-6 text-left hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-400 hover-lift hover-glow animate-fade-in-scale stagger-${index + 1} group`}
             >
-              <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{c.icon}</div>
-              <div className="text-lg font-semibold mb-1">{c.t}</div>
+              <div className="text-lg font-semibold mb-2">{c.t}</div>
               <div className="text-sm text-white/60">{c.d}</div>
             </button>
           ))}
@@ -144,7 +143,7 @@ export default function Page() {
 
       {/* Productos */}
       <section id="productos" className="mx-auto max-w-7xl p-6 md:p-8">
-        <h2 className="mb-8 text-2xl font-semibold text-white/90 md:text-3xl lg:text-4xl md:mb-12">Montajes destacados</h2>
+        <h2 className="mb-8 text-2xl font-semibold text-white/90 md:text-3xl lg:text-4xl md:mb-12">PCs listos para jugar</h2>
         
         {/* TITAN ADVANCED destacado */}
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 lg:items-center">
@@ -176,31 +175,31 @@ export default function Page() {
               </h3>
               
               <p className="mb-6 text-lg text-white/80">
-                Nuestra recomendación estrella para usuarios que buscan el equilibrio perfecto entre rendimiento y valor.
+                El PC gaming que más vendemos. Potencia de sobra para jugar en 1440p y mantener FPS altos sin problemas de temperatura.
               </p>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-cyan-400"></div>
                   <div>
-                    <h4 className="font-semibold text-white">Rendimiento excepcional</h4>
-                    <p className="text-sm text-white/70">RTX 5070 Ti con 16GB para gaming 1440p/4K y edición profesional</p>
+                    <h4 className="font-semibold text-white">Gráfica que rinde de verdad</h4>
+                    <p className="text-sm text-white/70">RTX 5070 Ti con 16GB. Tirarás juegos en 1440p o 4K sin ralentizaciones</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-blue-400"></div>
                   <div>
-                    <h4 className="font-semibold text-white">CPU de última generación</h4>
-                    <p className="text-sm text-white/70">AMD Ryzen 7 9800X3D con cache 3D para FPS máximos</p>
+                    <h4 className="font-semibold text-white">Procesador para FPS máximos</h4>
+                    <p className="text-sm text-white/70">AMD Ryzen 7 9800X3D con ese cache 3D que tanto gusta a los gamers</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-2 w-2 rounded-full bg-violet-400"></div>
                   <div>
-                    <h4 className="font-semibold text-white">Montaje profesional</h4>
-                    <p className="text-sm text-white/70">Validación térmica, control acústico y garantía de 3 años</p>
+                    <h4 className="font-semibold text-white">Hecho aquí en nuestro taller</h4>
+                    <p className="text-sm text-white/70">Lo montamos, lo probamos durante horas y te lo enviamos con 3 años de garantía</p>
                   </div>
                 </div>
               </div>
@@ -228,28 +227,25 @@ export default function Page() {
       <section id="ventajas" className="mx-auto max-w-7xl p-6 my-16">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-            Por qué TITAN-PC
+            Así funcionamos
           </span>
         </h2>
         <p className="text-center text-white/70 mb-12 max-w-2xl mx-auto">
-          No somos un ensamblador más. Cada PC pasa por nuestro proceso de validación profesional
+          No vendemos componentes en cajas. Aquí cada ordenador se monta, se prueba y sale listo para jugar
         </p>
         <div className="grid gap-6 md:grid-cols-3">
           {[
             { 
-              icon: "🌡️",
-              t: "Validación térmica real", 
-              d: "Stress de CPU/GPU, logging de temperaturas y curva de ventiladores optimizada para silencio y rendimiento." 
+              t: "Validación térmica", 
+              d: "Cada PC pasa por pruebas de estrés completas. Registramos temperaturas en situaciones reales y ajustamos cada ventilador para el máximo rendimiento sin ruido." 
             },
             { 
-              icon: "🔇",
-              t: "Silencio y estabilidad", 
-              d: "Montaje limpio, control de vibraciones y perfiles PWM probados. Tu PC será potente pero silencioso." 
+              t: "Montaje profesional", 
+              d: "Cableado limpio, vibraciones controladas y ventiladores configurados con perfiles PWM personalizados. Potencia sin sacrificar silencio." 
             },
             { 
-              icon: "⚡",
-              t: "Listo para jugar/crear", 
-              d: "Windows activado, drivers actualizados, BIOS optimizado y perfiles XMP/EXPO aplicados desde el primer encendido." 
+              t: "Configurado para ti", 
+              d: "Windows ya instalado y activado. Drivers actualizados, BIOS configurado y memoria funcionando a máxima velocidad. Solo conectas y listo." 
             },
           ].map((v, index) => (
             <div 
@@ -261,7 +257,6 @@ export default function Page() {
                 opacity: 0,
               }}
             >
-              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">{v.icon}</div>
               <div className="mb-3 font-bold text-lg text-white">{v.t}</div>
               <div className="text-sm text-white/70 leading-relaxed">{v.d}</div>
             </div>
@@ -288,8 +283,8 @@ export default function Page() {
       {/* CTA */}
       <section id="cta" className="mx-auto max-w-7xl p-6 pb-16">
         <div className="rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-violet-500/10 p-6 text-center">
-          <h3 className="text-2xl font-bold">¿Listo para tu TITAN-PC?</h3>
-          <p className="mt-2 text-white/70">Escríbenos por WhatsApp o pide tu PC a medida ahora.</p>
+          <h3 className="text-2xl font-bold">¿Quieres tu PC gaming ya?</h3>
+          <p className="mt-2 text-white/70">Háblanos por WhatsApp o configura el que quieras</p>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
             <a href="https://wa.me/34XXXXXXXXX" target="_blank" rel="noreferrer" className="rounded-xl bg-white px-5 py-2 font-semibold text-black hover:bg-white/90">WhatsApp</a>
             <Link href="/pc-a-medida" className="rounded-xl border border-white/20 px-5 py-2 font-semibold hover:border-white/40">PC a medida</Link>

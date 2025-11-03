@@ -10,10 +10,10 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: 500, label: "PCs Montados", suffix: "+", icon: "🖥️" },
-  { value: 98, label: "Satisfacción", suffix: "%", icon: "⭐" },
-  { value: 3, label: "Años Garantía", suffix: "", icon: "🛡️" },
-  { value: 24, label: "Envío Express", suffix: "h", icon: "🚀" },
+  { value: 500, label: "PCs Montados", suffix: "+", icon: "" },
+  { value: 98, label: "Satisfacción", suffix: "%", icon: "" },
+  { value: 3, label: "Años Garantía", suffix: "", icon: "" },
+  { value: 24, label: "Envío Express", suffix: "h", icon: "" },
 ];
 
 export default function AnimatedStats() {
@@ -103,7 +103,6 @@ function StatCard({
         transition: "all 0.6s ease-out",
       }}
     >
-      <div className="text-2xl md:text-4xl mb-2 md:mb-3">{stat.icon}</div>
       <div className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent mb-1 md:mb-2">
         {count}
         {stat.suffix}

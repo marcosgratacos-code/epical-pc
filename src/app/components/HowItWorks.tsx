@@ -4,26 +4,26 @@ const steps = [
   {
     number: "01",
     title: "Elige tu PC",
-    description: "Selecciona uno de nuestros montajes probados o configura tu PC a medida con los componentes que prefieras.",
-    icon: "🎯",
+    description: "Selecciona uno de nuestros PCs ya montados o escoge las piezas que quieras. Nosotros nos encargamos del resto.",
+    icon: "",
   },
   {
     number: "02",
-    title: "Montaje Profesional",
-    description: "Nuestro equipo ensambla tu PC con cableado limpio, optimización térmica y pruebas exhaustivas de estabilidad.",
-    icon: "🔧",
+    title: "Lo montamos aquí",
+    description: "Cableado limpio, ventiladores configurados y pruebas de temperatura. Cada PC se monta a mano en nuestro taller.",
+    icon: "",
   },
   {
     number: "03",
-    title: "Validación Completa",
-    description: "Realizamos stress tests, validamos temperaturas, configuramos BIOS, instalamos drivers y Windows activado.",
-    icon: "✅",
+    title: "Todo listo",
+    description: "Windows instalado, drivers actualizados y BIOS configurado. Cuando lo recibas, conectas y juegas.",
+    icon: "",
   },
   {
     number: "04",
-    title: "Envío Seguro",
-    description: "Embalamos tu PC con protección premium y lo enviamos en 24-48h con número de seguimiento en tiempo real.",
-    icon: "📦",
+    title: "Envío rápido",
+    description: "Se embala con cuidado y se envía en 24-48h. Recibirás el número de seguimiento para ir viendo dónde está.",
+    icon: "",
   },
 ];
 
@@ -56,9 +56,6 @@ export default function HowItWorks() {
             <div className="inline-flex items-center justify-center h-12 w-12 md:h-16 md:w-16 rounded-full bg-gradient-to-br from-violet-500/20 to-cyan-500/20 border border-white/10 mb-3 md:mb-4 text-lg md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-400 group-hover:scale-110 transition-transform duration-300">
               {step.number}
             </div>
-
-            {/* Icono */}
-            <div className="text-3xl md:text-4xl mb-3 md:mb-4">{step.icon}</div>
 
             {/* Contenido */}
             <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3 text-white">
