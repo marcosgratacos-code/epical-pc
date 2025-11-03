@@ -19,7 +19,7 @@
   "env": {
     "FORCE_REBUILD": "true",
     "BUILD_VERSION": "2.0.2",
-    "CACHE_BUSTER": "1737067000",
+    "CACHE_BUSTER": "1737068000",
     "VERCEL_FORCE_REBUILD": "true"
   }
 }
