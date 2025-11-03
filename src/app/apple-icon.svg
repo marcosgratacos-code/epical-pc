@@ -1,19 +1,10 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- TITAN-PC Logo para iOS/Apple -->
-  <!-- Background -->
   <rect width="180" height="180" fill="#000000"/>
-  
-  <!-- Texto "TITAN-" blanco -->
   <text x="20" y="70" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">TITAN-</text>
-  
-  <!-- Texto "PC" azul con glow -->
   <g filter="url(#pcGlow)">
     <text x="20" y="120" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#00d4ff">PC</text>
   </g>
-  
-  <!-- Filtros -->
   <defs>
-    <!-- Efecto glow azul para PC -->
     <filter id="pcGlow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
       <feMerge>
