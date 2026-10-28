@@ -1,271 +1,315 @@
-import { PRODUCTS } from "./lib/products";
-import ProductCard from "./components/ProductCard";
-import TestimonialsSection from "./components/TestimonialsSection";
-import AnimatedStats from "./components/AnimatedStats";
-import HowItWorks from "./components/HowItWorks";
-import TrustBadges from "./components/TrustBadges";
 import Image from "next/image";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { PRODUCTS, type Product } from "./lib/products";
+import Reveal from "./components/Reveal";
 
-const CATEGORIES = [
-  { t: "PC Gaming", d: "Rendimiento extremo para jugadores" },
-  { t: "Packs Gaming", d: "PC completo con periféricos" },
-  { t: "PC Edición", d: "Potencia para creadores" },
-  { t: "PC Oficina", d: "Fiables y silenciosos" },
-];
+/* Todos los datos de producto salen del catálogo (lib/products.ts). */
+const bySlug = (slug: string) => PRODUCTS.find((p) => p.slug === slug);
+const eur = (n: number) =>
+  n.toLocaleString("es-ES", { style: "currency", currency: "EUR", minimumFractionDigits: 0 });
+const specOf = (p: Product, prefix: string) =>
+  p.specs.find((s) => s.startsWith(prefix + " "))?.slice(prefix.length + 1) ?? "";
+const gpuModel = (p: Product) => /RTX \d{4}( Ti)?/.exec(specOf(p, "GPU"))?.[0] ?? specOf(p, "GPU");
+const cpuModel = (p: Product) =>
+  /Ryzen \d \d{4}(X3D)?|Core i\d-\d+F?/.exec(specOf(p, "CPU"))?.[0] ?? specOf(p, "CPU");
+const ramSize = (p: Product) => /\((\d+x\d+GB)\)|\b(\d+GB)\b/.exec(specOf(p, "RAM"))?.[2] ?? "";
+const ssdSize = (p: Product) => /\b(\d+(TB|GB))\b/.exec(specOf(p, "SSD"))?.[1] ?? "";
 
-const HIGHLIGHTS = [
-  { t: "Gráfica que rinde de verdad", d: "RTX 5070 Ti con 16GB. Tirarás juegos en 1440p o 4K sin ralentizaciones." },
-  { t: "Procesador para FPS máximos", d: "AMD Ryzen 7 9800X3D con esa caché 3D que tanto gusta a los gamers." },
-  { t: "Hecho aquí, en nuestro taller", d: "Lo montamos, lo probamos durante horas y te lo enviamos con 3 años de garantía." },
-];
+/* Solo TITAN ADVANCED tiene hoy una imagen de producto real en /public.
+   El resto usa imágenes provisionales y no se muestran como foto. */
+const HAS_REAL_PHOTO = new Set(["titan2"]);
 
 const PROCESS = [
   {
     t: "Validación térmica",
-    d: "Cada PC pasa por pruebas de estrés completas. Registramos temperaturas en situaciones reales y ajustamos cada ventilador para el máximo rendimiento sin ruido.",
+    d: "Cada equipo pasa pruebas de estrés y estabilidad antes de salir del taller.",
   },
   {
-    t: "Montaje profesional",
-    d: "Cableado limpio, vibraciones controladas y ventiladores configurados con perfiles PWM personalizados. Potencia sin sacrificar silencio.",
+    t: "Montaje y refrigeración",
+    d: "Cableado ordenado y ventiladores ajustados para rendir sin ruido.",
   },
   {
-    t: "Configurado para ti",
-    d: "Windows ya instalado y activado. Drivers actualizados, BIOS configurado y memoria funcionando a máxima velocidad. Solo conectas y listo.",
+    t: "Informe de pruebas",
+    d: "Recibes el resultado de temperaturas y estabilidad de tu equipo.",
   },
 ];
 
-const btnPrimary =
-  "inline-flex items-center justify-center rounded-full bg-neutral-900 px-7 py-3.5 text-sm font-medium text-white hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 transition-colors";
-const btnSecondary =
-  "inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-7 py-3.5 text-sm font-medium text-neutral-900 hover:bg-neutral-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 transition-colors";
-
 export default function Page() {
-  const advancedProduct = PRODUCTS.find((p) => p.id === "titan2");
+  const ultra = bySlug("titan-ultra");
+  const advanced = bySlug("titan-advanced");
+  const starter = bySlug("titan-starter");
+  const family = [starter, advanced, ultra].filter(Boolean) as Product[];
 
   return (
-    <main className="min-h-screen bg-white text-neutral-900">
+    <main id="contenido">
       {/* Promo */}
-      <div className="bg-neutral-900 text-white">
-        <p className="mx-auto max-w-7xl px-4 py-2 text-center text-xs sm:text-sm">
+      <div className="bg-night text-white">
+        <p className="mx-auto max-w-wide px-4 py-2 text-center text-xs sm:text-sm">
           <b className="font-semibold">-5% Epical Weeks</b> con cupón <b className="font-semibold">EQW</b>
-          <span className="hidden sm:inline"> · Envío 24/48h · 3 años de garantía</span>
         </p>
       </div>
 
-      {/* Hero */}
-      <section id="hero" className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-20 pt-16 md:pb-28 md:pt-24 lg:grid-cols-2">
-        <div>
-          <p className="text-sm font-medium text-blue-600">Serie TITAN 2025</p>
-          <h1 className="mt-4 text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-6xl">
-            PCs gaming hechos a mano, para jugadores de verdad.
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-500">
-            No vendemos cajas con componentes. Cada PC sale de nuestro taller probado, optimizado y listo para darlo todo en partidas competitivas.
-          </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <a href="#productos" className={btnPrimary}>
-              Ver PCs disponibles
+      {/* 1 · Hero */}
+      <section className="section-light overflow-hidden pt-16 text-center md:pt-24" aria-labelledby="hero-title">
+        <div className="container-content">
+          <Reveal>
+            <h1 id="hero-title" className="text-display text-ink">
+              Potencia sin límites.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-5 max-w-2xl text-subhead text-muted">
+              Diseñado para rendir. Construido para impresionar.
+            </p>
+          </Reveal>
+          <Reveal delay={0.2} className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+            <Link href="/productos" className="btn btn-primary">
+              Comprar
+            </Link>
+            <a href="#titan-advanced" className="btn-link">
+              Descubrir <span aria-hidden="true">›</span>
             </a>
-            <Link href="/pc-a-medida" className={btnSecondary}>
-              Diseña el tuyo
+          </Reveal>
+        </div>
+
+        {advanced && (
+          <Reveal delay={0.15} className="relative mx-auto mt-10 w-full max-w-[1000px] px-4">
+            <div className="relative aspect-[5/4] w-full sm:aspect-[16/11]">
+              <Image
+                src={advanced.image}
+                alt={`${advanced.name}, PC gaming de TITAN-PC`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 1000px, 100vw"
+                className="object-contain mix-blend-multiply"
+              />
+            </div>
+            <p className="pb-10 text-sm text-muted">
+              {advanced.name} · {gpuModel(advanced)} · {cpuModel(advanced)}
+            </p>
+          </Reveal>
+        )}
+      </section>
+
+      {/* 2 · TITAN ULTRA */}
+      {ultra && (
+        <section className="section section-dark" aria-labelledby="ultra-title">
+          <div className="container-content text-center">
+            <Reveal>
+              <p className="text-lg font-semibold text-[#f5f5f7]">{ultra.name}</p>
+              <h2 id="ultra-title" className="mt-2 text-headline">
+                Gaming 4K, sin concesiones.
+              </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-subhead text-muted">{ultra.desc}</p>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <dl className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
+                {[
+                  ["Gráfica", gpuModel(ultra)],
+                  ["Procesador", cpuModel(ultra)],
+                  ["Memoria", `${ramSize(ultra)} DDR5`],
+                  ["Almacenamiento", `${ssdSize(ultra)} NVMe`],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <dt className="text-sm text-muted">{label}</dt>
+                    <dd className="mt-1 text-2xl font-semibold tracking-tight md:text-[1.75rem]">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+
+            <Reveal delay={0.15} className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+              <Link href={`/products/${ultra.slug}`} className="btn btn-on-dark">
+                Comprar
+              </Link>
+              <Link href={`/products/${ultra.slug}`} className="btn-link btn-link-on-dark">
+                Descubrir <span aria-hidden="true">›</span>
+              </Link>
+            </Reveal>
+            <p className="mt-6 text-sm text-muted">Desde {eur(ultra.price)}</p>
+          </div>
+        </section>
+      )}
+
+      {/* 3 · TITAN ADVANCED */}
+      {advanced && (
+        <section id="titan-advanced" className="section section-gray scroll-mt-16" aria-labelledby="advanced-title">
+          <div className="container-content text-center">
+            <Reveal>
+              <p className="text-lg font-semibold">{advanced.name}</p>
+              <h2 id="advanced-title" className="mt-2 text-headline">
+                Hecho para ir más allá.
+              </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-subhead text-muted">{advanced.desc}</p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+                <Link href={`/products/${advanced.slug}`} className="btn btn-primary">
+                  Comprar
+                </Link>
+                <Link href={`/products/${advanced.slug}`} className="btn-link">
+                  Descubrir <span aria-hidden="true">›</span>
+                </Link>
+              </div>
+              <p className="mt-4 text-sm text-muted">Desde {eur(advanced.price)}</p>
+            </Reveal>
+
+            <Reveal delay={0.1} className="relative mx-auto mt-6 aspect-[5/4] w-full max-w-[860px] sm:aspect-[16/11]">
+              <Image
+                src={advanced.image}
+                alt={`${advanced.name}: interior con ${gpuModel(advanced)} y ${cpuModel(advanced)}`}
+                fill
+                sizes="(min-width: 900px) 860px, 100vw"
+                className="object-contain mix-blend-multiply"
+              />
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* 4 · Familia TITAN */}
+      <section className="section section-light" aria-labelledby="family-title">
+        <div className="container-wide">
+          <Reveal className="mb-10 px-1">
+            <h2 id="family-title" className="text-headline">
+              Conoce la familia TITAN.
+            </h2>
+          </Reveal>
+
+          <ul className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
+            {family.map((p, i) => (
+              <li key={p.id} className="min-w-[82%] snap-center sm:min-w-[46%] md:min-w-0">
+                <Reveal delay={i * 0.08} className="card flex h-full flex-col overflow-hidden">
+                  <Link
+                    href={`/products/${p.slug}`}
+                    className="relative block aspect-[4/3] bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    aria-label={`Ver ${p.name}`}
+                  >
+                    {HAS_REAL_PHOTO.has(p.id) ? (
+                      <Image
+                        src={p.image}
+                        alt={`${p.name}, PC gaming de TITAN-PC`}
+                        fill
+                        sizes="(min-width: 768px) 33vw, 82vw"
+                        className="object-contain p-6 mix-blend-multiply"
+                      />
+                    ) : (
+                      <span className="absolute inset-0 flex flex-col items-center justify-center gap-1 text-center">
+                        <span className="text-4xl font-semibold tracking-tight text-ink">{gpuModel(p)}</span>
+                        <span className="text-sm text-muted">{cpuModel(p)}</span>
+                      </span>
+                    )}
+                  </Link>
+                  <div className="flex flex-1 flex-col p-7">
+                    <h3 className="text-2xl font-semibold tracking-tight">{p.name}</h3>
+                    <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-muted">{p.desc}</p>
+                    <ul className="mt-5 space-y-1 text-sm text-ink/80">
+                      <li>{gpuModel(p)}</li>
+                      <li>{cpuModel(p)}</li>
+                      <li>
+                        {ramSize(p)} DDR5 · {ssdSize(p)} NVMe
+                      </li>
+                    </ul>
+                    <p className="mt-5 text-lg font-semibold">Desde {eur(p.price)}</p>
+                    <div className="mt-4 flex items-center gap-6">
+                      <Link href={`/products/${p.slug}`} className="btn btn-primary !px-5">
+                        Comprar
+                      </Link>
+                      <Link href={`/products/${p.slug}`} className="btn-link">
+                        Descubrir <span aria-hidden="true">›</span>
+                      </Link>
+                    </div>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 text-center">
+            <Link href="/comparador" className="btn-link">
+              Comparar modelos <span aria-hidden="true">›</span>
             </Link>
           </div>
-          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-500">
-            {["Montaje y test incluidos", "Soporte WhatsApp", "Pago a plazos"].map((t) => (
-              <li key={t} className="flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-neutral-900" aria-hidden="true" />
-                {t}
+        </div>
+      </section>
+
+      {/* 5 · Fabricados con precisión */}
+      <section className="section section-dark" aria-labelledby="precision-title">
+        <div className="container-content">
+          <Reveal className="max-w-3xl">
+            <h2 id="precision-title" className="text-headline">
+              Fabricados con precisión.
+            </h2>
+            <p className="mt-5 text-subhead text-muted">
+              Cada TITAN se monta y se prueba en nuestro taller antes de enviarse.
+            </p>
+          </Reveal>
+          <ul className="mt-14 grid gap-10 md:grid-cols-3">
+            {PROCESS.map((s, i) => (
+              <li key={s.t} className="border-t border-white/20 pt-6">
+                <Reveal delay={i * 0.08}>
+                  <h3 className="text-xl font-semibold tracking-tight">{s.t}</h3>
+                  <p className="mt-3 leading-relaxed text-muted">{s.d}</p>
+                </Reveal>
               </li>
             ))}
           </ul>
         </div>
-
-        <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] bg-neutral-50 ring-1 ring-neutral-200">
-          <Image
-            src="/logo-sin-fondo.png"
-            alt="TITAN ADVANCED, PC gaming de TITAN-PC"
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-contain p-8 mix-blend-multiply md:p-12"
-            priority
-          />
-        </div>
       </section>
 
-      <TrustBadges />
-
-      <AnimatedStats />
-
-      {/* Categorías */}
-      <section className="mx-auto max-w-6xl px-6 pb-20 md:pb-28">
-        <div className="mb-10 max-w-2xl">
-          <p className="text-sm font-medium text-blue-600">Categorías</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Qué tipo de PC necesitas</h2>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {CATEGORIES.map((c) => (
-            <Link
-              key={c.t}
-              href="/productos"
-              className="group rounded-3xl border border-neutral-200 bg-white p-6 transition-colors hover:bg-neutral-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-            >
-              <div className="text-lg font-semibold">{c.t}</div>
-              <div className="mt-2 text-sm text-neutral-500">{c.d}</div>
-              <div className="mt-6 text-sm font-medium text-neutral-900 transition-transform group-hover:translate-x-1">→</div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <HowItWorks />
-
-      {/* Producto destacado */}
-      <section id="productos" className="border-t border-neutral-200 bg-neutral-50">
-        <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <div className="mb-12 max-w-2xl">
-            <p className="text-sm font-medium text-blue-600">Selección especial</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">PCs listos para jugar</h2>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-16">
-            {advancedProduct && <ProductCard p={advancedProduct} />}
-
-            <div>
-              <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">TITAN ADVANCED</h3>
-              <p className="mt-4 text-lg leading-relaxed text-neutral-500">
-                El PC gaming que más vendemos. Potencia de sobra para jugar en 1440p y mantener FPS altos sin problemas de temperatura.
-              </p>
-
-              <ul className="mt-8 space-y-6">
-                {HIGHLIGHTS.map((h) => (
-                  <li key={h.t} className="flex gap-4">
-                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" aria-hidden="true" />
-                    <div>
-                      <h4 className="font-medium">{h.t}</h4>
-                      <p className="mt-1 text-sm leading-relaxed text-neutral-500">{h.d}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                <Link href="/products/titan-advanced" className={btnPrimary}>
-                  Ver producto
-                </Link>
-                <Link href="/productos" className={btnSecondary}>
-                  Ver todos los productos
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ventajas */}
-      <section id="ventajas" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <div className="mb-12 max-w-2xl">
-          <p className="text-sm font-medium text-blue-600">Así funcionamos</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-            Cada ordenador se monta, se prueba y sale listo para jugar
-          </h2>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {PROCESS.map((v) => (
-            <div key={v.t} className="rounded-3xl border border-neutral-200 p-8">
-              <h3 className="text-lg font-semibold">{v.t}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-500">{v.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <TestimonialsSection />
-
-      {/* CTA */}
-      <section id="cta" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <div className="rounded-[2rem] bg-neutral-900 px-8 py-16 text-center text-white md:px-16">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">¿Quieres tu PC gaming ya?</h2>
-          <p className="mt-3 text-neutral-400">Háblanos por WhatsApp o configura el que quieras.</p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <a
-              href="https://wa.me/34XXXXXXXXX"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-medium text-neutral-900 hover:bg-neutral-200 transition-colors"
-            >
-              WhatsApp
-            </a>
-            <Link
-              href="/pc-a-medida"
-              className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
-            >
-              PC a medida
-            </Link>
-            <Link
-              href="/contacto"
-              className="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-medium text-neutral-300 hover:text-white transition-colors"
-            >
-              Contacto
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-neutral-200 bg-neutral-50">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="grid gap-10 md:grid-cols-4">
-            <div>
-              <Link href="/" className="text-xl font-semibold tracking-tight">
-                TITAN<span className="text-blue-600">-PC</span>
+      {/* 6 · Configura tu TITAN */}
+      <section className="section section-light" aria-labelledby="config-title">
+        <div className="container-content text-center">
+          <Reveal>
+            <h2 id="config-title" className="text-headline">
+              Configura tu TITAN.
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-subhead text-muted">
+              Elige procesador, placa base, memoria, gráfica, almacenamiento, refrigeración, fuente y caja.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+              <Link href="/pc-a-medida" className="btn btn-primary">
+                Empezar
               </Link>
-              <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-500">
-                PCs gaming personalizados con montaje profesional y validación térmica real.
-              </p>
-              <p className="mt-4 text-xs text-neutral-400">
-                En TITAN-PC montamos ordenadores personalizados con componentes de alta gama para gamers, creadores y entornos exigentes.
-              </p>
+              <Link href="/contacto" className="btn-link">
+                Hablar con nosotros <span aria-hidden="true">›</span>
+              </Link>
             </div>
+          </Reveal>
+        </div>
+      </section>
 
-            <div>
-              <h3 className="text-sm font-semibold">Productos</h3>
-              <ul className="mt-4 space-y-3 text-sm text-neutral-500">
-                <li><Link href="/productos" className="hover:text-neutral-900 transition-colors">Todos los PCs</Link></li>
-                <li><Link href="/pc-a-medida" className="hover:text-neutral-900 transition-colors">PC a medida</Link></li>
-                <li><Link href="/comparador" className="hover:text-neutral-900 transition-colors">Comparador</Link></li>
-                <li><Link href="/calculadora-gaming" className="hover:text-neutral-900 transition-colors">Calculadora Gaming</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold">Soporte</h3>
-              <ul className="mt-4 space-y-3 text-sm text-neutral-500">
-                <li><Link href="/faq" className="hover:text-neutral-900 transition-colors">Preguntas frecuentes</Link></li>
-                <li><Link href="/contacto" className="hover:text-neutral-900 transition-colors">Contacto</Link></li>
-                <li><Link href="/seguimiento" className="hover:text-neutral-900 transition-colors">Seguimiento de envío</Link></li>
-                <li><Link href="/ventajas" className="hover:text-neutral-900 transition-colors">Garantías</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold">Legal</h3>
-              <ul className="mt-4 space-y-3 text-sm text-neutral-500">
-                <li><a href="#" className="hover:text-neutral-900 transition-colors">Aviso legal</a></li>
-                <li><a href="#" className="hover:text-neutral-900 transition-colors">Política de privacidad</a></li>
-                <li><a href="#" className="hover:text-neutral-900 transition-colors">Política de cookies</a></li>
-                <li><a href="#" className="hover:text-neutral-900 transition-colors">Condiciones de venta</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-12 flex flex-col gap-2 border-t border-neutral-200 pt-8 text-xs text-neutral-400 sm:flex-row sm:justify-between">
-            <p>© {new Date().getFullYear()} TITAN-PC. Todos los derechos reservados.</p>
-            <p>Montaje profesional · Validación térmica · 3 años de garantía</p>
+      {/* 7 · Garantía y soporte */}
+      <section className="section section-gray" aria-labelledby="support-title">
+        <div className="container-content">
+          <Reveal className="max-w-3xl">
+            <h2 id="support-title" className="text-headline">
+              Garantía y soporte.
+            </h2>
+          </Reveal>
+          <ul className="mt-12 grid gap-5 md:grid-cols-3">
+            {[
+              { t: "3 años de garantía", d: "En todos los equipos TITAN." },
+              { t: "Envío en 24/48 h", d: "Según stock. Te enviamos el seguimiento del pedido." },
+              {
+                t: "Windows opcional",
+                d: "No va incluido por defecto. Podemos entregarlo instalado y activado.",
+              },
+            ].map((c, i) => (
+              <li key={c.t}>
+                <Reveal delay={i * 0.08} className="card h-full p-8">
+                  <h3 className="text-xl font-semibold tracking-tight">{c.t}</h3>
+                  <p className="mt-3 leading-relaxed text-muted">{c.d}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8">
+            <Link href="/faq" className="btn-link">
+              Preguntas frecuentes <span aria-hidden="true">›</span>
+            </Link>
           </div>
         </div>
-      </footer>
+      </section>
     </main>
   );
 }

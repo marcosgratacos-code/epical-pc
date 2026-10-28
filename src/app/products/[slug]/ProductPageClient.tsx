@@ -34,6 +34,15 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
   const sessionId = useViewSession();
   const added = useRef(false);
   const [leaving, setLeaving] = useState(false);
+  const [showBar, setShowBar] = useState(false);
+
+  // Barra de compra fija: aparece al pasar la primera pantalla
+  useEffect(() => {
+    const onScroll = () => setShowBar(window.scrollY > 520);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   
   // ✅ Añadir solo una vez por producto
   useEffect(() => {
@@ -139,6 +148,29 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
     <>
       <StructuredData data={structuredData} />
       <StructuredData data={breadcrumbData} />
+
+      {/* Barra de compra fija */}
+      <div
+        className={`fixed inset-x-0 top-[57px] z-[90] border-b border-black/10 bg-white/85 backdrop-blur-xl transition-all duration-300 ${
+          showBar ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
+        }`}
+        aria-hidden={!showBar}
+      >
+        <div className="container-content flex h-14 items-center justify-between gap-4">
+          <p className="min-w-0 truncate text-base font-semibold tracking-tight">{product.name}</p>
+          <div className="flex shrink-0 items-center gap-4">
+            <span className="text-sm text-muted">{eur(product.price)}</span>
+            <button
+              onClick={handleAdd}
+              disabled={!product.inStock}
+              tabIndex={showBar ? 0 : -1}
+              className="btn btn-primary !min-h-9 !px-4 !py-1.5 !text-sm"
+            >
+              {product.inStock ? "Comprar" : "Sin stock"}
+            </button>
+          </div>
+        </div>
+      </div>
       
       <AnimatePresence mode="wait">
         {!leaving && (
@@ -238,11 +270,9 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                   <ul className="space-y-3 text-sm text-neutral-700">
                     {[
                       "✓ 3 años de garantía completa",
-                      "✓ Envío 24-48h asegurado",
+                      "✓ Envío 24/48 h según stock",
                       "✓ Montaje profesional + testeo",
-                      "✓ Soporte técnico WhatsApp",
-                      "✓ Financiación sin intereses",
-                      "✓ Devolución 30 días",
+                                                      "✓ Devolución 30 días",
                     ].map((item, index) => (
                       <li key={item} className={`transform transition-all duration-300 hover:translate-x-1 stagger-${index + 1}`}>{item}</li>
                     ))}
@@ -268,8 +298,8 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                 <p className="mt-4 leading-relaxed text-neutral-700">
                   Cada componente ha sido optimizado para trabajar en perfecta armonía.
                   Realizamos test de estrés, validación térmica y configuración de perfiles
-                  XMP/EXPO antes del envío. Incluye Windows 11 Pro activado, drivers
-                  instalados y actualizaciones al día.
+                  XMP/EXPO antes del envío. Windows no se incluye por defecto: podemos
+                  entregarlo instalado y activado. Drivers y BIOS al día.
                 </p>
               </Accordion>
 

@@ -27,7 +27,7 @@ const faqs: FAQ[] = [
   {
     id: '3',
     question: '¿Qué incluye el precio del PC?',
-    answer: 'El precio incluye: montaje profesional, validación térmica, instalación de Windows, drivers actualizados, configuración BIOS/XMP, cableado limpio, garantía de 3 años, y envío. No hay costes ocultos.',
+    answer: 'El precio incluye: montaje profesional, validación térmica, drivers actualizados, configuración BIOS/XMP, cableado limpio y garantía de 3 años. Windows no va incluido por defecto: podemos entregarlo instalado y activado.',
     category: 'general'
   },
 
@@ -93,7 +93,7 @@ const faqs: FAQ[] = [
   {
     id: '13',
     question: '¿Mi PC viene listo para usar?',
-    answer: 'Sí, tu PC llega completamente configurado: Windows activado, drivers instalados, BIOS optimizado, perfiles XMP/EXPO aplicados, y software básico instalado. Solo necesitas conectarlo y empezar a usar.',
+    answer: 'Sí, tu PC llega montado y probado, con drivers instalados, BIOS optimizado y perfiles XMP/EXPO aplicados. Si has pedido Windows instalado y activado, también llega listo; si no, puedes instalarlo tú.',
     category: 'montaje'
   },
 

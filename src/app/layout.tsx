@@ -7,6 +7,7 @@ import { NotificationsProvider } from "./context/notifications-context";
 import { CompareProvider } from "./context/compare-context";
 import CartDrawerGlobal from "./components/CartDrawerGlobal";
 import ChatWidget from "./components/ChatWidget";
+import SiteFooter from "./components/SiteFooter";
 import ProgressBar from "./components/ProgressBar";
 import ScrollToTop from "./components/ScrollToTop";
 import CompareFloatingButton from "./components/CompareFloatingButton";
@@ -157,7 +158,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   </Suspense>
                   <Suspense fallback={
                     <header className="sticky top-0 z-[100] bg-white/95 backdrop-blur-xl border-b border-neutral-200">
-                      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
+                      <div className="mx-auto flex h-14 max-w-wide items-center justify-between px-4 sm:px-6 gap-4">
                         <div className="text-xl font-semibold tracking-tight text-neutral-900">TITAN-PC</div>
                         <div className="flex items-center gap-2">
                           <div className="h-8 w-8 bg-neutral-100 rounded animate-pulse"></div>
@@ -169,6 +170,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     <SiteHeader />
                   </Suspense>
                   {children}
+                  <SiteFooter />
                   <CartDrawerGlobal />
                   <ChatWidget />
                   <ScrollToTop />

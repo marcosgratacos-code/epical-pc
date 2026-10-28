@@ -7,12 +7,27 @@ export default {
   ],
   theme: {
     extend: {
-      maxWidth: {
-        '8xl': '88rem',
-      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        ink: "var(--ink)",
+        muted: "var(--ink-muted)",
+        surface: "var(--surface)",
+        night: "var(--night)",
+        accent: {
+          DEFAULT: "var(--accent)",
+          hover: "var(--accent-hover)",
+        },
+      },
+      fontSize: {
+        display: ["clamp(2.75rem, 7vw + 0.5rem, 6.5rem)", { lineHeight: "1.02", letterSpacing: "-0.035em", fontWeight: "600" }],
+        headline: ["clamp(2rem, 4vw + 0.5rem, 3.75rem)", { lineHeight: "1.06", letterSpacing: "-0.028em", fontWeight: "600" }],
+        subhead: ["clamp(1.125rem, 1vw + 0.9rem, 1.625rem)", { lineHeight: "1.35", letterSpacing: "-0.01em" }],
+      },
+      maxWidth: {
+        content: "1200px",
+        wide: "1400px",
+        "8xl": "88rem",
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
