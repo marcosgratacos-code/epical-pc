@@ -30,7 +30,7 @@ export default function ReviewCard({ review, onImageClick }: ReviewCardProps) {
           <span
             key={star}
             className={`text-lg ${
-              star <= rating ? 'text-yellow-400' : 'text-white/30'
+              star <= rating ? 'text-yellow-400' : 'text-neutral-400'
             }`}
           >
             ★
@@ -52,22 +52,22 @@ export default function ReviewCard({ review, onImageClick }: ReviewCardProps) {
   };
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition-all duration-300">
+    <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 hover:bg-neutral-100 transition-all duration-300">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           {/* Avatar */}
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500/30 to-cyan-500/30 flex items-center justify-center">
-            <span className="text-white font-semibold text-lg">
+          <div className="w-12 h-12 rounded-full bg-neutral-50 flex items-center justify-center">
+            <span className="text-neutral-900 font-semibold text-lg">
               {review.customerName.charAt(0).toUpperCase()}
             </span>
           </div>
           
           <div>
             <div className="flex items-center gap-2">
-              <h4 className="font-semibold text-white">{review.customerName}</h4>
+              <h4 className="font-semibold text-neutral-900">{review.customerName}</h4>
               {review.verified && (
-                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs">
+                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs">
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -77,7 +77,7 @@ export default function ReviewCard({ review, onImageClick }: ReviewCardProps) {
             </div>
             <div className="flex items-center gap-2 mt-1">
               {renderStars(review.rating)}
-              <span className="text-white/60 text-sm">
+              <span className="text-neutral-500 text-sm">
                 {getRatingText(review.rating)}
               </span>
             </div>
@@ -85,15 +85,15 @@ export default function ReviewCard({ review, onImageClick }: ReviewCardProps) {
         </div>
 
         <div className="text-right">
-          <p className="text-white/60 text-sm">{formatReviewDate(review.createdAt)}</p>
+          <p className="text-neutral-500 text-sm">{formatReviewDate(review.createdAt)}</p>
         </div>
       </div>
 
       {/* Title */}
-      <h3 className="text-lg font-semibold text-white mb-2">{review.title}</h3>
+      <h3 className="text-lg font-semibold text-neutral-900 mb-2">{review.title}</h3>
 
       {/* Comment */}
-      <p className="text-white/80 leading-relaxed mb-4">{review.comment}</p>
+      <p className="text-neutral-700 leading-relaxed mb-4">{review.comment}</p>
 
       {/* Images */}
       {review.images && review.images.length > 0 && (
@@ -110,8 +110,8 @@ export default function ReviewCard({ review, onImageClick }: ReviewCardProps) {
                   alt={`Reseña ${index + 1}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="absolute inset-0 bg-neutral-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
@@ -122,14 +122,14 @@ export default function ReviewCard({ review, onImageClick }: ReviewCardProps) {
       )}
 
       {/* Actions */}
-      <div className="flex items-center justify-between pt-4 border-t border-white/10">
+      <div className="flex items-center justify-between pt-4 border-t border-neutral-200">
         <button
           onClick={handleHelpfulClick}
           disabled={isHelpful}
           className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
             isHelpful
-              ? 'bg-green-500/20 text-green-400'
-              : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+              ? 'bg-green-100 text-green-700'
+              : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
           }`}
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,11 +139,11 @@ export default function ReviewCard({ review, onImageClick }: ReviewCardProps) {
             {isHelpful ? 'Útil' : '¿Te resulta útil?'}
           </span>
           {helpfulCount > 0 && (
-            <span className="text-sm text-white/60">({helpfulCount})</span>
+            <span className="text-sm text-neutral-500">({helpfulCount})</span>
           )}
         </button>
 
-        <div className="flex items-center gap-4 text-white/60 text-sm">
+        <div className="flex items-center gap-4 text-neutral-500 text-sm">
           <span>Pedido #{review.orderId.slice(-8)}</span>
         </div>
       </div>

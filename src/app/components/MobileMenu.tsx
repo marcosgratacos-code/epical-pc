@@ -51,16 +51,16 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       />
 
       {/* Menu Panel */}
-      <div className="fixed inset-y-0 right-0 z-[1000] w-[85vw] max-w-sm bg-black border-l border-white/10 overflow-y-auto">
+      <div className="fixed inset-y-0 right-0 z-[1000] w-[85vw] max-w-sm bg-white border-l border-neutral-200 overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-black/95 backdrop-blur border-b border-white/10 p-4 flex items-center justify-between">
+        <div className="sticky top-0 bg-white/95 backdrop-blur border-b border-neutral-200 p-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold">
-            <span className="text-white">TITAN</span>
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">-PC</span>
+            <span className="text-neutral-900">TITAN</span>
+            <span className="text-neutral-900">-PC</span>
           </Link>
           <button
             onClick={onClose}
-            className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            className="h-10 w-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
             aria-label="Cerrar menú"
           >
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,8 +79,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   onClick={onClose}
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                     pathname === item.href
-                      ? "bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-violet-500/20 border border-white/20 text-white font-semibold"
-                      : "bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-transparent"
+                      ? "bg-neutral-50 border border-neutral-300 text-neutral-900 font-semibold"
+                      : "bg-neutral-50 hover:bg-neutral-100 text-neutral-700 hover:text-neutral-900 border border-transparent"
                   }`}
                 >
                   <span className="text-2xl">{item.icon}</span>
@@ -93,7 +93,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <li>
               <button
                 onClick={() => setIsVentajasOpen(!isVentajasOpen)}
-                className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-transparent transition-all duration-200"
+                className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-neutral-50 hover:bg-neutral-100 text-neutral-700 hover:text-neutral-900 border border-transparent transition-all duration-200"
               >
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">✨</span>
@@ -119,8 +119,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         onClick={onClose}
                         className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${
                           pathname === item.href
-                            ? "bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-violet-500/20 border border-white/20 text-white font-semibold"
-                            : "bg-white/5 hover:bg-white/10 text-white/70 hover:text-white border border-transparent"
+                            ? "bg-neutral-50 border border-neutral-300 text-neutral-900 font-semibold"
+                            : "bg-neutral-50 hover:bg-neutral-100 text-neutral-600 hover:text-neutral-900 border border-transparent"
                         }`}
                       >
                         <span className="text-lg">{item.icon}</span>
@@ -135,23 +135,23 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-white/10 mt-auto">
-          <div className="rounded-xl bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-violet-500/10 border border-white/10 p-4 text-center">
-            <p className="text-sm text-white/80 mb-3">
+        <div className="p-4 border-t border-neutral-200 mt-auto">
+          <div className="rounded-xl bg-neutral-50 border border-neutral-200 p-4 text-center">
+            <p className="text-sm text-neutral-700 mb-3">
               ¿Necesitas ayuda? Contáctanos por WhatsApp
             </p>
             <a
               href="https://wa.me/34XXXXXXXXX"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-semibold hover:bg-white/90 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-900 text-white font-semibold hover:bg-neutral-700 transition-colors"
             >
               <span>📱</span>
               WhatsApp
             </a>
           </div>
 
-          <div className="mt-4 text-center text-xs text-white/40">
+          <div className="mt-4 text-center text-xs text-neutral-400">
             © 2025 TITAN-PC
           </div>
         </div>

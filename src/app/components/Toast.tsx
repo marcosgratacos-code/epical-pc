@@ -45,12 +45,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
               animate-slide-in-right flex items-center gap-3 min-w-[300px] max-w-md
               ${
                 toast.type === "success"
-                  ? "bg-green-500/20 border-green-500/50 text-green-400"
+                  ? "bg-green-100 border-green-300 text-green-700"
                   : toast.type === "error"
-                  ? "bg-red-500/20 border-red-500/50 text-red-400"
+                  ? "bg-red-100 border-red-300 text-red-700"
                   : toast.type === "warning"
-                  ? "bg-yellow-500/20 border-yellow-500/50 text-yellow-400"
-                  : "bg-blue-500/20 border-blue-500/50 text-blue-400"
+                  ? "bg-yellow-100 border-yellow-300 text-yellow-400"
+                  : "bg-blue-100 border-blue-300 text-blue-600"
               }
             `}
           >

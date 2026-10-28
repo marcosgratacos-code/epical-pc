@@ -32,7 +32,7 @@ export default function ProgressBar() {
   return (
     <div className="fixed top-0 left-0 right-0 z-[9999] h-1">
       <div
-        className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 transition-all duration-300 ease-out"
+        className="h-full bg-neutral-900 transition-all duration-300 ease-out text-white"
         style={{ width: `${progress}%` }}
       />
     </div>

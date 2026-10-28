@@ -79,26 +79,26 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
         size="md"
       >
         <div className="text-center space-y-6">
-          <div className="inline-block h-20 w-20 rounded-full bg-orange-500/20 flex items-center justify-center">
-            <svg className="h-10 w-10 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="inline-block h-20 w-20 rounded-full bg-orange-100 flex items-center justify-center">
+            <svg className="h-10 w-10 text-orange-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
           </div>
           
           <div>
-            <h3 className="text-xl font-semibold text-white mb-2">Dirección no modificable</h3>
-            <p className="text-white/70">
+            <h3 className="text-xl font-semibold text-neutral-900 mb-2">Dirección no modificable</h3>
+            <p className="text-neutral-600">
               Tu pedido ya está en proceso de envío y no se puede modificar la dirección de entrega.
             </p>
           </div>
 
-          <div className="rounded-xl bg-white/5 border border-white/10 p-4 text-left">
-            <h4 className="font-semibold text-white mb-2">Estado actual:</h4>
-            <p className="text-sm text-white/70 mb-3">
+          <div className="rounded-xl bg-neutral-50 border border-neutral-200 p-4 text-left">
+            <h4 className="font-semibold text-neutral-900 mb-2">Estado actual:</h4>
+            <p className="text-sm text-neutral-600 mb-3">
               <span className="font-medium">{order.estado.charAt(0).toUpperCase() + order.estado.slice(1)}</span>
             </p>
-            <h4 className="font-semibold text-white mb-2">¿Qué puedes hacer?</h4>
-            <ul className="text-sm text-white/70 space-y-1">
+            <h4 className="font-semibold text-neutral-900 mb-2">¿Qué puedes hacer?</h4>
+            <ul className="text-sm text-neutral-600 space-y-1">
               <li>• Contactar con el transportista directamente</li>
               <li>• Solicitar cambio de dirección en su web</li>
               <li>• Programar nueva entrega</li>
@@ -107,7 +107,7 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
 
           <button
             onClick={handleClose}
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all duration-200"
+            className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-medium hover:bg-neutral-100 transition-all duration-200"
           >
             Entendido
           </button>
@@ -125,22 +125,22 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
         size="md"
       >
         <div className="text-center space-y-6">
-          <div className="inline-block h-20 w-20 rounded-full bg-green-500/20 flex items-center justify-center">
-            <svg className="h-10 w-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="inline-block h-20 w-20 rounded-full bg-green-100 flex items-center justify-center">
+            <svg className="h-10 w-10 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
           
           <div>
-            <h3 className="text-xl font-semibold text-white mb-2">¡Dirección actualizada!</h3>
-            <p className="text-white/70">
+            <h3 className="text-xl font-semibold text-neutral-900 mb-2">¡Dirección actualizada!</h3>
+            <p className="text-neutral-600">
               La nueva dirección se aplicará a tu pedido. Recibirás una confirmación por email.
             </p>
           </div>
 
-          <div className="rounded-xl bg-white/5 border border-white/10 p-4 text-left">
-            <h4 className="font-semibold text-white mb-2">Nueva dirección:</h4>
-            <div className="text-sm text-white/70">
+          <div className="rounded-xl bg-neutral-50 border border-neutral-200 p-4 text-left">
+            <h4 className="font-semibold text-neutral-900 mb-2">Nueva dirección:</h4>
+            <div className="text-sm text-neutral-600">
               <p className="font-medium">{formData.nombre}</p>
               <p>{formData.direccion}</p>
               <p>{formData.codigoPostal} {formData.ciudad}</p>
@@ -149,8 +149,8 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
             </div>
           </div>
 
-          <div className="rounded-xl bg-blue-500/10 border border-blue-500/20 p-4">
-            <p className="text-sm text-blue-300">
+          <div className="rounded-xl bg-blue-50 border border-blue-200 p-4">
+            <p className="text-sm text-blue-600">
               <span className="font-semibold">Nota:</span> El cambio se reflejará en las próximas 24 horas. 
               Si el pedido ya está en preparación, es posible que no se pueda aplicar.
             </p>
@@ -158,7 +158,7 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
 
           <button
             onClick={handleClose}
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all duration-200"
+            className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-medium hover:bg-neutral-100 transition-all duration-200"
           >
             Cerrar
           </button>
@@ -176,24 +176,24 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
     >
       <div className="space-y-6">
         {/* Información del pedido */}
-        <div className="rounded-xl bg-white/5 border border-white/10 p-4">
-          <h3 className="font-semibold text-white mb-2">Información del Pedido</h3>
+        <div className="rounded-xl bg-neutral-50 border border-neutral-200 p-4">
+          <h3 className="font-semibold text-neutral-900 mb-2">Información del Pedido</h3>
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div>
-              <span className="text-white/60">Pedido:</span>
-              <span className="text-white ml-2">#{order.id}</span>
+              <span className="text-neutral-500">Pedido:</span>
+              <span className="text-neutral-900 ml-2">#{order.id}</span>
             </div>
             <div>
-              <span className="text-white/60">Estado:</span>
-              <span className="text-white ml-2">{order.estado}</span>
+              <span className="text-neutral-500">Estado:</span>
+              <span className="text-neutral-900 ml-2">{order.estado}</span>
             </div>
           </div>
         </div>
 
         {/* Dirección actual */}
-        <div className="rounded-xl bg-white/5 border border-white/10 p-4">
-          <h3 className="font-semibold text-white mb-2">Dirección Actual</h3>
-          <div className="text-sm text-white/70">
+        <div className="rounded-xl bg-neutral-50 border border-neutral-200 p-4">
+          <h3 className="font-semibold text-neutral-900 mb-2">Dirección Actual</h3>
+          <div className="text-sm text-neutral-600">
             <p className="font-medium">{order.shippingAddress.nombre}</p>
             <p>{order.shippingAddress.direccion}</p>
             <p>{order.shippingAddress.codigoPostal} {order.shippingAddress.ciudad}</p>
@@ -206,20 +206,20 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Error */}
           {error && (
-            <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-4">
+            <div className="rounded-xl bg-red-50 border border-red-200 p-4">
               <div className="flex items-center gap-2">
-                <svg className="h-5 w-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-5 w-5 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <p className="text-red-400 font-medium">Error</p>
+                <p className="text-red-700 font-medium">Error</p>
               </div>
-              <p className="text-red-300 text-sm mt-1">{error}</p>
+              <p className="text-red-700 text-sm mt-1">{error}</p>
             </div>
           )}
 
           {/* Nombre */}
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-2">
+            <label className="block text-sm font-medium text-neutral-500 mb-2">
               Nombre completo *
             </label>
             <input
@@ -227,14 +227,14 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
               value={formData.nombre}
               onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
               placeholder="Nombre completo"
             />
           </div>
 
           {/* Dirección */}
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-2">
+            <label className="block text-sm font-medium text-neutral-500 mb-2">
               Dirección *
             </label>
             <input
@@ -242,7 +242,7 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
               value={formData.direccion}
               onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
               placeholder="Calle, número, piso, puerta"
             />
           </div>
@@ -250,7 +250,7 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
           {/* Ciudad y código postal */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-white/60 mb-2">
+              <label className="block text-sm font-medium text-neutral-500 mb-2">
                 Ciudad *
               </label>
               <input
@@ -258,12 +258,12 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
                 value={formData.ciudad}
                 onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
                 placeholder="Madrid"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/60 mb-2">
+              <label className="block text-sm font-medium text-neutral-500 mb-2">
                 Código Postal *
               </label>
               <input
@@ -271,7 +271,7 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
                 value={formData.codigoPostal}
                 onChange={(e) => setFormData({ ...formData, codigoPostal: e.target.value })}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
                 placeholder="28001"
               />
             </div>
@@ -279,7 +279,7 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
 
           {/* País */}
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-2">
+            <label className="block text-sm font-medium text-neutral-500 mb-2">
               País *
             </label>
             <input
@@ -287,27 +287,27 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
               value={formData.pais}
               onChange={(e) => setFormData({ ...formData, pais: e.target.value })}
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
               placeholder="España"
             />
           </div>
 
           {/* Teléfono */}
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-2">
+            <label className="block text-sm font-medium text-neutral-500 mb-2">
               Teléfono de contacto
             </label>
             <input
               type="tel"
               value={formData.telefono}
               onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
               placeholder="+34 600 000 000"
             />
           </div>
 
           {/* Nota importante */}
-          <div className="rounded-xl bg-yellow-500/10 border border-yellow-500/20 p-4">
+          <div className="rounded-xl bg-yellow-50 border border-yellow-200 p-4">
             <div className="flex items-start gap-2">
               <svg className="h-5 w-5 text-yellow-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
@@ -327,18 +327,18 @@ export default function AddressChangeModal({ isOpen, onClose, order }: AddressCh
             <button
               type="button"
               onClick={handleClose}
-              className="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all duration-200"
+              className="flex-1 px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-medium hover:bg-neutral-100 transition-all duration-200"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-4 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="flex-1 px-4 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <>
-                  <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <div className="h-4 w-4 border-2 border-neutral-400 border-t-neutral-900 rounded-full animate-spin"></div>
                   Actualizando...
                 </>
               ) : (

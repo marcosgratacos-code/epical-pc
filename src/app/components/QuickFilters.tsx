@@ -82,9 +82,9 @@ export default function QuickFilters({ onFilterChange }: QuickFiltersProps) {
   const hasActiveFilters = selectedPriceRange !== 0 || inStockOnly || minRating > 0;
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 space-y-4">
+    <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-white flex items-center gap-2">
+        <h3 className="font-semibold text-neutral-900 flex items-center gap-2">
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
           </svg>
@@ -93,7 +93,7 @@ export default function QuickFilters({ onFilterChange }: QuickFiltersProps) {
         {hasActiveFilters && (
           <button
             onClick={clearFilters}
-            className="text-sm text-white/60 hover:text-white transition-colors"
+            className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
           >
             Limpiar
           </button>
@@ -102,7 +102,7 @@ export default function QuickFilters({ onFilterChange }: QuickFiltersProps) {
 
       {/* Rango de precio */}
       <div>
-        <label className="block text-sm text-white/80 mb-2">Rango de precio</label>
+        <label className="block text-sm text-neutral-700 mb-2">Rango de precio</label>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
           {PRICE_RANGES.map((range, index) => (
             <button
@@ -110,8 +110,8 @@ export default function QuickFilters({ onFilterChange }: QuickFiltersProps) {
               onClick={() => setSelectedPriceRange(index)}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 selectedPriceRange === index
-                  ? "bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 text-white"
-                  : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                  ? "bg-neutral-900 text-white"
+                  : "bg-neutral-50 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
               }`}
             >
               {range.label}
@@ -127,8 +127,8 @@ export default function QuickFilters({ onFilterChange }: QuickFiltersProps) {
           onClick={() => setInStockOnly(!inStockOnly)}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
             inStockOnly
-              ? "bg-green-500/20 text-green-400 border border-green-500/30"
-              : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10"
+              ? "bg-green-100 text-green-700 border border-green-200"
+              : "bg-neutral-50 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 border border-neutral-200"
           }`}
         >
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,7 +139,7 @@ export default function QuickFilters({ onFilterChange }: QuickFiltersProps) {
 
         {/* Valoración mínima */}
         <div className="flex items-center gap-2">
-          <span className="text-sm text-white/70">Valoración mínima:</span>
+          <span className="text-sm text-neutral-600">Valoración mínima:</span>
           <div className="flex gap-1">
             {[0, 3, 4, 5].map((rating) => (
               <button
@@ -147,8 +147,8 @@ export default function QuickFilters({ onFilterChange }: QuickFiltersProps) {
                 onClick={() => setMinRating(rating)}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   minRating === rating
-                    ? "bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 text-white"
-                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                    ? "bg-neutral-900 text-white"
+                    : "bg-neutral-50 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
                 }`}
               >
                 {rating === 0 ? "Todas" : `${rating}★+`}

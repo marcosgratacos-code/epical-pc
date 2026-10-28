@@ -24,8 +24,8 @@ export default function SiteHeader() {
   const { cart } = useCart();
   const { wishlistCount } = useWishlist();
   const pathname = usePathname();
-  // El resto de páginas siguen en tema oscuro hasta que se rediseñen
-  const light = pathname === "/";
+  // El panel de administración conserva el tema oscuro
+  const light = !pathname.startsWith("/admin");
   const totalItems = Object.values(cart).reduce((a: number, b: number) => a + b, 0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);

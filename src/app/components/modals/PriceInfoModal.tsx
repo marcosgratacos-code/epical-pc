@@ -74,29 +74,29 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Overlay */}
       <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-white backdrop-blur-sm"
         onClick={onClose}
       />
       
       {/* Modal */}
-      <div className="relative w-full max-w-2xl bg-gradient-to-br from-black/95 to-black/90 border border-white/10 rounded-3xl shadow-2xl animate-fade-in-scale overflow-hidden">
+      <div className="relative w-full max-w-2xl bg-gradient-to-br from-black/95 to-black/90 border border-neutral-200 rounded-3xl shadow-2xl animate-fade-in-scale overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-violet-500/20 to-cyan-500/20 p-6 border-b border-white/10">
+        <div className="bg-neutral-50 p-6 border-b border-neutral-200">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-violet-500/30 to-cyan-500/30 flex items-center justify-center">
+              <div className="h-12 w-12 rounded-full bg-neutral-50 flex items-center justify-center">
                 <span className="text-2xl">{currentSlideData.icon}</span>
               </div>
               <div>
-                <h2 className="text-xl font-bold text-white">Precios Orientativos</h2>
-                <p className="text-white/60 text-sm">Entiende cómo funcionan nuestros precios</p>
+                <h2 className="text-xl font-bold text-neutral-900">Precios Orientativos</h2>
+                <p className="text-neutral-500 text-sm">Entiende cómo funcionan nuestros precios</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              className="p-2 rounded-full bg-neutral-100 hover:bg-neutral-200 transition-colors"
             >
-              <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-6 w-6 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -107,21 +107,21 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
         <div className="p-6">
           {/* Slide content */}
           <div className="text-center mb-6">
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-neutral-900 mb-4">
               {currentSlideData.title}
             </h3>
-            <p className="text-white/80 text-lg leading-relaxed mb-6">
+            <p className="text-neutral-700 text-lg leading-relaxed mb-6">
               {currentSlideData.content}
             </p>
             
             {/* Details list */}
             <div className="space-y-3">
               {currentSlideData.details.map((detail, index) => (
-                <div key={index} className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 flex items-center justify-center">
-                    <span className="text-white text-sm font-bold">{index + 1}</span>
+                <div key={index} className="flex items-start gap-3 p-3 rounded-xl bg-neutral-50 border border-neutral-200">
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-neutral-900 flex items-center justify-center text-white">
+                    <span className="text-neutral-900 text-sm font-bold">{index + 1}</span>
                   </div>
-                  <p className="text-white/90 text-sm text-left">{detail}</p>
+                  <p className="text-neutral-800 text-sm text-left">{detail}</p>
                 </div>
               ))}
             </div>
@@ -131,7 +131,7 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
           <div className="flex items-center justify-between">
             <button
               onClick={prevSlide}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/80 hover:bg-white/10 hover:text-white transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 transition-all"
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -147,8 +147,8 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
                   onClick={() => setCurrentSlide(index)}
                   className={`w-3 h-3 rounded-full transition-all ${
                     currentSlide === index 
-                      ? 'bg-gradient-to-r from-violet-500 to-cyan-500 w-8' 
-                      : 'bg-white/30 hover:bg-white/60'
+                      ? 'bg-neutral-900 w-8 text-white' 
+                      : 'bg-neutral-300 hover:bg-white/60'
                   }`}
                 />
               ))}
@@ -156,7 +156,7 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
 
             <button
               onClick={nextSlide}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/80 hover:bg-white/10 hover:text-white transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 transition-all"
             >
               Siguiente
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,9 +167,9 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
         </div>
 
         {/* Footer */}
-        <div className="bg-gradient-to-r from-violet-500/10 to-cyan-500/10 p-4 border-t border-white/10">
+        <div className="bg-neutral-50 p-4 border-t border-neutral-200">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-white/60 text-sm">
+            <div className="flex items-center gap-2 text-neutral-500 text-sm">
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -177,7 +177,7 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
             </div>
             <button
               onClick={onClose}
-              className="px-6 py-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300"
+              className="px-6 py-2 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300"
             >
               Entendido
             </button>

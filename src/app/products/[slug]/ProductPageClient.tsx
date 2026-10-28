@@ -148,14 +148,14 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="min-h-screen bg-black text-white"
+            className="min-h-screen bg-white text-neutral-900"
           >
           <div className="mx-auto max-w-7xl p-6">
             {/* barra superior: volver + migas */}
             <div className="mb-4 flex items-center justify-between">
               <button
                 onClick={handleBack}
-                className="text-white/70 hover:text-white flex items-center gap-2 transition-colors"
+                className="text-neutral-600 hover:text-neutral-900 flex items-center gap-2 transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -171,12 +171,12 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                 </svg>
                 Volver
               </button>
-              <nav className="text-sm text-white/60">
-                <Link href="/" className="hover:text-white">Inicio</Link>
+              <nav className="text-sm text-neutral-500">
+                <Link href="/" className="hover:text-neutral-900">Inicio</Link>
                 <span className="mx-2">/</span>
-                <Link href="/#productos" className="hover:text-white">Montajes</Link>
+                <Link href="/#productos" className="hover:text-neutral-900">Montajes</Link>
                 <span className="mx-2">/</span>
-                <span className="text-white">{product.name}</span>
+                <span className="text-neutral-900">{product.name}</span>
               </nav>
             </div>
 
@@ -193,24 +193,24 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                   <h1 className="text-3xl font-extrabold md:text-4xl leading-tight">
                     {product.name}
                   </h1>
-                  <p className="mt-2 text-white/70">{product.desc || product.name}</p>
+                  <p className="mt-2 text-neutral-600">{product.desc || product.name}</p>
                 </div>
 
                 <div className="flex items-baseline gap-4">
-                  <span className="text-4xl font-bold text-white">
+                  <span className="text-4xl font-bold text-neutral-900">
                     {eur(product.price)}
                   </span>
-                  <span className={`rounded-lg px-3 py-1 text-sm transition-all duration-300 ${product.inStock ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                  <span className={`rounded-lg px-3 py-1 text-sm transition-all duration-300 ${product.inStock ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                     {product.inStock ? "✓ En stock" : "Sin stock"}
                   </span>
                 </div>
 
                 <div>
                   <h3 className="mb-3 font-semibold text-lg">Especificaciones</h3>
-                  <ul className="space-y-2 text-white/80">
+                  <ul className="space-y-2 text-neutral-700">
                     {product.specs.map((s, index) => (
-                      <li key={s} className={`flex items-start transform transition-all duration-300 hover:translate-x-1 hover:text-white stagger-${index + 1}`}>
-                        <span className="mr-2 text-cyan-400">✓</span>
+                      <li key={s} className={`flex items-start transform transition-all duration-300 hover:translate-x-1 hover:text-neutral-900 stagger-${index + 1}`}>
+                        <span className="mr-2 text-blue-600">✓</span>
                         {s}
                       </li>
                     ))}
@@ -221,21 +221,21 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                   <button
                     onClick={handleAdd}
                     disabled={!product.inStock}
-                    className="flex-1 rounded-xl bg-white px-6 py-4 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400 disabled:cursor-not-allowed disabled:bg-white/20 disabled:text-white/40 transform hover:scale-105 transition-all duration-200 hover:shadow-lg"
+                    className="flex-1 rounded-xl bg-neutral-900 px-6 py-4 font-semibold text-white hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:cursor-not-allowed disabled:bg-neutral-200 disabled:text-white/40 transform hover:scale-105 transition-all duration-200 hover:shadow-lg"
                   >
                     {product.inStock ? "Añadir al carrito" : "Sin stock"}
                   </button>
                   <Link
                     href="/#productos"
-                    className="rounded-xl border border-white/20 px-6 py-4 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transform hover:scale-105 transition-all duration-200 hover:shadow-lg hover-glow flex items-center justify-center"
+                    className="rounded-xl border border-neutral-300 px-6 py-4 font-semibold hover:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transform hover:scale-105 transition-all duration-200 hover:shadow-lg hover-glow flex items-center justify-center"
                   >
                     Explorar más
                   </Link>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 backdrop-blur-sm">
+                <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 backdrop-blur-sm">
                   <h3 className="mb-4 font-semibold text-lg">Ventajas TITAN-PC</h3>
-                  <ul className="space-y-3 text-sm text-white/80">
+                  <ul className="space-y-3 text-sm text-neutral-700">
                     {[
                       "✓ 3 años de garantía completa",
                       "✓ Envío 24-48h asegurado",
@@ -259,13 +259,13 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               className="mt-12"
             >
               <Accordion title="Descripción completa">
-                <p className="leading-relaxed text-white/80">
+                <p className="leading-relaxed text-neutral-700">
                   El <b>{product.name}</b> es un PC gaming de alto rendimiento diseñado para
                   ofrecer la mejor experiencia en tus juegos favoritos. Con componentes de
                   última generación cuidadosamente seleccionados y probados, garantizamos
                   estabilidad, rendimiento y durabilidad.
                 </p>
-                <p className="mt-4 leading-relaxed text-white/80">
+                <p className="mt-4 leading-relaxed text-neutral-700">
                   Cada componente ha sido optimizado para trabajar en perfecta armonía.
                   Realizamos test de estrés, validación térmica y configuración de perfiles
                   XMP/EXPO antes del envío. Incluye Windows 11 Pro activado, drivers
@@ -274,25 +274,25 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               </Accordion>
 
               <Accordion title="Garantía y devoluciones">
-                <p className="leading-relaxed text-white/80">
+                <p className="leading-relaxed text-neutral-700">
                   Ofrecemos <b>3 años de garantía completa</b> en todos nuestros montajes.
                   Si tienes cualquier problema técnico, nuestro equipo te asistirá por
                   WhatsApp y gestionaremos la reparación o sustitución del equipo sin coste
                   adicional.
                 </p>
-                <p className="mt-4 leading-relaxed text-white/80">
+                <p className="mt-4 leading-relaxed text-neutral-700">
                   Además, dispones de <b>30 días</b> para devoluciones sin preguntas.
                   Si no quedas satisfecho, te devolvemos el 100% del importe.
                 </p>
               </Accordion>
 
               <Accordion title="Envío y montaje">
-                <p className="leading-relaxed text-white/80">
+                <p className="leading-relaxed text-neutral-700">
                   Realizamos el montaje profesional con gestión de cables premium, aplicamos
                   pasta térmica de alta calidad y configuramos la BIOS para máximo
                   rendimiento y estabilidad.
                 </p>
-                <p className="mt-4 leading-relaxed text-white/80">
+                <p className="mt-4 leading-relaxed text-neutral-700">
                   El envío se realiza en <b>24-48h</b> en embalaje reforzado con protección
                   ESD. Recibirás tu PC listo para conectar y usar, sin necesidad de
                   instalaciones adicionales.
@@ -331,7 +331,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
-              className="text-white text-lg font-semibold"
+              className="text-neutral-900 text-lg font-semibold"
             >
               Regresando…
             </motion.div>

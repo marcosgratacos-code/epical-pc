@@ -44,10 +44,10 @@ export default function PedidosPage() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
-          <div className="h-20 w-20 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500"></div>
-          <p className="text-white/60">Cargando pedidos...</p>
+          <div className="h-20 w-20 rounded-full bg-neutral-900 text-white"></div>
+          <p className="text-neutral-500">Cargando pedidos...</p>
         </div>
       </div>
     );
@@ -56,32 +56,32 @@ export default function PedidosPage() {
   // Mostrar mensaje amigable si no hay sesión
   if (!session) {
     return (
-      <div className="min-h-screen bg-black text-white">
-        <div className="border-b border-white/10 bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+      <div className="min-h-screen bg-white text-neutral-900">
+        <div className="border-b border-neutral-200 bg-neutral-50">
           <div className="max-w-4xl mx-auto px-4 py-8">
             <BackButton />
             <div className="text-center mt-12">
-              <div className="inline-block h-24 w-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center shadow-2xl shadow-orange-500/50 animate-fade-in-scale">
+              <div className="inline-block h-24 w-24 mx-auto mb-6 rounded-full bg-neutral-900 flex items-center justify-center shadow-2xl shadow-orange-500/50 animate-fade-in-scale text-white">
                 <svg className="h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
               </div>
-              <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-400 via-red-500 to-pink-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold mb-4 text-neutral-900">
                 Inicia sesión para ver tus pedidos
               </h1>
-              <p className="text-white/60 mb-8 max-w-md mx-auto">
+              <p className="text-neutral-500 mb-8 max-w-md mx-auto">
                 Crea una cuenta para realizar compras y ver el historial de tus pedidos.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/auth/signin?callbackUrl=/pedidos"
-                  className="px-8 py-4 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300"
+                  className="px-8 py-4 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300"
                 >
                   🔓 Iniciar Sesión
                 </Link>
                 <Link
                   href="/productos"
-                  className="px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 transition-all duration-300"
+                  className="px-8 py-4 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold hover:bg-neutral-100 transition-all duration-300"
                 >
                   🛍️ Ver Productos
                 </Link>
@@ -112,17 +112,17 @@ export default function PedidosPage() {
   const getEstadoColor = (estado: string) => {
     switch (estado) {
       case "entregado":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-green-100 text-green-700 border-green-200";
       case "enviado":
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+        return "bg-blue-100 text-blue-600 border-blue-300";
       case "procesando":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+        return "bg-yellow-100 text-yellow-400 border-yellow-200";
       case "pendiente":
-        return "bg-orange-500/20 text-orange-400 border-orange-500/30";
+        return "bg-orange-100 text-orange-700 border-orange-200";
       case "cancelado":
-        return "bg-red-500/20 text-red-400 border-red-500/30";
+        return "bg-red-100 text-red-700 border-red-200";
       default:
-        return "bg-white/20 text-white border-white/30";
+        return "bg-neutral-200 text-neutral-900 border-neutral-400";
     }
   };
 
@@ -153,17 +153,17 @@ export default function PedidosPage() {
       : pedidos.filter((p) => p.estado === filtroEstado);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-neutral-900">
       {/* Header */}
-      <div className="border-b border-white/10 bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+      <div className="border-b border-neutral-200 bg-neutral-50">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <BackButton />
           <div className="flex items-center justify-between mt-6">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold text-neutral-900">
                 Mis Pedidos
               </h1>
-              <p className="text-white/60 mt-2">
+              <p className="text-neutral-500 mt-2">
                 Gestiona y rastrea todos tus pedidos
               </p>
             </div>
@@ -174,23 +174,23 @@ export default function PedidosPage() {
                 const stats = calculateOrderStats(pedidos);
                 return (
                   <>
-                    <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
-                      <p className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    <div className="text-center px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200">
+                      <p className="text-2xl font-bold text-neutral-900">
                         {stats.totalPedidos}
                       </p>
-                      <p className="text-xs text-white/50">Total Pedidos</p>
+                      <p className="text-xs text-neutral-500">Total Pedidos</p>
                     </div>
-                    <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
-                      <p className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+                    <div className="text-center px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200">
+                      <p className="text-2xl font-bold text-neutral-900">
                         {stats.entregados}
                       </p>
-                      <p className="text-xs text-white/50">Entregados</p>
+                      <p className="text-xs text-neutral-500">Entregados</p>
                     </div>
-                    <div className="text-center px-6 py-3 rounded-xl bg-white/5 border border-white/10">
-                      <p className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    <div className="text-center px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200">
+                      <p className="text-2xl font-bold text-neutral-900">
                         {stats.enCamino}
                       </p>
-                      <p className="text-xs text-white/50">En Camino</p>
+                      <p className="text-xs text-neutral-500">En Camino</p>
                     </div>
                   </>
                 );
@@ -204,8 +204,8 @@ export default function PedidosPage() {
               onClick={() => setFiltroEstado("todos")}
               className={`px-4 py-2 rounded-xl font-medium transition-all ${
                 filtroEstado === "todos"
-                  ? "bg-gradient-to-r from-violet-500 to-cyan-500 text-white shadow-lg shadow-violet-500/30"
-                  : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
+                  ? "bg-neutral-900 text-white shadow-lg shadow-black/10"
+                  : "bg-neutral-50 border border-neutral-200 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
               }`}
             >
               Todos ({pedidos.length})
@@ -218,8 +218,8 @@ export default function PedidosPage() {
                     onClick={() => setFiltroEstado("entregado")}
                     className={`px-4 py-2 rounded-xl font-medium transition-all ${
                       filtroEstado === "entregado"
-                        ? "bg-green-500/30 text-green-400 border border-green-500/50"
-                        : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
+                        ? "bg-green-100 text-green-700 border border-green-300"
+                        : "bg-neutral-50 border border-neutral-200 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
                     }`}
                   >
                     Entregados ({stats.entregados})
@@ -228,8 +228,8 @@ export default function PedidosPage() {
                     onClick={() => setFiltroEstado("enviado")}
                     className={`px-4 py-2 rounded-xl font-medium transition-all ${
                       filtroEstado === "enviado"
-                        ? "bg-blue-500/30 text-blue-400 border border-blue-500/50"
-                        : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
+                        ? "bg-blue-100 text-blue-600 border border-blue-300"
+                        : "bg-neutral-50 border border-neutral-200 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
                     }`}
                   >
                     En camino ({stats.enCamino})
@@ -238,8 +238,8 @@ export default function PedidosPage() {
                     onClick={() => setFiltroEstado("procesando")}
                     className={`px-4 py-2 rounded-xl font-medium transition-all ${
                       filtroEstado === "procesando"
-                        ? "bg-yellow-500/30 text-yellow-400 border border-yellow-500/50"
-                        : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
+                        ? "bg-yellow-100 text-yellow-400 border border-yellow-300"
+                        : "bg-neutral-50 border border-neutral-200 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
                     }`}
                   >
                     Procesando ({stats.procesando})
@@ -256,17 +256,17 @@ export default function PedidosPage() {
         {pedidosFiltrados.length === 0 ? (
           <div className="text-center py-20">
             <div className="text-6xl mb-4">📦</div>
-            <h2 className="text-2xl font-bold text-white/80 mb-2">
+            <h2 className="text-2xl font-bold text-neutral-700 mb-2">
               No hay pedidos
             </h2>
-            <p className="text-white/50 mb-6">
+            <p className="text-neutral-500 mb-6">
               {filtroEstado === "todos"
                 ? "Aún no has realizado ningún pedido"
                 : `No tienes pedidos con estado "${filtroEstado}"`}
             </p>
             <Link
               href="/productos"
-              className="inline-block px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300"
+              className="inline-block px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300"
             >
               Ver Productos
             </Link>
@@ -276,15 +276,15 @@ export default function PedidosPage() {
             {pedidosFiltrados.map((pedido) => (
               <div
                 key={pedido.id}
-                className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300 group"
+                className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 backdrop-blur-sm hover:border-neutral-300 transition-all duration-300 group"
               >
                 {/* Header del pedido */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
+                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-neutral-200">
                   <div>
-                    <h3 className="text-xl font-bold text-white">
+                    <h3 className="text-xl font-bold text-neutral-900">
                       Pedido #{pedido.id}
                     </h3>
-                    <p className="text-sm text-white/50">
+                    <p className="text-sm text-neutral-500">
                       {formatDateOnly(pedido.fecha)}
                     </p>
                   </div>
@@ -299,7 +299,7 @@ export default function PedidosPage() {
                       {pedido.estado.charAt(0).toUpperCase() +
                         pedido.estado.slice(1)}
                     </span>
-                    <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
+                    <span className="text-2xl font-bold text-neutral-900">
                       {pedido.total}€
                     </span>
                   </div>
@@ -310,22 +310,22 @@ export default function PedidosPage() {
                   {pedido.productos.map((producto, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-4 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all"
+                      className="flex items-center gap-4 p-3 rounded-xl bg-neutral-50 hover:bg-neutral-100 transition-all"
                     >
                       <img
                         src={producto.imagen}
                         alt={producto.nombre}
-                        className="h-16 w-16 rounded-lg object-cover ring-2 ring-white/10"
+                        className="h-16 w-16 rounded-lg object-cover ring-2 ring-neutral-200"
                       />
                       <div className="flex-1">
-                        <p className="font-semibold text-white">
+                        <p className="font-semibold text-neutral-900">
                           {producto.nombre}
                         </p>
-                        <p className="text-sm text-white/50">
+                        <p className="text-sm text-neutral-500">
                           Cantidad: {producto.cantidad}
                         </p>
                       </div>
-                      <p className="text-lg font-bold text-white">
+                      <p className="text-lg font-bold text-neutral-900">
                         {producto.precio}€
                       </p>
                     </div>
@@ -333,24 +333,24 @@ export default function PedidosPage() {
                 </div>
 
                 {/* Acciones */}
-                <div className="flex flex-wrap gap-3 pt-4 border-t border-white/10">
+                <div className="flex flex-wrap gap-3 pt-4 border-t border-neutral-200">
                   {pedido.numeroSeguimiento && (
                     <Link
                       href={`/seguimiento?pedido=${pedido.id}`}
-                      className="flex-1 px-4 py-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold text-center hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300"
+                      className="flex-1 px-4 py-2 rounded-xl bg-neutral-900 text-white font-semibold text-center hover:shadow-lg hover:shadow-black/10 transition-all duration-300"
                     >
                       📦 Rastrear Pedido
                     </Link>
                   )}
                   <button 
                     onClick={() => handleViewDetails(pedido)}
-                    className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-all font-medium"
+                    className="px-4 py-2 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 transition-all font-medium"
                   >
                     Ver Detalles
                   </button>
                   <button 
                     onClick={() => handleDownloadInvoice(pedido)}
-                    className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-all font-medium"
+                    className="px-4 py-2 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 transition-all font-medium"
                   >
                     Descargar Factura
                   </button>

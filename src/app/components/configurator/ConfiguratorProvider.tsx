@@ -16,10 +16,10 @@ export default function ConfiguratorProvider({ children }: ConfiguratorProviderP
 
   if (!isHydrated) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-white text-neutral-900 flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
-          <div className="h-20 w-20 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500"></div>
-          <p className="text-white/60">Cargando configurador...</p>
+          <div className="h-20 w-20 rounded-full bg-neutral-900 text-white"></div>
+          <p className="text-neutral-500">Cargando configurador...</p>
         </div>
       </div>
     );

@@ -80,18 +80,18 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
         {faqData.map((faq, index) => (
           <div
             key={index}
-            className="rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:border-white/20"
+            className="rounded-xl border border-neutral-200 bg-neutral-50 overflow-hidden transition-all duration-300 hover:border-neutral-300"
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full px-5 py-4 text-left flex items-center justify-between gap-3 hover:bg-white/5 transition-all duration-200"
+              className="w-full px-5 py-4 text-left flex items-center justify-between gap-3 hover:bg-neutral-50 transition-all duration-200"
             >
               <div className="flex items-center gap-3 flex-1">
                 <span className="text-2xl flex-shrink-0">{faq.emoji}</span>
-                <span className="font-semibold text-white">{faq.pregunta}</span>
+                <span className="font-semibold text-neutral-900">{faq.pregunta}</span>
               </div>
               <svg
-                className={`h-5 w-5 text-white/60 transition-transform duration-300 flex-shrink-0 ${
+                className={`h-5 w-5 text-neutral-500 transition-transform duration-300 flex-shrink-0 ${
                   openIndex === index ? "rotate-180" : ""
                 }`}
                 fill="none"
@@ -112,7 +112,7 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
               }`}
             >
               <div className="px-5 pb-4 pt-0">
-                <p className="text-white/70 leading-relaxed text-sm pl-11">
+                <p className="text-neutral-600 leading-relaxed text-sm pl-11">
                   {faq.respuesta}
                 </p>
               </div>
@@ -121,12 +121,12 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
         ))}
       </div>
 
-      <div className="mt-6 p-4 rounded-xl bg-gradient-to-br from-violet-500/10 to-cyan-500/10 border border-white/10">
-        <p className="text-sm text-white/70 text-center">
+      <div className="mt-6 p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+        <p className="text-sm text-neutral-600 text-center">
           ¿No encuentras respuesta a tu pregunta?{" "}
           <button
             onClick={onClose}
-            className="text-violet-400 hover:text-violet-300 font-semibold transition-colors"
+            className="text-blue-600 hover:text-blue-600 font-semibold transition-colors"
           >
             Contacta con nuestro soporte
           </button>

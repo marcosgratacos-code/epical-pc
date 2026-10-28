@@ -36,7 +36,7 @@ export default function Gallery({ images, title }: { images: Pic[]; title?: stri
         {images.map((img, i) => (
           <li
             key={img.src}
-            className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] cursor-zoom-in"
+            className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50 cursor-zoom-in"
             onClick={() => openAt(i)}
           >
             <Image
@@ -50,7 +50,7 @@ export default function Gallery({ images, title }: { images: Pic[]; title?: stri
                 if (!target.src.includes("epical_hero_setup.jpg")) target.src = "/epical_hero_setup.jpg";
               }}
             />
-            <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-black/20" />
+            <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-neutral-50" />
           </li>
         ))}
       </ul>
@@ -66,7 +66,7 @@ export default function Gallery({ images, title }: { images: Pic[]; title?: stri
         >
           <div className="absolute inset-0 m-auto grid h-full w-full max-w-6xl place-items-center p-4">
             <div
-              className="relative aspect-[4/3] w-full max-h-[80vh] overflow-hidden rounded-2xl border border-white/20 bg-black"
+              className="relative aspect-[4/3] w-full max-h-[80vh] overflow-hidden rounded-2xl border border-neutral-300 bg-white"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
@@ -83,26 +83,26 @@ export default function Gallery({ images, title }: { images: Pic[]; title?: stri
               <button
                 aria-label="Cerrar"
                 onClick={close}
-                className="absolute right-3 top-3 rounded-full border border-white/30 bg-black/60 px-3 py-1 text-sm hover:border-white/60"
+                className="absolute right-3 top-3 rounded-full border border-neutral-400 bg-white px-3 py-1 text-sm hover:border-neutral-500"
               >
                 Cerrar
               </button>
               <button
                 aria-label="Anterior"
                 onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)}
-                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-black/60 px-3 py-2 text-lg hover:border-white/60"
+                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-neutral-400 bg-white px-3 py-2 text-lg hover:border-neutral-500"
               >
                 ‹
               </button>
               <button
                 aria-label="Siguiente"
                 onClick={() => setIdx((i) => (i + 1) % images.length)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-black/60 px-3 py-2 text-lg hover:border-white/60"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-neutral-400 bg-white px-3 py-2 text-lg hover:border-neutral-500"
               >
                 ›
               </button>
 
-              <div className="absolute bottom-2 left-0 right-0 mx-auto w-fit rounded-full border border-white/10 bg-black/60 px-3 py-1 text-xs text-white/70">
+              <div className="absolute bottom-2 left-0 right-0 mx-auto w-fit rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs text-neutral-600">
                 {idx + 1} / {images.length}
               </div>
             </div>

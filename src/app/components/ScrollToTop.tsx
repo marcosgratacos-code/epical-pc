@@ -46,7 +46,7 @@ export default function ScrollToTop() {
             cx="28"
             cy="28"
             r="24"
-            stroke="rgba(255, 255, 255, 0.1)"
+            stroke="rgba(0, 0, 0, 0.1)"
             strokeWidth="3"
             fill="none"
           />
@@ -73,9 +73,9 @@ export default function ScrollToTop() {
 
         {/* Botón central */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-500 via-blue-500 to-violet-500 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+          <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-110 text-neutral-900">
             <svg
-              className="h-6 w-6 text-white"
+              className="h-6 w-6 text-neutral-900"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

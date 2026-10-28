@@ -80,10 +80,10 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
 
       {/* Search Panel */}
       <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[1000] w-[90vw] max-w-2xl animate-fade-in-scale">
-        <div className="rounded-2xl border border-white/20 bg-black/95 backdrop-blur-xl shadow-2xl overflow-hidden">
+        <div className="rounded-2xl border border-neutral-300 bg-white/95 backdrop-blur-xl shadow-2xl overflow-hidden">
           {/* Search Input */}
-          <div className="flex items-center gap-3 p-4 border-b border-white/10">
-            <svg className="h-5 w-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex items-center gap-3 p-4 border-b border-neutral-200">
+            <svg className="h-5 w-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
@@ -92,9 +92,9 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
               placeholder="Buscar productos, componentes..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="flex-1 bg-transparent text-white placeholder:text-white/40 outline-none"
+              className="flex-1 bg-transparent text-neutral-900 placeholder:text-neutral-400 outline-none"
             />
-            <kbd className="hidden sm:inline-block px-2 py-1 text-xs rounded bg-white/10 text-white/60 border border-white/20">
+            <kbd className="hidden sm:inline-block px-2 py-1 text-xs rounded bg-neutral-100 text-neutral-500 border border-neutral-300">
               ESC
             </kbd>
           </div>
@@ -102,16 +102,16 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
           {/* Results */}
           <div className="max-h-[60vh] overflow-y-auto">
             {query.trim().length < 2 ? (
-              <div className="p-8 text-center text-white/40">
-                <svg className="h-16 w-16 mx-auto mb-4 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-8 text-center text-neutral-400">
+                <svg className="h-16 w-16 mx-auto mb-4 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <p>Escribe al menos 2 caracteres para buscar</p>
                 <p className="text-sm mt-2">Prueba con: RTX, Intel, Gaming...</p>
               </div>
             ) : results.length === 0 ? (
-              <div className="p-8 text-center text-white/40">
-                <svg className="h-16 w-16 mx-auto mb-4 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-8 text-center text-neutral-400">
+                <svg className="h-16 w-16 mx-auto mb-4 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <p>No se encontraron resultados para "{query}"</p>
@@ -124,9 +124,9 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                     key={product.id}
                     href={`/products/${product.slug}`}
                     onClick={onClose}
-                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/10 transition-colors group"
+                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-neutral-100 transition-colors group"
                   >
-                    <div className="relative h-16 w-16 flex-shrink-0 rounded-lg overflow-hidden border border-white/10">
+                    <div className="relative h-16 w-16 flex-shrink-0 rounded-lg overflow-hidden border border-neutral-200">
                       <Image
                         src={product.image}
                         alt={product.name}
@@ -136,22 +136,22 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-white group-hover:text-cyan-400 transition-colors truncate">
+                      <div className="font-semibold text-neutral-900 group-hover:text-blue-600 transition-colors truncate">
                         {product.name}
                       </div>
-                      <div className="text-sm text-white/60 truncate">
+                      <div className="text-sm text-neutral-500 truncate">
                         {product.desc}
                       </div>
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-sm font-bold text-white">{eur(product.price)}</span>
+                        <span className="text-sm font-bold text-neutral-900">{eur(product.price)}</span>
                         {product.inStock && (
-                          <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 border border-green-500/30">
+                          <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 border border-green-200">
                             En stock
                           </span>
                         )}
                       </div>
                     </div>
-                    <svg className="h-5 w-5 text-white/40 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>
@@ -161,12 +161,12 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between p-3 border-t border-white/10 text-xs text-white/40">
+          <div className="flex items-center justify-between p-3 border-t border-neutral-200 text-xs text-neutral-400">
             <span>
               {results.length > 0 && `${results.length} resultado${results.length > 1 ? "s" : ""}`}
             </span>
             <div className="flex gap-2">
-              <kbd className="px-2 py-1 rounded bg-white/10 border border-white/20">⌘K</kbd>
+              <kbd className="px-2 py-1 rounded bg-neutral-100 border border-neutral-300">⌘K</kbd>
               <span>para buscar</span>
             </div>
           </div>

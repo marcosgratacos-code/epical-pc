@@ -35,7 +35,7 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
   return (
     <div className="space-y-8">
       {/* Gráficas de barras por categoría */}
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 backdrop-blur-sm">
+      <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 backdrop-blur-sm">
         <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
           <span>📊</span>
           <span>Comparación Visual</span>
@@ -45,26 +45,26 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
           {/* Precio */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h4 className="font-semibold text-sm text-white/90">💰 Precio (menor es mejor)</h4>
+              <h4 className="font-semibold text-sm text-neutral-800">💰 Precio (menor es mejor)</h4>
             </div>
             <div className="space-y-2">
               {products.map((product, index) => (
                 <div key={product.id} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-white/70">{product.name}</span>
-                    <span className="font-semibold text-violet-400">
+                    <span className="text-neutral-600">{product.name}</span>
+                    <span className="font-semibold text-blue-600">
                       {product.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
                     </span>
                   </div>
-                  <div className="relative h-8 bg-white/5 rounded-lg overflow-hidden">
+                  <div className="relative h-8 bg-neutral-50 rounded-lg overflow-hidden">
                     <div
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-green-500 to-emerald-400 transition-all duration-500"
+                      className="absolute inset-y-0 left-0 bg-neutral-900 transition-all duration-500 text-white"
                       style={{ 
                         width: `${scores[index].price}%`,
                         animationDelay: `${index * 0.1}s`,
                       }}
                     >
-                      <div className="absolute inset-0 bg-white/20 animate-shimmer"></div>
+                      <div className="absolute inset-0 bg-neutral-200 animate-shimmer"></div>
                     </div>
                   </div>
                 </div>
@@ -75,26 +75,26 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
           {/* Rendimiento estimado */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h4 className="font-semibold text-sm text-white/90">⚡ Rendimiento Estimado</h4>
+              <h4 className="font-semibold text-sm text-neutral-800">⚡ Rendimiento Estimado</h4>
             </div>
             <div className="space-y-2">
               {products.map((product, index) => (
                 <div key={product.id} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-white/70">{product.name}</span>
-                    <span className="font-semibold text-blue-400">
+                    <span className="text-neutral-600">{product.name}</span>
+                    <span className="font-semibold text-blue-600">
                       {Math.round(scores[index].performance)}/100
                     </span>
                   </div>
-                  <div className="relative h-8 bg-white/5 rounded-lg overflow-hidden">
+                  <div className="relative h-8 bg-neutral-50 rounded-lg overflow-hidden">
                     <div
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-500"
+                      className="absolute inset-y-0 left-0 bg-neutral-900 transition-all duration-500 text-white"
                       style={{ 
                         width: `${scores[index].performance}%`,
                         animationDelay: `${index * 0.1}s`,
                       }}
                     >
-                      <div className="absolute inset-0 bg-white/20 animate-shimmer"></div>
+                      <div className="absolute inset-0 bg-neutral-200 animate-shimmer"></div>
                     </div>
                   </div>
                 </div>
@@ -105,26 +105,26 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
           {/* Características */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h4 className="font-semibold text-sm text-white/90">✨ Características</h4>
+              <h4 className="font-semibold text-sm text-neutral-800">✨ Características</h4>
             </div>
             <div className="space-y-2">
               {products.map((product, index) => (
                 <div key={product.id} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-white/70">{product.name}</span>
-                    <span className="font-semibold text-violet-400">
+                    <span className="text-neutral-600">{product.name}</span>
+                    <span className="font-semibold text-blue-600">
                       {Math.round(scores[index].features)}/100
                     </span>
                   </div>
-                  <div className="relative h-8 bg-white/5 rounded-lg overflow-hidden">
+                  <div className="relative h-8 bg-neutral-50 rounded-lg overflow-hidden">
                     <div
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-violet-500 to-purple-400 transition-all duration-500"
+                      className="absolute inset-y-0 left-0 bg-neutral-900 transition-all duration-500 text-white"
                       style={{ 
                         width: `${scores[index].features}%`,
                         animationDelay: `${index * 0.1}s`,
                       }}
                     >
-                      <div className="absolute inset-0 bg-white/20 animate-shimmer"></div>
+                      <div className="absolute inset-0 bg-neutral-200 animate-shimmer"></div>
                     </div>
                   </div>
                 </div>
@@ -135,26 +135,26 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
           {/* Relación calidad-precio */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h4 className="font-semibold text-sm text-white/90">🎯 Relación Calidad-Precio</h4>
+              <h4 className="font-semibold text-sm text-neutral-800">🎯 Relación Calidad-Precio</h4>
             </div>
             <div className="space-y-2">
               {products.map((product, index) => (
                 <div key={product.id} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-white/70">{product.name}</span>
-                    <span className="font-semibold text-cyan-400">
+                    <span className="text-neutral-600">{product.name}</span>
+                    <span className="font-semibold text-blue-600">
                       {Math.round(scores[index].value)}/100
                     </span>
                   </div>
-                  <div className="relative h-8 bg-white/5 rounded-lg overflow-hidden">
+                  <div className="relative h-8 bg-neutral-50 rounded-lg overflow-hidden">
                     <div
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 to-teal-400 transition-all duration-500"
+                      className="absolute inset-y-0 left-0 bg-neutral-900 transition-all duration-500 text-white"
                       style={{ 
                         width: `${scores[index].value}%`,
                         animationDelay: `${index * 0.1}s`,
                       }}
                     >
-                      <div className="absolute inset-0 bg-white/20 animate-shimmer"></div>
+                      <div className="absolute inset-0 bg-neutral-200 animate-shimmer"></div>
                     </div>
                   </div>
                 </div>
@@ -165,7 +165,7 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
       </div>
 
       {/* Rendimiento detallado (FPS) */}
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 p-6 backdrop-blur-sm">
+      <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 backdrop-blur-sm">
         <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
           <span>🎯</span>
           <span>Rendimiento en Juegos (FPS Promedio)</span>
@@ -177,21 +177,21 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
             if (!benchmark) return null;
             
             return (
-              <div key={product.id} className="p-4 rounded-xl bg-black/30 border border-white/10">
+              <div key={product.id} className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
                 <div className="mb-4">
-                  <h4 className="font-semibold text-white">{product.name}</h4>
-                  <p className="text-xs text-white/60">Benchmarks reales</p>
+                  <h4 className="font-semibold text-neutral-900">{product.name}</h4>
+                  <p className="text-xs text-neutral-500">Benchmarks reales</p>
                 </div>
                 
                 <div className="space-y-3">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs text-white/70">1080p Ultra</span>
-                      <span className="text-sm font-bold text-green-400">{benchmark.gaming.fps1080p} FPS</span>
+                      <span className="text-xs text-neutral-600">1080p Ultra</span>
+                      <span className="text-sm font-bold text-green-700">{benchmark.gaming.fps1080p} FPS</span>
                     </div>
-                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-neutral-100 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-green-500 to-emerald-400"
+                        className="h-full bg-neutral-900 text-white"
                         style={{ width: `${(benchmark.gaming.fps1080p / 240) * 100}%` }}
                       />
                     </div>
@@ -199,12 +199,12 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
                   
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs text-white/70">1440p Ultra</span>
-                      <span className="text-sm font-bold text-blue-400">{benchmark.gaming.fps1440p} FPS</span>
+                      <span className="text-xs text-neutral-600">1440p Ultra</span>
+                      <span className="text-sm font-bold text-blue-600">{benchmark.gaming.fps1440p} FPS</span>
                     </div>
-                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-neutral-100 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-400"
+                        className="h-full bg-neutral-900 text-white"
                         style={{ width: `${(benchmark.gaming.fps1440p / 200) * 100}%` }}
                       />
                     </div>
@@ -212,20 +212,20 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
                   
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs text-white/70">4K Ultra</span>
-                      <span className="text-sm font-bold text-violet-400">{benchmark.gaming.fps4k} FPS</span>
+                      <span className="text-xs text-neutral-600">4K Ultra</span>
+                      <span className="text-sm font-bold text-blue-600">{benchmark.gaming.fps4k} FPS</span>
                     </div>
-                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-neutral-100 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-violet-500 to-purple-400"
+                        className="h-full bg-neutral-900 text-white"
                         style={{ width: `${(benchmark.gaming.fps4k / 140) * 100}%` }}
                       />
                     </div>
                   </div>
                   
-                  <div className="pt-2 border-t border-white/10">
-                    <div className="text-xs text-white/60">
-                      €/FPS (1440p): <span className="text-cyan-400 font-semibold">{benchmark.efficiency.pricePerFps1440p.toFixed(2)}€</span>
+                  <div className="pt-2 border-t border-neutral-200">
+                    <div className="text-xs text-neutral-500">
+                      €/FPS (1440p): <span className="text-blue-600 font-semibold">{benchmark.efficiency.pricePerFps1440p.toFixed(2)}€</span>
                     </div>
                   </div>
                 </div>
@@ -234,15 +234,15 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
           })}
         </div>
         
-        <div className="mt-4 p-3 rounded-lg bg-black/20 border border-white/10">
-          <p className="text-xs text-white/60">
+        <div className="mt-4 p-3 rounded-lg bg-neutral-50 border border-neutral-200">
+          <p className="text-xs text-neutral-500">
             💡 <strong>Nota:</strong> FPS promedios basados en {products[0] && scores[0].benchmark ? scores[0].benchmark.gaming.gamesTest.length : 5}+ juegos AAA actuales en calidad Ultra/Máxima
           </p>
         </div>
       </div>
 
       {/* Recomendaciones por uso */}
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/10 to-cyan-500/10 p-6 backdrop-blur-sm">
+      <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 backdrop-blur-sm">
         <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
           <span>🎮</span>
           <span>Recomendaciones por Uso</span>
@@ -250,58 +250,58 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
         
         <div className="grid md:grid-cols-3 gap-4">
           {/* Gaming Competitivo */}
-          <div className="p-4 rounded-xl bg-black/30 border border-white/10">
+          <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
             <div className="flex items-center gap-2 mb-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-full bg-neutral-50 flex items-center justify-center">
                 <span className="text-xl">🎯</span>
               </div>
               <div>
                 <h4 className="font-semibold text-sm">Gaming Competitivo</h4>
-                <p className="text-xs text-white/60">eSports / FPS</p>
+                <p className="text-xs text-neutral-500">eSports / FPS</p>
               </div>
             </div>
-            <div className="text-sm text-white/80">
+            <div className="text-sm text-neutral-700">
               {getBestForGaming(products)?.name || 'N/A'}
             </div>
-            <p className="text-xs text-white/60 mt-2">
+            <p className="text-xs text-neutral-500 mt-2">
               Alto rendimiento en 1080p/1440p con tasas de refresco elevadas
             </p>
           </div>
 
           {/* Streaming / Creación */}
-          <div className="p-4 rounded-xl bg-black/30 border border-white/10">
+          <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
             <div className="flex items-center gap-2 mb-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-full bg-neutral-50 flex items-center justify-center">
                 <span className="text-xl">📹</span>
               </div>
               <div>
                 <h4 className="font-semibold text-sm">Streaming / Creación</h4>
-                <p className="text-xs text-white/60">Multi-tarea</p>
+                <p className="text-xs text-neutral-500">Multi-tarea</p>
               </div>
             </div>
-            <div className="text-sm text-white/80">
+            <div className="text-sm text-neutral-700">
               {getBestForCreation(products)?.name || 'N/A'}
             </div>
-            <p className="text-xs text-white/60 mt-2">
+            <p className="text-xs text-neutral-500 mt-2">
               CPU potente y RAM generosa para edición y streaming simultáneo
             </p>
           </div>
 
           {/* Mejor Valor */}
-          <div className="p-4 rounded-xl bg-black/30 border border-white/10">
+          <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
             <div className="flex items-center gap-2 mb-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-full bg-neutral-50 flex items-center justify-center">
                 <span className="text-xl">💎</span>
               </div>
               <div>
                 <h4 className="font-semibold text-sm">Mejor Valor</h4>
-                <p className="text-xs text-white/60">Calidad-Precio</p>
+                <p className="text-xs text-neutral-500">Calidad-Precio</p>
               </div>
             </div>
-            <div className="text-sm text-white/80">
+            <div className="text-sm text-neutral-700">
               {getBestValue(products)?.name || 'N/A'}
             </div>
-            <p className="text-xs text-white/60 mt-2">
+            <p className="text-xs text-neutral-500 mt-2">
               Mejor relación entre rendimiento y precio
             </p>
           </div>

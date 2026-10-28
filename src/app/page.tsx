@@ -130,7 +130,7 @@ export default function Page() {
           </div>
 
           <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-16">
-            {advancedProduct && <ProductCard p={advancedProduct} tone="light" />}
+            {advancedProduct && <ProductCard p={advancedProduct} />}
 
             <div>
               <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">TITAN ADVANCED</h3>

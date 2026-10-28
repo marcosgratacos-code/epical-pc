@@ -96,7 +96,7 @@ export default function HeroSection() {
           }}
         >
           <motion.div 
-            className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl"
+            className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-50 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.6, 0.3],
@@ -108,7 +108,7 @@ export default function HeroSection() {
             }}
           />
           <motion.div 
-            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/10 rounded-full blur-3xl"
+            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-50 rounded-full blur-3xl"
             animate={{
               scale: [1.2, 1, 1.2],
               opacity: [0.4, 0.7, 0.4],
@@ -127,7 +127,7 @@ export default function HeroSection() {
           {[...Array(30)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-blue-400/20 rounded-full"
+              className="absolute w-1 h-1 bg-blue-100 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -148,8 +148,8 @@ export default function HeroSection() {
         </div>
 
         {/* Luz ambiental neón lateral */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-96 bg-gradient-to-b from-transparent via-blue-500 to-transparent blur-xl opacity-30" />
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-96 bg-gradient-to-b from-transparent via-violet-500 to-transparent blur-xl opacity-30" />
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-96 bg-neutral-900 blur-xl opacity-30 text-white" />
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-96 bg-neutral-900 blur-xl opacity-30 text-white" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
           {/* Contenido principal */}
@@ -162,9 +162,9 @@ export default function HeroSection() {
           >
             {/* Badge */}
             <motion.div variants={itemVariants}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-300 backdrop-blur-sm shadow-lg shadow-blue-500/10">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-600 backdrop-blur-sm shadow-lg shadow-black/10">
                 <motion.span 
-                  className="w-2 h-2 bg-blue-400 rounded-full"
+                  className="w-2 h-2 bg-blue-600 rounded-full text-white"
                   animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
@@ -178,7 +178,7 @@ export default function HeroSection() {
               className="mt-6 text-5xl md:text-6xl lg:text-7xl font-black leading-tight"
             >
               <span 
-                className="block text-white drop-shadow-2xl"
+                className="block text-neutral-900 drop-shadow-2xl"
                 style={{
                   textShadow: '0 0 40px rgba(255, 255, 255, 0.3), 0 0 80px rgba(59, 130, 246, 0.2)',
                 }}
@@ -186,7 +186,7 @@ export default function HeroSection() {
                 Potencia extrema,
               </span>
               <span 
-                className="block text-white/90 drop-shadow-xl"
+                className="block text-neutral-800 drop-shadow-xl"
                 style={{
                   textShadow: '0 0 30px rgba(255, 255, 255, 0.2)',
                 }}
@@ -198,7 +198,7 @@ export default function HeroSection() {
             {/* Línea luminosa pulsante */}
             <motion.div 
               variants={itemVariants}
-              className="mt-6 h-1 w-32 bg-gradient-to-r from-blue-500 via-violet-500 to-transparent rounded-full"
+              className="mt-6 h-1 w-32 bg-neutral-900 rounded-full text-white"
               animate={{
                 opacity: [0.5, 1, 0.5],
                 scaleX: [1, 1.1, 1],
@@ -216,7 +216,7 @@ export default function HeroSection() {
               className="mt-6"
             >
               <motion.span 
-                className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-400 via-violet-400 to-blue-400 bg-clip-text text-transparent"
+                className="text-4xl md:text-5xl lg:text-6xl font-black text-neutral-900"
                 style={{
                   backgroundSize: '200% 100%',
                   textShadow: '0 0 60px rgba(59, 130, 246, 0.4)',
@@ -237,11 +237,11 @@ export default function HeroSection() {
             {/* Subtítulo inspirador */}
             <motion.p 
               variants={itemVariants}
-              className="mt-8 text-lg md:text-xl lg:text-2xl text-white/70 leading-relaxed max-w-2xl mx-auto lg:mx-0"
+              className="mt-8 text-lg md:text-xl lg:text-2xl text-neutral-600 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
               Cada PC se ensambla con{" "}
               <motion.span 
-                className="text-blue-300 font-semibold cursor-pointer relative inline-block"
+                className="text-blue-600 font-semibold cursor-pointer relative inline-block"
                 whileHover={{ 
                   textShadow: '0 0 20px rgba(59, 130, 246, 0.8)',
                   color: '#60a5fa'
@@ -249,7 +249,7 @@ export default function HeroSection() {
               >
                 precisión milimétrica
                 <motion.span
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-violet-400"
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-neutral-900 text-white"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.3 }}
@@ -265,7 +265,7 @@ export default function HeroSection() {
             >
               <motion.button
                 onClick={() => scrollTo("productos")}
-                className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 via-blue-600 to-violet-600 rounded-xl font-bold text-white text-lg overflow-hidden"
+                className="group relative px-8 py-4 bg-neutral-900 rounded-xl font-bold text-white text-lg overflow-hidden"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{
@@ -296,7 +296,7 @@ export default function HeroSection() {
                   </motion.svg>
                 </span>
                 <motion.div 
-                  className="absolute inset-0 bg-white/20"
+                  className="absolute inset-0 bg-neutral-200"
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
@@ -319,13 +319,13 @@ export default function HeroSection() {
               >
                 <Link
                   href="/pc-a-medida"
-                  className="group relative px-8 py-4 border-2 rounded-xl font-bold text-white text-lg backdrop-blur-lg overflow-hidden flex items-center justify-center gap-2"
+                  className="group relative px-8 py-4 border-2 rounded-xl font-bold text-neutral-900 text-lg backdrop-blur-lg overflow-hidden flex items-center justify-center gap-2"
                   style={{
                     borderImage: 'linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(139, 92, 246, 0.5)) 1',
                   }}
                 >
                   <motion.span
-                    className="absolute inset-0 border-2 border-blue-500/50 rounded-xl"
+                    className="absolute inset-0 border-2 border-blue-300 rounded-xl"
                     animate={{
                       opacity: [0.3, 1, 0.3],
                     }}
@@ -348,7 +348,7 @@ export default function HeroSection() {
                   >
                     +
                   </motion.span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-violet-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-xl" />
+                  <div className="absolute inset-0 bg-neutral-50 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-xl" />
                 </Link>
               </motion.div>
             </motion.div>
@@ -380,7 +380,7 @@ export default function HeroSection() {
               }}
             >
               {/* Contenedor principal con efectos */}
-              <div className="relative w-full h-full rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-sm overflow-hidden group">
+              <div className="relative w-full h-full rounded-3xl border border-neutral-200 bg-neutral-50 backdrop-blur-sm overflow-hidden group">
                 {/* Imagen del PC */}
                 <Image 
                   src="/epical_hero_setup.jpg" 
@@ -392,13 +392,13 @@ export default function HeroSection() {
                 />
                 
                 {/* Efectos de luz RGB volumétricos */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 via-transparent to-violet-500/30 opacity-60 mix-blend-screen" />
+                <div className="absolute inset-0 bg-neutral-50 opacity-60 mix-blend-screen" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.5),transparent_50%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.5),transparent_50%)]" />
                 
                 {/* Efecto highlight animado en cristal */}
                 <motion.div 
-                  className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent"
+                  className="absolute inset-0 bg-neutral-50"
                   animate={{
                     opacity: [0, 0.3, 0],
                     x: ['-100%', '100%'],
@@ -438,12 +438,12 @@ export default function HeroSection() {
                 </div>
 
                 {/* Borde interno brillante */}
-                <div className="absolute inset-0 rounded-3xl border-2 border-blue-500/20 group-hover:border-blue-500/40 transition-colors duration-500" />
+                <div className="absolute inset-0 rounded-3xl border-2 border-blue-200 group-hover:border-blue-300 transition-colors duration-500" />
               </div>
 
               {/* Efectos de glow exterior múltiples */}
               <motion.div 
-                className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/30 to-violet-500/30 blur-2xl scale-110 opacity-40"
+                className="absolute inset-0 rounded-3xl bg-neutral-50 blur-2xl scale-110 opacity-40"
                 animate={{
                   opacity: [0.3, 0.6, 0.3],
                   scale: [1.1, 1.15, 1.1],
@@ -488,7 +488,7 @@ export default function HeroSection() {
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
-                className="group relative text-center p-8 rounded-3xl border border-blue-500/10 bg-black/40 backdrop-blur-lg cursor-pointer overflow-hidden"
+                className="group relative text-center p-8 rounded-3xl border border-blue-200 bg-neutral-50 backdrop-blur-lg cursor-pointer overflow-hidden"
                 whileHover={{ 
                   scale: 1.05,
                   borderColor: 'rgba(59, 130, 246, 0.5)',
@@ -497,7 +497,7 @@ export default function HeroSection() {
               >
                 {/* Glow de fondo en hover */}
                 <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`}
+                  className={`absolute inset-0 bg-neutral-50 ${stat.gradient} opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`}
                 />
 
                 {/* Ícono animado */}
@@ -521,7 +521,7 @@ export default function HeroSection() {
 
                 {/* Número */}
                 <motion.div 
-                  className={`text-4xl md:text-5xl font-black bg-gradient-to-br ${stat.gradient} bg-clip-text text-transparent mb-3`}
+                  className={`text-4xl md:text-5xl font-black bg-neutral-50 ${stat.gradient} bg-clip-text text-transparent mb-3`}
                   whileHover={{
                     textShadow: '0 0 30px rgba(59, 130, 246, 0.6)',
                   }}
@@ -530,7 +530,7 @@ export default function HeroSection() {
                 </motion.div>
 
                 {/* Label */}
-                <div className="text-sm text-white/70 group-hover:text-white transition-colors duration-300">
+                <div className="text-sm text-neutral-600 group-hover:text-neutral-900 transition-colors duration-300">
                   {stat.label}
                 </div>
 
@@ -558,7 +558,7 @@ export default function HeroSection() {
           href="https://wa.me/34XXXXXXXXX"
           target="_blank"
           rel="noreferrer"
-          className="group relative flex items-center gap-3 rounded-full bg-gradient-to-r from-green-500 to-green-600 px-6 py-4 text-white font-semibold shadow-2xl hover:from-green-600 hover:to-green-700 transition-all duration-300"
+          className="group relative flex items-center gap-3 rounded-full bg-neutral-900 px-6 py-4 text-white font-semibold shadow-2xl hover:bg-neutral-700 transition-all duration-300"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

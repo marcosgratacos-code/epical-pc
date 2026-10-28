@@ -24,11 +24,11 @@ export default function VistosRecientementePage() {
 
   if (!productos || productos.length === 0) {
     return (
-      <main className="mx-auto max-w-5xl px-4 py-20 text-center text-white">
+      <main className="mx-auto max-w-5xl px-4 py-20 text-center text-neutral-900">
         <h1 className="text-3xl font-bold mb-4">No has visto ningún producto aún</h1>
         <Link
           href="/productos"
-          className="inline-block mt-4 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-400 text-black font-semibold px-6 py-3 hover:scale-[1.03] transition-all duration-300"
+          className="inline-block mt-4 rounded-xl bg-neutral-900 text-white font-semibold px-6 py-3 hover:scale-[1.03] transition-all duration-300"
         >
           Ir a productos
         </Link>
@@ -37,16 +37,16 @@ export default function VistosRecientementePage() {
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-10 text-white">
+    <main className="max-w-6xl mx-auto px-4 py-10 text-neutral-900">
       <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl font-bold text-neutral-900">
           Vistos recientemente
         </h1>
 
         <select
           value={orden}
           onChange={(e) => setOrden(e.target.value)}
-          className="rounded-lg bg-white/10 border border-white/10 px-3 py-2 text-sm focus:outline-none"
+          className="rounded-lg bg-neutral-100 border border-neutral-200 px-3 py-2 text-sm focus:outline-none"
         >
           <option value="reciente">Más recientes</option>
           <option value="precioAsc">Precio: menor a mayor</option>
@@ -62,7 +62,7 @@ export default function VistosRecientementePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.04, duration: 0.4 }}
             whileHover={{ scale: 1.05 }}
-            className="rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900/80 to-neutral-800/60 overflow-hidden hover:border-white/20 transition-all duration-300"
+            className="rounded-2xl border border-neutral-200 bg-neutral-50 overflow-hidden hover:border-neutral-300 transition-all duration-300"
           >
             <Link href={`/products/${item.slug}`}>
               <div className="relative aspect-[4/3] w-full">
@@ -75,11 +75,11 @@ export default function VistosRecientementePage() {
                 />
               </div>
               <div className="p-3">
-                <h3 className="text-sm text-white font-semibold truncate">
+                <h3 className="text-sm text-neutral-900 font-semibold truncate">
                   {item.name}
                 </h3>
                 {item.price && (
-                  <p className="text-blue-400 font-medium text-sm mt-1">
+                  <p className="text-blue-600 font-medium text-sm mt-1">
                     {item.price.toLocaleString("es-ES", {
                       style: "currency",
                       currency: "EUR",
@@ -96,7 +96,7 @@ export default function VistosRecientementePage() {
       <div className="flex justify-center mt-12">
         <Link
           href="/productos"
-          className="rounded-xl bg-gradient-to-r from-violet-500 to-cyan-400 text-black font-semibold px-6 py-3 hover:scale-[1.03] transition-all duration-300"
+          className="rounded-xl bg-neutral-900 text-white font-semibold px-6 py-3 hover:scale-[1.03] transition-all duration-300"
         >
           Volver a productos
         </Link>

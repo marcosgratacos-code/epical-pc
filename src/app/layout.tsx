@@ -145,7 +145,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="apple-touch-icon" href="/apple-icon.svg" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="bg-black text-white">
+      <body className="bg-white text-neutral-900">
         <StructuredData data={organizationData} />
         <AuthSessionProvider session={session}>
           <NotificationsProvider>
@@ -156,12 +156,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     <ProgressBar />
                   </Suspense>
                   <Suspense fallback={
-                    <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
+                    <header className="sticky top-0 z-[100] bg-white/95 backdrop-blur-xl border-b border-neutral-200">
                       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
-                        <div className="text-2xl font-bold text-white">TITAN-PC</div>
+                        <div className="text-xl font-semibold tracking-tight text-neutral-900">TITAN-PC</div>
                         <div className="flex items-center gap-2">
-                          <div className="h-8 w-8 bg-white/10 rounded animate-pulse"></div>
-                          <div className="h-8 w-8 bg-white/10 rounded animate-pulse"></div>
+                          <div className="h-8 w-8 bg-neutral-100 rounded animate-pulse"></div>
+                          <div className="h-8 w-8 bg-neutral-100 rounded animate-pulse"></div>
                         </div>
                       </div>
                     </header>

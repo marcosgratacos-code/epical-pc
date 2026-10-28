@@ -14,7 +14,7 @@ export default function BackButton({ fallback = "/#productos" }: { fallback?: st
           router.push(fallback);
         }
       }}
-      className="rounded-xl border border-white/20 px-3 py-1 text-sm hover:border-white/40"
+      className="rounded-xl border border-neutral-300 px-3 py-1 text-sm hover:border-neutral-400"
       aria-label="Volver a la página anterior"
     >
       ← Volver

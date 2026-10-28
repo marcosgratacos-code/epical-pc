@@ -193,8 +193,8 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
       <div className="space-y-6">
         {/* Header del resumen */}
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-2">Tu Configuración</h2>
-          <p className="text-white/60">Revisa tu configuración antes de enviar la solicitud</p>
+          <h2 className="text-2xl font-bold text-neutral-900 mb-2">Tu Configuración</h2>
+          <p className="text-neutral-500">Revisa tu configuración antes de enviar la solicitud</p>
         </div>
 
         {/* Resumen de componentes */}
@@ -202,32 +202,32 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
           {steps.map((step, index) => {
             const component = currentConfig[step.id as keyof PCConfiguration];
             return (
-              <div key={step.id} className="rounded-xl border border-white/10 bg-white/5 p-4">
+              <div key={step.id} className="rounded-xl border border-neutral-200 bg-neutral-50 p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-xl">{step.icon}</span>
-                      <h3 className="font-semibold text-white">{step.name}</h3>
+                      <h3 className="font-semibold text-neutral-900">{step.name}</h3>
                     </div>
                     {component ? (
                       <>
-                        <p className="text-white/90 text-sm font-medium">{component.name}</p>
-                        <p className="text-violet-400 font-bold mt-1">
+                        <p className="text-neutral-800 text-sm font-medium">{component.name}</p>
+                        <p className="text-blue-600 font-bold mt-1">
                           {component.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
                         </p>
-                        <ul className="mt-2 text-xs text-white/60 space-y-1">
+                        <ul className="mt-2 text-xs text-neutral-500 space-y-1">
                           {component.specs.slice(0, 2).map((spec, i) => (
                             <li key={i}>• {spec}</li>
                           ))}
                         </ul>
                       </>
                     ) : (
-                      <p className="text-white/40 text-sm">No seleccionado</p>
+                      <p className="text-neutral-400 text-sm">No seleccionado</p>
                     )}
                   </div>
                   <button
                     onClick={() => goToStep(index)}
-                    className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 text-xs"
+                    className="px-3 py-1 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-600 hover:bg-neutral-100 text-xs"
                   >
                     Cambiar
                   </button>
@@ -239,7 +239,7 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
 
         {/* Advertencias de compatibilidad */}
         {compatibilityWarnings.length > 0 && (
-          <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-4">
+          <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-4">
             <h4 className="text-yellow-400 font-semibold mb-2">⚠️ Advertencias:</h4>
             <ul className="text-yellow-400/80 text-sm space-y-1">
               {compatibilityWarnings.map((warning, index) => (
@@ -250,36 +250,36 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
         )}
 
         {/* Precio total */}
-        <div className="rounded-2xl border border-white/10 bg-gradient-to-r from-violet-500/10 to-cyan-500/10 p-6">
+        <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-white/70 text-lg">Precio estimado total:</span>
-            <span className="text-3xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="text-neutral-600 text-lg">Precio estimado total:</span>
+            <span className="text-3xl font-bold text-neutral-900">
               {totalPrice.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
             </span>
           </div>
-          <p className="text-white/60 text-sm text-center mb-4">
+          <p className="text-neutral-500 text-sm text-center mb-4">
             * Este precio es orientativo. Te enviaremos una propuesta con precio final según disponibilidad.
           </p>
           
           {isComplete && (
-            <div className="flex items-center gap-2 justify-center p-3 rounded-lg bg-green-500/10 border border-green-500/30 mb-4">
-              <svg className="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-center gap-2 justify-center p-3 rounded-lg bg-green-50 border border-green-200 mb-4">
+              <svg className="h-5 w-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <p className="text-green-400 font-medium text-sm">Configuración completa</p>
+              <p className="text-green-700 font-medium text-sm">Configuración completa</p>
             </div>
           )}
 
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={() => setShowSummary(false)}
-              className="flex-1 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 transition-all touch-target"
+              className="flex-1 px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold hover:bg-neutral-100 transition-all touch-target"
             >
               ← Seguir configurando
             </button>
             <button
               onClick={handleSendEmail}
-              className="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 touch-target"
+              className="flex-1 px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
             >
               📧 Enviar Configuración
             </button>
@@ -287,7 +287,7 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
           
           <button
             onClick={resetConfiguration}
-            className="w-full mt-3 px-4 py-2 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all text-sm font-medium"
+            className="w-full mt-3 px-4 py-2 rounded-lg bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 transition-all text-sm font-medium"
           >
             🔄 Empezar de nuevo
           </button>
@@ -302,15 +302,15 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-neutral-900">
               Paso {currentStep + 1} de {steps.length}
             </h3>
-            <p className="text-white/60 text-sm">{steps[currentStep].description}</p>
+            <p className="text-neutral-500 text-sm">{steps[currentStep].description}</p>
           </div>
           <button
             onClick={() => setShowSummary(true)}
             disabled={totalPrice === 0}
-            className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-600 hover:bg-neutral-100 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Ver Resumen
           </button>
@@ -329,10 +329,10 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
                   onClick={() => goToStep(index)}
                   className={`w-full h-2 rounded-full transition-all ${
                     isCompleted
-                      ? 'bg-gradient-to-r from-violet-500 to-cyan-500'
+                      ? 'bg-neutral-900 text-white'
                       : isCurrent
-                      ? 'bg-violet-500/50'
-                      : 'bg-white/10'
+                      ? 'bg-blue-200'
+                      : 'bg-neutral-100'
                   }`}
                   title={step.name}
                 />
@@ -342,7 +342,7 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
         </div>
 
         {/* Indicadores de pasos */}
-        <div className="flex justify-between mt-2 text-xs text-white/50">
+        <div className="flex justify-between mt-2 text-xs text-neutral-500">
           {steps.map((step, index) => {
             const component = currentConfig[step.id as keyof PCConfiguration];
             return (
@@ -356,34 +356,34 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
 
       {/* Header del paso actual */}
       <div className="text-center mb-6">
-        <div className="inline-block h-16 w-16 rounded-full bg-gradient-to-br from-violet-500/20 to-cyan-500/20 flex items-center justify-center mb-4">
+        <div className="inline-block h-16 w-16 rounded-full bg-neutral-50 flex items-center justify-center mb-4">
           <span className="text-3xl">{steps[currentStep].icon}</span>
         </div>
-        <h2 className="text-2xl font-bold text-white mb-2">
+        <h2 className="text-2xl font-bold text-neutral-900 mb-2">
           {steps[currentStep].name}
         </h2>
-        <p className="text-white/70 mb-4">
+        <p className="text-neutral-600 mb-4">
           {steps[currentStep].description}
         </p>
         
       </div>
 
       {/* Nota informativa clickeable */}
-      <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+      <div className="rounded-xl border border-blue-300 bg-blue-50 p-4">
         <div className="flex items-start gap-3">
           <div className="flex-shrink-0">
-            <svg className="h-5 w-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <div className="flex-1">
             <button
               onClick={() => setIsPriceInfoOpen(true)}
-              className="text-cyan-400 text-sm font-medium hover:text-cyan-300 transition-colors cursor-pointer text-left"
+              className="text-blue-600 text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer text-left"
             >
               💡 Los precios son orientativos
             </button>
-            <p className="text-white/70 text-xs mt-1">
+            <p className="text-neutral-600 text-xs mt-1">
               Te enviaremos una propuesta detallada con precios finales según disponibilidad de stock.
             </p>
           </div>
@@ -391,8 +391,8 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
       </div>
 
       {/* Componentes disponibles */}
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-        <h3 className="text-lg font-semibold text-white mb-4">
+      <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+        <h3 className="text-lg font-semibold text-neutral-900 mb-4">
           Selecciona tu {steps[currentStep].name}
         </h3>
         
@@ -403,37 +403,37 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
               onClick={() => handleSelectComponent(component)}
               className={`text-left p-4 rounded-xl border transition-all hover:scale-[1.02] ${
                 selectedComponent?.id === component.id
-                  ? 'border-violet-500/50 bg-violet-500/10 ring-2 ring-violet-500/30'
-                  : 'border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20'
+                  ? 'border-blue-300 bg-blue-50 ring-2 ring-blue-300'
+                  : 'border-neutral-200 bg-neutral-50 hover:bg-neutral-100 hover:border-neutral-300'
               }`}
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <h4 className="font-semibold text-white text-lg">{component.name}</h4>
+                  <h4 className="font-semibold text-neutral-900 text-lg">{component.name}</h4>
                   {component.recommended && (
-                    <span className="inline-block mt-1 px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium">
+                    <span className="inline-block mt-1 px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium">
                       ⭐ Recomendado
                     </span>
                   )}
                 </div>
                 <div className="text-right">
-                  <span className="text-violet-400 font-bold text-xl">
+                  <span className="text-blue-600 font-bold text-xl">
                     {component.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
                   </span>
                 </div>
               </div>
               
-              <ul className="text-white/70 text-sm space-y-1.5">
+              <ul className="text-neutral-600 text-sm space-y-1.5">
                 {component.specs.map((spec, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="w-1.5 h-1.5 bg-violet-400 rounded-full mr-2 mt-1.5 flex-shrink-0"></span>
+                    <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2 mt-1.5 flex-shrink-0 text-white"></span>
                     <span>{spec}</span>
                   </li>
                 ))}
               </ul>
               
               {selectedComponent?.id === component.id && (
-                <div className="mt-3 flex items-center gap-2 text-violet-400 font-medium text-sm">
+                <div className="mt-3 flex items-center gap-2 text-blue-600 font-medium text-sm">
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -450,14 +450,14 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
         <button
           onClick={goBack}
           disabled={currentStep === 0}
-          className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 transition-all disabled:opacity-50 disabled:cursor-not-allowed touch-target"
+          className="px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold hover:bg-neutral-100 transition-all disabled:opacity-50 disabled:cursor-not-allowed touch-target"
         >
           ← Anterior
         </button>
 
         <div className="text-center flex-1">
-          <p className="text-white/60 text-sm">
-            Precio actual: <span className="text-violet-400 font-bold text-lg">
+          <p className="text-neutral-500 text-sm">
+            Precio actual: <span className="text-blue-600 font-bold text-lg">
               {totalPrice.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
             </span>
           </p>
@@ -466,14 +466,14 @@ export default function PCConfigurator({ onConfigurationChange }: PCConfigurator
         {currentStep < steps.length - 1 ? (
           <button
             onClick={goNext}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 touch-target"
+            className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
           >
             Siguiente →
           </button>
         ) : (
           <button
             onClick={() => setShowSummary(true)}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 touch-target"
+            className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
           >
             Finalizar →
           </button>

@@ -154,16 +154,16 @@ export default function GamingCalculator() {
     
     if (adjustedFPS >= 120) {
       experience = "Experiencia Premium";
-      experienceColor = "text-green-400";
+      experienceColor = "text-green-700";
     } else if (adjustedFPS >= 60) {
       experience = "Experiencia Fluida";
-      experienceColor = "text-blue-400";
+      experienceColor = "text-blue-600";
     } else if (adjustedFPS >= 30) {
       experience = "Experiencia Jugable";
       experienceColor = "text-yellow-400";
     } else {
       experience = "Experiencia Limitada";
-      experienceColor = "text-red-400";
+      experienceColor = "text-red-700";
     }
 
     return {
@@ -249,22 +249,22 @@ export default function GamingCalculator() {
   }, [selectedGame, selectedResolution, selectedQuality, selectedGPU, enableDLSS4, calculateFPS]);
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-white text-neutral-900">
       {/* Header */}
       <section className="mx-auto max-w-7xl p-6">
         <div className="mb-8">
-          <nav className="mb-4 text-sm text-white/60">
-            <Link href="/" className="hover:text-white">Inicio</Link>
+          <nav className="mb-4 text-sm text-neutral-500">
+            <Link href="/" className="hover:text-neutral-900">Inicio</Link>
             <span className="mx-2">/</span>
-            <span className="text-white">Calculadora Gaming</span>
+            <span className="text-neutral-900">Calculadora Gaming</span>
           </nav>
           
           <h1 className="text-4xl font-bold mb-2">
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
+            <span className="text-neutral-900">
               Calculadora Gaming TITAN
             </span>
           </h1>
-          <p className="text-white/70 text-lg">
+          <p className="text-neutral-600 text-lg">
             Calcula el rendimiento de tus juegos favoritos con nuestros PCs personalizados
           </p>
         </div>
@@ -272,12 +272,12 @@ export default function GamingCalculator() {
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Panel de configuración */}
           <div className="lg:col-span-1">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 sticky top-6">
+            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 sticky top-6">
               <h3 className="text-xl font-semibold mb-6">Configuración</h3>
               
               {/* Selección de juego */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-white/80 mb-3">Juego</label>
+                <label className="block text-sm font-medium text-neutral-700 mb-3">Juego</label>
                 <div className="space-y-2">
                   {GAMES_DATABASE.map(game => (
                     <button
@@ -285,12 +285,12 @@ export default function GamingCalculator() {
                       onClick={() => setSelectedGame(game)}
                       className={`w-full text-left p-3 rounded-xl border transition-all ${
                         selectedGame.id === game.id
-                          ? "border-violet-400 bg-violet-400/10"
-                          : "border-white/10 hover:border-white/20"
+                          ? "border-blue-600 bg-blue-50"
+                          : "border-neutral-200 hover:border-neutral-300"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-white/10">
+                        <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-neutral-200">
                           <Image
                             src={game.image}
                             alt={game.name}
@@ -301,11 +301,11 @@ export default function GamingCalculator() {
                         </div>
                         <div>
                           <div className="font-medium">{game.name}</div>
-                          <div className="text-xs text-white/60">
+                          <div className="text-xs text-neutral-500">
                             {game.categories.join(" • ")}
                           </div>
                           {game.supportsDLSS4 && (
-                            <div className="text-xs text-cyan-400">✓ DLSS 4</div>
+                            <div className="text-xs text-blue-600">✓ DLSS 4</div>
                           )}
                         </div>
                       </div>
@@ -316,7 +316,7 @@ export default function GamingCalculator() {
 
               {/* Selección de GPU */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-white/80 mb-3">GPU</label>
+                <label className="block text-sm font-medium text-neutral-700 mb-3">GPU</label>
                 <div className="space-y-2">
                   {["RTX 5060", "RTX 5070", "RTX 5080"].map(gpu => (
                     <button
@@ -324,8 +324,8 @@ export default function GamingCalculator() {
                       onClick={() => setSelectedGPU(gpu)}
                       className={`w-full text-left p-3 rounded-xl border transition-all ${
                         selectedGPU === gpu
-                          ? "border-cyan-400 bg-cyan-400/10"
-                          : "border-white/10 hover:border-white/20"
+                          ? "border-blue-600 bg-blue-50"
+                          : "border-neutral-200 hover:border-neutral-300"
                       }`}
                     >
                       {gpu}
@@ -336,7 +336,7 @@ export default function GamingCalculator() {
 
               {/* Resolución */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-white/80 mb-3">Resolución</label>
+                <label className="block text-sm font-medium text-neutral-700 mb-3">Resolución</label>
                 <div className="space-y-2">
                   {RESOLUTIONS.map(res => (
                     <button
@@ -344,12 +344,12 @@ export default function GamingCalculator() {
                       onClick={() => setSelectedResolution(res)}
                       className={`w-full text-left p-3 rounded-xl border transition-all ${
                         selectedResolution.id === res.id
-                          ? "border-blue-400 bg-blue-400/10"
-                          : "border-white/10 hover:border-white/20"
+                          ? "border-blue-600 bg-blue-50"
+                          : "border-neutral-200 hover:border-neutral-300"
                       }`}
                     >
                       <div className="font-medium">{res.name}</div>
-                      <div className="text-xs text-white/60">{res.pixels}</div>
+                      <div className="text-xs text-neutral-500">{res.pixels}</div>
                     </button>
                   ))}
                 </div>
@@ -357,7 +357,7 @@ export default function GamingCalculator() {
 
               {/* Calidad gráfica */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-white/80 mb-3">Calidad Gráfica</label>
+                <label className="block text-sm font-medium text-neutral-700 mb-3">Calidad Gráfica</label>
                 <div className="space-y-2">
                   {QUALITY_PRESETS.map(quality => (
                     <button
@@ -365,8 +365,8 @@ export default function GamingCalculator() {
                       onClick={() => setSelectedQuality(quality)}
                       className={`w-full text-left p-3 rounded-xl border transition-all ${
                         selectedQuality.id === quality.id
-                          ? "border-green-400 bg-green-400/10"
-                          : "border-white/10 hover:border-white/20"
+                          ? "border-green-400 bg-green-50"
+                          : "border-neutral-200 hover:border-neutral-300"
                       }`}
                     >
                       {quality.name}
@@ -383,11 +383,11 @@ export default function GamingCalculator() {
                       type="checkbox"
                       checked={enableDLSS4}
                       onChange={(e) => setEnableDLSS4(e.target.checked)}
-                      className="w-4 h-4 text-cyan-400 bg-black border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+                      className="w-4 h-4 text-blue-600 bg-white border-neutral-300 rounded focus:ring-blue-600 focus:ring-2"
                     />
                     <div>
-                      <div className="font-medium text-white/80">DLSS 4</div>
-                      <div className="text-xs text-cyan-400">Mejora de rendimiento con IA</div>
+                      <div className="font-medium text-neutral-700">DLSS 4</div>
+                      <div className="text-xs text-blue-600">Mejora de rendimiento con IA</div>
                     </div>
                   </label>
                 </div>
@@ -400,10 +400,10 @@ export default function GamingCalculator() {
             {results && (
               <div className="space-y-6">
                 {/* Resultado principal */}
-                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-violet-500/10 p-8">
+                <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-8">
                   <div className="text-center mb-6">
                     <div className="text-6xl font-bold mb-2">
-                      <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
+                      <span className="text-neutral-900">
                         {results.fps}
                       </span>
                     </div>
@@ -412,37 +412,37 @@ export default function GamingCalculator() {
                       {results.experience}
                     </div>
                     {results.dlssEnabled && (
-                      <div className="mt-2 text-sm text-cyan-400 font-medium">
+                      <div className="mt-2 text-sm text-blue-600 font-medium">
                         ✨ Con DLSS 4 activado
                       </div>
                     )}
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-3 text-center">
-                    <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                      <div className="text-sm text-white/60 mb-1">Juego</div>
+                    <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+                      <div className="text-sm text-neutral-500 mb-1">Juego</div>
                       <div className="font-semibold">{selectedGame.name}</div>
                     </div>
-                    <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                      <div className="text-sm text-white/60 mb-1">GPU</div>
+                    <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+                      <div className="text-sm text-neutral-500 mb-1">GPU</div>
                       <div className="font-semibold">{selectedGPU}</div>
                     </div>
-                    <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                      <div className="text-sm text-white/60 mb-1">Resolución</div>
+                    <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+                      <div className="text-sm text-neutral-500 mb-1">Resolución</div>
                       <div className="font-semibold">{selectedResolution.name}</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Recomendaciones */}
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
                   <h3 className="text-xl font-semibold mb-4">Recomendaciones</h3>
                   <div className="space-y-3">
                     {getRecommendations(results.fps).map((rec, index) => (
                       <div key={index} className={`p-3 rounded-xl border ${
                         rec.type === "warning" 
-                          ? "border-yellow-400/20 bg-yellow-400/5" 
-                          : "border-blue-400/20 bg-blue-400/5"
+                          ? "border-yellow-200 bg-yellow-50" 
+                          : "border-blue-200 bg-blue-50"
                       }`}>
                         <div className="flex items-center gap-2">
                           <span className="text-lg">
@@ -456,12 +456,12 @@ export default function GamingCalculator() {
                 </div>
 
                 {/* Comparación con otros GPUs */}
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-xl font-semibold">Comparación con otros GPUs</h3>
                     <button
                       onClick={() => setShowComparison(!showComparison)}
-                      className="text-violet-400 hover:text-violet-300 text-sm font-medium"
+                      className="text-blue-600 hover:text-blue-600 text-sm font-medium"
                     >
                       {showComparison ? "Ocultar" : "Mostrar"}
                     </button>
@@ -470,12 +470,12 @@ export default function GamingCalculator() {
                   {showComparison && (
                     <div className="space-y-3">
                       {getComparison().map((comp, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 rounded-xl border border-white/10">
+                        <div key={index} className="flex items-center justify-between p-3 rounded-xl border border-neutral-200">
                           <div className="font-medium">{comp.gpu}</div>
                           <div className="flex items-center gap-4">
                             <div className="text-lg font-semibold">{comp.fps} FPS</div>
                             <div className={`text-sm ${
-                              comp.difference > 0 ? "text-green-400" : "text-red-400"
+                              comp.difference > 0 ? "text-green-700" : "text-red-700"
                             }`}>
                               {comp.difference > 0 ? "+" : ""}{comp.difference}
                             </div>
@@ -487,21 +487,21 @@ export default function GamingCalculator() {
                 </div>
 
                 {/* CTA para comprar */}
-                <div className="rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-violet-500/10 p-6 text-center">
+                <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 text-center">
                   <h3 className="text-xl font-semibold mb-2">¿Te gusta este rendimiento?</h3>
-                  <p className="text-white/70 mb-4">
+                  <p className="text-neutral-600 mb-4">
                     Consigue este PC personalizado con garantía de 3 años y montaje profesional
                   </p>
                   <div className="flex flex-wrap justify-center gap-3">
                     <a
                       href="/productos"
-                      className="rounded-xl bg-white px-6 py-3 font-semibold text-black hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-400"
+                      className="rounded-xl bg-neutral-900 px-6 py-3 font-semibold text-white hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     >
                       Ver PCs disponibles
                     </a>
                     <a
                       href="/pc-a-medida"
-                      className="rounded-xl border border-white/20 px-6 py-3 font-semibold hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400"
+                      className="rounded-xl border border-neutral-300 px-6 py-3 font-semibold hover:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     >
                       PC a medida
                     </a>
@@ -513,12 +513,12 @@ export default function GamingCalculator() {
         </div>
 
         {/* Información sobre datos reales de 2025 */}
-        <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">📊 Datos Reales de Benchmarks 2025</h3>
-          <div className="space-y-3 text-sm text-white/70">
+        <div className="mt-8 rounded-xl border border-neutral-200 bg-neutral-50 p-6">
+          <h3 className="mb-4 text-lg font-semibold text-neutral-900">📊 Datos Reales de Benchmarks 2025</h3>
+          <div className="space-y-3 text-sm text-neutral-600">
             <p>• Los FPS mostrados son datos reales de benchmarks de 2025 (+20% optimizados)</p>
             <p>• Basados en pruebas con configuraciones Ultra/High</p>
-            <p>• <span className="text-cyan-400 font-semibold">DLSS 4 cuadruplica el rendimiento (4x)</span> en todos los juegos compatibles</p>
+            <p>• <span className="text-blue-600 font-semibold">DLSS 4 cuadruplica el rendimiento (4x)</span> en todos los juegos compatibles</p>
             <p>• El rendimiento puede variar según la configuración del sistema</p>
             <p>• Datos extrapolados de RTX 4060/4070/4080 con mejoras estimadas</p>
             <p>• Fuentes: TechPowerUp, Tom&apos;s Hardware, AnandTech (2025)</p>

@@ -88,11 +88,11 @@ export default function Onboarding() {
 
       {/* Modal */}
       <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-        <div className="bg-black border border-white/20 rounded-2xl max-w-md w-full overflow-hidden animate-fade-in-scale shadow-2xl">
+        <div className="bg-white border border-neutral-300 rounded-2xl max-w-md w-full overflow-hidden animate-fade-in-scale shadow-2xl">
           {/* Progress bar */}
-          <div className="h-1 bg-white/10">
+          <div className="h-1 bg-neutral-100">
             <div
-              className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 transition-all duration-300"
+              className="h-full bg-neutral-900 transition-all duration-300 text-white"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -105,12 +105,12 @@ export default function Onboarding() {
             </div>
 
             {/* Title */}
-            <h2 className="text-2xl font-bold text-center mb-3 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold text-center mb-3 text-neutral-900">
               {step.title}
             </h2>
 
             {/* Description */}
-            <p className="text-white/70 text-center mb-6 leading-relaxed">
+            <p className="text-neutral-600 text-center mb-6 leading-relaxed">
               {step.description}
             </p>
 
@@ -121,8 +121,8 @@ export default function Onboarding() {
                   key={index}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === currentStep
-                      ? "w-8 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500"
-                      : "w-2 bg-white/20"
+                      ? "w-8 bg-neutral-900 text-white"
+                      : "w-2 bg-neutral-200"
                   }`}
                 />
               ))}
@@ -133,14 +133,14 @@ export default function Onboarding() {
               {currentStep > 0 && (
                 <button
                   onClick={handlePrev}
-                  className="flex-1 px-4 py-3 rounded-xl border border-white/20 text-white hover:bg-white/10 transition-all duration-200"
+                  className="flex-1 px-4 py-3 rounded-xl border border-neutral-300 text-neutral-900 hover:bg-neutral-100 transition-all duration-200"
                 >
                   Anterior
                 </button>
               )}
               <button
                 onClick={handleNext}
-                className="flex-1 px-4 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300"
+                className="flex-1 px-4 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300"
               >
                 {currentStep < STEPS.length - 1 ? "Siguiente" : "Empezar"}
               </button>
@@ -149,7 +149,7 @@ export default function Onboarding() {
             {/* Skip button */}
             <button
               onClick={handleSkip}
-              className="w-full mt-4 text-sm text-white/40 hover:text-white/60 transition-colors"
+              className="w-full mt-4 text-sm text-neutral-400 hover:text-neutral-500 transition-colors"
             >
               Saltar tutorial
             </button>

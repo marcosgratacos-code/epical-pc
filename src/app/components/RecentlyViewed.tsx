@@ -13,7 +13,7 @@ export default function RecentlyViewed() {
   return (
     <section className="mt-20 mb-12">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent mb-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-6">
           Vistos recientemente
         </h2>
 
@@ -25,7 +25,7 @@ export default function RecentlyViewed() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
               whileHover={{ scale: 1.05 }}
-              className="rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900/80 to-neutral-800/60 overflow-hidden hover:border-white/20 transition-all duration-300"
+              className="rounded-2xl border border-neutral-200 bg-neutral-50 overflow-hidden hover:border-neutral-300 transition-all duration-300"
             >
               <Link href={`/products/${item.slug}`}>
                 <div className="relative aspect-[4/3] w-full">
@@ -38,11 +38,11 @@ export default function RecentlyViewed() {
                   />
                 </div>
                 <div className="p-3">
-                  <h3 className="text-sm text-white font-semibold truncate">
+                  <h3 className="text-sm text-neutral-900 font-semibold truncate">
                     {item.name}
                   </h3>
                   {item.price && (
-                    <p className="text-blue-400 font-medium text-sm mt-1">
+                    <p className="text-blue-600 font-medium text-sm mt-1">
                       {item.price.toLocaleString("es-ES", {
                         style: "currency",
                         currency: "EUR",
@@ -60,7 +60,7 @@ export default function RecentlyViewed() {
         <div className="flex justify-center mt-10">
           <Link
             href="/vistos-recientemente"
-            className="rounded-xl bg-gradient-to-r from-violet-500 to-cyan-400 text-black font-semibold px-6 py-3 hover:scale-[1.03] transition-all duration-300"
+            className="rounded-xl bg-neutral-900 text-white font-semibold px-6 py-3 hover:scale-[1.03] transition-all duration-300"
           >
             Ver todos
           </Link>

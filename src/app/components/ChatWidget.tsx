@@ -167,7 +167,7 @@ export default function ChatWidget() {
       {/* Botón flotante */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 touch-target ${
+        className={`fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-neutral-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 touch-target ${
           isOpen ? 'opacity-0 invisible pointer-events-none' : 'opacity-100 visible'
         }`}
         aria-label="Abrir chat de soporte"
@@ -183,19 +183,19 @@ export default function ChatWidget() {
       </button>
 
       {/* Widget de chat */}
-      <div className={`fixed bottom-6 right-6 z-50 w-80 md:w-96 h-[500px] bg-black border border-white/10 rounded-2xl shadow-2xl backdrop-blur-sm flex flex-col transition-all duration-300 ${
+      <div className={`fixed bottom-6 right-6 z-50 w-80 md:w-96 h-[500px] bg-white border border-neutral-200 rounded-2xl shadow-2xl backdrop-blur-sm flex flex-col transition-all duration-300 ${
         isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4 pointer-events-none'
       }`}>
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-white/10 bg-gradient-to-r from-violet-500/10 to-cyan-500/10 rounded-t-2xl flex-shrink-0">
+          <div className="flex items-center justify-between p-4 border-b border-neutral-200 bg-neutral-50 rounded-t-2xl flex-shrink-0">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 flex items-center justify-center relative">
-                <span className="text-white text-sm font-bold">T</span>
-                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-black"></span>
+              <div className="h-8 w-8 rounded-full bg-neutral-900 flex items-center justify-center relative text-white">
+                <span className="text-neutral-900 text-sm font-bold">T</span>
+                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-white"></span>
               </div>
               <div>
-                <h3 className="text-white font-semibold text-sm">TITAN-PC</h3>
-                <p className="text-green-400 text-xs flex items-center gap-1">
+                <h3 className="text-neutral-900 font-semibold text-sm">TITAN-PC</h3>
+                <p className="text-green-700 text-xs flex items-center gap-1">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-400"></span>
                   En línea
                 </p>
@@ -209,20 +209,20 @@ export default function ChatWidget() {
                     initializeChat();
                   }
                 }}
-                className="p-1 rounded-full hover:bg-white/10 transition-colors touch-target"
+                className="p-1 rounded-full hover:bg-neutral-100 transition-colors touch-target"
                 aria-label="Limpiar chat"
                 title="Limpiar historial"
               >
-                <svg className="h-4 w-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded-full hover:bg-white/10 transition-colors touch-target"
+                className="p-1 rounded-full hover:bg-neutral-100 transition-colors touch-target"
                 aria-label="Cerrar chat"
               >
-                <svg className="h-4 w-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -241,13 +241,13 @@ export default function ChatWidget() {
                   <div
                     className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
                       message.isUser
-                        ? 'bg-gradient-to-r from-violet-500 to-cyan-500 text-white rounded-br-none'
-                        : 'bg-white/10 text-white/90 rounded-bl-none'
+                        ? 'bg-neutral-900 text-white rounded-br-none'
+                        : 'bg-neutral-100 text-neutral-800 rounded-bl-none'
                     }`}
                   >
                     {message.text}
                   </div>
-                  <span className={`text-xs text-white/40 ${message.isUser ? 'text-right' : 'text-left'}`}>
+                  <span className={`text-xs text-neutral-400 ${message.isUser ? 'text-right' : 'text-left'}`}>
                     {message.timestamp.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
@@ -257,7 +257,7 @@ export default function ChatWidget() {
             {/* Indicador de escritura */}
             {isTyping && (
               <div className="flex justify-start animate-fade-in">
-                <div className="bg-white/10 text-white/90 px-4 py-3 rounded-lg text-sm rounded-bl-none">
+                <div className="bg-neutral-100 text-neutral-800 px-4 py-3 rounded-lg text-sm rounded-bl-none">
                   <div className="flex space-x-1">
                     <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -273,14 +273,14 @@ export default function ChatWidget() {
 
           {/* Respuestas rápidas */}
           {messages.length === 1 && (
-            <div className="p-4 border-t border-white/10">
-              <p className="text-white/60 text-xs mb-2">Respuestas rápidas:</p>
+            <div className="p-4 border-t border-neutral-200">
+              <p className="text-neutral-500 text-xs mb-2">Respuestas rápidas:</p>
               <div className="space-y-2">
                 {quickReplies.slice(0, 3).map((reply, index) => (
                   <button
                     key={index}
                     onClick={() => handleQuickReply(reply)}
-                    className="block w-full text-left px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white/80 text-xs hover:bg-white/10 transition-colors touch-target"
+                    className="block w-full text-left px-3 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-700 text-xs hover:bg-neutral-100 transition-colors touch-target"
                   >
                     {reply}
                   </button>
@@ -290,7 +290,7 @@ export default function ChatWidget() {
           )}
 
           {/* Input */}
-          <div className="p-4 border-t border-white/10 flex-shrink-0">
+          <div className="p-4 border-t border-neutral-200 flex-shrink-0">
             <div className="flex gap-2 mb-3">
               <input
                 ref={inputRef}
@@ -299,12 +299,12 @@ export default function ChatWidget() {
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Escribe tu mensaje..."
-                className="flex-1 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+                className="flex-1 px-3 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!inputText.trim()}
-                className="px-3 py-2 rounded-lg bg-gradient-to-r from-violet-500 to-cyan-500 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 transition-all touch-target"
+                className="px-3 py-2 rounded-lg bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 transition-all touch-target"
               >
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -318,13 +318,13 @@ export default function ChatWidget() {
                 href="https://wa.me/34XXXXXXXXX"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-3 py-2 rounded-lg bg-green-500/20 text-green-400 text-xs font-medium text-center hover:bg-green-500/30 transition-colors touch-target"
+                className="flex-1 px-3 py-2 rounded-lg bg-green-100 text-green-700 text-xs font-medium text-center hover:bg-green-100 transition-colors touch-target"
               >
                 WhatsApp
               </a>
               <a
                 href="mailto:epicalpc@gmail.com"
-                className="flex-1 px-3 py-2 rounded-lg bg-white/5 text-white/70 text-xs font-medium text-center hover:bg-white/10 transition-colors touch-target"
+                className="flex-1 px-3 py-2 rounded-lg bg-neutral-50 text-neutral-600 text-xs font-medium text-center hover:bg-neutral-100 transition-colors touch-target"
               >
                 Email
               </a>

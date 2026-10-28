@@ -10,23 +10,23 @@ export default function CompareFloatingButton() {
 
   return (
     <div className="fixed bottom-24 right-6 z-40 animate-fade-in-scale">
-      <div className="rounded-2xl border border-white/20 bg-black/95 backdrop-blur-xl shadow-2xl overflow-hidden">
+      <div className="rounded-2xl border border-neutral-300 bg-white/95 backdrop-blur-xl shadow-2xl overflow-hidden">
         <div className="p-4">
           <div className="flex items-center justify-between gap-3 mb-3">
             <div className="flex items-center gap-2">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cyan-500 via-blue-500 to-violet-500 flex items-center justify-center">
-                <span className="text-white font-bold">{compareCount}</span>
+              <div className="h-10 w-10 rounded-full bg-neutral-900 flex items-center justify-center text-white">
+                <span className="text-neutral-900 font-bold">{compareCount}</span>
               </div>
               <div>
-                <div className="text-sm font-semibold text-white">Comparar</div>
-                <div className="text-xs text-white/60">
+                <div className="text-sm font-semibold text-neutral-900">Comparar</div>
+                <div className="text-xs text-neutral-500">
                   {compareCount}/3 productos
                 </div>
               </div>
             </div>
             <button
               onClick={clearCompare}
-              className="h-8 w-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+              className="h-8 w-8 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
               aria-label="Limpiar comparación"
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@ export default function CompareFloatingButton() {
 
           <Link
             href="/comparador"
-            className="block w-full px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 text-white text-center font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300"
+            className="block w-full px-4 py-2 rounded-xl bg-neutral-900 text-white text-center font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300"
           >
             Comparar ahora
           </Link>

@@ -76,11 +76,11 @@ export default function CompareTable({
       <h3 className="mb-3 text-lg font-semibold">Comparar configuraciones</h3>
 
       {/* contenedor con scroll + snap en móvil */}
-      <div className="overflow-x-auto rounded-2xl border border-white/10 snap-x snap-mandatory">
-        <table className="min-w-[720px] w-full border-separate border-spacing-0 bg-black text-sm">
+      <div className="overflow-x-auto rounded-2xl border border-neutral-200 snap-x snap-mandatory">
+        <table className="min-w-[720px] w-full border-separate border-spacing-0 bg-white text-sm">
           <thead className="sticky top-0 z-20">
-            <tr className="bg-white/[0.03] text-left">
-              <th className="sticky left-0 z-30 bg-white/[0.03] p-3 font-semibold">
+            <tr className="bg-neutral-50 text-left">
+              <th className="sticky left-0 z-30 bg-neutral-50 p-3 font-semibold">
                 Característica
               </th>
               {list.map((p) => {
@@ -91,8 +91,8 @@ export default function CompareTable({
                     <div
                       className={`rounded-xl border px-3 py-2 ${
                         isCurrent
-                          ? "border-white/40 bg-white/[0.06]"
-                          : "border-white/10 bg-white/[0.03] hover:border-white/20"
+                          ? "border-neutral-400 bg-neutral-100"
+                          : "border-neutral-200 bg-neutral-50 hover:border-neutral-300"
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -100,7 +100,7 @@ export default function CompareTable({
                           {p.name}
                         </a>
                         {isRec && (
-                          <span className="rounded-full bg-white text-black px-2 py-0.5 text-xs font-bold">
+                          <span className="rounded-full bg-neutral-900 text-white px-2 py-0.5 text-xs font-bold">
                             ⭐ Recomendado
                           </span>
                         )}
@@ -108,7 +108,7 @@ export default function CompareTable({
                       <div className="mt-2">
                         <a
                           href={`/products/${p.slug}`}
-                          className="inline-block rounded-lg border border-white/20 px-2 py-1 text-xs hover:border-white/40"
+                          className="inline-block rounded-lg border border-neutral-300 px-2 py-1 text-xs hover:border-neutral-400"
                         >
                           Ver
                         </a>
@@ -121,10 +121,10 @@ export default function CompareTable({
           </thead>
           <tbody>
             {rows.map((r, i) => (
-              <tr key={r} className={i % 2 ? "bg-white/[0.02]" : ""}>
-                <td className="sticky left-0 z-10 bg-black p-3 text-white/80">{r}</td>
+              <tr key={r} className={i % 2 ? "bg-neutral-50" : ""}>
+                <td className="sticky left-0 z-10 bg-white p-3 text-neutral-700">{r}</td>
                 {list.map((p) => (
-                  <td key={p.id + r} className="p-3 text-white/80">
+                  <td key={p.id + r} className="p-3 text-neutral-700">
                     {getField(p, r)}
                   </td>
                 ))}
@@ -134,7 +134,7 @@ export default function CompareTable({
         </table>
       </div>
 
-      <p className="mt-2 text-xs text-white/50">
+      <p className="mt-2 text-xs text-neutral-500">
         * Componentes sujetos a equivalencias por stock, manteniendo gama y rendimiento.
       </p>
     </section>

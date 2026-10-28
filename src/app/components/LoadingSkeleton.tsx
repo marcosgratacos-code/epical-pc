@@ -14,7 +14,7 @@ export default function LoadingSkeleton({
   count = 1,
 }: LoadingSkeletonProps) {
   const getClassName = () => {
-    const base = "bg-gradient-to-r from-white/5 via-white/10 to-white/5 bg-[length:200%_100%] animate-shimmer";
+    const base = "bg-neutral-50 bg-[length:200%_100%] animate-shimmer";
     
     switch (variant) {
       case "text":
@@ -43,7 +43,7 @@ export default function LoadingSkeleton({
 
 export function ProductCardSkeleton() {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 space-y-3 animate-pulse">
+    <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 space-y-3 animate-pulse">
       <LoadingSkeleton variant="rectangular" height="200px" />
       <LoadingSkeleton variant="text" width="80%" />
       <LoadingSkeleton variant="text" width="60%" />

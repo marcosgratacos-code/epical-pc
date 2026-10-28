@@ -18,7 +18,7 @@ export default async function Upgrades({ slug }: { slug: string }) {
 
   return (
     <section className="mt-14 space-y-8">
-      <h2 className="text-2xl font-semibold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+      <h2 className="text-2xl font-semibold text-neutral-900">
         ⚙️ Upgrades compatibles
       </h2>
 
@@ -27,13 +27,13 @@ export default async function Upgrades({ slug }: { slug: string }) {
         if (!list || list.length === 0) return null;
         return (
           <div key={String(bucket)}>
-            <h3 className="text-lg font-semibold mb-3 text-white/90">{bucket}</h3>
+            <h3 className="text-lg font-semibold mb-3 text-neutral-800">{bucket}</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
               {list.map((s: any) => (
                 <Link
                   key={s.product.slug}
                   href={`/products/${s.product.slug}`}
-                  className="rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition overflow-hidden"
+                  className="rounded-2xl border border-neutral-200 bg-neutral-50 hover:bg-neutral-100 transition overflow-hidden"
                 >
                   <div className="relative aspect-[4/3]">
                     <Image
@@ -47,14 +47,14 @@ export default async function Upgrades({ slug }: { slug: string }) {
                   <div className="p-3">
                     <div className="text-sm font-semibold truncate">{s.product.name}</div>
                     {typeof s.product.price === "number" && (
-                      <div className="text-blue-400 text-sm mt-1">
+                      <div className="text-blue-600 text-sm mt-1">
                         {s.product.price.toLocaleString("es-ES", {
                           style: "currency",
                           currency: "EUR",
                         })}
                       </div>
                     )}
-                    <div className="text-xs text-white/50 mt-1">{s.reason}</div>
+                    <div className="text-xs text-neutral-500 mt-1">{s.reason}</div>
                   </div>
                 </Link>
               ))}

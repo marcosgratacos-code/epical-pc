@@ -144,16 +144,16 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-neutral-900">
       {/* Header */}
-      <div className="border-b border-white/10 bg-gradient-to-br from-violet-500/10 to-cyan-500/10">
+      <div className="border-b border-neutral-200 bg-neutral-50">
         <div className="max-w-4xl mx-auto px-4 py-8">
           <BackButton />
           <div className="mt-6 text-center">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold text-neutral-900">
               Preguntas Frecuentes
             </h1>
-            <p className="text-white/60 mt-2">
+            <p className="text-neutral-500 mt-2">
               Encuentra respuestas a las dudas más comunes sobre nuestros PCs gaming
             </p>
           </div>
@@ -170,9 +170,9 @@ export default function FAQPage() {
               placeholder="Buscar preguntas..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 pl-10 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+              className="w-full px-4 py-3 pl-10 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
             />
-            <svg className="absolute left-3 top-3.5 h-5 w-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="absolute left-3 top-3.5 h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
@@ -187,8 +187,8 @@ export default function FAQPage() {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   selectedCategory === category.id
-                    ? 'bg-violet-500/20 text-violet-400 border border-violet-500/30'
-                    : 'bg-white/5 text-white/70 border border-white/10 hover:bg-white/10'
+                    ? 'bg-blue-100 text-blue-600 border border-blue-300'
+                    : 'bg-neutral-50 text-neutral-600 border border-neutral-200 hover:bg-neutral-100'
                 }`}
               >
                 <span className="mr-2">{category.icon}</span>
@@ -202,13 +202,13 @@ export default function FAQPage() {
         <div className="space-y-4">
           {filteredFAQs.length === 0 ? (
             <div className="text-center py-12">
-              <div className="inline-block h-16 w-16 rounded-full bg-gradient-to-br from-violet-500/20 to-cyan-500/20 flex items-center justify-center mb-4">
-                <svg className="h-8 w-8 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-block h-16 w-16 rounded-full bg-neutral-50 flex items-center justify-center mb-4">
+                <svg className="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">No se encontraron preguntas</h3>
-              <p className="text-white/60 mb-6">
+              <h3 className="text-xl font-bold text-neutral-900 mb-2">No se encontraron preguntas</h3>
+              <p className="text-neutral-500 mb-6">
                 Intenta ajustar los filtros de búsqueda o contacta con nosotros directamente.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -216,13 +216,13 @@ export default function FAQPage() {
                   href="https://wa.me/34XXXXXXXXX"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 touch-target"
+                  className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
                 >
                   📱 Contactar por WhatsApp
                 </a>
                 <a
                   href="mailto:epicalpc@gmail.com"
-                  className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 transition-all duration-300 touch-target"
+                  className="px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold hover:bg-neutral-100 transition-all duration-300 touch-target"
                 >
                   📧 Enviar Email
                 </a>
@@ -232,16 +232,16 @@ export default function FAQPage() {
             filteredFAQs.map((faq) => (
               <div
                 key={faq.id}
-                className="rounded-xl border border-white/10 bg-white/5 overflow-hidden"
+                className="rounded-xl border border-neutral-200 bg-neutral-50 overflow-hidden"
               >
                 <button
                   onClick={() => toggleFAQ(faq.id)}
-                  className="w-full px-6 py-4 text-left hover:bg-white/5 transition-colors"
+                  className="w-full px-6 py-4 text-left hover:bg-neutral-50 transition-colors"
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-white pr-4">{faq.question}</h3>
+                    <h3 className="font-semibold text-neutral-900 pr-4">{faq.question}</h3>
                     <svg
-                      className={`h-5 w-5 text-white/60 transition-transform ${
+                      className={`h-5 w-5 text-neutral-500 transition-transform ${
                         openFAQ === faq.id ? 'rotate-180' : ''
                       }`}
                       fill="none"
@@ -254,8 +254,8 @@ export default function FAQPage() {
                 </button>
                 
                 {openFAQ === faq.id && (
-                  <div className="px-6 pb-4 border-t border-white/10">
-                    <p className="text-white/80 leading-relaxed pt-4">
+                  <div className="px-6 pb-4 border-t border-neutral-200">
+                    <p className="text-neutral-700 leading-relaxed pt-4">
                       {faq.answer}
                     </p>
                   </div>
@@ -266,9 +266,9 @@ export default function FAQPage() {
         </div>
 
         {/* CTA de contacto */}
-        <div className="mt-12 rounded-2xl border border-white/10 bg-gradient-to-r from-violet-500/10 to-cyan-500/10 p-8 text-center">
-          <h3 className="text-xl font-bold text-white mb-4">¿No encuentras tu respuesta?</h3>
-          <p className="text-white/70 mb-6">
+        <div className="mt-12 rounded-2xl border border-neutral-200 bg-neutral-50 p-8 text-center">
+          <h3 className="text-xl font-bold text-neutral-900 mb-4">¿No encuentras tu respuesta?</h3>
+          <p className="text-neutral-600 mb-6">
             Nuestro equipo de soporte está aquí para ayudarte con cualquier duda
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -276,13 +276,13 @@ export default function FAQPage() {
               href="https://wa.me/34XXXXXXXXX"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 touch-target"
+              className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
             >
               📱 Chat por WhatsApp
             </a>
             <a
               href="mailto:epicalpc@gmail.com?subject=Consulta%20FAQ"
-              className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 transition-all duration-300 touch-target"
+              className="px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold hover:bg-neutral-100 transition-all duration-300 touch-target"
             >
               📧 Enviar Email
             </a>

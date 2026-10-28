@@ -11,11 +11,11 @@ function SignInContent() {
   const error = searchParams.get("error");
 
   return (
-    <main className="min-h-screen bg-black text-white flex items-center justify-center relative overflow-hidden">
+    <main className="min-h-screen bg-white text-neutral-900 flex items-center justify-center relative overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl animate-soft-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-soft-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-100 rounded-full blur-3xl animate-soft-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-100 rounded-full blur-3xl animate-soft-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
       <div className="max-w-md w-full mx-4 relative z-10">
@@ -23,33 +23,33 @@ function SignInContent() {
         <div className="text-center mb-8 animate-fade-in-up">
           <div className="inline-block">
             <h1 className="text-5xl font-bold mb-3">
-              <span className="text-white">TITAN</span>
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
+              <span className="text-neutral-900">TITAN</span>
+              <span className="text-neutral-900">
                 -PC
               </span>
             </h1>
-            <div className="h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 rounded-full animate-gradient-shift"></div>
+            <div className="h-1 bg-neutral-900 rounded-full animate-gradient-shift text-white"></div>
           </div>
         </div>
 
         {/* Card principal */}
-        <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-xl p-8 shadow-2xl shadow-violet-500/10 animate-fade-in-up-delay-1">
+        <div className="rounded-2xl border border-neutral-200 bg-neutral-50 backdrop-blur-xl p-8 shadow-2xl shadow-black/10 animate-fade-in-up-delay-1">
           <h2 className="text-2xl font-bold text-center mb-2">
             Bienvenido de vuelta
           </h2>
           
-          <p className="text-white/60 text-center mb-8">
+          <p className="text-neutral-500 text-center mb-8">
             Inicia sesión para acceder a tu cuenta
           </p>
 
           {/* Mensaje de error */}
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 animate-fade-in-scale">
+            <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 animate-fade-in-scale">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">⚠️</span>
                 <div>
-                  <p className="text-sm font-semibold text-red-400">Error al iniciar sesión</p>
-                  <p className="text-xs text-red-400/70 mt-1">
+                  <p className="text-sm font-semibold text-red-700">Error al iniciar sesión</p>
+                  <p className="text-xs text-red-700 mt-1">
                     {error === "Configuration" 
                       ? "Google OAuth no está configurado correctamente"
                       : "Hubo un problema al iniciar sesión. Inténtalo de nuevo."}
@@ -62,7 +62,7 @@ function SignInContent() {
           {/* Botón de Google */}
           <button
             onClick={() => signIn("google", { callbackUrl })}
-            className="group w-full flex items-center justify-center gap-3 rounded-xl bg-white px-6 py-4 text-black font-semibold hover:bg-white/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 hover:shadow-lg hover:shadow-white/20 hover:scale-[1.02]"
+            className="group w-full flex items-center justify-center gap-3 rounded-xl bg-neutral-900 px-6 py-4 text-white font-semibold hover:bg-neutral-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg hover:shadow-white/20 hover:scale-[1.02]"
           >
             <svg className="h-6 w-6 transition-transform group-hover:scale-110" viewBox="0 0 24 24">
               <path
@@ -88,10 +88,10 @@ function SignInContent() {
           {/* Divider */}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10"></div>
+              <div className="w-full border-t border-neutral-200"></div>
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-black px-3 text-white/50">O también puedes</span>
+              <span className="bg-white px-3 text-neutral-500">O también puedes</span>
             </div>
           </div>
 
@@ -99,28 +99,28 @@ function SignInContent() {
           <div className="space-y-3">
             <Link
               href="/productos"
-              className="block w-full px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-center font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+              className="block w-full px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 text-center font-medium hover:bg-neutral-100 hover:border-neutral-300 transition-all duration-300"
             >
               🛍️ Explorar productos
             </Link>
           </div>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-white/50 mb-2">
+            <p className="text-sm text-neutral-500 mb-2">
               ¿Todavía no tienes cuenta?
             </p>
-            <p className="text-xs text-green-400/80">
+            <p className="text-xs text-green-700">
               ✨ Se creará automáticamente al iniciar sesión con Google
             </p>
           </div>
 
-          <p className="text-xs text-white/40 text-center mt-6 leading-relaxed">
+          <p className="text-xs text-neutral-400 text-center mt-6 leading-relaxed">
             Al continuar, aceptas nuestros{" "}
-            <a href="#" className="text-cyan-400 hover:text-cyan-300 underline">
+            <a href="#" className="text-blue-600 hover:text-blue-600 underline">
               Términos de Servicio
             </a>{" "}
             y{" "}
-            <a href="#" className="text-cyan-400 hover:text-cyan-300 underline">
+            <a href="#" className="text-blue-600 hover:text-blue-600 underline">
               Política de Privacidad
             </a>
           </p>
@@ -147,14 +147,14 @@ function SignInContent() {
           ].map((f, idx) => (
             <div 
               key={f.text} 
-              className="group rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-sm p-4 hover:border-violet-400/50 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-default"
+              className="group rounded-xl border border-neutral-200 bg-neutral-50 backdrop-blur-sm p-4 hover:border-blue-300 hover:bg-neutral-100 transition-all duration-300 hover:scale-105 cursor-default"
               style={{ animationDelay: `${idx * 0.1}s` }}
             >
               <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
                 {f.icon}
               </div>
-              <div className="text-sm font-semibold text-white mb-1">{f.text}</div>
-              <div className="text-xs text-white/50">{f.desc}</div>
+              <div className="text-sm font-semibold text-neutral-900 mb-1">{f.text}</div>
+              <div className="text-xs text-neutral-500">{f.desc}</div>
             </div>
           ))}
         </div>
@@ -162,7 +162,7 @@ function SignInContent() {
         {/* Link de regreso */}
         <Link
           href="/"
-          className="group flex items-center justify-center gap-2 mt-6 text-sm text-white/60 hover:text-white transition-all duration-300 animate-fade-in-up-delay-3"
+          className="group flex items-center justify-center gap-2 mt-6 text-sm text-neutral-500 hover:text-neutral-900 transition-all duration-300 animate-fade-in-up-delay-3"
         >
           <svg 
             className="h-4 w-4 transition-transform group-hover:-translate-x-1" 
@@ -176,12 +176,12 @@ function SignInContent() {
         </Link>
 
         {/* Nota de seguridad */}
-        <div className="mt-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 animate-fade-in-up-delay-3">
+        <div className="mt-6 p-4 rounded-xl bg-blue-50 border border-blue-200 animate-fade-in-up-delay-3">
           <div className="flex items-center gap-3">
             <div className="text-2xl">🔒</div>
             <div>
-              <p className="text-xs font-semibold text-blue-400">100% Seguro</p>
-              <p className="text-xs text-blue-400/70 mt-0.5">
+              <p className="text-xs font-semibold text-blue-600">100% Seguro</p>
+              <p className="text-xs text-blue-600 mt-0.5">
                 Tus datos están protegidos con encriptación de nivel bancario
               </p>
             </div>
@@ -195,10 +195,10 @@ function SignInContent() {
 export default function SignIn() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
-          <div className="h-20 w-20 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500"></div>
-          <p className="text-white/60">Cargando...</p>
+          <div className="h-20 w-20 rounded-full bg-neutral-900 text-white"></div>
+          <p className="text-neutral-500">Cargando...</p>
         </div>
       </div>
     }>

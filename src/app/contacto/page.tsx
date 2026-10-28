@@ -101,35 +101,35 @@ ${formData.nombre}
       icon: '🏢',
       title: 'Oficina',
       details: ['Calle Tecnología 123', '28001 Madrid, España'],
-      color: 'text-blue-400'
+      color: 'text-blue-600'
     },
     {
       icon: '⏰',
       title: 'Horarios',
       details: ['Lunes a Viernes: 9:00 - 18:00', 'Sábados: 10:00 - 14:00'],
-      color: 'text-green-400'
+      color: 'text-green-700'
     },
     {
       icon: '🚚',
       title: 'Envíos',
       details: ['Peninsular: 24-48h', 'Islas: 3-5 días laborables'],
-      color: 'text-purple-400'
+      color: 'text-blue-600'
     }
   ];
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-white text-neutral-900">
       <section className="mx-auto max-w-7xl p-6">
         <BackButton />
         
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-violet-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+            <span className="text-neutral-900">
               Contacta con TITAN-PC
             </span>
           </h1>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
+          <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
             ¿Tienes dudas sobre tu configuración? ¿Necesitas asesoramiento técnico? 
             Estamos aquí para ayudarte a crear el PC perfecto para ti.
           </p>
@@ -138,13 +138,13 @@ ${formData.nombre}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Formulario de contacto */}
           <div className="lg:col-span-2">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Envíanos un mensaje</h2>
+            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-8">
+              <h2 className="text-2xl font-bold text-neutral-900 mb-6">Envíanos un mensaje</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="nombre" className="block text-sm font-medium text-white/80 mb-2">
+                    <label htmlFor="nombre" className="block text-sm font-medium text-neutral-700 mb-2">
                       Nombre completo *
                     </label>
                     <input
@@ -154,13 +154,13 @@ ${formData.nombre}
                       required
                       value={formData.nombre}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all"
                       placeholder="Tu nombre completo"
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-2">
                       Email *
                     </label>
                     <input
@@ -170,7 +170,7 @@ ${formData.nombre}
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all"
                       placeholder="tu@email.com"
                     />
                   </div>
@@ -178,7 +178,7 @@ ${formData.nombre}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="telefono" className="block text-sm font-medium text-white/80 mb-2">
+                    <label htmlFor="telefono" className="block text-sm font-medium text-neutral-700 mb-2">
                       Teléfono
                     </label>
                     <input
@@ -187,13 +187,13 @@ ${formData.nombre}
                       name="telefono"
                       value={formData.telefono}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all"
                       placeholder="+34 612 345 678"
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="tipoConsulta" className="block text-sm font-medium text-white/80 mb-2">
+                    <label htmlFor="tipoConsulta" className="block text-sm font-medium text-neutral-700 mb-2">
                       Tipo de consulta
                     </label>
                     <select
@@ -201,7 +201,7 @@ ${formData.nombre}
                       name="tipoConsulta"
                       value={formData.tipoConsulta}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all"
                     >
                       <option value="general">Consulta general</option>
                       <option value="configuracion">Configuración PC</option>
@@ -214,7 +214,7 @@ ${formData.nombre}
                 </div>
 
                 <div>
-                  <label htmlFor="asunto" className="block text-sm font-medium text-white/80 mb-2">
+                  <label htmlFor="asunto" className="block text-sm font-medium text-neutral-700 mb-2">
                     Asunto *
                   </label>
                   <input
@@ -224,13 +224,13 @@ ${formData.nombre}
                     required
                     value={formData.asunto}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all"
                     placeholder="Resumen de tu consulta"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="mensaje" className="block text-sm font-medium text-white/80 mb-2">
+                  <label htmlFor="mensaje" className="block text-sm font-medium text-neutral-700 mb-2">
                     Mensaje *
                   </label>
                   <textarea
@@ -240,7 +240,7 @@ ${formData.nombre}
                     rows={6}
                     value={formData.mensaje}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all resize-none"
                     placeholder="Cuéntanos en detalle qué necesitas..."
                   />
                 </div>
@@ -248,11 +248,11 @@ ${formData.nombre}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed touch-target"
+                  className="w-full px-8 py-4 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed touch-target"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center gap-2">
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <div className="w-5 h-5 border-2 border-neutral-400 border-t-neutral-900 rounded-full animate-spin"></div>
                       Enviando...
                     </div>
                   ) : (
@@ -261,13 +261,13 @@ ${formData.nombre}
                 </button>
 
                 {submitStatus === 'success' && (
-                  <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 text-center">
+                  <div className="p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 text-center">
                     ✅ ¡Mensaje enviado! Se abrirá tu cliente de email para completar el envío.
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-center">
+                  <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-center">
                     ❌ Error al enviar. Inténtalo de nuevo o contacta directamente por WhatsApp.
                   </div>
                 )}
@@ -278,14 +278,14 @@ ${formData.nombre}
           {/* Sidebar con información de contacto */}
           <div className="space-y-6">
             {/* Acciones rápidas */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Contacto rápido</h3>
+            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+              <h3 className="text-xl font-bold text-neutral-900 mb-4">Contacto rápido</h3>
               <div className="space-y-3">
                 {quickActions.map((action, index) => (
                   <button
                     key={index}
                     onClick={action.action}
-                    className={`w-full p-4 rounded-xl bg-gradient-to-r ${action.color} text-white font-semibold hover:shadow-lg transition-all duration-300 touch-target`}
+                    className={`w-full p-4 rounded-xl bg-neutral-50 ${action.color} text-neutral-900 font-semibold hover:shadow-lg transition-all duration-300 touch-target`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{action.icon}</span>
@@ -300,8 +300,8 @@ ${formData.nombre}
             </div>
 
             {/* Información de contacto */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Información</h3>
+            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+              <h3 className="text-xl font-bold text-neutral-900 mb-4">Información</h3>
               <div className="space-y-4">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start gap-3">
@@ -309,7 +309,7 @@ ${formData.nombre}
                     <div>
                       <h4 className={`font-semibold ${info.color}`}>{info.title}</h4>
                       {info.details.map((detail, i) => (
-                        <p key={i} className="text-white/70 text-sm">{detail}</p>
+                        <p key={i} className="text-neutral-600 text-sm">{detail}</p>
                       ))}
                     </div>
                   </div>
@@ -318,11 +318,11 @@ ${formData.nombre}
             </div>
 
             {/* Garantía destacada */}
-            <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-6">
+            <div className="rounded-2xl border border-green-200 bg-green-50 p-6">
               <div className="text-center">
                 <div className="text-4xl mb-3">🛡️</div>
-                <h3 className="text-lg font-bold text-green-400 mb-2">Garantía TITAN</h3>
-                <p className="text-green-400/80 text-sm">
+                <h3 className="text-lg font-bold text-green-700 mb-2">Garantía TITAN</h3>
+                <p className="text-green-700 text-sm">
                   3 años de garantía completa en todos nuestros montajes con validación térmica real.
                 </p>
               </div>
@@ -331,27 +331,27 @@ ${formData.nombre}
         </div>
 
         {/* FAQ rápida */}
-        <div className="mt-16 rounded-2xl border border-white/10 bg-gradient-to-r from-violet-500/10 via-blue-500/10 to-cyan-500/10 p-8">
-          <h2 className="text-2xl font-bold text-center text-white mb-8">Preguntas frecuentes</h2>
+        <div className="mt-16 rounded-2xl border border-neutral-200 bg-neutral-50 p-8">
+          <h2 className="text-2xl font-bold text-center text-neutral-900 mb-8">Preguntas frecuentes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                <h4 className="font-semibold text-white mb-2">¿Cuánto tarda el montaje?</h4>
-                <p className="text-white/70 text-sm">Entre 2-5 días laborables, dependiendo de la complejidad y disponibilidad de componentes.</p>
+              <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+                <h4 className="font-semibold text-neutral-900 mb-2">¿Cuánto tarda el montaje?</h4>
+                <p className="text-neutral-600 text-sm">Entre 2-5 días laborables, dependiendo de la complejidad y disponibilidad de componentes.</p>
               </div>
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                <h4 className="font-semibold text-white mb-2">¿Hacen envíos a toda España?</h4>
-                <p className="text-white/70 text-sm">Sí, enviamos a toda la península e islas con seguro incluido.</p>
+              <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+                <h4 className="font-semibold text-neutral-900 mb-2">¿Hacen envíos a toda España?</h4>
+                <p className="text-neutral-600 text-sm">Sí, enviamos a toda la península e islas con seguro incluido.</p>
               </div>
             </div>
             <div className="space-y-4">
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                <h4 className="font-semibold text-white mb-2">¿Qué incluye la validación térmica?</h4>
-                <p className="text-white/70 text-sm">Pruebas de estrés, medición de temperaturas y optimización de curvas PWM para máximo rendimiento y silencio.</p>
+              <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+                <h4 className="font-semibold text-neutral-900 mb-2">¿Qué incluye la validación térmica?</h4>
+                <p className="text-neutral-600 text-sm">Pruebas de estrés, medición de temperaturas y optimización de curvas PWM para máximo rendimiento y silencio.</p>
               </div>
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                <h4 className="font-semibold text-white mb-2">¿Puedo cambiar componentes después?</h4>
-                <p className="text-white/70 text-sm">Sí, ofrecemos servicio de actualización y mantenimiento con descuentos para clientes.</p>
+              <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+                <h4 className="font-semibold text-neutral-900 mb-2">¿Puedo cambiar componentes después?</h4>
+                <p className="text-neutral-600 text-sm">Sí, ofrecemos servicio de actualización y mantenimiento con descuentos para clientes.</p>
               </div>
             </div>
           </div>

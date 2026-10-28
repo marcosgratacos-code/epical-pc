@@ -92,13 +92,13 @@ export default function CompareModal({ parts, category, onClose, onSelect }: Com
 
       {/* Modal */}
       <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
-        <div className="bg-black border border-white/20 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden animate-fade-in-scale shadow-2xl">
+        <div className="bg-white border border-neutral-300 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden animate-fade-in-scale shadow-2xl">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-white/10">
+          <div className="flex items-center justify-between p-6 border-b border-neutral-200">
             <h2 className="text-2xl font-bold">Comparar productos</h2>
             <button
               onClick={onClose}
-              className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+              className="h-10 w-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
             >
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -109,24 +109,24 @@ export default function CompareModal({ parts, category, onClose, onSelect }: Com
           {/* Contenido */}
           <div className="overflow-x-auto overflow-y-auto max-h-[calc(90vh-140px)]">
             <table className="w-full">
-              <thead className="sticky top-0 bg-black/95 backdrop-blur-xl z-10">
+              <thead className="sticky top-0 bg-white/95 backdrop-blur-xl z-10">
                 <tr>
-                  <th className="p-4 text-left border-b border-white/10 w-48">Especificación</th>
+                  <th className="p-4 text-left border-b border-neutral-200 w-48">Especificación</th>
                   {parts.map((part) => (
-                    <th key={part.id} className="p-4 border-b border-white/10">
+                    <th key={part.id} className="p-4 border-b border-neutral-200">
                       <div className="space-y-3">
-                        <div className="font-semibold text-white">{part.name}</div>
-                        <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
+                        <div className="font-semibold text-neutral-900">{part.name}</div>
+                        <div className="text-2xl font-bold text-neutral-900">
                           {part.price.eur.toFixed(2)} €
                         </div>
                         {part.recommended && (
-                          <span className="inline-block px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-cyan-500 to-violet-500 text-white">
+                          <span className="inline-block px-2 py-1 rounded-full text-xs font-semibold bg-neutral-900 text-white">
                             Recomendado
                           </span>
                         )}
                         <button
                           onClick={() => onSelect(part)}
-                          className="w-full px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/50 transition-all"
+                          className="w-full px-4 py-2 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all"
                         >
                           Elegir
                         </button>
@@ -137,10 +137,10 @@ export default function CompareModal({ parts, category, onClose, onSelect }: Com
               </thead>
               <tbody>
                 {specs.map((spec, idx) => (
-                  <tr key={spec} className={idx % 2 === 0 ? 'bg-white/[0.02]' : ''}>
-                    <td className="p-4 text-white/60 font-medium">{getSpecLabel(spec)}</td>
+                  <tr key={spec} className={idx % 2 === 0 ? 'bg-neutral-50' : ''}>
+                    <td className="p-4 text-neutral-500 font-medium">{getSpecLabel(spec)}</td>
                     {parts.map((part) => (
-                      <td key={`${part.id}-${spec}`} className="p-4 text-center text-white">
+                      <td key={`${part.id}-${spec}`} className="p-4 text-center text-neutral-900">
                         {formatValue(part[spec])}
                       </td>
                     ))}
@@ -148,14 +148,14 @@ export default function CompareModal({ parts, category, onClose, onSelect }: Com
                 ))}
                 
                 {/* Fila de stock */}
-                <tr className="bg-white/[0.02]">
-                  <td className="p-4 text-white/60 font-medium">Stock</td>
+                <tr className="bg-neutral-50">
+                  <td className="p-4 text-neutral-500 font-medium">Stock</td>
                   {parts.map((part) => (
                     <td key={`${part.id}-stock`} className="p-4 text-center">
                       <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                        part.stock === 'in_stock' ? 'bg-green-500/20 text-green-400' :
-                        part.stock === 'low' ? 'bg-amber-500/20 text-amber-400' :
-                        'bg-red-500/20 text-red-400'
+                        part.stock === 'in_stock' ? 'bg-green-100 text-green-700' :
+                        part.stock === 'low' ? 'bg-amber-100 text-amber-700' :
+                        'bg-red-100 text-red-700'
                       }`}>
                         {part.stock === 'in_stock' ? 'En stock' : 
                          part.stock === 'low' ? 'Pocas unidades' : 

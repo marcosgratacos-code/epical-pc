@@ -26,17 +26,17 @@ export default function ConfiguratorEpic({ onSelectPreset, onStartWizard, onStep
     <section className="relative">
       {/* fondo suave coherente con el hero */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-[8rem] h-[36rem] w-[80vw] -translate-x-1/2 rounded-full bg-gradient-to-br from-blue-500/15 via-indigo-500/10 to-transparent blur-3xl" />
+        <div className="absolute left-1/2 top-[8rem] h-[36rem] w-[80vw] -translate-x-1/2 rounded-full bg-neutral-50 blur-3xl" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         {/* Título */}
         <header className="mb-6 mt-6">
-          <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Configurador de PCs <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">Personalizados</span>
+          <h1 className="text-3xl font-bold tracking-tight text-neutral-900 md:text-4xl">
+            Configurador de PCs <span className="text-neutral-900">Personalizados</span>
           </h1>
-          <p className="mt-2 max-w-2xl text-white/80">
-            Crea tu PC perfecto con <span className="font-semibold text-sky-300">personalización extrema</span>. Validación térmica, overclocking seguro,
+          <p className="mt-2 max-w-2xl text-neutral-700">
+            Crea tu PC perfecto con <span className="font-semibold text-blue-600">personalización extrema</span>. Validación térmica, overclocking seguro,
             RGB sincronizado y <span className="font-semibold">3 años de garantía</span>.
           </p>
         </header>
@@ -80,12 +80,12 @@ function FeaturesBar() {
       className="grid grid-cols-2 gap-4 md:grid-cols-4">
       {items.map((it) => (
         <motion.div key={it.title} variants={item}
-          className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur hover:bg-white/7 transition">
+          className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 backdrop-blur hover:bg-neutral-100 transition">
           <div className="flex items-center gap-3">
-            <it.icon className="h-5 w-5 text-sky-300" />
+            <it.icon className="h-5 w-5 text-blue-600" />
             <div>
-              <p className="text-sm font-semibold text-white">{it.title}</p>
-              <p className="text-xs text-white/60">{it.desc}</p>
+              <p className="text-sm font-semibold text-neutral-900">{it.title}</p>
+              <p className="text-xs text-neutral-500">{it.desc}</p>
             </div>
           </div>
         </motion.div>
@@ -96,22 +96,22 @@ function FeaturesBar() {
 
 function FullyCustom({ onStartWizard }: { onStartWizard?: () => void }) {
   return (
-    <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900/70 to-slate-900/30 p-6">
+    <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-6">
       <div className="mb-5 flex items-center gap-3">
-        <Gem className="h-6 w-6 text-sky-300" />
-        <h2 className="text-xl font-bold text-white">PCs 100% Personalizados</h2>
+        <Gem className="h-6 w-6 text-blue-600" />
+        <h2 className="text-xl font-bold text-neutral-900">PCs 100% Personalizados</h2>
       </div>
 
-      <p className="max-w-3xl text-white/85">
+      <p className="max-w-3xl text-neutral-700">
         ¿Quieres componentes específicos que no ves en la guía? Montamos PCs con <b>CUALQUIER</b> componente que necesites.
       </p>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl bg-white/4 p-4 border border-white/10">
-          <h3 className="mb-2 flex items-center gap-2 text-white font-semibold">
-            <CheckCircle2 className="h-4 w-4 text-emerald-400" /> Componentes a tu elección
+        <div className="rounded-2xl bg-neutral-50 p-4 border border-neutral-200">
+          <h3 className="mb-2 flex items-center gap-2 text-neutral-900 font-semibold">
+            <CheckCircle2 className="h-4 w-4 text-emerald-700" /> Componentes a tu elección
           </h3>
-          <ul className="list-disc pl-5 text-white/80 text-sm space-y-1">
+          <ul className="list-disc pl-5 text-neutral-700 text-sm space-y-1">
             <li>Refrigeración líquida custom (360/420, doble loop)</li>
             <li>Cualquier GPU, CPU, placa que encuentres</li>
             <li>Tubing rígido o blando; colores personalizados</li>
@@ -119,11 +119,11 @@ function FullyCustom({ onStartWizard }: { onStartWizard?: () => void }) {
           </ul>
         </div>
 
-        <div className="rounded-2xl bg-white/4 p-4 border border-white/10">
-          <h3 className="mb-2 flex items-center gap-2 text-white font-semibold">
-            <Star className="h-4 w-4 text-blue-300" /> Estética extrema
+        <div className="rounded-2xl bg-neutral-50 p-4 border border-neutral-200">
+          <h3 className="mb-2 flex items-center gap-2 text-neutral-900 font-semibold">
+            <Star className="h-4 w-4 text-blue-600" /> Estética extrema
           </h3>
-          <ul className="list-disc pl-5 text-white/80 text-sm space-y-1">
+          <ul className="list-disc pl-5 text-neutral-700 text-sm space-y-1">
             <li>Cableado sleeved en cualquier color</li>
             <li>RGB sincronizado (ARGb, iCUE, Aura Sync)</li>
             <li>Cajas custom o modificadas</li>
@@ -134,12 +134,12 @@ function FullyCustom({ onStartWizard }: { onStartWizard?: () => void }) {
 
       <div className="mt-6 flex flex-wrap gap-3">
         <a href="/contacto"
-          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 text-white hover:scale-[1.03] transition">
+          className="inline-flex items-center gap-2 rounded-2xl bg-neutral-900 px-5 py-3 text-white hover:scale-[1.03] transition">
           <Rocket className="h-4 w-4" /> Cuéntanos tu proyecto
         </a>
         <button
           onClick={onStartWizard}
-          className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-white/90 hover:bg-white/10 transition">
+          className="inline-flex items-center gap-2 rounded-2xl border border-neutral-300 bg-neutral-50 px-5 py-3 text-neutral-800 hover:bg-neutral-100 transition">
           Usa el configurador guiado <Zap className="h-4 w-4" />
         </button>
       </div>
@@ -161,8 +161,8 @@ const PRESETS = [
 function Presets({ onSelectPreset }: { onSelectPreset?: (id: string) => void }) {
   return (
     <section>
-      <h3 className="mb-3 text-xl font-bold text-white">Configuraciones Profesionales</h3>
-      <p className="mb-5 text-white/75">
+      <h3 className="mb-3 text-xl font-bold text-neutral-900">Configuraciones Profesionales</h3>
+      <p className="mb-5 text-neutral-600">
         Presets optimizados por nuestros expertos (puedes cambiar cualquier componente). Incluyen validación térmica y garantía extendida.
       </p>
 
@@ -170,18 +170,18 @@ function Presets({ onSelectPreset }: { onSelectPreset?: (id: string) => void }) 
         className="grid gap-5 md:grid-cols-2">
         {PRESETS.map((p) => (
           <motion.div key={p.id} variants={item}
-            className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur hover:bg-white/7 transition">
+            className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5 backdrop-blur hover:bg-neutral-100 transition">
             <div className="flex items-center gap-3 mb-3">
-              <Monitor className="h-5 w-5 text-blue-300" />
-              <h4 className="text-white font-semibold">{p.title}</h4>
+              <Monitor className="h-5 w-5 text-blue-600" />
+              <h4 className="text-neutral-900 font-semibold">{p.title}</h4>
             </div>
-            <ul className="mt-3 text-sm text-white/80 space-y-1 list-disc pl-5">
+            <ul className="mt-3 text-sm text-neutral-700 space-y-1 list-disc pl-5">
               {p.bullets.map((b) => <li key={b}>{b}</li>)}
             </ul>
 
             <button
               onClick={() => onSelectPreset?.(p.id)}
-              className="mt-4 w-full rounded-xl bg-white/10 py-2 text-white/90 hover:bg-white/15 transition">
+              className="mt-4 w-full rounded-xl bg-neutral-100 py-2 text-neutral-800 hover:bg-neutral-200 transition">
               Seleccionar
             </button>
           </motion.div>
@@ -202,8 +202,8 @@ const PERSONAS = [
 function PersonaWizard({ onStartWizard }: { onStartWizard?: () => void }) {
   return (
     <section>
-      <h3 className="mb-3 text-xl font-bold text-white">Asistente Guiado (Para Resolver Dudas)</h3>
-      <p className="mb-5 text-white/75">
+      <h3 className="mb-3 text-xl font-bold text-neutral-900">Asistente Guiado (Para Resolver Dudas)</h3>
+      <p className="mb-5 text-neutral-600">
         Elige tu perfil de uso. Te sugerimos una configuración y luego <b>puedes cambiar cualquier componente</b>.
       </p>
 
@@ -211,12 +211,12 @@ function PersonaWizard({ onStartWizard }: { onStartWizard?: () => void }) {
         className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {PERSONAS.map((p) => (
           <motion.div key={p.title} variants={item}
-            className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur hover:bg-white/7 transition">
+            className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5 backdrop-blur hover:bg-neutral-100 transition">
             <div className="flex items-center gap-3 mb-3">
-              <p.icon className="h-5 w-5 text-violet-300" />
-              <h4 className="text-white font-semibold">{p.title}</h4>
+              <p.icon className="h-5 w-5 text-blue-600" />
+              <h4 className="text-neutral-900 font-semibold">{p.title}</h4>
             </div>
-            <ul className="mt-3 text-sm text-white/80 space-y-1 list-disc pl-5">
+            <ul className="mt-3 text-sm text-neutral-700 space-y-1 list-disc pl-5">
               {p.tips.map((t) => <li key={t}>{t}</li>)}
             </ul>
           </motion.div>
@@ -226,12 +226,12 @@ function PersonaWizard({ onStartWizard }: { onStartWizard?: () => void }) {
       <div className="mt-5 flex justify-center gap-3">
         <button
           onClick={onStartWizard}
-          className="rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-white/90 hover:bg-white/10 transition">
+          className="rounded-2xl border border-neutral-300 bg-neutral-50 px-5 py-3 text-neutral-800 hover:bg-neutral-100 transition">
           Omitir y configurar con guía
         </button>
         <a
           href="/configurador-libre"
-          className="rounded-2xl border border-blue-500/30 bg-blue-500/10 px-5 py-3 text-white/90 hover:bg-blue-500/20 transition">
+          className="rounded-2xl border border-blue-300 bg-blue-50 px-5 py-3 text-neutral-800 hover:bg-blue-100 transition">
           Configurar libremente
         </a>
       </div>
@@ -251,16 +251,16 @@ function ProcessStepper({ onStepChange }: { onStepChange?: (n: number) => void }
     { n: 8, label: 'Caja', icon: Box },
   ];
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/5 p-5">
-      <h3 className="mb-4 text-xl font-bold text-white">Proceso de Configuración</h3>
+    <section className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5">
+      <h3 className="mb-4 text-xl font-bold text-neutral-900">Proceso de Configuración</h3>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {steps.map((s) => (
           <button key={s.n}
             onClick={() => onStepChange?.(s.n)}
-            className="flex items-center gap-3 rounded-2xl bg-black/20 px-4 py-3 text-left text-white/85 hover:bg-white/10 border border-white/10">
+            className="flex items-center gap-3 rounded-2xl bg-neutral-50 px-4 py-3 text-left text-neutral-700 hover:bg-neutral-100 border border-neutral-200">
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-white text-sm">{s.n}</span>
             <div className="flex items-center gap-2">
-              <s.icon className="h-4 w-4 text-blue-300" />
+              <s.icon className="h-4 w-4 text-blue-600" />
               <span className="text-sm">{s.label}</span>
             </div>
           </button>
@@ -282,18 +282,18 @@ function Examples() {
   ];
 
   return (
-    <section className="rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900/60 to-slate-900/30 p-6">
-      <h3 className="mb-3 text-xl font-bold text-white">Ejemplos de Proyectos Personalizados</h3>
-      <p className="mb-6 text-white/75">Algunos builds reales que hemos montado.</p>
+    <section className="rounded-3xl border border-neutral-200 bg-neutral-50 p-6">
+      <h3 className="mb-3 text-xl font-bold text-neutral-900">Ejemplos de Proyectos Personalizados</h3>
+      <p className="mb-6 text-neutral-600">Algunos builds reales que hemos montado.</p>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {cards.map((c) => (
-          <div key={c.title} className="rounded-3xl border border-white/10 bg-white/5 p-5">
+          <div key={c.title} className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5">
             <div className="flex items-center gap-3 mb-3">
-              <c.icon className="h-5 w-5 text-sky-300" />
-              <h4 className="text-white font-semibold">{c.title}</h4>
+              <c.icon className="h-5 w-5 text-blue-600" />
+              <h4 className="text-neutral-900 font-semibold">{c.title}</h4>
             </div>
-            <ul className="mt-3 text-sm text-white/80 space-y-1 list-disc pl-5">
+            <ul className="mt-3 text-sm text-neutral-700 space-y-1 list-disc pl-5">
               {c.lines.map((l) => <li key={l}>{l}</li>)}
             </ul>
           </div>
@@ -314,16 +314,16 @@ function Addons() {
   ];
   return (
     <section className="">
-      <h3 className="mb-4 text-xl font-bold text-white">Servicios Adicionales</h3>
+      <h3 className="mb-4 text-xl font-bold text-neutral-900">Servicios Adicionales</h3>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {items.map((it) => (
           <div key={it.title}
-            className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur hover:bg-white/7 transition">
+            className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5 backdrop-blur hover:bg-neutral-100 transition">
             <div className="flex items-center gap-3">
-              <it.icon className="h-5 w-5 text-blue-300" />
+              <it.icon className="h-5 w-5 text-blue-600" />
               <div>
-                <p className="text-white font-semibold">{it.title}</p>
-                <p className="text-xs text-white/60">{it.desc}</p>
+                <p className="text-neutral-900 font-semibold">{it.title}</p>
+                <p className="text-xs text-neutral-500">{it.desc}</p>
               </div>
             </div>
           </div>
@@ -336,19 +336,19 @@ function Addons() {
 function SummaryDrawer() {
   const tags = ['Silencio', 'Estable', 'TOP Gaming', '3 años garantía'];
   return (
-    <div className="sticky top-20 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-      <h4 className="text-white text-xl font-bold mb-4">Tu Configuración</h4>
+    <div className="sticky top-20 rounded-3xl border border-neutral-200 bg-neutral-50 p-5 backdrop-blur">
+      <h4 className="text-neutral-900 text-xl font-bold mb-4">Tu Configuración</h4>
 
       <div className="flex flex-wrap gap-2 mb-6">
         {tags.map((t) => (
-          <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/75">{t}</span>
+          <span key={t} className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs text-neutral-600">{t}</span>
         ))}
       </div>
 
-      <button className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 px-5 py-3 text-white font-semibold shadow-[0_0_30px_-10px_rgba(16,185,129,0.6)] hover:scale-[1.02] transition">
+      <button className="w-full rounded-2xl bg-neutral-900 px-5 py-3 text-white font-semibold shadow-[0_0_30px_-10px_rgba(16,185,129,0.6)] hover:scale-[1.02] transition">
         Enviar Configuración
       </button>
-      <button className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-white/85 hover:bg-white/10 transition">
+      <button className="mt-2 w-full rounded-2xl border border-neutral-200 bg-neutral-50 px-5 py-3 text-neutral-700 hover:bg-neutral-100 transition">
         Nueva configuración
       </button>
     </div>

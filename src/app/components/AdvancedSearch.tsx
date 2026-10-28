@@ -197,9 +197,9 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
             placeholder="Buscar productos por nombre, especificaciones..."
             value={filters.search}
             onChange={(e) => updateFilter('search', e.target.value)}
-            className="w-full px-4 py-3 pl-10 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all"
+            className="w-full px-4 py-3 pl-10 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
           />
-          <svg className="absolute left-3 top-3.5 h-5 w-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="absolute left-3 top-3.5 h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
@@ -208,8 +208,8 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
           onClick={() => setShowFilters(!showFilters)}
           className={`px-4 py-3 rounded-xl border transition-all ${
             showFilters || activeFiltersCount > 0
-              ? 'bg-violet-500/20 text-violet-400 border-violet-500/30'
-              : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/10'
+              ? 'bg-blue-100 text-blue-600 border-blue-300'
+              : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:bg-neutral-100'
           }`}
         >
           🔧 Filtros {activeFiltersCount > 0 && `(${activeFiltersCount})`}
@@ -218,10 +218,10 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
 
       {/* Panel de filtros avanzados */}
       {showFilters && (
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-6 animate-fade-in-scale">
+        <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 space-y-6 animate-fade-in-scale">
           {/* Filtros de precio */}
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-3">
+            <label className="block text-sm font-medium text-neutral-500 mb-3">
               Rango de Precio: {filters.priceRange[0]}€ - {filters.priceRange[1]}€
             </label>
             <div className="space-y-2">
@@ -232,7 +232,7 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
                 step="50"
                 value={filters.priceRange[0]}
                 onChange={(e) => updateFilter('priceRange', [parseInt(e.target.value), filters.priceRange[1]])}
-                className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-neutral-100 rounded-lg appearance-none cursor-pointer"
               />
               <input
                 type="range"
@@ -241,7 +241,7 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
                 step="50"
                 value={filters.priceRange[1]}
                 onChange={(e) => updateFilter('priceRange', [filters.priceRange[0], parseInt(e.target.value)])}
-                className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-neutral-100 rounded-lg appearance-none cursor-pointer"
               />
             </div>
           </div>
@@ -250,11 +250,11 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* GPU */}
             <div>
-              <label className="block text-sm font-medium text-white/60 mb-2">GPU</label>
+              <label className="block text-sm font-medium text-neutral-500 mb-2">GPU</label>
               <select
                 value={filters.gpu}
                 onChange={(e) => updateFilter('gpu', e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+                className="w-full px-3 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
               >
                 <option value="all">Todas las GPUs</option>
                 {filterOptions.gpus.map(gpu => (
@@ -265,11 +265,11 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
 
             {/* RAM */}
             <div>
-              <label className="block text-sm font-medium text-white/60 mb-2">RAM</label>
+              <label className="block text-sm font-medium text-neutral-500 mb-2">RAM</label>
               <select
                 value={filters.ram}
                 onChange={(e) => updateFilter('ram', e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+                className="w-full px-3 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
               >
                 <option value="all">Toda la RAM</option>
                 {filterOptions.rams.map(ram => (
@@ -280,11 +280,11 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
 
             {/* Almacenamiento */}
             <div>
-              <label className="block text-sm font-medium text-white/60 mb-2">Almacenamiento</label>
+              <label className="block text-sm font-medium text-neutral-500 mb-2">Almacenamiento</label>
               <select
                 value={filters.storage}
                 onChange={(e) => updateFilter('storage', e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+                className="w-full px-3 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
               >
                 <option value="all">Todo el almacenamiento</option>
                 {filterOptions.storages.map(storage => (
@@ -296,14 +296,14 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
 
           {/* Filtro de stock */}
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-2">Disponibilidad</label>
+            <label className="block text-sm font-medium text-neutral-500 mb-2">Disponibilidad</label>
             <div className="flex gap-2">
               <button
                 onClick={() => updateFilter('inStock', null)}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                   filters.inStock === null
-                    ? 'bg-violet-500/20 text-violet-400 border border-violet-500/30'
-                    : 'bg-white/5 text-white/70 border border-white/10 hover:bg-white/10'
+                    ? 'bg-blue-100 text-blue-600 border border-blue-300'
+                    : 'bg-neutral-50 text-neutral-600 border border-neutral-200 hover:bg-neutral-100'
                 }`}
               >
                 Todos
@@ -312,8 +312,8 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
                 onClick={() => updateFilter('inStock', true)}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                   filters.inStock === true
-                    ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                    : 'bg-white/5 text-white/70 border border-white/10 hover:bg-white/10'
+                    ? 'bg-green-100 text-green-700 border border-green-200'
+                    : 'bg-neutral-50 text-neutral-600 border border-neutral-200 hover:bg-neutral-100'
                 }`}
               >
                 En Stock
@@ -322,8 +322,8 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
                 onClick={() => updateFilter('inStock', false)}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                   filters.inStock === false
-                    ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                    : 'bg-white/5 text-white/70 border border-white/10 hover:bg-white/10'
+                    ? 'bg-red-100 text-red-700 border border-red-200'
+                    : 'bg-neutral-50 text-neutral-600 border border-neutral-200 hover:bg-neutral-100'
                 }`}
               >
                 Sin Stock
@@ -333,11 +333,11 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
 
           {/* Ordenamiento */}
           <div className="flex items-center gap-4">
-            <label className="text-sm font-medium text-white/60">Ordenar por:</label>
+            <label className="text-sm font-medium text-neutral-500">Ordenar por:</label>
             <select
               value={filters.sortBy}
               onChange={(e) => updateFilter('sortBy', e.target.value)}
-              className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-violet-400"
+              className="px-3 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
             >
               <option value="name">Nombre</option>
               <option value="price">Precio</option>
@@ -345,21 +345,21 @@ export default function AdvancedSearch({ products, onFilteredProducts }: Advance
             </select>
             <button
               onClick={() => updateFilter('sortOrder', filters.sortOrder === 'asc' ? 'desc' : 'asc')}
-              className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all"
+              className="px-3 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-900 hover:bg-neutral-100 transition-all"
             >
               {filters.sortOrder === 'asc' ? '↑' : '↓'}
             </button>
           </div>
 
           {/* Botones de acción */}
-          <div className="flex gap-3 pt-4 border-t border-white/10">
+          <div className="flex gap-3 pt-4 border-t border-neutral-200">
             <button
               onClick={clearFilters}
-              className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 transition-all text-sm font-medium"
+              className="px-4 py-2 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-600 hover:bg-neutral-100 transition-all text-sm font-medium"
             >
               Limpiar Filtros
             </button>
-            <div className="flex-1 text-right text-sm text-white/60">
+            <div className="flex-1 text-right text-sm text-neutral-500">
               {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''} encontrado{filteredProducts.length !== 1 ? 's' : ''}
             </div>
           </div>

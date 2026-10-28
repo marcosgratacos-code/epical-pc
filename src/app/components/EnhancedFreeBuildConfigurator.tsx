@@ -533,10 +533,10 @@ export default function EnhancedFreeBuildConfigurator() {
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         {/* Header */}
         <header className="mb-6 space-y-2">
-          <h1 className="text-3xl font-bold text-white md:text-4xl">
+          <h1 className="text-3xl font-bold text-neutral-900 md:text-4xl">
             Configurador avanzado
           </h1>
-          <p className="max-w-3xl text-white/80">
+          <p className="max-w-3xl text-neutral-700">
             Selecciona cada componente para crear tu build ideal. Esta guía
             incluye hardware de 2025 seleccionado por nuestros expertos.
           </p>
@@ -563,22 +563,22 @@ export default function EnhancedFreeBuildConfigurator() {
                     onClick={() => setActive(step.key as CategoryKey)}
                     className={`flex w-full items-center gap-3 rounded-2xl border px-4 py-3 text-left transition ${
                       isActive
-                        ? "border-white/25 bg-white/10"
-                        : "border-white/10 bg-white/5 hover:bg-white/7"
+                        ? "border-neutral-400 bg-neutral-100"
+                        : "border-neutral-200 bg-neutral-50 hover:bg-neutral-100"
                     }`}
                   >
                     <span
                       className={`flex h-7 w-7 items-center justify-center rounded-full text-sm ${
-                        isActive ? "bg-blue-600 text-white" : "bg-white/10 text-white/80"
+                        isActive ? "bg-blue-600 text-white" : "bg-neutral-100 text-neutral-700"
                       }`}
                     >
                       {i + 1}
                     </span>
                     <step.icon
-                      className={`h-4 w-4 ${isActive ? "text-blue-300" : "text-white/70"}`}
+                      className={`h-4 w-4 ${isActive ? "text-blue-600" : "text-neutral-600"}`}
                     />
                     <span
-                      className={`text-sm ${isActive ? "text-white" : "text-white/80"}`}
+                      className={`text-sm ${isActive ? "text-neutral-900" : "text-neutral-700"}`}
                     >
                       {step.label}
                     </span>
@@ -590,8 +590,8 @@ export default function EnhancedFreeBuildConfigurator() {
 
           {/* Middle column: component grid */}
           <main className="col-span-12 lg:col-span-6">
-            <div className="mb-4 flex items-center gap-2 text-white/80">
-              <Sparkles className="h-4 w-4 text-blue-300" />
+            <div className="mb-4 flex items-center gap-2 text-neutral-700">
+              <Sparkles className="h-4 w-4 text-blue-600" />
               <p className="text-sm">
                 Selecciona tu {active === "cpu" ? "procesador" : 
                 active === "mobo" ? "placa base" :
@@ -612,18 +612,18 @@ export default function EnhancedFreeBuildConfigurator() {
                     key={item.id}
                     className={`group rounded-3xl border p-4 backdrop-blur transition cursor-pointer ${
                       isSelected
-                        ? "border-blue-400 bg-blue-400/10"
-                        : "border-white/10 bg-white/5 hover:bg-white/7 hover:border-white/20"
+                        ? "border-blue-600 bg-blue-50"
+                        : "border-neutral-200 bg-neutral-50 hover:bg-neutral-100 hover:border-neutral-300"
                     }`}
                     onClick={() => handlePick(item)}
                   >
-                    <div className="mb-3 flex h-40 items-center justify-center rounded-2xl bg-gradient-to-b from-slate-800/40 to-slate-900/30">
-                      <span className="text-white/40">IMG</span>
+                    <div className="mb-3 flex h-40 items-center justify-center rounded-2xl bg-neutral-50">
+                      <span className="text-neutral-400">IMG</span>
                     </div>
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <h4 className="font-semibold text-white">{item.name}</h4>
-                        <div className="mt-1 text-xs text-white/75">
+                        <h4 className="font-semibold text-neutral-900">{item.name}</h4>
+                        <div className="mt-1 text-xs text-neutral-600">
                           {active === "cpu" && `${item.cores}C/${item.threads}T · Base ${item.base}GHz · Boost ${item.boost}GHz`}
                           {active === "mobo" && `${item.form} · ${item.chipset} · Socket ${item.socket}`}
                           {active === "ram" && `${item.sizeGB}GB · ${item.speed}MHz ${item.type}`}
@@ -635,7 +635,7 @@ export default function EnhancedFreeBuildConfigurator() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sky-300 font-semibold">{item.price.toFixed(2)} €</div>
+                        <div className="text-blue-600 font-semibold">{item.price.toFixed(2)} €</div>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -643,8 +643,8 @@ export default function EnhancedFreeBuildConfigurator() {
                           }}
                           className={`mt-2 rounded-xl border px-3 py-1.5 text-sm font-medium transition ${
                             isSelected
-                              ? "border-blue-400 bg-blue-400/20 text-blue-300"
-                              : "border-white/10 bg-white/5 text-white/90 hover:bg-white/10 hover:border-white/20"
+                              ? "border-blue-600 bg-blue-100 text-blue-600"
+                              : "border-neutral-200 bg-neutral-50 text-neutral-800 hover:bg-neutral-100 hover:border-neutral-300"
                           }`}
                           disabled={isSelected}
                         >
@@ -672,8 +672,8 @@ export default function EnhancedFreeBuildConfigurator() {
                 />
               )}
 
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                <h3 className="text-white text-lg font-bold">Resumen</h3>
+              <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5 backdrop-blur">
+                <h3 className="text-neutral-900 text-lg font-bold">Resumen</h3>
                 <div className="mt-3 space-y-2">
                   {[
                     { key: "cpu", label: "Procesador", icon: Cpu },
@@ -687,17 +687,17 @@ export default function EnhancedFreeBuildConfigurator() {
                   ].map((r) => (
                     <div
                       key={r.key}
-                      className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/20 px-3 py-2"
+                      className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 px-3 py-2"
                     >
-                      <r.icon className="h-4 w-4 text-blue-300" />
+                      <r.icon className="h-4 w-4 text-blue-600" />
                       <div className="flex-1">
-                        <p className="text-sm text-white/85">
+                        <p className="text-sm text-neutral-700">
                           {build[r.key as CategoryKey]?.name ?? (
-                            <span className="text-white/50">Sin {r.label.toLowerCase()}</span>
+                            <span className="text-neutral-500">Sin {r.label.toLowerCase()}</span>
                           )}
                         </p>
                         {build[r.key as CategoryKey] && (
-                          <p className="text-xs text-sky-300">
+                          <p className="text-xs text-blue-600">
                             {(build[r.key as CategoryKey] as any).price.toFixed(2)} €
                           </p>
                         )}
@@ -705,7 +705,7 @@ export default function EnhancedFreeBuildConfigurator() {
                       {build[r.key as CategoryKey] && (
                         <button
                           onClick={() => setBuild((prev) => ({ ...prev, [r.key]: undefined }))}
-                          className="rounded-lg border border-white/10 p-1 text-white/70 hover:bg-white/10"
+                          className="rounded-lg border border-neutral-200 p-1 text-neutral-600 hover:bg-neutral-100"
                         >
                           <X className="h-4 w-4" />
                         </button>
@@ -715,13 +715,13 @@ export default function EnhancedFreeBuildConfigurator() {
                 </div>
                 
                 <div className="mt-4 flex items-center justify-between">
-                  <p className="text-white/70 text-sm">Total</p>
-                  <p className="text-2xl font-extrabold text-sky-300">
+                  <p className="text-neutral-600 text-sm">Total</p>
+                  <p className="text-2xl font-extrabold text-blue-600">
                     {totalPrice.toFixed(2)} €
                   </p>
                 </div>
 
-                <button className="mt-3 w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-3 text-white font-semibold hover:scale-[1.02] transition">
+                <button className="mt-3 w-full rounded-2xl bg-neutral-900 px-4 py-3 text-white font-semibold hover:scale-[1.02] transition">
                   Continuar
                 </button>
               </div>

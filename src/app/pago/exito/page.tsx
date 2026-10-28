@@ -47,10 +47,10 @@ function ExitoContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-white text-neutral-900 flex items-center justify-center p-4">
         <div className="animate-pulse flex flex-col items-center gap-4">
-          <div className="h-20 w-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-500"></div>
-          <p className="text-white/60">Cargando información del pedido...</p>
+          <div className="h-20 w-20 rounded-full bg-neutral-900 text-white"></div>
+          <p className="text-neutral-500">Cargando información del pedido...</p>
         </div>
       </div>
     );
@@ -59,15 +59,15 @@ function ExitoContent() {
   return (
     <>
       <Confetti active={showConfetti} duration={5000} />
-      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-white text-neutral-900 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full">
           <BackButton />
         
         {/* Animación de éxito */}
         <div className="text-center mb-8 animate-fade-in-scale">
           <div className="inline-block relative">
-            <div className="absolute inset-0 bg-green-500/20 blur-3xl animate-soft-pulse"></div>
-            <div className="relative h-32 w-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-2xl shadow-green-500/50">
+            <div className="absolute inset-0 bg-green-100 blur-3xl animate-soft-pulse"></div>
+            <div className="relative h-32 w-32 mx-auto mb-6 rounded-full bg-neutral-900 flex items-center justify-center shadow-2xl shadow-green-500/50 text-white">
               <svg
                 className="h-16 w-16 text-white animate-fade-in-scale"
                 fill="none"
@@ -84,83 +84,83 @@ function ExitoContent() {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 via-emerald-500 to-cyan-400 bg-clip-text text-transparent animate-fade-in-up">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900 animate-fade-in-up">
             ¡Pago Completado!
           </h1>
           
-          <p className="text-xl text-white/70 mb-2 animate-fade-in-up-delay-1">
+          <p className="text-xl text-neutral-600 mb-2 animate-fade-in-up-delay-1">
             Tu pedido ha sido confirmado con éxito
           </p>
           
           {order && (
             <div className="space-y-2 animate-fade-in-up-delay-2">
-              <p className="text-sm text-white/50">
-                Número de pedido: <span className="font-mono font-bold text-cyan-400">{order.id}</span>
+              <p className="text-sm text-neutral-500">
+                Número de pedido: <span className="font-mono font-bold text-blue-600">{order.id}</span>
               </p>
-              <p className="text-sm text-white/50">
-                Número de seguimiento: <span className="font-mono font-bold text-violet-400">{order.numeroSeguimiento}</span>
+              <p className="text-sm text-neutral-500">
+                Número de seguimiento: <span className="font-mono font-bold text-blue-600">{order.numeroSeguimiento}</span>
               </p>
-              <p className="text-sm text-white/50">
-                Fecha: <span className="font-semibold text-white">{formatDateOnly(order.fecha)}</span>
+              <p className="text-sm text-neutral-500">
+                Fecha: <span className="font-semibold text-neutral-900">{formatDateOnly(order.fecha)}</span>
               </p>
-              <p className="text-sm text-white/50">
-                Total: <span className="font-bold text-green-400">{order.total}€</span>
+              <p className="text-sm text-neutral-500">
+                Total: <span className="font-bold text-green-700">{order.total}€</span>
               </p>
             </div>
           )}
         </div>
 
         {/* Card de información */}
-        <div className="rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/10 to-transparent p-8 backdrop-blur-sm mb-6 animate-fade-in-up-delay-2">
+        <div className="rounded-2xl border border-green-200 bg-neutral-50 p-8 backdrop-blur-sm mb-6 animate-fade-in-up-delay-2">
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
             <span className="text-3xl">📦</span>
             ¿Qué sigue ahora?
           </h2>
 
           <div className="space-y-4">
-            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="h-10 w-10 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+              <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
                 <span className="text-xl">📧</span>
               </div>
               <div>
-                <h3 className="font-semibold text-white mb-1">Confirmación por email</h3>
-                <p className="text-sm text-white/60">
+                <h3 className="font-semibold text-neutral-900 mb-1">Confirmación por email</h3>
+                <p className="text-sm text-neutral-500">
                   Te hemos enviado un email con los detalles de tu pedido y el número de seguimiento.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+              <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
                 <span className="text-xl">⚙️</span>
               </div>
               <div>
-                <h3 className="font-semibold text-white mb-1">Preparando tu pedido</h3>
-                <p className="text-sm text-white/60">
+                <h3 className="font-semibold text-neutral-900 mb-1">Preparando tu pedido</h3>
+                <p className="text-sm text-neutral-500">
                   Nuestro equipo comenzará a preparar y montar tu PC gaming con componentes de primera calidad.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="h-10 w-10 rounded-full bg-violet-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+              <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
                 <span className="text-xl">🚚</span>
               </div>
               <div>
-                <h3 className="font-semibold text-white mb-1">Envío en 24-48h</h3>
-                <p className="text-sm text-white/60">
+                <h3 className="font-semibold text-neutral-900 mb-1">Envío en 24-48h</h3>
+                <p className="text-sm text-neutral-500">
                   Una vez montado y validado térmicamente, tu PC será enviado de forma segura. Te notificaremos cuando salga.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="h-10 w-10 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+              <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
                 <span className="text-xl">🎮</span>
               </div>
               <div>
-                <h3 className="font-semibold text-white mb-1">¡A disfrutar!</h3>
-                <p className="text-sm text-white/60">
+                <h3 className="font-semibold text-neutral-900 mb-1">¡A disfrutar!</h3>
+                <p className="text-sm text-neutral-500">
                   Tu PC llegará listo para enchufar y jugar. Incluye garantía de 3 años y soporte técnico.
                 </p>
               </div>
@@ -172,7 +172,7 @@ function ExitoContent() {
         <div className="grid md:grid-cols-3 gap-4 animate-fade-in-up-delay-3">
           <Link
             href="/pedidos"
-            className="px-6 py-4 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold text-center hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 flex items-center justify-center gap-2"
+            className="px-6 py-4 rounded-xl bg-neutral-900 text-white font-semibold text-center hover:shadow-lg hover:shadow-black/10 transition-all duration-300 flex items-center justify-center gap-2"
           >
             <span>📋</span>
             Ver Pedidos
@@ -181,7 +181,7 @@ function ExitoContent() {
           {order && (
             <Link
               href={`/seguimiento?pedido=${order.id}`}
-              className="px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+              className="px-6 py-4 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold text-center hover:bg-neutral-100 hover:border-neutral-300 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <span>📦</span>
               Rastrear Pedido
@@ -190,7 +190,7 @@ function ExitoContent() {
           
           <Link
             href="/"
-            className="px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+            className="px-6 py-4 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold text-center hover:bg-neutral-100 hover:border-neutral-300 transition-all duration-300 flex items-center justify-center gap-2"
           >
             <span>🏠</span>
             Volver al inicio
@@ -198,12 +198,12 @@ function ExitoContent() {
         </div>
 
         {/* Nota de soporte */}
-        <div className="mt-8 p-6 rounded-xl bg-white/5 border border-white/10 text-center animate-fade-in-up-delay-3">
-          <p className="text-sm text-white/60">
+        <div className="mt-8 p-6 rounded-xl bg-neutral-50 border border-neutral-200 text-center animate-fade-in-up-delay-3">
+          <p className="text-sm text-neutral-500">
             ¿Necesitas ayuda? Contáctanos en{" "}
             <a
               href="mailto:epicalpc@gmail.com"
-              className="text-cyan-400 hover:text-cyan-300 underline"
+              className="text-blue-600 hover:text-blue-600 underline"
             >
               epicalpc@gmail.com
             </a>
@@ -218,10 +218,10 @@ function ExitoContent() {
 export default function PagoExitoPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
-          <div className="h-20 w-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-500"></div>
-          <p className="text-white/60">Cargando...</p>
+          <div className="h-20 w-20 rounded-full bg-neutral-900 text-white"></div>
+          <p className="text-neutral-500">Cargando...</p>
         </div>
       </div>
     }>

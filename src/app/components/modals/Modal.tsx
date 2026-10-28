@@ -88,27 +88,27 @@ export default function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Overlay */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-white backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
       
       {/* Modal */}
       <div 
         ref={modalRef}
-        className={`relative w-full ${sizeClasses[size]} bg-black border border-white/10 rounded-2xl shadow-2xl animate-fade-in-scale`}
+        className={`relative w-full ${sizeClasses[size]} bg-white border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/10">
-          <h2 id="modal-title" className="text-xl font-bold text-white">
+        <div className="flex items-center justify-between p-6 border-b border-neutral-200">
+          <h2 id="modal-title" className="text-xl font-bold text-neutral-900">
             {title}
           </h2>
           {showCloseButton && (
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all duration-200"
+              className="p-2 rounded-xl text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 transition-all duration-200"
               aria-label="Cerrar modal"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
