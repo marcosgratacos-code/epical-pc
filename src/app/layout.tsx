@@ -17,9 +17,16 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthSessionProvider from "./components/AuthSessionProvider";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
+import { Inter } from "next/font/google";
 // import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 // import { extractRouterConfig } from "uploadthing/server";
 // import { ourFileRouter } from "./api/uploadthing/core";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "TITAN-PC | Potencia extrema, diseño impecable",
@@ -83,7 +90,7 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#8b5cf6",
+  themeColor: "#ffffff",
   maximumScale: 5,
   userScalable: true,
 };
@@ -131,7 +138,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   };
 
   return (
-    <html lang="es">
+    <html lang="es" className={inter.variable}>
       <head>
         {preloadResources()}
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />

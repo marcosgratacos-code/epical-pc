@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Heart, Menu, Search, ShoppingBag } from "lucide-react";
 import { useCart } from "../context/cart-context";
 import { useWishlist } from "../context/wishlist-context";
 import GoogleSignInButton from "./GoogleSignInButton";
@@ -10,109 +12,100 @@ import GlobalSearch from "./GlobalSearch";
 import SafeCount from "./SafeCount";
 import { useState } from "react";
 
+const NAV = [
+  { href: "/productos", label: "Productos" },
+  { href: "/pc-a-medida", label: "Configurar PC" },
+  { href: "/ventajas", label: "Ventajas" },
+  { href: "/contacto", label: "Contacto" },
+  { href: "/faq", label: "FAQ" },
+];
+
 export default function SiteHeader() {
-  const { openCart, cart } = useCart();
+  const { cart } = useCart();
   const { wishlistCount } = useWishlist();
+  const pathname = usePathname();
+  // El resto de páginas siguen en tema oscuro hasta que se rediseñen
+  const light = pathname === "/";
   const totalItems = Object.values(cart).reduce((a: number, b: number) => a + b, 0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+  const shell = light
+    ? "bg-white border-neutral-200 text-neutral-900"
+    : "bg-black/95 border-white/10 text-white";
+  const navLink = light
+    ? "text-neutral-500 hover:text-neutral-900"
+    : "text-white/80 hover:text-white";
+  const iconBtn = light
+    ? "border-transparent text-neutral-700 hover:bg-neutral-100"
+    : "border-white/20 text-white hover:border-white/40 hover:bg-white/5";
+
   return (
     <>
-      <header className="sticky top-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10">
+      <header className={`sticky top-0 z-[100] backdrop-blur-xl border-b ${shell}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 gap-4">
-          {/* Hamburger Menu - Mobile */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-200"
+            className={`md:hidden flex items-center justify-center w-10 h-10 rounded-full border transition-colors ${iconBtn}`}
             aria-label="Abrir menú"
           >
-            <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            <Menu className="h-5 w-5" />
           </button>
 
-          {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-md px-1 hover-lift"
+            className="shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight rounded-md px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             aria-label="Ir al inicio"
           >
-            <span className="text-white">TITAN</span>
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent animate-gradient-shift">
-              -PC
-            </span>
+            TITAN<span className={light ? "text-blue-600" : "text-violet-400"}>-PC</span>
           </Link>
 
-          {/* Nav - Desktop */}
-          <nav className="hidden md:flex gap-4 text-sm text-white/80" aria-label="Navegación principal">
-            <Link href="/productos" className="px-2 py-1 hover:text-white transition-colors">
-              Productos
-            </Link>
-            <Link href="/pc-a-medida" className="px-2 py-1 hover:text-white transition-colors">
-              Configurar PC
-            </Link>
-            <Link href="/ventajas" className="px-2 py-1 hover:text-white transition-colors">
-              Ventajas
-            </Link>
-            <Link href="/contacto" className="px-2 py-1 hover:text-white transition-colors">
-              Contacto
-            </Link>
-            <Link href="/faq" className="px-2 py-1 hover:text-white transition-colors">
-              FAQ
-            </Link>
+          <nav className={`hidden md:flex gap-6 text-sm font-medium ${navLink}`} aria-label="Navegación principal">
+            {NAV.map((item) => (
+              <Link key={item.href} href={item.href} className="py-1 transition-colors">
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Acciones del lado derecho */}
-          <div className="flex items-center gap-3">
-            {/* Búsqueda */}
+          <div className="flex items-center gap-0.5 sm:gap-2">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200"
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${iconBtn}`}
               aria-label="Buscar productos"
             >
-              <svg className="h-4 w-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+              <Search className="h-[18px] w-[18px]" />
             </button>
 
-            {/* Usuario */}
-            <GoogleSignInButton />
+            <GoogleSignInButton light={light} />
 
-            {/* Notificaciones */}
-            <NotificationBell />
+            <div className="hidden sm:block">
+              <NotificationBell light={light} />
+            </div>
 
-            {/* Favoritos */}
             <Link
               href="/favoritos"
-              className="rounded-lg border border-white/20 px-3 py-2 text-sm hover:border-white/40 transition-all duration-200 hover:bg-white/5"
+              className={`inline-flex h-10 items-center gap-1.5 rounded-full border px-2.5 text-sm transition-colors sm:px-3 ${iconBtn}`}
               aria-label="Ver favoritos"
             >
-              <span className="inline-flex items-center gap-1">
-                <span>❤️</span>
-                <SafeCount value={wishlistCount} fallback={0} />
-              </span>
+              <Heart className="h-[18px] w-[18px]" />
+              <SafeCount value={wishlistCount} fallback={0} />
             </Link>
 
-            {/* Carrito */}
             <Link
               href="/cesta"
-              className="rounded-lg border border-white/20 px-3 py-2 text-sm hover:border-white/40 transition-all duration-200 hover:bg-white/5"
+              className={`inline-flex h-10 items-center gap-1.5 rounded-full border px-2.5 text-sm transition-colors sm:px-3 ${iconBtn}`}
               aria-label="Ver cesta"
             >
-              <span className="inline-flex items-center gap-1">
-                <span>🛒</span>
-                <SafeCount value={totalItems} fallback={0} />
-              </span>
+              <ShoppingBag className="h-[18px] w-[18px]" />
+              <SafeCount value={totalItems} fallback={0} />
             </Link>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-      {/* Global Search */}
       <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   );

@@ -4,7 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
-export default function GoogleSignInButton() {
+export default function GoogleSignInButton({ light = false }: { light?: boolean }) {
   const { data: session, status } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -34,7 +34,7 @@ export default function GoogleSignInButton() {
   // No mostrar nada mientras carga
   if (status === "loading") {
     return (
-      <div className="h-10 w-10 rounded-full bg-white/10 animate-pulse"></div>
+      <div className={`h-10 w-10 rounded-full animate-pulse ${light ? "bg-neutral-100" : "bg-white/10"}`}></div>
     );
   }
 
@@ -48,7 +48,11 @@ export default function GoogleSignInButton() {
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className="group flex items-center gap-2 rounded-xl border border-white/20 px-3 py-1.5 text-sm hover:border-violet-400/50 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/20 bg-gradient-to-br from-white/5 to-transparent hover:from-violet-500/10 hover:to-cyan-500/10"
+          className={
+            light
+              ? "group flex items-center gap-2 rounded-full border border-neutral-200 px-3 py-1.5 text-sm text-neutral-900 hover:bg-neutral-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 transition-colors"
+              : "group flex items-center gap-2 rounded-xl border border-white/20 px-3 py-1.5 text-sm hover:border-violet-400/50 focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/20 bg-gradient-to-br from-white/5 to-transparent hover:from-violet-500/10 hover:to-cyan-500/10"
+          }
         >
           {/* Avatar con imagen o inicial */}
           <div className="relative h-7 w-7 rounded-full overflow-hidden ring-2 ring-white/20 group-hover:ring-violet-400/50 transition-all duration-300">
@@ -67,13 +71,13 @@ export default function GoogleSignInButton() {
           </div>
           
           {/* Nombre (solo desktop) */}
-          <span className="hidden md:inline text-sm font-medium text-white/80 group-hover:text-white transition-colors max-w-[120px] truncate">
+          <span className={`hidden md:inline text-sm font-medium transition-colors max-w-[120px] truncate ${light ? "text-neutral-700" : "text-white/80 group-hover:text-white"}`}>
             {userName}
           </span>
           
           {/* Icono flecha con animación */}
           <svg 
-            className={`h-4 w-4 text-white/60 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} 
+            className={`h-4 w-4 transition-transform duration-300 ${light ? "text-neutral-400" : "text-white/60"} ${isDropdownOpen ? 'rotate-180' : ''}`}
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -222,6 +226,21 @@ export default function GoogleSignInButton() {
           </div>
         )}
       </div>
+    );
+  }
+
+  if (light) {
+    return (
+      <Link
+        href="/auth/signin"
+        className="inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-full bg-neutral-900 px-3 text-sm font-medium text-white hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 transition-colors sm:px-4"
+        aria-label="Iniciar sesión"
+      >
+        <svg className="h-[18px] w-[18px] sm:hidden" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+        <span className="hidden sm:inline">Iniciar sesión</span>
+      </Link>
     );
   }
 

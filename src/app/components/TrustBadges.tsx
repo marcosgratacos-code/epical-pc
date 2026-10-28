@@ -1,75 +1,26 @@
-"use client";
+import { Headset, PackageCheck, RotateCcw, ShieldCheck, Thermometer, Truck } from "lucide-react";
 
 const badges = [
-  {
-    icon: "",
-    title: "3 Años Garantía",
-    description: "Componentes y montaje",
-  },
-  {
-    icon: "",
-    title: "Envío Gratis",
-    description: "Península en 24-48h",
-  },
-  {
-    icon: "",
-    title: "Pago Seguro",
-    description: "Stripe verificado",
-  },
-  {
-    icon: "",
-    title: "Devolución 30 días",
-    description: "Sin preguntas",
-  },
-  {
-    icon: "",
-    title: "Montaje Pro",
-    description: "Validación térmica",
-  },
-  {
-    icon: "",
-    title: "Soporte Rápido",
-    description: "WhatsApp directo",
-  },
+  { icon: ShieldCheck, title: "3 años de garantía", description: "Componentes y montaje" },
+  { icon: Truck, title: "Envío gratis", description: "Península en 24-48h" },
+  { icon: PackageCheck, title: "Pago seguro", description: "Stripe verificado" },
+  { icon: RotateCcw, title: "Devolución 30 días", description: "Sin preguntas" },
+  { icon: Thermometer, title: "Montaje pro", description: "Validación térmica" },
+  { icon: Headset, title: "Soporte rápido", description: "WhatsApp directo" },
 ];
 
 export default function TrustBadges() {
   return (
-    <section className="mx-auto max-w-7xl p-6 my-12">
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-8 backdrop-blur-sm">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {badges.map((badge, index) => (
-            <div
-              key={badge.title}
-              className="text-center group"
-              style={{
-                animation: "fadeInUp 0.6s ease-out forwards",
-                animationDelay: `${index * 0.1}s`,
-                opacity: 0,
-              }}
-            >
-              <div className="text-sm font-semibold text-white mb-1">
-                {badge.title}
-              </div>
-              <div className="text-xs text-white/60">{badge.description}</div>
-            </div>
-          ))}
-        </div>
+    <section className="border-y border-neutral-200 bg-neutral-50">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-8 px-6 py-12 md:grid-cols-3 lg:grid-cols-6">
+        {badges.map(({ icon: Icon, title, description }) => (
+          <div key={title} className="flex flex-col items-center text-center">
+            <Icon className="h-6 w-6 text-neutral-900" strokeWidth={1.5} aria-hidden="true" />
+            <p className="mt-3 text-sm font-medium text-neutral-900">{title}</p>
+            <p className="mt-1 text-xs text-neutral-500">{description}</p>
+          </div>
+        ))}
       </div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </section>
   );
 }
-

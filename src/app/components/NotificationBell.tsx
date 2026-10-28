@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNotifications } from "../context/notifications-context";
 import Link from "next/link";
 
-export default function NotificationBell() {
+export default function NotificationBell({ light = false }: { light?: boolean }) {
   const { notificaciones, noLeidas, marcarComoLeida, marcarTodasComoLeidas, eliminarNotificacion } = useNotifications();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -71,11 +71,13 @@ export default function NotificationBell() {
       {/* Botón de campana */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-200 touch-target"
+        className={`relative p-2 rounded-full transition-all duration-200 touch-target ${
+          light ? "hover:bg-neutral-100" : "hover:bg-white/10"
+        }`}
         aria-label={`Notificaciones (${noLeidas} sin leer)`}
       >
         <svg
-          className="h-6 w-6 text-white"
+          className={`h-6 w-6 ${light ? "text-neutral-700" : "text-white"}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

@@ -36,7 +36,7 @@ export default function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-6 right-6 z-50 group"
+      className="fixed bottom-6 right-24 z-50 group"
       aria-label="Volver arriba"
     >
       <div className="relative h-14 w-14">
