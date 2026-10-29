@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
 import Link from "next/link";
+import { POLICIES } from "../lib/policies";
 import PasswordInfoModal from "../components/modals/PasswordInfoModal";
 
 export default function PerfilPage() {
@@ -341,7 +342,7 @@ export default function PerfilPage() {
               <ul className="space-y-3 text-sm">
                 <li className="flex items-center gap-2 text-neutral-600">
                   <span className="text-green-700">✓</span>
-                  Envío gratis en pedidos +500€
+                  Envío gratis en pedidos desde {POLICIES.freeShippingFrom} €
                 </li>
                 <li className="flex items-center gap-2 text-neutral-600">
                   <span className="text-green-700">✓</span>

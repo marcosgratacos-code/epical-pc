@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useCart } from "../context/cart-context";
 import { PRODUCTS, type Product } from "../lib/products";
 import { getStripe } from "../lib/get-stripe";
+import { POLICIES } from "../lib/policies";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -38,7 +39,7 @@ export default function CartDrawerGlobal() {
   );
 
   const subtotal = useMemo(() => items.reduce((a, it) => a + it.price * it.qty, 0), [items]);
-  const envio = subtotal >= 1000 ? 0 : 14.9;
+  const envio = subtotal >= POLICIES.freeShippingFrom ? 0 : POLICIES.shippingCost;
 
   const [coupon, setCoupon] = useState("");
   const [couponApplied, setCouponApplied] = useState<{ code: string; discount: number } | null>(null);
@@ -282,7 +283,7 @@ export default function CartDrawerGlobal() {
             <div className="grid grid-cols-3 gap-3 mb-6">
               {[
                 { icon: "🛡️", text: "3 años garantía" },
-                { icon: "🚚", text: envio === 0 ? "Envío gratis" : "Envío 24-48h" },
+                { icon: "🚚", text: envio === 0 ? "Envío gratis" : `Envío ${POLICIES.shippingTime}` },
                 { icon: "✅", text: "Montaje Pro" },
               ].map((benefit, i) => (
                 <div key={i} className="text-center p-3 rounded-xl bg-neutral-50 border border-neutral-200">
@@ -338,7 +339,7 @@ export default function CartDrawerGlobal() {
               <div className="mt-1 flex items-center justify-between text-sm"><span className="text-neutral-600">IVA (21%)</span><span className="font-semibold">{eur(iva)}</span></div>
               <div className="mt-1 flex items-center justify-between text-sm"><span className="text-neutral-600">Envío {envio===0?"(Gratis)":""}</span><span className="font-semibold">{eur(envio)}</span></div>
               <div className="mt-3 flex items-center justify-between text-base"><span className="font-semibold">Total (IVA incl.)</span><span className="font-bold">{eur(total)}</span></div>
-              <div className="mt-2 text-xs text-neutral-500">{envio===0 ? "🎉 Envío gratis a partir de 1000€" : `Sube tu pedido a ${eur(1000)} para envío gratis. Te faltan ${eur(Math.max(0, 1000 - subtotal))}.`}</div>
+              <div className="mt-2 text-xs text-neutral-500">{envio===0 ? `🎉 Envío gratis a partir de ${eur(POLICIES.freeShippingFrom)}` : `Sube tu pedido a ${eur(POLICIES.freeShippingFrom)} para envío gratis. Te faltan ${eur(Math.max(0, POLICIES.freeShippingFrom - subtotal))}.`}</div>
               <div className="mt-4 flex gap-2">
                 <button 
                   onClick={clear} 

@@ -212,7 +212,7 @@ export default function ConfigurarPC() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-700">✓</span>
-              <span>Financiación disponible</span>
+              <span>Montaje y pruebas incluidos</span>
         </div>
       </div>
     </div>

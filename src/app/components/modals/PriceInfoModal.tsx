@@ -52,8 +52,7 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
       details: [
         'Precio final exacto de cada componente',
         'Disponibilidad real en stock',
-        'Tiempo estimado de montaje',
-        'Opciones de financiación disponibles'
+        'Tiempo estimado de montaje'
       ]
     }
   ];

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../context/cart-context";
 import { PRODUCTS } from "../lib/products";
+import { POLICIES } from "../lib/policies";
 import { ShoppingBag, ArrowLeft, Minus, Plus, Sparkles, Truck, Shield, Lock } from "lucide-react";
 import { useMemo, useState } from "react";
 import CartRecommendationsClient from "../components/CartRecommendations.client";
@@ -38,8 +39,8 @@ export default function CestaPage() {
     return 0;
   }, [coupon, subtotal]);
 
-  // Envío gratis si total + descuento > 1500
-  const envio = subtotal + descuento > 1500 ? 0 : 12.9;
+  // Envío gratis a partir del umbral definido en lib/policies
+  const envio = subtotal + descuento > POLICIES.freeShippingFrom ? 0 : POLICIES.shippingCost;
   const iva = (subtotal + descuento + Math.max(envio, 0)) * 0.21;
   const totalFinal = Math.max(0, subtotal + descuento + Math.max(envio, 0) + iva);
   const count = items.reduce((sum, item) => sum + (item?.qty || 0), 0);

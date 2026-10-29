@@ -15,7 +15,7 @@ const faqs: FAQ[] = [
   {
     id: '1',
     question: '¿Qué hace diferente a TITAN-PC?',
-    answer: 'TITAN-PC se especializa en montaje profesional con validación térmica real. Realizamos stress testing completo, optimización de curvas PWM para silencio máximo, y cableado profesional. Cada PC se entrega listo para usar con Windows activado, drivers instalados y perfiles XMP/EXPO aplicados.',
+    answer: 'TITAN-PC se especializa en montaje profesional con validación térmica real. Realizamos stress testing completo, optimización de curvas PWM para silencio máximo, y cableado profesional. Cada PC se entrega montado y probado, con drivers instalados y perfiles XMP/EXPO aplicados. Windows no va incluido por defecto: podemos entregarlo instalado y activado.',
     category: 'general'
   },
   {
@@ -101,13 +101,13 @@ const faqs: FAQ[] = [
   {
     id: '14',
     question: '¿Qué métodos de pago aceptan?',
-    answer: 'Aceptamos tarjetas de crédito/débito (Visa, Mastercard), PayPal, transferencia bancaria, y financiación a través de nuestros partners. Todos los pagos son seguros y procesados por Stripe.',
+    answer: 'Aceptamos los métodos de pago disponibles en el pago seguro, procesado por Stripe. Si necesitas otra forma de pago, escríbenos desde la página de contacto.',
     category: 'pagos'
   },
   {
     id: '15',
     question: '¿Puedo pagar a plazos?',
-    answer: 'Sí, ofrecemos financiación sin intereses hasta 12 meses para pedidos superiores a 1000€. También tenemos opciones de financiación más largas con nuestros partners financieros.',
+    answer: 'Por ahora el pago se realiza en un único cobro con tarjeta. Si necesitas otra fórmula, escríbenos desde la página de contacto.',
     category: 'pagos'
   },
   {

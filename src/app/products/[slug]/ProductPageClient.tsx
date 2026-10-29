@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Product } from "../../lib/products";
+import { POLICIES } from "../../lib/policies";
 import BackButton from "../../components/BackButton";
 import Accordion from "../../components/Accordion";
 import ReviewSection from "../../components/ReviewSection";
@@ -269,10 +270,10 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                   <h3 className="mb-4 font-semibold text-lg">Ventajas TITAN-PC</h3>
                   <ul className="space-y-3 text-sm text-neutral-700">
                     {[
-                      "✓ 3 años de garantía completa",
-                      "✓ Envío 24/48 h según stock",
+                      `✓ ${POLICIES.warrantyYears} años de garantía completa`,
+                      `✓ Envío ${POLICIES.shippingTime}`,
                       "✓ Montaje profesional + testeo",
-                                                      "✓ Devolución 30 días",
+                      ...(POLICIES.returnDays ? [`✓ Devolución ${POLICIES.returnDays} días`] : []),
                     ].map((item, index) => (
                       <li key={item} className={`transform transition-all duration-300 hover:translate-x-1 stagger-${index + 1}`}>{item}</li>
                     ))}
@@ -310,10 +311,15 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                   WhatsApp y gestionaremos la reparación o sustitución del equipo sin coste
                   adicional.
                 </p>
-                <p className="mt-4 leading-relaxed text-neutral-700">
-                  Además, dispones de <b>30 días</b> para devoluciones sin preguntas.
-                  Si no quedas satisfecho, te devolvemos el 100% del importe.
-                </p>
+                {POLICIES.returnDays ? (
+                  <p className="mt-4 leading-relaxed text-neutral-700">
+                    Además, dispones de <b>{POLICIES.returnDays} días</b> para devoluciones.
+                  </p>
+                ) : (
+                  <p className="mt-4 leading-relaxed text-neutral-700">
+                    Consulta las condiciones de desistimiento y devolución en la página de contacto.
+                  </p>
+                )}
               </Accordion>
 
               <Accordion title="Envío y montaje">

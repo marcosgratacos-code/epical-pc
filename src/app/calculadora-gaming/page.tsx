@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-// Base de datos de juegos con benchmarks reales de 2025 (+20% FPS, Cyberpunk +25% adicional)
+// Valores de referencia aproximados (estimaciones, no mediciones de TITAN-PC)
 const GAMES_DATABASE = [
   {
     id: "cyberpunk",
@@ -265,7 +265,7 @@ export default function GamingCalculator() {
             </span>
           </h1>
           <p className="text-neutral-600 text-lg">
-            Calcula el rendimiento de tus juegos favoritos con nuestros PCs personalizados
+            Estima el rendimiento orientativo de tus juegos favoritos
           </p>
         </div>
 
@@ -407,7 +407,7 @@ export default function GamingCalculator() {
                         {results.fps}
                       </span>
                     </div>
-                    <div className="text-2xl font-semibold mb-2">FPS</div>
+                    <div className="text-2xl font-semibold mb-2">FPS estimados</div>
                     <div className={`text-lg font-medium ${results.experienceColor}`}>
                       {results.experience}
                     </div>
@@ -514,14 +514,12 @@ export default function GamingCalculator() {
 
         {/* Información sobre datos reales de 2025 */}
         <div className="mt-8 rounded-xl border border-neutral-200 bg-neutral-50 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-neutral-900">📊 Datos Reales de Benchmarks 2025</h3>
+          <h3 className="mb-4 text-lg font-semibold text-neutral-900">Cómo interpretar estos resultados</h3>
           <div className="space-y-3 text-sm text-neutral-600">
-            <p>• Los FPS mostrados son datos reales de benchmarks de 2025 (+20% optimizados)</p>
-            <p>• Basados en pruebas con configuraciones Ultra/High</p>
-            <p>• <span className="text-blue-600 font-semibold">DLSS 4 cuadruplica el rendimiento (4x)</span> en todos los juegos compatibles</p>
-            <p>• El rendimiento puede variar según la configuración del sistema</p>
-            <p>• Datos extrapolados de RTX 4060/4070/4080 con mejoras estimadas</p>
-            <p>• Fuentes: TechPowerUp, Tom&apos;s Hardware, AnandTech (2025)</p>
+            <p>• Los FPS son <strong>estimaciones orientativas</strong>, no mediciones realizadas por TITAN-PC.</p>
+            <p>• Se extrapolan a partir de referencias de otras tarjetas gráficas y pueden diferir del resultado real.</p>
+            <p>• La mejora con DLSS 4 depende del juego, la resolución y la configuración; no es un multiplicador fijo.</p>
+            <p>• El rendimiento también varía con el procesador, la memoria, los controladores y la versión del juego.</p>
           </div>
         </div>
       </section>
