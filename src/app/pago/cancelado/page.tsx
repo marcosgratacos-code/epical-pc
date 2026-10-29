@@ -1,5 +1,7 @@
 "use client";
 
+import { COMPANY, whatsappUrl } from "@/lib/company";
+
 import Link from "next/link";
 import BackButton from "@/app/components/BackButton";
 
@@ -147,7 +149,7 @@ export default function PagoCanceladoPage() {
             ¿Tuviste algún problema durante el pago?
           </p>
           <a
-            href="mailto:epicalpc@gmail.com?subject=Problema%20con%20el%20pago"
+            href={`mailto:${COMPANY.email}?subject=Problema%20con%20el%20pago`}
             className="text-blue-600 hover:text-blue-600 underline text-sm"
           >
             Contáctanos y te ayudamos →

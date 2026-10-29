@@ -126,8 +126,7 @@ export default function GamingCalculator() {
   const [selectedResolution, setSelectedResolution] = useState(RESOLUTIONS[0]);
   const [selectedQuality, setSelectedQuality] = useState(QUALITY_PRESETS[2]);
   const [selectedGPU, setSelectedGPU] = useState("RTX 5070");
-  const [enableDLSS4, setEnableDLSS4] = useState(false);
-  const [results, setResults] = useState<{
+    const [results, setResults] = useState<{
     fps: number;
     experience: string;
     experienceColor: string;
@@ -142,11 +141,6 @@ export default function GamingCalculator() {
     const baseFPS = selectedGame.benchmarks[selectedGPU as keyof typeof selectedGame.benchmarks]?.[selectedResolution.id as keyof typeof selectedGame.benchmarks[keyof typeof selectedGame.benchmarks]] || 0;
     let adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
     
-    // Aplicar DLSS 4 si está habilitado y el juego lo soporta
-    if (enableDLSS4 && selectedGame.supportsDLSS4 && selectedGame.dlss4Boost) {
-      const dlssMultiplier = selectedGame.dlss4Boost[selectedGPU as keyof typeof selectedGame.dlss4Boost]?.[selectedResolution.id as keyof typeof selectedGame.dlss4Boost[keyof typeof selectedGame.dlss4Boost]] || 1;
-      adjustedFPS = Math.round(adjustedFPS * dlssMultiplier);
-    }
     
     // Calcular experiencia de juego
     let experience = "";
@@ -172,9 +166,9 @@ export default function GamingCalculator() {
       experienceColor,
       baseFPS,
       qualityImpact: Math.round((1 - selectedQuality.multiplier) * 100),
-      dlssEnabled: enableDLSS4 && selectedGame.supportsDLSS4
+      dlssEnabled: false
     };
-  }, [selectedGame, selectedGPU, selectedResolution, selectedQuality, enableDLSS4]);
+  }, [selectedGame, selectedGPU, selectedResolution, selectedQuality]);
 
   // Obtener recomendaciones
   const getRecommendations = (fps: number) => {
@@ -201,10 +195,10 @@ export default function GamingCalculator() {
       });
     }
 
-    if (selectedGame.supportsDLSS4 && !enableDLSS4) {
+    if (selectedGame.supportsDLSS4) {
       recommendations.push({
         type: "info",
-        message: "DLSS 4 puede mejorar significativamente el rendimiento en este juego"
+        message: "Este juego admite DLSS 4. El efecto depende del juego y la tarjeta (Multi Frame Generation solo en la serie RTX 50) y no está incluido en la estimación."
       });
     }
 
@@ -225,11 +219,6 @@ export default function GamingCalculator() {
         const baseFPS = selectedGame.benchmarks[gpu as keyof typeof selectedGame.benchmarks][selectedResolution.id as keyof typeof selectedGame.benchmarks[keyof typeof selectedGame.benchmarks]] || 0;
         let adjustedFPS = Math.round(baseFPS * selectedQuality.multiplier);
         
-        // Aplicar DLSS 4 si está habilitado
-        if (enableDLSS4 && selectedGame.supportsDLSS4 && selectedGame.dlss4Boost) {
-          const dlssMultiplier = selectedGame.dlss4Boost[gpu as keyof typeof selectedGame.dlss4Boost]?.[selectedResolution.id as keyof typeof selectedGame.dlss4Boost[keyof typeof selectedGame.dlss4Boost]] || 1;
-          adjustedFPS = Math.round(adjustedFPS * dlssMultiplier);
-        }
         
         comparisons.push({
           gpu,
@@ -246,7 +235,7 @@ export default function GamingCalculator() {
   useEffect(() => {
     const result = calculateFPS();
     setResults(result);
-  }, [selectedGame, selectedResolution, selectedQuality, selectedGPU, enableDLSS4, calculateFPS]);
+  }, [selectedGame, selectedResolution, selectedQuality, selectedGPU, calculateFPS]);
 
   return (
     <main className="min-h-screen bg-white text-neutral-900">
@@ -375,22 +364,11 @@ export default function GamingCalculator() {
                 </div>
               </div>
 
-              {/* DLSS 4 */}
+              {/* DLSS 4: informativo, sin multiplicador numérico */}
               {selectedGame.supportsDLSS4 && (
-                <div className="mb-6">
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={enableDLSS4}
-                      onChange={(e) => setEnableDLSS4(e.target.checked)}
-                      className="w-4 h-4 text-blue-600 bg-white border-neutral-300 rounded focus:ring-blue-600 focus:ring-2"
-                    />
-                    <div>
-                      <div className="font-medium text-neutral-700">DLSS 4</div>
-                      <div className="text-xs text-blue-600">Mejora de rendimiento con IA</div>
-                    </div>
-                  </label>
-                </div>
+                <p className="mb-6 rounded-xl border border-neutral-200 bg-white p-3 text-xs leading-relaxed text-neutral-600">
+                  Este juego admite DLSS 4. No se suma a la estimación: la mejora real varía según el juego, la resolución y la tarjeta.
+                </p>
               )}
             </div>
           </div>
@@ -411,11 +389,9 @@ export default function GamingCalculator() {
                     <div className={`text-lg font-medium ${results.experienceColor}`}>
                       {results.experience}
                     </div>
-                    {results.dlssEnabled && (
-                      <div className="mt-2 text-sm text-blue-600 font-medium">
-                        ✨ Con DLSS 4 activado
-                      </div>
-                    )}
+                    <div className="mt-3 inline-flex items-center rounded-full border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-neutral-700">
+                      Estimación · sin medición propia de TITAN-PC
+                    </div>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-3 text-center">
@@ -515,11 +491,17 @@ export default function GamingCalculator() {
         {/* Información sobre datos reales de 2025 */}
         <div className="mt-8 rounded-xl border border-neutral-200 bg-neutral-50 p-6">
           <h3 className="mb-4 text-lg font-semibold text-neutral-900">Cómo interpretar estos resultados</h3>
+          <dl className="mb-5 grid gap-3 text-sm sm:grid-cols-3">
+            <div className="rounded-lg bg-white p-3"><dt className="text-xs uppercase tracking-wide text-neutral-500">Tipo de dato</dt><dd className="mt-1 font-medium text-neutral-900">Estimación</dd></div>
+            <div className="rounded-lg bg-white p-3"><dt className="text-xs uppercase tracking-wide text-neutral-500">Mediciones propias</dt><dd className="mt-1 font-medium text-neutral-900">Ninguna publicada</dd></div>
+            <div className="rounded-lg bg-white p-3"><dt className="text-xs uppercase tracking-wide text-neutral-500">Método</dt><dd className="mt-1 font-medium text-neutral-900">FPS de referencia × resolución × calidad</dd></div>
+          </dl>
           <div className="space-y-3 text-sm text-neutral-600">
             <p>• Los FPS son <strong>estimaciones orientativas</strong>, no mediciones realizadas por TITAN-PC.</p>
             <p>• Se extrapolan a partir de referencias de otras tarjetas gráficas y pueden diferir del resultado real.</p>
             <p>• La mejora con DLSS 4 depende del juego, la resolución y la configuración; no es un multiplicador fijo.</p>
             <p>• El rendimiento también varía con el procesador, la memoria, los controladores y la versión del juego.</p>
+            <p>• Fuentes: no hay mediciones propias ni se citan reseñas concretas. Cuando TITAN-PC publique pruebas medidas (juego, versión, ajustes y fecha), se mostrarán aquí separadas de las estimaciones.</p>
           </div>
         </div>
       </section>

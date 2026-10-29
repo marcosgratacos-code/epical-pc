@@ -1,3 +1,4 @@
+import { COMPANY, whatsappUrl } from "@/lib/company";
 // Modal para contactar con soporte TITAN
 
 import { useState } from 'react';
@@ -87,12 +88,13 @@ Mensaje: ${formData.message || ''}
 Email: ${formData.email || 'No proporcionado'}
 Teléfono: ${formData.phone || 'No proporcionado'}`;
     
-    window.open(`mailto:epicalpc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    window.open(`mailto:${COMPANY.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
   };
 
   const openWhatsApp = () => {
     const message = `Hola, tengo una consulta sobre mi pedido ${order?.id || ''}`;
-    window.open(`https://wa.me/34600000000?text=${encodeURIComponent(message)}`);
+    const url = whatsappUrl(message);
+    if (url) window.open(url);
   };
 
   if (submitted) {

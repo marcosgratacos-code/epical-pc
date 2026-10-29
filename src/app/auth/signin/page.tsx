@@ -116,11 +116,11 @@ function SignInContent() {
 
           <p className="text-xs text-neutral-400 text-center mt-6 leading-relaxed">
             Al continuar, aceptas nuestros{" "}
-            <a href="#" className="text-blue-600 hover:text-blue-600 underline">
+            <a href="/legal/condiciones" className="text-blue-600 hover:text-blue-600 underline">
               Términos de Servicio
             </a>{" "}
             y{" "}
-            <a href="#" className="text-blue-600 hover:text-blue-600 underline">
+            <a href="/legal/privacidad" className="text-blue-600 hover:text-blue-600 underline">
               Política de Privacidad
             </a>
           </p>

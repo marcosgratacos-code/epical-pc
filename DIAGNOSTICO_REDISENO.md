@@ -41,3 +41,15 @@ Solo TITAN ADVANCED tiene hoy una imagen de producto real (`/logo-sin-fondo.png`
 4. Animaciones de scroll adicionales y medición real de LCP/INP/CLS.
 5. Carrito y checkout; unificar envío, devoluciones y financiación.
 6. Páginas legales.
+
+## Configuración de empresa (variables de entorno en Vercel)
+
+| Variable | Uso |
+|---|---|
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Correo visible en la web y destinatario de presupuestos (por defecto `epicalpc@gmail.com`). |
+| `NEXT_PUBLIC_WHATSAPP` | Número con prefijo, solo dígitos (p. ej. `34612345678`). Sin valor, no se muestra WhatsApp. |
+| `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_LEGAL_TAX_ID`, `NEXT_PUBLIC_LEGAL_ADDRESS`, `NEXT_PUBLIC_PHONE` | Datos del titular (aviso legal, condiciones, pie de página y contacto). |
+| `RESEND_API_KEY`, `RESEND_FROM` | Necesarias para que las solicitudes de presupuesto del configurador lleguen por correo. |
+
+Condiciones comerciales (envío, garantía, devoluciones, financiación): `src/app/lib/policies.ts`.
+Fotos reales de producto: `public/productos/<slug>/` (ver `LEEME.md`).

@@ -6,6 +6,7 @@ import { useCart } from "../context/cart-context";
 import { PRODUCTS, type Product } from "../lib/products";
 import { getStripe } from "../lib/get-stripe";
 import { POLICIES } from "../lib/policies";
+import { COMPANY } from "@/lib/company";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -121,7 +122,7 @@ export default function CartDrawerGlobal() {
           "✓ Explorar productos\n" +
           "✓ Añadir al carrito\n" +
           "✓ Ver precios y especificaciones\n\n" +
-          "Para consultas: epicalpc@gmail.com"
+          `Para consultas: ${COMPANY.email}`
         );
         setIsProcessingPayment(false);
         return;

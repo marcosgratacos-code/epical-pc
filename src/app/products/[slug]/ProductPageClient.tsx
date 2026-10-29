@@ -17,6 +17,8 @@ import { useState, useEffect, useRef } from "react";
 import StructuredData from "../../components/StructuredData";
 import { motion, AnimatePresence } from "framer-motion";
 import RecentlyViewed from "../../components/RecentlyViewed";
+import HardwareDetail from "../../components/product/HardwareDetail";
+import { HARDWARE, PHOTO_ANGLES } from "../../lib/product-details";
 // Temporalmente comentado - componentes async no se pueden usar en client components
 // import ProductRecommendations from "./Recommendations.server";
 // import Complements from "./Complements.server";
@@ -24,9 +26,10 @@ import RecentlyViewed from "../../components/RecentlyViewed";
 
 interface ProductPageClientProps {
   product: Product;
+  shots?: { id: string; label: string; src: string }[];
 }
 
-export default function ProductPageClient({ product }: ProductPageClientProps) {
+export default function ProductPageClient({ product, shots = [] }: ProductPageClientProps) {
   const router = useRouter();
   const { data: session } = useSession();
   const userId = session?.user?.email || session?.user?.id;
@@ -61,8 +64,9 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
     }).catch(() => {});
   }, [product?.slug, sessionId, addToRecentlyViewed, product]);
 
-  const gallery: string[] =
-    Array.isArray((product as { images?: string[] }).images) && (product as { images: string[] }).images.length
+  const gallery: string[] = shots.length
+    ? shots.map((s) => s.src)
+    : Array.isArray((product as { images?: string[] }).images) && (product as { images: string[] }).images.length
       ? (product as { images: string[] }).images
       : [product.image];
 
@@ -218,6 +222,15 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               {/* galería */}
               <div>
                 <ImageGalleryZoom images={gallery} productName={product.name} />
+                {shots.length > 0 ? (
+                  <p className="mt-3 text-xs text-muted">
+                    Fotografías reales del equipo: {shots.map((s) => s.label).join(" · ")} ({shots.length}/{PHOTO_ANGLES.length} vistas).
+                  </p>
+                ) : (
+                  <p className="mt-3 text-xs text-muted">
+                    Imágenes de referencia. Las fotografías reales de este equipo se publicarán próximamente.
+                  </p>
+                )}
               </div>
 
               {/* info del producto */}
@@ -281,6 +294,8 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                 </div>
               </div>
             </div>
+
+            {HARDWARE[product.slug] && <HardwareDetail items={HARDWARE[product.slug]} />}
 
             {/* Detalles adicionales */}
             <motion.section

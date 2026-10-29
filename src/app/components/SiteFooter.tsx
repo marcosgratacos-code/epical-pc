@@ -1,5 +1,7 @@
 "use client";
 
+import { COMPANY, whatsappUrl } from "@/lib/company";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -33,6 +35,13 @@ const COLUMNS = [
   },
 ];
 
+const LEGAL = [
+  { href: "/legal/aviso-legal", label: "Aviso legal" },
+  { href: "/legal/privacidad", label: "Privacidad" },
+  { href: "/legal/cookies", label: "Cookies" },
+  { href: "/legal/condiciones", label: "Condiciones de venta" },
+];
+
 export default function SiteFooter() {
   const pathname = usePathname();
   if (pathname.startsWith("/admin")) return null;
@@ -49,8 +58,8 @@ export default function SiteFooter() {
               Ordenadores montados a mano, probados y listos para jugar. Garantía de 3 años.
             </p>
             <p className="mt-4 text-sm text-muted">
-              <a href="mailto:epicalpc@gmail.com" className="hover:text-ink transition-colors">
-                epicalpc@gmail.com
+              <a href={`mailto:${COMPANY.email}`} className="hover:text-ink transition-colors">
+                {COMPANY.email}
               </a>
             </p>
           </div>
@@ -72,6 +81,12 @@ export default function SiteFooter() {
         </div>
 
         <div className="mt-12 border-t border-black/10 pt-6 text-xs text-muted">
+          <ul className="mb-4 flex flex-wrap gap-x-5 gap-y-2" aria-label="Información legal">
+            {LEGAL.map((l) => (
+              <li key={l.href}><Link href={l.href} className="hover:text-ink hover:underline underline-offset-4">{l.label}</Link></li>
+            ))}
+          </ul>
+          {COMPANY.legalName && <p className="mb-1">{COMPANY.legalName}{COMPANY.taxId ? ` · ${COMPANY.taxId}` : ""}{COMPANY.address ? ` · ${COMPANY.address}` : ""}</p>}
           © {new Date().getFullYear()} TITAN-PC. Todos los derechos reservados.
         </div>
       </div>

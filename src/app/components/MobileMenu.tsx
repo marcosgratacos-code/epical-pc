@@ -1,5 +1,7 @@
 "use client";
 
+import { COMPANY, whatsappUrl } from "@/lib/company";
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -138,21 +140,20 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <div className="p-4 border-t border-neutral-200 mt-auto">
           <div className="rounded-xl bg-neutral-50 border border-neutral-200 p-4 text-center">
             <p className="text-sm text-neutral-700 mb-3">
-              ¿Necesitas ayuda? Contáctanos por WhatsApp
+              ¿Necesitas ayuda? {COMPANY.whatsapp ? "Contáctanos por WhatsApp" : "Escríbenos"}
             </p>
             <a
-              href="https://wa.me/34XXXXXXXXX"
+              href={whatsappUrl() ?? `mailto:${COMPANY.email}`}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-900 text-white font-semibold hover:bg-neutral-700 transition-colors"
             >
-              <span>📱</span>
-              WhatsApp
+              {COMPANY.whatsapp ? "WhatsApp" : "Enviar un correo"}
             </a>
           </div>
 
           <div className="mt-4 text-center text-xs text-neutral-400">
-            © 2025 TITAN-PC
+            © {new Date().getFullYear()} TITAN-PC
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ export default function ReviewForm({ productId, productName, onReviewSubmitted, 
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="absolute inset-0 bg-white backdrop-blur-sm" onClick={onClose} />
-        <div className="relative w-full max-w-md bg-gradient-to-br from-black/95 to-black/90 border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale">
+        <div className="relative w-full max-w-md bg-white border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale">
           <div className="p-6 text-center">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
               <svg className="w-8 h-8 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,7 +62,7 @@ export default function ReviewForm({ productId, productName, onReviewSubmitted, 
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="absolute inset-0 bg-white backdrop-blur-sm" onClick={onClose} />
-        <div className="relative w-full max-w-md bg-gradient-to-br from-black/95 to-black/90 border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale">
+        <div className="relative w-full max-w-md bg-white border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale">
           <div className="p-6 text-center">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
               <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +152,7 @@ export default function ReviewForm({ productId, productName, onReviewSubmitted, 
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="absolute inset-0 bg-white backdrop-blur-sm" onClick={onClose} />
-        <div className="relative w-full max-w-md bg-gradient-to-br from-black/95 to-black/90 border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale">
+        <div className="relative w-full max-w-md bg-white border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale">
           <div className="p-6 text-center">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
               <svg className="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -178,7 +178,7 @@ export default function ReviewForm({ productId, productName, onReviewSubmitted, 
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-white backdrop-blur-sm" onClick={onClose} />
       
-      <div className="relative w-full max-w-2xl bg-gradient-to-br from-black/95 to-black/90 border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale overflow-hidden">
+      <div className="relative w-full max-w-2xl bg-white border border-neutral-200 rounded-2xl shadow-2xl animate-fade-in-scale overflow-hidden">
         {/* Header */}
         <div className="bg-neutral-50 p-6 border-b border-neutral-200">
           <div className="flex items-center justify-between">
@@ -281,7 +281,7 @@ export default function ReviewForm({ productId, productName, onReviewSubmitted, 
               multiple
               accept="image/*"
               onChange={handleImageUpload}
-              className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-violet-600 transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-violet-600 transition-all"
             />
             <p className="text-neutral-500 text-xs mt-1">
               Máximo 3 imágenes. Formatos: JPG, PNG, WebP

@@ -1,5 +1,7 @@
 "use client";
 
+import { COMPANY, whatsappUrl } from "@/lib/company";
+
 // Widget de chat de soporte mejorado con persistencia
 
 import { useState, useEffect, useRef } from 'react';
@@ -314,16 +316,18 @@ export default function ChatWidget() {
             
             {/* Enlaces de contacto */}
             <div className="mt-3 flex gap-2">
+              {COMPANY.whatsapp && (
+                <a
+                  href={whatsappUrl() ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 px-3 py-2 rounded-lg bg-green-100 text-green-700 text-xs font-medium text-center hover:bg-green-100 transition-colors touch-target"
+                >
+                  WhatsApp
+                </a>
+              )}
               <a
-                href="https://wa.me/34XXXXXXXXX"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 px-3 py-2 rounded-lg bg-green-100 text-green-700 text-xs font-medium text-center hover:bg-green-100 transition-colors touch-target"
-              >
-                WhatsApp
-              </a>
-              <a
-                href="mailto:epicalpc@gmail.com"
+                href={`mailto:${COMPANY.email}`}
                 className="flex-1 px-3 py-2 rounded-lg bg-neutral-50 text-neutral-600 text-xs font-medium text-center hover:bg-neutral-100 transition-colors touch-target"
               >
                 Email

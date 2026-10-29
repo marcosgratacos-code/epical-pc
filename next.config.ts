@@ -82,6 +82,8 @@ const nextConfig: NextConfig = {
       // Redireccionar URLs antiguas epical-* a titan-*
       { source: '/productos/epical-:slug', destination: '/productos/titan-:slug', permanent: true },
       { source: '/products/epical-:slug', destination: '/products/titan-:slug', permanent: true },
+      // El antiguo asistente por pasos usaba precios propios; el configurador actual vive en /pc-a-medida
+      { source: '/pc-a-medida/:step(1-procesador|2-placa-base|3-memoria|4-grafica|5-almacenamiento|6-refrigeracion|7-fuente|8-caja|resumen)', destination: '/pc-a-medida', permanent: false },
     ];
   },
   env: {

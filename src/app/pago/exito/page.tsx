@@ -1,5 +1,7 @@
 "use client";
 
+import { COMPANY, whatsappUrl } from "@/lib/company";
+
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -202,10 +204,10 @@ function ExitoContent() {
           <p className="text-sm text-neutral-500">
             ¿Necesitas ayuda? Contáctanos en{" "}
             <a
-              href="mailto:epicalpc@gmail.com"
+              href={`mailto:${COMPANY.email}`}
               className="text-blue-600 hover:text-blue-600 underline"
             >
-              epicalpc@gmail.com
+              {COMPANY.email}
             </a>
           </p>
         </div>

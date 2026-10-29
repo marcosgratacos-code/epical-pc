@@ -180,7 +180,7 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
               <div key={product.id} className="p-4 rounded-xl bg-neutral-50 border border-neutral-200">
                 <div className="mb-4">
                   <h4 className="font-semibold text-neutral-900">{product.name}</h4>
-                  <p className="text-xs text-neutral-500">Benchmarks reales</p>
+                  <p className="text-xs text-neutral-500">Estimación orientativa</p>
                 </div>
                 
                 <div className="space-y-3">
@@ -236,7 +236,7 @@ export default function ComparisonCharts({ products }: ComparisonChartsProps) {
         
         <div className="mt-4 p-3 rounded-lg bg-neutral-50 border border-neutral-200">
           <p className="text-xs text-neutral-500">
-            💡 <strong>Nota:</strong> FPS promedios basados en {products[0] && scores[0].benchmark ? scores[0].benchmark.gaming.gamesTest.length : 5}+ juegos AAA actuales en calidad Ultra/Máxima
+            💡 <strong>Nota:</strong> Los FPS y las puntuaciones son estimaciones orientativas, no mediciones realizadas por TITAN-PC. Pueden diferir del rendimiento real.
           </p>
         </div>
       </div>

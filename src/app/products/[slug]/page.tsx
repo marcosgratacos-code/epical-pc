@@ -2,6 +2,21 @@ import { getProductBySlug } from "@/app/lib/products";
 import ProductPageClient from "./ProductPageClient";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import fs from "node:fs";
+import path from "node:path";
+import { PHOTO_ANGLES } from "@/app/lib/product-details";
+
+// Fotos reales: public/productos/<slug>/<ángulo>.(jpg|jpeg|png|webp|avif)
+// Solo se muestran las que existen; no se sustituyen por imágenes de otros equipos.
+function realShots(slug: string) {
+  const dir = path.join(process.cwd(), "public", "productos", slug);
+  let files: string[] = [];
+  try { files = fs.readdirSync(dir); } catch { return []; }
+  return PHOTO_ANGLES.flatMap((a) => {
+    const f = files.find((n) => n.toLowerCase().startsWith(a.id + ".") && /[.](jpe?g|png|webp|avif)$/i.test(n));
+    return f ? [{ id: a.id, label: a.label, src: `/productos/${slug}/${f}` }] : [];
+  });
+}
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -58,5 +73,5 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
-  return <ProductPageClient product={product} />;
+  return <ProductPageClient product={product} shots={realShots(product.slug)} />;
 }

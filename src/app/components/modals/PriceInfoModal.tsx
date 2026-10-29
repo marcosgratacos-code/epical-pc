@@ -78,7 +78,7 @@ export default function PriceInfoModal({ isOpen, onClose }: PriceInfoModalProps)
       />
       
       {/* Modal */}
-      <div className="relative w-full max-w-2xl bg-gradient-to-br from-black/95 to-black/90 border border-neutral-200 rounded-3xl shadow-2xl animate-fade-in-scale overflow-hidden">
+      <div className="relative w-full max-w-2xl bg-white border border-neutral-200 rounded-3xl shadow-2xl animate-fade-in-scale overflow-hidden">
         {/* Header */}
         <div className="bg-neutral-50 p-6 border-b border-neutral-200">
           <div className="flex items-center justify-between">

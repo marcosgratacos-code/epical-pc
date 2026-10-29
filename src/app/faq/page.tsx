@@ -1,5 +1,7 @@
 "use client";
 
+import { COMPANY, whatsappUrl } from "@/lib/company";
+
 import { useState } from 'react';
 import BackButton from "../components/BackButton";
 
@@ -212,16 +214,18 @@ export default function FAQPage() {
                 Intenta ajustar los filtros de búsqueda o contacta con nosotros directamente.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                {COMPANY.whatsapp && (
+                  <a
+                    href={whatsappUrl() ?? "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
+                  >
+                    📱 Contactar por WhatsApp
+                  </a>
+                )}
                 <a
-                  href="https://wa.me/34XXXXXXXXX"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
-                >
-                  📱 Contactar por WhatsApp
-                </a>
-                <a
-                  href="mailto:epicalpc@gmail.com"
+                  href={`mailto:${COMPANY.email}`}
                   className="px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold hover:bg-neutral-100 transition-all duration-300 touch-target"
                 >
                   📧 Enviar Email
@@ -272,16 +276,18 @@ export default function FAQPage() {
             Nuestro equipo de soporte está aquí para ayudarte con cualquier duda
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {COMPANY.whatsapp && (
+              <a
+                href={whatsappUrl() ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
+              >
+                📱 Chat por WhatsApp
+              </a>
+            )}
             <a
-              href="https://wa.me/34XXXXXXXXX"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:shadow-lg hover:shadow-black/10 transition-all duration-300 touch-target"
-            >
-              📱 Chat por WhatsApp
-            </a>
-            <a
-              href="mailto:epicalpc@gmail.com?subject=Consulta%20FAQ"
+              href={`mailto:${COMPANY.email}?subject=Consulta%20FAQ`}
               className="px-6 py-3 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-900 font-semibold hover:bg-neutral-100 transition-all duration-300 touch-target"
             >
               📧 Enviar Email

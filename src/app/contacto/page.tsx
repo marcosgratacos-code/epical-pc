@@ -1,5 +1,8 @@
 "use client";
 
+import { COMPANY, whatsappUrl } from "@/lib/company";
+import { POLICIES } from "../lib/policies";
+
 // Página de contacto profesional
 
 import { useState } from 'react';
@@ -57,7 +60,7 @@ ${formData.nombre}
       `.trim();
 
       // Abrir cliente de email
-      const mailtoUrl = `mailto:epicalpc@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+      const mailtoUrl = `mailto:${COMPANY.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoUrl;
       
       setSubmitStatus('success');
@@ -69,13 +72,15 @@ ${formData.nombre}
   };
 
   const quickActions = [
-    {
-      icon: '📞',
-      title: 'WhatsApp',
-      description: 'Respuesta inmediata',
-      action: () => window.open('https://wa.me/34612345678?text=Hola%20TITAN-PC,%20me%20interesa%20configurar%20un%20PC%20a%20medida', '_blank'),
-      color: 'from-green-500 to-green-600'
-    },
+    ...(COMPANY.whatsapp
+      ? [{
+          icon: '📞',
+          title: 'WhatsApp',
+          description: 'Escríbenos por WhatsApp',
+          action: () => window.open(whatsappUrl('Hola TITAN-PC, me interesa configurar un PC a medida') ?? '', '_blank'),
+          color: 'from-green-500 to-green-600'
+        }]
+      : []),
     {
       icon: '💬',
       title: 'Chat en vivo',
@@ -90,29 +95,20 @@ ${formData.nombre}
     {
       icon: '📧',
       title: 'Email directo',
-      description: 'epicalpc@gmail.com',
-      action: () => window.location.href = 'mailto:epicalpc@gmail.com',
+      description: COMPANY.email,
+      action: () => window.location.href = `mailto:${COMPANY.email}`,
       color: 'from-blue-500 to-blue-600'
     }
   ];
 
   const contactInfo = [
-    {
-      icon: '🏢',
-      title: 'Oficina',
-      details: ['Calle Tecnología 123', '28001 Madrid, España'],
-      color: 'text-blue-600'
-    },
-    {
-      icon: '⏰',
-      title: 'Horarios',
-      details: ['Lunes a Viernes: 9:00 - 18:00', 'Sábados: 10:00 - 14:00'],
-      color: 'text-green-700'
-    },
+    ...(COMPANY.address
+      ? [{ icon: '🏢', title: 'Dirección', details: [COMPANY.address], color: 'text-blue-600' }]
+      : []),
     {
       icon: '🚚',
       title: 'Envíos',
-      details: ['Peninsular: 24-48h', 'Islas: 3-5 días laborables'],
+      details: [`Plazo habitual: ${POLICIES.shippingTime}`],
       color: 'text-blue-600'
     }
   ];

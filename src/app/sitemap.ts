@@ -13,6 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/ventajas',
     '/contacto',
     '/faq',
+    '/calculadora-gaming',
+    '/legal/aviso-legal',
+    '/legal/privacidad',
+    '/legal/cookies',
+    '/legal/condiciones',
     '/favoritos',
     '/seguimiento',
   ].map((route) => ({
